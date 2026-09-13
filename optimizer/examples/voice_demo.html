@@ -154,6 +154,10 @@
     summary { cursor: pointer; color: var(--muted); font-size: .82rem; font-weight: 700; }
     pre { max-height: 220px; overflow: auto; padding: 12px; border-radius: 10px; color: #d9f5df; background: #173325; font-size: .72rem; white-space: pre-wrap; }
     .error-box { display: none; margin: 18px 0 0; padding: 11px 13px; border-radius: 10px; color: #7b2424; background: #fde9e7; font-size: .85rem; text-align: left; }
+    .constraint-actions { display: none; gap: 8px; margin-top: 15px; }
+    .constraint-actions button { flex: 1; min-height: 40px; border-radius: 10px; font-weight: 800; }
+    .confirm { border: 0; color: white; background: var(--leaf); }
+    .discard { border: 1px solid var(--line); color: var(--ink); background: white; }
     .history { grid-column: 1 / -1; padding: 24px 26px; }
     .history h2 { margin: 0 0 14px; font-size: 1rem; }
     .turns { display: grid; gap: 10px; }
@@ -215,6 +219,10 @@
         <p class="label">FarmOpti answered</p>
         <p id="answer" class="answer empty">The optimizer's answer will appear here.</p>
         <span id="mode" class="mode"></span>
+        <div id="constraint-actions" class="constraint-actions">
+          <button id="confirm-constraint" class="confirm" type="button">Confirm change</button>
+          <button id="discard-constraint" class="discard" type="button">Discard</button>
+        </div>
         <details>
           <summary>Optimizer details</summary>
           <pre id="metadata">No response metadata yet.</pre>
@@ -244,6 +252,7 @@
       answer: document.querySelector('#answer'),
       mode: document.querySelector('#mode'),
       metadata: document.querySelector('#metadata'),
+      constraintActions: document.querySelector('#constraint-actions'),
       turns: document.querySelector('#turns'),
     };
 
@@ -293,6 +302,7 @@
       elements.mode.textContent = turn.reply.mode;
       elements.mode.style.display = 'block';
       elements.metadata.textContent = JSON.stringify(turn.reply.metadata || {}, null, 2);
+      elements.constraintActions.style.display = turn.reply.metadata?.constraint_proposal ? 'flex' : 'none';
 
       elements.turns.replaceChildren(...turn.history.map((item) => {
         const wrapper = document.createElement('article');
@@ -345,6 +355,9 @@
     document.querySelectorAll('[data-question]').forEach((button) => {
       button.addEventListener('click', () => sendTypedQuestion(button.dataset.question));
     });
+
+    document.querySelector('#confirm-constraint').addEventListener('click', () => sendTypedQuestion('confirm change'));
+    document.querySelector('#discard-constraint').addEventListener('click', () => sendTypedQuestion('cancel change'));
 
     fetch('/api/voice/health')
       .then((response) => response.json())

@@ -5,6 +5,7 @@ import os
 import time
 import urllib.error
 import urllib.request
+from copy import deepcopy
 
 from chatbot.explanation.retrieve_decisions import DecisionRetriever
 from chatbot.scenario import ScenarioParser, ScenarioRunner, ScenarioValidationError
@@ -276,11 +277,21 @@ class ExplanationService:
         process_print(f"[CLASSIFY] {mode.upper()} ({elapsed:.2f}s)")
         return mode
 
-    def _run_scenario(self, question):
+    def _run_scenario(self, question, scenario_overlay=None):
         process_print("[SCENARIO] Parsing requested modification...")
 
         try:
             interpretation = self.scenario_parser.parse(question)
+            requested_interpretation = deepcopy(interpretation)
+            if scenario_overlay and scenario_overlay.get("changes"):
+                interpretation = self.scenario_runner.validator.validate_interpretation({
+                    "mode": "scenario",
+                    "description": f"{scenario_overlay.get('description', 'Confirmed constraints')} + {interpretation['description']}",
+                    "changes": [
+                        *deepcopy(scenario_overlay["changes"]),
+                        *deepcopy(interpretation["changes"]),
+                    ],
+                })
         except ScenarioValidationError as exc:
             process_print(f"[SCENARIO] Invalid scenario: {exc}")
             return {
@@ -334,6 +345,7 @@ Explain what changed and whether the requested scenario improved or reduced the 
 """.strip()
 
         answer = self._generate(prompt, SCENARIO_EXPLANATION_PROMPT)
+        result["requested_scenario"] = requested_interpretation
         return {"answer": answer, "needs_reoptimization": False, "scenario_result": result}
 
     def explain_default(self):
@@ -352,13 +364,13 @@ Optimisation evidence:
 """.strip()
         return self._generate(prompt)
 
-    def answer(self, question, return_evidence=False):
+    def answer(self, question, return_evidence=False, scenario_overlay=None):
         process_print(f"\n[CHAT] Question: {question}")
 
         mode = self._classify_request(question)
 
         if mode == "scenario":
-            return self._run_scenario(question)
+            return self._run_scenario(question, scenario_overlay=scenario_overlay)
 
         process_print("[RETRIEVAL] Existing decision → retrieving optimisation evidence")
         records = self.retriever.retrieve(question)

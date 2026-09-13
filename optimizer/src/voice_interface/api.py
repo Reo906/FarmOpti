@@ -3,6 +3,7 @@ import os
 from pathlib import Path
 
 from voice_interface.config import VoiceConfig
+from voice_interface.constraint_store import ConstraintStore
 from voice_interface.elevenlabs_client import ElevenLabsVoiceClient
 from voice_interface.errors import VoiceInputError, VoiceInterfaceError
 from voice_interface.farmopti_adapter import FarmOptiConversationAdapter
@@ -10,9 +11,16 @@ from voice_interface.service import VoiceGateway
 
 
 def build_default_gateway() -> VoiceGateway:
+    optimizer_dir = Path(__file__).resolve().parents[2]
+    constraints = ConstraintStore.from_env(
+        default_path=optimizer_dir / "runtime" / "confirmed_constraints.json"
+    )
     return VoiceGateway(
         speech=ElevenLabsVoiceClient(VoiceConfig.from_env()),
-        conversation=FarmOptiConversationAdapter(),
+        conversation=FarmOptiConversationAdapter(
+            active_constraints=constraints.active_scenario
+        ),
+        constraints=constraints,
     )
 
 
@@ -33,6 +41,10 @@ def create_voice_router(gateway: VoiceGateway):
     class SpeechRequest(BaseModel):
         text: str = Field(min_length=1, max_length=4_000)
 
+    class ConstraintActionRequest(BaseModel):
+        session_id: str = Field(min_length=1, max_length=100)
+        proposal_id: str | None = Field(default=None, max_length=100)
+
     router = APIRouter(prefix="/api/voice", tags=["FarmOpti voice"])
 
     def api_error(exc: Exception):
@@ -47,6 +59,7 @@ def create_voice_router(gateway: VoiceGateway):
         return {
             "status": "ready" if gateway.configured else "needs_configuration",
             "elevenlabs_configured": gateway.configured,
+            "confirmed_constraints": len(gateway.constraints.confirmed()),
         }
 
     @router.post("/transcribe")
@@ -100,7 +113,38 @@ def create_voice_router(gateway: VoiceGateway):
     @router.delete("/sessions/{session_id}")
     def clear_session(session_id: str):
         gateway.sessions.clear(session_id)
+        gateway.constraints.clear_pending(session_id)
         return {"session_id": session_id, "cleared": True}
+
+    @router.get("/constraints")
+    def confirmed_constraints():
+        return {
+            "constraints": [
+                constraint.to_dict()
+                for constraint in gateway.constraints.confirmed()
+            ]
+        }
+
+    @router.get("/sessions/{session_id}/constraint-proposal")
+    def pending_constraint(session_id: str):
+        proposal = gateway.constraints.pending(session_id)
+        return {"proposal": proposal.to_dict() if proposal else None}
+
+    @router.post("/constraints/confirm")
+    def confirm_constraint(request: ConstraintActionRequest):
+        try:
+            proposal = gateway.confirm_constraint(request.session_id, request.proposal_id)
+            return {"constraint": proposal.to_dict()}
+        except Exception as exc:
+            api_error(exc)
+
+    @router.post("/constraints/reject")
+    def reject_constraint(request: ConstraintActionRequest):
+        try:
+            proposal = gateway.reject_constraint(request.session_id, request.proposal_id)
+            return {"constraint": proposal.to_dict()}
+        except Exception as exc:
+            api_error(exc)
 
     return router
 

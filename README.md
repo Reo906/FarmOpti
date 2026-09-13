@@ -49,6 +49,6 @@ The schedule generation, constraint enforcement, strategy comparison, and econom
 
 A production version would require farm-management and OEM integrations, live weather and receival data, calibrated field-level productivity and loss models, a more complete optimisation formulation, uncertainty testing, permissions and audit trails, safety and legal review, offline resilience, and shadow evaluation against real manager decisions.
 
-## Optional voice interface
+## Voice interaction feature
 
-The live optimiser has a reusable ElevenLabs speech input/output package under **optimizer/src/voice_interface**. See [the voice interface guide](optimizer/VOICE_INTERFACE_README.md) for its architecture, API contract, configuration, browser adapter, and verification steps.
+The live optimiser has a reusable ElevenLabs conversation layer under **optimizer/src/voice_interface**. Farmers can ask about dashboard decisions, propose operational constraints in natural language, preview a re-optimized plan, and explicitly confirm or discard the rule. See [the feature overview](optimizer/VOICE_FEATURE_README.md) for the product behavior and boundaries, and [the technical guide](optimizer/VOICE_INTERFACE_README.md) for setup, API integration, and verification.

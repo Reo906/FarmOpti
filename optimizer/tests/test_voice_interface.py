@@ -1,12 +1,14 @@
 from __future__ import annotations
 
 import sys
+import tempfile
 import unittest
 from pathlib import Path
 
 sys.path.insert(0, str(Path(__file__).resolve().parents[1] / "src"))
 
 from voice_interface.config import VoiceConfig
+from voice_interface.constraint_store import ConstraintStore
 from voice_interface.api import create_app
 from voice_interface.elevenlabs_client import ElevenLabsVoiceClient
 from voice_interface.models import ConversationReply, Transcript
@@ -32,6 +34,27 @@ class FakeConversation:
             answer=f"Grounded answer for: {question}",
             mode="explain",
             metadata={"source": "optimiser evidence"},
+        )
+
+
+class FakeScenarioConversation:
+    def answer(self, question):
+        return ConversationReply(
+            answer="The scenario reduces the objective by $120.",
+            mode="scenario",
+            metadata={
+                "constraint_evaluation": {
+                    "scenario": {
+                        "mode": "scenario",
+                        "description": "Do not spray F2",
+                        "changes": [{"target": "action", "where": {"field_id": {"op": "eq", "value": "F2"}}, "constraints": {"selected": {"op": "eq", "value": False}}}],
+                    },
+                    "resolved_changes": [{"target": "action", "plan_ids": ["F2_SPRAY"]}],
+                    "comparison": {"objective_change_aud": -120.0},
+                    "summary": {"total_objective_value_aud": 1000.0},
+                    "schedule": [{"plan_id": "F2_HARVEST"}],
+                }
+            },
         )
 
 
@@ -76,6 +99,48 @@ class VoiceGatewayTests(unittest.TestCase):
         self.assertEqual(store.get("session-1"), ())
         store.clear("session-2")
         self.assertEqual(store.get("session-2"), ())
+
+    def test_scenario_can_be_confirmed_by_voice_and_persisted(self):
+        with tempfile.TemporaryDirectory() as temp_dir:
+            path = Path(temp_dir) / "constraints.json"
+            constraints = ConstraintStore(path)
+            gateway = VoiceGateway(
+                FakeSpeech(),
+                FakeScenarioConversation(),
+                constraints=constraints,
+            )
+
+            session_id, preview, _ = gateway.respond("Do not spray F2", "farm-1")
+            self.assertEqual(session_id, "farm-1")
+            self.assertEqual(preview.metadata["constraint_proposal"]["status"], "pending_confirmation")
+            self.assertIn("confirm change", preview.answer)
+
+            _, confirmation, _ = gateway.respond("confirm change", "farm-1")
+            self.assertEqual(confirmation.mode, "constraint_update")
+            self.assertEqual(confirmation.metadata["constraint"]["status"], "confirmed")
+            self.assertEqual(len(constraints.confirmed()), 1)
+            self.assertEqual(len(ConstraintStore(path).confirmed()), 1)
+            self.assertEqual(len(constraints.active_scenario()["changes"]), 1)
+
+    def test_constraint_confirmation_api_exposes_confirmed_rule(self):
+        from fastapi.testclient import TestClient
+
+        gateway = VoiceGateway(FakeSpeech(), FakeScenarioConversation())
+        client = TestClient(create_app(gateway))
+        preview = client.post(
+            "/api/voice/respond",
+            json={"session_id": "farm-2", "text": "Do not spray F2"},
+        ).json()
+        proposal_id = preview["reply"]["metadata"]["constraint_proposal"]["proposal_id"]
+
+        response = client.post(
+            "/api/voice/constraints/confirm",
+            json={"session_id": "farm-2", "proposal_id": proposal_id},
+        )
+        self.assertEqual(response.status_code, 200)
+        self.assertEqual(response.json()["constraint"]["status"], "confirmed")
+        confirmed = client.get("/api/voice/constraints").json()["constraints"]
+        self.assertEqual(len(confirmed), 1)
 
     def test_elevenlabs_adapter_uses_server_key_and_models(self):
         http = FakeHttpClient()

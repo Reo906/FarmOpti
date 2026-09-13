@@ -3,8 +3,10 @@ from __future__ import annotations
 import time
 import uuid
 from collections import OrderedDict
+import re
 from threading import Lock
 
+from voice_interface.constraint_store import ConstraintProposal, ConstraintStore
 from voice_interface.models import ConversationReply, ConversationTurn, Transcript, VoiceTurn
 from voice_interface.ports import ConversationBackend, SpeechProvider
 
@@ -45,10 +47,56 @@ class VoiceGateway:
         speech: SpeechProvider,
         conversation: ConversationBackend,
         sessions: SessionStore | None = None,
+        constraints: ConstraintStore | None = None,
     ):
         self.speech = speech
         self.conversation = conversation
         self.sessions = sessions or SessionStore()
+        self.constraints = constraints or ConstraintStore()
+
+    def _constraint_command(self, text: str) -> str | None:
+        normalized = re.sub(r"[^a-z ]", "", text.lower()).strip()
+        if normalized in {
+            "confirm",
+            "confirm change",
+            "confirm the change",
+            "apply change",
+            "apply the change",
+            "save constraint",
+            "save the constraint",
+            "yes confirm",
+            "yes save it",
+        }:
+            return "confirm"
+        if normalized in {
+            "cancel",
+            "cancel change",
+            "cancel the change",
+            "discard change",
+            "discard the change",
+            "reject change",
+            "no cancel",
+        }:
+            return "reject"
+        return None
+
+    def _constraint_reply(self, action: str, session_id: str) -> ConversationReply:
+        if action == "confirm":
+            proposal = self.constraints.confirm(session_id)
+            return ConversationReply(
+                answer=(
+                    "Confirmed. I saved that farmer constraint. Future voice scenarios will "
+                    "include it, and the dashboard can retrieve the confirmed rule and evaluated schedule."
+                ),
+                mode="constraint_update",
+                metadata={"constraint": proposal.to_dict()},
+            )
+        proposal = self.constraints.reject(session_id)
+        return ConversationReply(
+            answer="Cancelled. I discarded the proposed constraint and did not activate it.",
+            mode="constraint_update",
+            metadata={"constraint": proposal.to_dict()},
+        )
 
     @property
     def configured(self) -> bool:
@@ -59,12 +107,39 @@ class VoiceGateway:
 
     def respond(self, text: str, session_id: str | None = None) -> tuple[str, ConversationReply, tuple[ConversationTurn, ...]]:
         resolved_session_id = session_id or str(uuid.uuid4())
-        reply = self.conversation.answer(text)
+        command = self._constraint_command(text)
+        if command and self.constraints.pending(resolved_session_id):
+            reply = self._constraint_reply(command, resolved_session_id)
+        else:
+            reply = self.conversation.answer(text)
+            evaluation = reply.metadata.get("constraint_evaluation")
+            if reply.mode == "scenario" and isinstance(evaluation, dict):
+                proposal = self.constraints.propose(resolved_session_id, text, evaluation)
+                metadata = {
+                    key: value
+                    for key, value in reply.metadata.items()
+                    if key != "constraint_evaluation"
+                }
+                metadata["constraint_proposal"] = proposal.to_dict()
+                reply = ConversationReply(
+                    answer=(
+                        f"{reply.answer}\n\nThis is a preview. Say ‘confirm change’ to save this "
+                        "as an active farmer constraint, or ‘cancel change’ to discard it."
+                    ),
+                    mode=reply.mode,
+                    metadata=metadata,
+                )
         history = self.sessions.append(
             resolved_session_id,
             ConversationTurn(transcript=text, answer=reply.answer, mode=reply.mode),
         )
         return resolved_session_id, reply, history
+
+    def confirm_constraint(self, session_id: str, proposal_id: str | None = None) -> ConstraintProposal:
+        return self.constraints.confirm(session_id, proposal_id)
+
+    def reject_constraint(self, session_id: str, proposal_id: str | None = None) -> ConstraintProposal:
+        return self.constraints.reject(session_id, proposal_id)
 
     def speak(self, text: str) -> tuple[bytes, str]:
         return self.speech.synthesise(text)

@@ -14,7 +14,7 @@ microphone
   -> speaker + visible transcript
 ~~~
 
-The package does not let ElevenLabs choose a farm action. Scenario questions remain temporary what-if runs. Any future endpoint that changes the active operating plan should require a separate explicit confirmation.
+The package does not let ElevenLabs choose a farm action. Scenario questions run first as temporary what-if evaluations. A valid result becomes a pending constraint proposal and requires a separate explicit confirmation before it is retained. See **VOICE_FEATURE_README.md** for the full product behavior and model boundary.
 
 ## Install and run
 
@@ -43,6 +43,8 @@ Browser microphone access works on localhost. Testing from a phone over a plain 
 
 The default voice ID is configurable. Override it with **ELEVENLABS_VOICE_ID**. Copy **optimizer/.env.example** for the complete list of settings, but export or load those settings through the team's deployment environment.
 
+Confirmed farmer constraints are written to **optimizer/runtime/confirmed_constraints.json** by default. Set **FARMOPTI_CONSTRAINT_STORE_PATH** to another server-side path, or to an empty value for in-memory-only operation. Runtime constraint data is ignored by Git.
+
 ## API
 
 ### One-call browser flow
@@ -62,6 +64,10 @@ The response includes the transcript, FarmOpti answer, request mode, scenario co
 - **POST /api/voice/speak** — text to audio/mpeg
 - **DELETE /api/voice/sessions/{session_id}** — clear in-memory transcript history
 - **GET /api/voice/health** — configuration readiness
+- **GET /api/voice/sessions/{session_id}/constraint-proposal** — pending evaluated change
+- **POST /api/voice/constraints/confirm** — confirm the pending change
+- **POST /api/voice/constraints/reject** — discard the pending change
+- **GET /api/voice/constraints** — confirmed constraint overlays for dashboard/optimizer integration
 
 The composable endpoints let a frontend show and correct the transcript before sending it to FarmOpti. This is recommended when field noise makes recognition uncertain.
 
@@ -95,12 +101,14 @@ The **SpeechProvider** and **ConversationBackend** protocols are intentionally s
 requesting_microphone -> listening -> transcribing -> evaluating -> speaking -> idle
 ~~~
 
-The API returns recent turns for display, but FarmOpti currently evaluates each utterance as a self-contained request. Pronoun resolution across turns is deliberately outside this package's first version.
+The API returns recent turns for display. FarmOpti evaluates normal questions as self-contained requests, while the bounded session state connects “confirm change” or “cancel change” to the latest evaluated constraint proposal. General pronoun resolution across turns is outside this package's first version.
 
 ## Reliability and data handling
 
 - Recordings are limited to 10 MB by default and held in memory.
 - Session history is in-memory, bounded, and not written to disk.
+- Pending proposals are in-memory; confirmed constraints can be persisted as server-side JSON.
+- Confirmed constraints are included in later voice scenario evaluations.
 - Provider errors do not expose the API key or response body.
 - Transcription keyterms bias Scribe toward FarmOpti field IDs, crops, and operation names.
 - ElevenLabs currently applies additional usage cost when keyterm prompting is enabled.

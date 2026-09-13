@@ -1,6 +1,7 @@
 from __future__ import annotations
 
 from threading import Lock
+from typing import Callable
 
 from chatbot.explanation_service import ExplanationService
 from voice_interface.errors import VoiceInputError
@@ -10,8 +11,13 @@ from voice_interface.models import ConversationReply
 class FarmOptiConversationAdapter:
     """Adapts the existing explanation/scenario service to the voice port."""
 
-    def __init__(self, service: ExplanationService | None = None):
+    def __init__(
+        self,
+        service: ExplanationService | None = None,
+        active_constraints: Callable[[], dict | None] | None = None,
+    ):
         self.service = service or ExplanationService()
+        self.active_constraints = active_constraints or (lambda: None)
         self._lock = Lock()
 
     def answer(self, question: str) -> ConversationReply:
@@ -24,7 +30,10 @@ class FarmOptiConversationAdapter:
         # Scenario runs use temporary input copies, but the underlying service is
         # intentionally serialized until its concurrency guarantees are explicit.
         with self._lock:
-            result = self.service.answer(clean_question)
+            result = self.service.answer(
+                clean_question,
+                scenario_overlay=self.active_constraints(),
+            )
 
         answer = str(result.get("answer", "")).strip()
         if not answer:
@@ -39,5 +48,13 @@ class FarmOptiConversationAdapter:
                 "actions_added": len(comparison.get("actions_added", [])),
                 "actions_removed": len(comparison.get("actions_removed", [])),
                 "actions_rescheduled": len(comparison.get("actions_rescheduled", [])),
+                "constraint_evaluation": {
+                    "scenario": scenario_result.get("requested_scenario", scenario_result.get("scenario")),
+                    "effective_scenario": scenario_result.get("scenario"),
+                    "resolved_changes": scenario_result.get("resolved_changes"),
+                    "comparison": comparison,
+                    "summary": scenario_result.get("summary"),
+                    "schedule": scenario_result.get("schedule"),
+                },
             })
         return ConversationReply(answer=answer, mode=mode, metadata=metadata)
