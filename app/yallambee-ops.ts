@@ -2,7 +2,7 @@ export type CropKey = 'wheat' | 'barley' | 'canola' | 'lentil' | 'beans' | 'oats
 export type Severity = 1 | 2 | 3;
 export type MachineType = 'combine' | 'chaser' | 'truck' | 'sprayer';
 export type MachineHealth = 'Nominal' | 'Restricted' | 'Standby';
-export type DashboardView = 'command' | 'harvest' | 'grain' | 'protection' | 'agronomy' | 'fleet' | 'people' | 'markets' | 'rules';
+export type DashboardView = 'command' | 'harvest' | 'grain' | 'protection' | 'agronomy' | 'fleet' | 'people' | 'markets' | 'rules' | 'history';
 
 export interface Property {
   id: string;
