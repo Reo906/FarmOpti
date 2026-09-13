@@ -1,12 +1,19 @@
 import type { ChatMessage, LLMClientLike } from "../scenario/parser";
 import { ConfigValidationError, describeConfigForLlm, getConfigLeaf, validateConfigUpdate } from "./schema";
 import { describeMachinesForLlm, MachineValidationError, validateMachineChange, type MachineChange } from "./machineSchema";
+import type { FarmRule, NewFarmRule } from "../../rules/types";
 
 export class ConfigUpdateValidationError extends Error {}
 
 export type ConfigChangeProposal =
   | { kind: "config_update"; description: string; path: string; previous_value: unknown; new_value: number | boolean | string }
   | { kind: "machine_change"; description: string; change: MachineChange }
+  // Constructed directly by the Farm Rules UI form (no LLM involved -- the
+  // form's dropdowns/inputs are already unambiguous), but shares the same
+  // propose-object shape so it flows through the same confirm/apply/
+  // reoptimize pipeline as chat-originated proposals.
+  | { kind: "rule_change"; description: string; action: "add"; rule: NewFarmRule }
+  | { kind: "rule_change"; description: string; action: "remove"; rule: FarmRule }
   | { kind: "unsupported"; description: string; reason: string };
 
 const SYSTEM_PROMPT = `

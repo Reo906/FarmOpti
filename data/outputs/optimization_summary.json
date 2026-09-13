@@ -1,12 +1,12 @@
 {
   "status": "optimal",
-  "total_direct_cash_effect_aud": 50483.9,
-  "total_terminal_value_aud": 174241,
-  "total_objective_value_aud": 224724.9,
-  "num_scheduled_actions": 13,
+  "total_direct_cash_effect_aud": 51519.37,
+  "total_terminal_value_aud": 173482.19,
+  "total_objective_value_aud": 225001.56,
+  "num_scheduled_actions": 12,
   "selected_options": [
     {
-      "option_id": "F1_O003",
+      "option_id": "F1_O001",
       "field_id": "F1",
       "direct_cash_effect_aud": 36037.91,
       "terminal_value_aud": 0,
@@ -15,26 +15,26 @@
     {
       "option_id": "F2_O023",
       "field_id": "F2",
-      "direct_cash_effect_aud": -1579.5,
+      "direct_cash_effect_aud": -1569.5,
       "terminal_value_aud": 42379.08,
-      "objective_value_aud": 40799.58
+      "objective_value_aud": 40809.58
     },
     {
-      "option_id": "F3_O030",
+      "option_id": "F3_O008",
       "field_id": "F3",
-      "direct_cash_effect_aud": -3712.33,
-      "terminal_value_aud": 32416.44,
-      "objective_value_aud": 28704.11
+      "direct_cash_effect_aud": -2722.14,
+      "terminal_value_aud": 31657.63,
+      "objective_value_aud": 28935.49
     },
     {
       "option_id": "F4_O029",
       "field_id": "F4",
-      "direct_cash_effect_aud": -4270.5,
+      "direct_cash_effect_aud": -4255.5,
       "terminal_value_aud": 45281.88,
-      "objective_value_aud": 41011.38
+      "objective_value_aud": 41026.38
     },
     {
-      "option_id": "F5_O003",
+      "option_id": "F5_O008",
       "field_id": "F5",
       "direct_cash_effect_aud": -4032.75,
       "terminal_value_aud": 15508.56,
@@ -43,16 +43,16 @@
     {
       "option_id": "F6_O001",
       "field_id": "F6",
-      "direct_cash_effect_aud": -684.75,
+      "direct_cash_effect_aud": -675.58,
       "terminal_value_aud": 38655.04,
-      "objective_value_aud": 37970.29
+      "objective_value_aud": 37979.46
     },
     {
-      "option_id": "F7_O005",
+      "option_id": "F7_O009",
       "field_id": "F7",
-      "direct_cash_effect_aud": 28725.82,
+      "direct_cash_effect_aud": 28736.93,
       "terminal_value_aud": 0,
-      "objective_value_aud": 28725.82
+      "objective_value_aud": 28736.93
     }
   ]
 }

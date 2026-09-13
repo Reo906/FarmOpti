@@ -18,6 +18,8 @@ import {
 } from "./datetime";
 import { pyRound, clip } from "./numeric";
 import { EXTERNAL_DIR } from "./paths";
+import { filterEligibleMachines } from "./rules/enforce";
+import { loadRules } from "./rules/store";
 import type { ActionResult, Candidate, ExternalVariables, FieldRow, FieldStateRow, ManagementPlanRow, WeatherRow } from "./types";
 
 function calculateExecutionCost(
@@ -233,6 +235,7 @@ function candidateIdTimestamp(ts: number): string {
 
 export function generateCandidates(externalVariablesDir: string = EXTERNAL_DIR): Candidate[] {
   const data = loadExternalVariables(externalVariablesDir);
+  const rules = loadRules();
   const candidates: Candidate[] = [];
   const timeStepHours = Number(CANDIDATE_CONFIG.time_step_hours);
   const configStartHour = Number(CANDIDATE_CONFIG.workday_start_hour);
@@ -270,7 +273,8 @@ export function generateCandidates(externalVariablesDir: string = EXTERNAL_DIR):
 
       while (start + duration * 3_600_000 <= dayEnd) {
         const end = start + duration * 3_600_000;
-        const machineIds = getEligibleMachines(data, rule.machine_type, start, end, currentDate);
+        const eligibleMachineIds = getEligibleMachines(data, rule.machine_type, start, end, currentDate);
+        const machineIds = filterEligibleMachines(rules, plan.field_id, operation, eligibleMachineIds, start, data.weather);
 
         if (machineIds.length > 0) {
           const weather = getWeatherWindow(data, start, duration);

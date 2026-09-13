@@ -14,6 +14,7 @@
     "format": "oxfmt",
     "optimizer:pipeline": "tsx lib/optimizer/pipeline.ts",
     "optimizer:chatbot": "tsx lib/optimizer/chatbot/chatbot.ts",
+    "optimizer:server": "tsx lib/optimizer/server.ts",
     "optimizer:calibrate": "tsx lib/optimizer/calibration/cli.ts --history data/farm_history/history.csv --farm-id demo_farm --output data/farm_history"
   },
   "dependencies": {
