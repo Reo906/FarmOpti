@@ -1,5 +1,6 @@
 from typing import Annotated
 import os
+from pathlib import Path
 
 from voice_interface.config import VoiceConfig
 from voice_interface.elevenlabs_client import ElevenLabsVoiceClient
@@ -107,6 +108,7 @@ def create_voice_router(gateway: VoiceGateway):
 def create_app(gateway: VoiceGateway | None = None):
     try:
         from fastapi import FastAPI
+        from fastapi.responses import FileResponse
     except ImportError as exc:
         raise RuntimeError(
             "Voice API dependencies are missing. Install optimizer/requirements-voice.txt."
@@ -132,4 +134,18 @@ def create_app(gateway: VoiceGateway | None = None):
             allow_headers=["Content-Type"],
         )
     app.include_router(create_voice_router(gateway or build_default_gateway()))
+
+    examples_dir = Path(__file__).resolve().parents[2] / "examples"
+
+    @app.get("/voice-demo", include_in_schema=False)
+    def voice_demo():
+        return FileResponse(examples_dir / "voice_demo.html", media_type="text/html")
+
+    @app.get("/voice-demo/client.js", include_in_schema=False)
+    def voice_demo_client():
+        return FileResponse(
+            examples_dir / "browser_voice_client.js",
+            media_type="text/javascript",
+        )
+
     return app

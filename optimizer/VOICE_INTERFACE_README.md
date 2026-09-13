@@ -30,6 +30,17 @@ python optimizer/voice_api.py
 
 The API runs at **http://localhost:8000**. Interactive API documentation is available at **/docs**. The API key is read only from the server environment; never put it in browser code or commit it.
 
+Open **http://localhost:8000/voice-demo** for the built-in test page. It supports push-to-talk, typed questions, visible transcripts, spoken replies, recent conversation history, and response metadata. Start with a typed question to verify FarmOpti and text-to-speech, then use the microphone to add speech-to-text to the test.
+
+The existing FarmOpti conversation service also expects its configured Ollama model. With the repository defaults, ensure Ollama is running and the model is available:
+
+~~~bash
+ollama serve
+ollama pull qwen2.5:3b
+~~~
+
+Browser microphone access works on localhost. Testing from a phone over a plain LAN HTTP address may be blocked by the browser; serve the app over HTTPS for a remote phone test.
+
 The default voice ID is configurable. Override it with **ELEVENLABS_VOICE_ID**. Copy **optimizer/.env.example** for the complete list of settings, but export or load those settings through the team's deployment environment.
 
 ## API

@@ -135,6 +135,18 @@ class VoiceGatewayTests(unittest.TestCase):
         self.assertEqual(speech_response.headers["content-type"], "audio/mpeg")
         self.assertTrue(speech_response.content.startswith(b"audio:"))
 
+    def test_http_package_serves_the_voice_demo(self):
+        from fastapi.testclient import TestClient
+
+        client = TestClient(create_app(VoiceGateway(FakeSpeech(), FakeConversation())))
+        page = client.get("/voice-demo")
+        script = client.get("/voice-demo/client.js")
+
+        self.assertEqual(page.status_code, 200)
+        self.assertIn("FarmOpti Voice Test", page.text)
+        self.assertEqual(script.status_code, 200)
+        self.assertIn("FarmOptiVoiceClient", script.text)
+
 
 if __name__ == "__main__":
     unittest.main()
