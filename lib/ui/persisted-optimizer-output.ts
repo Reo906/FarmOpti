@@ -1,8 +1,8 @@
 import summary from '@/data/outputs/optimization_summary.json';
 import scheduleCsv from '@/data/outputs/optimal_schedule.csv?raw';
 import managementPlanCsv from '@/data/external_variables/management_plan.csv?raw';
+import fieldsCsv from '@/data/external_variables/fields.csv?raw';
 import type { OptimiserCandidate } from '@/app/yallambee-ops';
-import type { CropKey } from '@/lib/farm/types';
 
 export interface PersistedScheduleRow {
   option_id: string;
@@ -121,6 +121,21 @@ export const scheduleEndTime = persistedSchedule.length
   ? Math.max(...persistedSchedule.map((row) => parseTimestamp(row.end_time)))
   : scheduleAnchorTime;
 
+// field_id -> the crop actually growing there: current_crop, unless the field
+// is bare ("none") and about to be planted, in which case its planned_crop.
+export const fieldCrops: Record<string, string> = Object.fromEntries(
+  fieldsCsv
+    .trim()
+    .split(/\r?\n/)
+    .slice(1)
+    .filter(Boolean)
+    .map((line) => {
+      const [fieldId, , currentCrop, plannedCrop] = parseCsvRow(line);
+      const crop = currentCrop && currentCrop !== 'none' ? currentCrop : plannedCrop || currentCrop;
+      return [fieldId, crop || 'unknown'];
+    }),
+);
+
 export const managementPlanInputs: ManagementPlanInput[] = managementPlanCsv
   .trim()
   .split(/\r?\n/)
@@ -147,12 +162,16 @@ export function persistedDashboardPlan(): OptimiserCandidate {
   const blocks = persistedSchedule.map((row) => {
     const start = (parseTimestamp(row.start_time) - scheduleAnchorTime) / 3_600_000;
     const end = (parseTimestamp(row.end_time) - scheduleAnchorTime) / 3_600_000;
-    const operationCrop: CropKey = row.operation === 'harvest' ? 'wheat' : row.operation === 'plant' ? 'barley' : 'canola';
     return {
       m: row.machine_id,
       f: row.field_id,
       name: row.field_id,
-      crop: operationCrop,
+      crop: fieldCrops[row.field_id] ?? row.target,
+      operation: row.operation,
+      target: row.target,
+      planId: row.plan_id,
+      cashEffect: row.direct_cash_effect_aud,
+      workers: row.workers_required,
       s: Math.max(0, start),
       e: Math.max(start + 1, end),
       ha: 0,
