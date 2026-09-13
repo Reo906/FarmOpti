@@ -1,6 +1,6 @@
-{"timestamp":"2026-09-13T15:55:38.601Z","stage":"candidates","message":"Generated 429 candidate actions","metrics":{"count":429}}
-{"timestamp":"2026-09-13T15:55:38.710Z","stage":"field_options","message":"Built 147 field options to choose between","metrics":{"count":147}}
-{"timestamp":"2026-09-13T15:55:48.516Z","stage":"optimise","message":"Solved to optimal (10 actions, objective $819,810.93)","metrics":{"status":"optimal","num_scheduled_actions":10,"objective_value_aud":819810.93,"alternative_plans":4}}
-{"timestamp":"2026-09-13T15:55:48.522Z","stage":"decision_evidence","message":"Extracted evidence for 15 scheduling decisions","metrics":{"count":15}}
-{"timestamp":"2026-09-13T15:55:58.060Z","stage":"counterfactuals","message":"Analysed 9 counterfactuals","metrics":{"count":9}}
-{"timestamp":"2026-09-13T15:55:58.063Z","stage":"retrieval_index","message":"Indexed 74 retrievable facts for the chatbot","metrics":{"count":74}}
+{"timestamp":"2026-09-13T16:25:18.890Z","stage":"candidates","message":"Generated 365 candidate actions","metrics":{"count":365}}
+{"timestamp":"2026-09-13T16:25:18.985Z","stage":"field_options","message":"Built 117 field options to choose between","metrics":{"count":117}}
+{"timestamp":"2026-09-13T16:25:21.168Z","stage":"optimise","message":"Solved to optimal (8 actions, objective $738,320.76)","metrics":{"status":"optimal","num_scheduled_actions":8,"objective_value_aud":738320.76,"alternative_plans":4}}
+{"timestamp":"2026-09-13T16:25:21.176Z","stage":"decision_evidence","message":"Extracted evidence for 15 scheduling decisions","metrics":{"count":15}}
+{"timestamp":"2026-09-13T16:25:24.371Z","stage":"counterfactuals","message":"Analysed 9 counterfactuals","metrics":{"count":9}}
+{"timestamp":"2026-09-13T16:25:24.374Z","stage":"retrieval_index","message":"Indexed 63 retrievable facts for the chatbot","metrics":{"count":63}}

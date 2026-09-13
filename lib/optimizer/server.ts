@@ -4,7 +4,7 @@ import { ExplanationService } from "./chatbot/explanationService";
 import { RULES } from "./config";
 import { loadExternalVariables } from "./externalVariables";
 import { loadRules } from "./rules/store";
-import { SCHEDULE_PATH } from "./paths";
+import { PLAN_CHANGE_SUMMARY_PATH, SCHEDULE_PATH } from "./paths";
 import type { ConfigChangeProposal } from "./chatbot/configUpdate/parser";
 
 /**
@@ -57,6 +57,20 @@ const server = http.createServer(async (request, response) => {
       return;
     }
 
+    // Polled by the frontend after a confirm-config-update response: that
+    // response returns immediately with the fast, deterministic plan-change
+    // summary, while the nicer LLM-phrased version (~10s on a local model)
+    // keeps generating in the background and overwrites this file when
+    // ready. Polling here is how the UI picks up that upgrade.
+    if (request.method === "GET" && request.url === "/plan-change-summary") {
+      if (!fs.existsSync(PLAN_CHANGE_SUMMARY_PATH)) {
+        sendJson(response, 404, { error: "No plan change summary yet. Run the optimizer pipeline first." });
+        return;
+      }
+      sendJson(response, 200, JSON.parse(fs.readFileSync(PLAN_CHANGE_SUMMARY_PATH, "utf-8")));
+      return;
+    }
+
     if (request.method === "POST" && request.url === "/confirm-config-update") {
       const raw = await readBody(request);
       const { proposal } = JSON.parse(raw) as { proposal?: ConfigChangeProposal };
@@ -76,7 +90,7 @@ const server = http.createServer(async (request, response) => {
       return;
     }
 
-    sendJson(response, 404, { error: "Not found. GET /rules, POST /confirm-config-update" });
+    sendJson(response, 404, { error: "Not found. GET /rules, GET /plan-change-summary, POST /confirm-config-update" });
   } catch (error) {
     const message = error instanceof Error ? error.message : String(error);
     sendJson(response, 500, { error: `Could not apply that change: ${message}` });
@@ -84,5 +98,5 @@ const server = http.createServer(async (request, response) => {
 });
 
 server.listen(PORT, () => {
-  console.log(`[optimizer:server] Listening on http://localhost:${PORT} (GET /rules, POST /confirm-config-update)`);
+  console.log(`[optimizer:server] Listening on http://localhost:${PORT} (GET /rules, GET /plan-change-summary, POST /confirm-config-update)`);
 });

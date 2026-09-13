@@ -11,9 +11,10 @@ export interface PlanChangeSummary {
   change_bullets: string[];
   positive_bullets: string[];
   steps: string[];
+  source: 'llm' | 'template';
 }
 
-export const persistedPlanChangeSummary: PlanChangeSummary = planChangeSummary;
+export const persistedPlanChangeSummary: PlanChangeSummary = planChangeSummary as PlanChangeSummary;
 
 export interface PersistedScheduleRow {
   option_id: string;

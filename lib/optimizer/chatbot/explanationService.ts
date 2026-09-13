@@ -16,7 +16,7 @@ import { saveFieldOptions } from "../fieldOptionsIO";
 import { optimizeSchedule } from "../scheduleOptimizer";
 import { CANDIDATE_ACTIONS_PATH, DECISION_TRACE_PATH, EXTERNAL_DIR, PLAN_CHANGE_SUMMARY_PATH, SCHEDULE_PATH, SUMMARY_PATH } from "../paths";
 import { logStage, resetRunLog, runLogSteps } from "../runLog";
-import { narratePlanChange, type PlanChangeSummary } from "./planChangeSummary";
+import { narratePlanChange, summarizePlanChange, type PlanChangeSummary } from "./planChangeSummary";
 import { LLMClient, processPrint } from "./llmClient";
 import type { OptimizationSummary, ScheduleRow } from "../types";
 
@@ -130,6 +130,14 @@ export class ExplanationService {
   private scenarioParser: ScenarioParser | null = null;
   private scenarioRunner: ScenarioRunner | null = null;
   private configUpdateParser: ConfigUpdateParser;
+  // Ollama serialises requests, so if a second reoptimization is confirmed
+  // while the first one's background LLM narration is still generating (it
+  // can take 10-30s), that first call can finish AFTER the second one's --
+  // and would otherwise overwrite PLAN_CHANGE_SUMMARY_PATH with a narration
+  // describing the wrong (superseded) plan. This counter tags each
+  // confirmConfigUpdate() call so a stale background result can tell it's
+  // been superseded and discard itself instead of writing.
+  private changeSummaryGeneration = 0;
 
   constructor() {
     processPrint("[INIT] Initialising explanation service...");
@@ -441,8 +449,25 @@ Explain what changed and whether the requested scenario improved or reduced the 
     // subsequent EXPLAIN questions in this same chat session see the new plan.
     this.retriever = new DecisionRetriever();
 
-    const changeSummary = await narratePlanChange(this.llm, { beforeSchedule, beforeSummary: before, afterSchedule: schedule, afterSummary: after, steps: runLogSteps() });
+    // The LLM narration alone takes ~10s on a local model -- far longer than
+    // the reoptimization it's describing (candidates/solve/evidence above
+    // typically finish in ~4s). Rather than make the user wait through both,
+    // respond immediately with the deterministic summary (instant, and
+    // already fully correct) and let the nicer LLM phrasing land in the
+    // background: it overwrites PLAN_CHANGE_SUMMARY_PATH when it finishes,
+    // and the frontend briefly polls for that newer version to swap in.
+    const steps = runLogSteps();
+    const changeSummary = summarizePlanChange({ beforeSchedule, beforeSummary: before, afterSchedule: schedule, afterSummary: after, steps });
     fs.writeFileSync(PLAN_CHANGE_SUMMARY_PATH, JSON.stringify(changeSummary, null, 2));
+
+    const myGeneration = ++this.changeSummaryGeneration;
+    void narratePlanChange(this.llm, { beforeSchedule, beforeSummary: before, afterSchedule: schedule, afterSummary: after, steps })
+      .then((narrated) => {
+        if (narrated.source !== "llm") return; // fell back to the same deterministic result already on disk -- nothing newer to write
+        if (this.changeSummaryGeneration !== myGeneration) return; // a later reoptimization has since started -- this result describes a superseded plan, discard it
+        fs.writeFileSync(PLAN_CHANGE_SUMMARY_PATH, JSON.stringify(narrated, null, 2));
+      })
+      .catch((error) => processPrint(`[CHANGE_SUMMARY] Background LLM narration failed: ${error instanceof Error ? error.message : error}`));
 
     const delta = before ? after.total_objective_value_aud - before.total_objective_value_aud : null;
     const deltaText = delta === null ? "" : ` (${delta >= 0 ? "+" : ""}${delta.toFixed(2)} AUD)`;

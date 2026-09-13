@@ -8,6 +8,7 @@ export interface PlanChangeSummary {
   change_bullets: string[];
   positive_bullets: string[];
   steps: string[];
+  source: "llm" | "template";
 }
 
 function money(value: number): string {
@@ -82,6 +83,7 @@ export function summarizePlanChange(params: {
       change_bullets: [],
       positive_bullets: [`Selected ${afterSummary.num_scheduled_actions} actions with a whole-farm objective value of ${money(afterSummary.total_objective_value_aud)}.`],
       steps,
+      source: "template",
     };
   }
 
@@ -95,7 +97,7 @@ export function summarizePlanChange(params: {
     ? "The plan was not changed -- the same schedule is still optimal."
     : `The plan was updated: ${change_bullets.length} action${change_bullets.length === 1 ? "" : "s"} changed. Whole-farm objective value ${deltaText}.`;
 
-  return { generated_at, narrative, change_bullets, positive_bullets, steps };
+  return { generated_at, narrative, change_bullets, positive_bullets, steps, source: "template" };
 }
 
 const NARRATION_SCHEMA = {
@@ -202,6 +204,7 @@ export async function narratePlanChange(
       change_bullets: parsed.change_bullets.map(String),
       positive_bullets: parsed.positive_bullets.map(String),
       steps,
+      source: "llm",
     };
   } catch (error) {
     processPrint(`[CHANGE_SUMMARY] LLM narration failed, using templated summary instead: ${error instanceof Error ? error.message : error}`);

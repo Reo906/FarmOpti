@@ -624,6 +624,12 @@ function ConfirmModal({ title, body, confirmLabel, busy, onConfirm, onCancel }: 
 }
 
 function FarmRulesPanel({ onOutputChange }: { onOutputChange: (next: OptimizerOutput) => void }) {
+  // Guards against a stale poll loop (from a confirm that's still generating
+  // its LLM narration) applying its result after a newer confirm has already
+  // superseded it -- which would pair an old narration with the wrong
+  // schedule/summary. Each confirmPending() call claims the next value here
+  // and a poll only applies its result while it still holds the latest one.
+  const confirmGenerationRef = useRef(0);
   const [rules, setRules] = useState<FarmRule[]>([]);
   const [fields, setFields] = useState<string[]>([]);
   const [machines, setMachines] = useState<{ id: string; type: string }[]>([]);
@@ -687,8 +693,38 @@ function FarmRulesPanel({ onOutputChange }: { onOutputChange: (next: OptimizerOu
     setPending({ kind: 'remove', proposal, summary: `${rule.id}: ${rule.description}` });
   };
 
+  // confirmPending already showed the fast, deterministic plan-change
+  // summary -- the nicer LLM-phrased version takes several more seconds to
+  // generate in the background on the sidecar, so poll briefly for it and
+  // swap it in once it lands, rather than making the confirm action itself
+  // wait on the LLM call.
+  const pollForNarratedSummary = (baseOutput: OptimizerOutput, generation: number, attempt = 0) => {
+    // Ollama serialises requests, so if the user confirms another change
+    // while this one's narration is still generating, this poll can end up
+    // waiting behind that one too -- 20 attempts at 2s comfortably covers
+    // that worst case (observed up to ~30s for a second queued call).
+    if (attempt >= 20 || confirmGenerationRef.current !== generation) return;
+    setTimeout(async () => {
+      if (confirmGenerationRef.current !== generation) return; // a newer confirm has since started; this result would no longer match the displayed plan
+      try {
+        const response = await fetch('/api/plan-change-summary');
+        if (response.ok) {
+          const summary = (await response.json()) as PlanChangeSummary;
+          if (summary.source === 'llm' && summary.generated_at !== baseOutput.changeSummary.generated_at && confirmGenerationRef.current === generation) {
+            onOutputChange({ ...baseOutput, changeSummary: summary });
+            return;
+          }
+        }
+      } catch {
+        // ignore and retry -- this is a background enhancement, not required for the confirm action to succeed
+      }
+      pollForNarratedSummary(baseOutput, generation, attempt + 1);
+    }, 2000);
+  };
+
   const confirmPending = async () => {
     if (!pending) return;
+    const generation = ++confirmGenerationRef.current;
     setBusy(true);
     setResultBanner(null);
     try {
@@ -704,16 +740,18 @@ function FarmRulesPanel({ onOutputChange }: { onOutputChange: (next: OptimizerOu
         setResultBanner({ tone: 'ok', text: result.answer ?? 'Applied.' });
         setDescription('');
         await load();
-        if (result.summary && result.scheduleCsv) {
+        if (result.summary && result.scheduleCsv && confirmGenerationRef.current === generation) {
           const schedule = parseSchedule(result.scheduleCsv);
-          onOutputChange({
+          const fastOutput: OptimizerOutput = {
             summary: result.summary,
             schedule,
             plan: dashboardPlanFrom(result.summary, schedule),
             anchorTime: scheduleAnchorFrom(schedule),
             live: true,
             changeSummary: result.changeSummary ?? initialOutput.changeSummary,
-          });
+          };
+          onOutputChange(fastOutput);
+          pollForNarratedSummary(fastOutput, generation);
         }
       }
     } catch {
