@@ -1,58 +1,58 @@
 {
   "status": "optimal",
-  "total_direct_cash_effect_aud": 45551.47,
-  "total_terminal_value_aud": 164124.91,
-  "total_objective_value_aud": 209676.38,
-  "num_scheduled_actions": 11,
+  "total_direct_cash_effect_aud": 50483.9,
+  "total_terminal_value_aud": 174241,
+  "total_objective_value_aud": 224724.9,
+  "num_scheduled_actions": 13,
   "selected_options": [
     {
       "option_id": "F1_O003",
       "field_id": "F1",
-      "direct_cash_effect_aud": 33206.57,
+      "direct_cash_effect_aud": 36037.91,
       "terminal_value_aud": 0,
-      "objective_value_aud": 33206.57
+      "objective_value_aud": 36037.91
     },
     {
-      "option_id": "F2_O017",
+      "option_id": "F2_O023",
       "field_id": "F2",
       "direct_cash_effect_aud": -1579.5,
-      "terminal_value_aud": 39501,
-      "objective_value_aud": 37921.5
+      "terminal_value_aud": 42379.08,
+      "objective_value_aud": 40799.58
     },
     {
-      "option_id": "F3_O007",
+      "option_id": "F3_O030",
       "field_id": "F3",
-      "direct_cash_effect_aud": -2734.08,
-      "terminal_value_aud": 30172.15,
-      "objective_value_aud": 27438.07
+      "direct_cash_effect_aud": -3712.33,
+      "terminal_value_aud": 32416.44,
+      "objective_value_aud": 28704.11
     },
     {
-      "option_id": "F4_O007",
+      "option_id": "F4_O029",
       "field_id": "F4",
       "direct_cash_effect_aud": -4270.5,
-      "terminal_value_aud": 42390,
-      "objective_value_aud": 38119.5
+      "terminal_value_aud": 45281.88,
+      "objective_value_aud": 41011.38
     },
     {
-      "option_id": "F5_O005",
+      "option_id": "F5_O003",
       "field_id": "F5",
       "direct_cash_effect_aud": -4032.75,
-      "terminal_value_aud": 15852.51,
-      "objective_value_aud": 11819.76
+      "terminal_value_aud": 15508.56,
+      "objective_value_aud": 11475.81
     },
     {
-      "option_id": "F6_O006",
+      "option_id": "F6_O001",
       "field_id": "F6",
       "direct_cash_effect_aud": -684.75,
-      "terminal_value_aud": 36209.25,
-      "objective_value_aud": 35524.5
+      "terminal_value_aud": 38655.04,
+      "objective_value_aud": 37970.29
     },
     {
-      "option_id": "F7_O002",
+      "option_id": "F7_O005",
       "field_id": "F7",
-      "direct_cash_effect_aud": 25646.48,
+      "direct_cash_effect_aud": 28725.82,
       "terminal_value_aud": 0,
-      "objective_value_aud": 25646.48
+      "objective_value_aud": 28725.82
     }
   ]
 }

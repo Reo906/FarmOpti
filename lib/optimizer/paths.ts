@@ -27,5 +27,10 @@ export const CANDIDATE_ACTIONS_PATH = path.join(OUTPUTS_DIR, "candidate_actions.
 export const FIELD_OPTIONS_PATH = path.join(OUTPUTS_DIR, "field_options.json");
 export const SCHEDULE_PATH = path.join(OUTPUTS_DIR, "optimal_schedule.csv");
 export const SUMMARY_PATH = path.join(OUTPUTS_DIR, "optimization_summary.json");
+
+export function schedulePath(index: number): string {
+  return path.join(OUTPUTS_DIR, `optimal_schedule_${index}.csv`);
+}
+export const ALTERNATIVE_PLANS_PATH = path.join(OUTPUTS_DIR, "alternative_plans.json");
 export const DECISION_TRACE_PATH = path.join(OUTPUTS_DIR, "decision_trace.json");
 export const DECISION_INDEX_PATH = path.join(OUTPUTS_DIR, "decision_index.jsonl");

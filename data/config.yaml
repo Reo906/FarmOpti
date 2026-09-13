@@ -84,6 +84,13 @@ crop_parameters:
   maize:
     potential_yield_t_per_ha: 10.0
 
+simulator:
+  farm_calibration:
+    enabled: true
+    model_dir: data/farm_history
+    confidence_k: 5
+    min_training_samples: 5
+
 state_simulation:
   residual_decay_per_day:
     soil_moisture: 0.65
@@ -105,6 +112,13 @@ field_option_generation:
 global_optimization:
   max_solver_seconds: 30
   objective_scale: 100
+
+alternative_plans:
+  enabled: true
+  min_optimality_ratio: 0.95
+  plan_count: 4
+  max_jaccard_similarity: 0.8
+  min_field_option_changes: 2
 
 transport:
   enforce_travel_time: true

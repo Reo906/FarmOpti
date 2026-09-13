@@ -6,12 +6,13 @@ import { buildDecisionIndex, saveDecisionIndex } from "../decisionAnalysis/build
 import { generateDecisionTrace, updateImportance, type DecisionTrace } from "../decisionAnalysis/extractDecisions";
 import { generateFieldOptions } from "../fieldOptions";
 import { saveFieldOptions } from "../fieldOptionsIO";
-import { CANDIDATE_ACTIONS_PATH, DECISION_TRACE_PATH, EXTERNAL_DIR, SCHEDULE_PATH, SUMMARY_PATH } from "../paths";
+import { ALTERNATIVE_PLANS_PATH, CANDIDATE_ACTIONS_PATH, DECISION_TRACE_PATH, EXTERNAL_DIR, SCHEDULE_PATH, SUMMARY_PATH } from "../paths";
+import { generateAlternativePlans, saveAlternativePlans } from "../alternativePlans";
 import { optimizeSchedule } from "../scheduleOptimizer";
 import { ExplanationService, LLMClient } from "../chatbot/explanationService";
 import { applyConfigChangeProposal } from "../chatbot/configUpdate/applier";
 import { ConfigUpdateParser, type ConfigChangeProposal } from "../chatbot/configUpdate/parser";
-import type { Candidate, FieldOption, OptimizationScenario, OptimizationSummary, ScheduleRow } from "../types";
+import type { AlternativePlansResult, Candidate, FieldOption, OptimizationScenario, OptimizationSummary, ScheduleRow } from "../types";
 import { ToolRegistry } from "./registry";
 import type { ToolDefinition } from "./types";
 
@@ -84,6 +85,32 @@ const optimizeScheduleTool: ToolDefinition<
       fs.writeFileSync(SUMMARY_PATH, JSON.stringify(result.summary, null, 2));
     }
     return result;
+  },
+};
+
+const generateAlternativePlansTool: ToolDefinition<
+  { options: FieldOption[]; external_variables_dir?: string; max_solver_seconds?: number },
+  { schedule: ScheduleRow[]; summary: OptimizationSummary; alternatives: AlternativePlansResult }
+> = {
+  name: "generate_alternative_plans",
+  description:
+    "Stage 3 of the optimizer pipeline (supersedes calling optimize_schedule directly for the real, unconstrained solve). Solves the primary whole-farm plan, then generates several near-optimal alternatives with different objectives (lowest cost, lowest risk, earliest/latest completion, smoothest labour use) that stay within min_optimality_ratio (config.yaml's alternative_plans section) of the best value -- so a farm manager can see genuinely different tradeoffs, not just the single 'best' plan. Writes optimal_schedule.csv + optimization_summary.json for the primary plan (plans[0]) and optimal_schedule_<n>.csv + alternative_plans.json for the full set.",
+  input_schema: {
+    type: "object",
+    properties: {
+      options: { type: "array", description: "Field options from generate_field_options." },
+      ...externalVariablesDirProperty,
+      max_solver_seconds: { type: "number", description: "Per-solve time budget; defaults to config.yaml's global_optimization.max_solver_seconds." },
+    },
+    required: ["options"],
+  },
+  execute: async ({ options, external_variables_dir, max_solver_seconds }) => {
+    const alternatives = await generateAlternativePlans(options, external_variables_dir ?? EXTERNAL_DIR, max_solver_seconds);
+    const { schedule, summary } = alternatives.plans[0];
+    writeScheduleCsv(SCHEDULE_PATH, schedule);
+    fs.writeFileSync(SUMMARY_PATH, JSON.stringify(summary, null, 2));
+    saveAlternativePlans(alternatives);
+    return { schedule, summary, alternatives };
   },
 };
 
@@ -185,7 +212,7 @@ const applyScenarioTool: ToolDefinition<{ description: string }, unknown> = {
 async function rerunFullPipeline(): Promise<OptimizationSummary> {
   const candidates = await generateCandidatesTool.execute({});
   const options = await generateFieldOptionsTool.execute({});
-  const { schedule, summary } = await optimizeScheduleTool.execute({ options });
+  const { schedule, summary } = await generateAlternativePlansTool.execute({ options });
   let trace = await extractDecisionTraceTool.execute({ candidates, options, schedule, summary });
   trace = await analyseCounterfactualsTool.execute({ trace, options, schedule, summary });
   fs.writeFileSync(DECISION_TRACE_PATH, JSON.stringify(trace, null, 2));
@@ -239,6 +266,7 @@ export function createDefaultToolRegistry(): ToolRegistry {
   registry.register(generateCandidatesTool);
   registry.register(generateFieldOptionsTool);
   registry.register(optimizeScheduleTool);
+  registry.register(generateAlternativePlansTool);
   registry.register(extractDecisionTraceTool);
   registry.register(analyseCounterfactualsTool);
   registry.register(buildDecisionIndexTool);

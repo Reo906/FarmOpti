@@ -1,4 +1,0 @@
-pandas>=2.0
-PyYAML>=6.0
-ortools>=9.10
-tqdm>=4.66
