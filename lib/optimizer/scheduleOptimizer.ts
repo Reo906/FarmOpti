@@ -4,7 +4,17 @@ import { loadExternalVariables } from "./externalVariables";
 import { ceilToHour, dateOnlyOf, floorToHour, combineDateAndTime } from "./datetime";
 import { pyRound } from "./numeric";
 import { EXTERNAL_DIR } from "./paths";
-import type { FieldOption, FieldRow, OptimizationScenario, OptimizationSummary, OptionAction, ScheduleRow } from "./types";
+import { buildOptionMetrics } from "./planMetrics";
+import type {
+  AlternativeObjective,
+  FieldOption,
+  FieldRow,
+  OptimizationScenario,
+  OptimizationSummary,
+  OptimizationVariant,
+  OptionAction,
+  ScheduleRow,
+} from "./types";
 
 export { loadFieldOptions } from "./fieldOptionsIO";
 
@@ -95,7 +105,10 @@ function buildLpText(
   varCoeffs: Map<string, Map<string, number>>,
   constraintBounds: Map<string, { equal?: number; max?: number; min?: number }>,
   objectiveKey: string,
+  lpOptions: { sense?: "max" | "min"; continuousVars?: Set<string> } = {},
 ): LpBuild {
+  const sense = lpOptions.sense ?? "max";
+  const continuousVars = lpOptions.continuousVars ?? new Set<string>();
   const varNames = [...varCoeffs.keys()];
   const lpName = new Map(varNames.map((v) => [v, sanitizeLpName(v)]));
 
@@ -119,7 +132,7 @@ function buildLpText(
     terms.map((t) => `${t.coeff >= 0 ? "+" : "-"}${fmtLpNumber(Math.abs(t.coeff))} ${t.varName}`).join(" ");
 
   const lines: string[] = [];
-  lines.push("Maximize");
+  lines.push(sense === "min" ? "Minimize" : "Maximize");
   lines.push(` obj: ${objectiveTerms.length > 0 ? termsToText(objectiveTerms) : "0 " + (varNames[0] ? lpName.get(varNames[0]) : "x")}`);
   lines.push("Subject To");
 
@@ -139,13 +152,27 @@ function buildLpText(
     }
   }
 
+  const binaryVars = varNames.filter((name) => !continuousVars.has(name));
+  const contVars = varNames.filter((name) => continuousVars.has(name));
+
+  if (contVars.length > 0) {
+    lines.push("Bounds");
+    for (const name of contVars) {
+      lines.push(` ${lpName.get(name)} >= 0`);
+    }
+  }
+
   lines.push("Binary");
-  for (let i = 0; i < varNames.length; i += 20) {
-    lines.push(" " + varNames.slice(i, i + 20).map((v) => lpName.get(v)).join(" "));
+  for (let i = 0; i < binaryVars.length; i += 20) {
+    lines.push(" " + binaryVars.slice(i, i + 20).map((v) => lpName.get(v)).join(" "));
   }
   lines.push("End");
 
   return { text: lines.join("\n"), varNames };
+}
+
+function objectiveSense(mode: AlternativeObjective): "max" | "min" {
+  return mode === "value" || mode === "lateness" ? "max" : "min";
 }
 
 export async function optimizeSchedule(
@@ -153,6 +180,7 @@ export async function optimizeSchedule(
   externalVariablesDir: string = EXTERNAL_DIR,
   scenario: OptimizationScenario = {},
   maxSolverSeconds?: number,
+  variant: OptimizationVariant = {},
 ): Promise<{ schedule: ScheduleRow[]; summary: OptimizationSummary }> {
   const forbidPlanIds = new Set((scenario.forbid_plan_ids ?? []).map(String));
   const forcePlanIds = new Set((scenario.force_plan_ids ?? []).map(String));
@@ -162,6 +190,11 @@ export async function optimizeSchedule(
 
   const data = loadExternalVariables(externalVariablesDir);
   const fields = new Map(data.fields.map((f) => [f.field_id, f]));
+  const optionMetrics = buildOptionMetrics(options, data);
+  const objectiveMode: AlternativeObjective = variant.objective ?? "value";
+  const labourCapacityFactor = variant.labourCapacityFactor ?? 1;
+  const continuousVars = new Set<string>();
+  const labourSlots: { t: number; active: FlatAction[] }[] = [];
 
   const optionsByField = new Map<string, FieldOption[]>();
   for (const option of options) {
@@ -274,11 +307,12 @@ export async function optimizeSchedule(
       if (labourRow) {
         const start = combineDateAndTime(date, labourRow.workday_start);
         const end = combineDateAndTime(date, labourRow.workday_end);
-        if (start <= t && t < end) capacity = labourRow.available_workers;
+        if (start <= t && t < end) capacity = labourRow.available_workers * labourCapacityFactor;
       }
 
       const active = flatActions.filter((f) => f.action.start_time <= t && t < f.action.end_time);
       if (active.length > 0) {
+        labourSlots.push({ t, active });
         const conKey = `labour:${t}`;
         constraintBounds.set(conKey, { max: capacity });
         for (const flat of active) {
@@ -303,12 +337,50 @@ export async function optimizeSchedule(
     }
   }
 
-  const objectiveKey = "objective";
-  for (const option of options) {
-    addCoef(varCoeffs, optionVarKey(option.option_id), objectiveKey, option.objective_value_aud);
+  if (variant.minObjectiveValue != null) {
+    constraintBounds.set("min_value", { min: variant.minObjectiveValue });
+    for (const option of options) {
+      addCoef(varCoeffs, optionVarKey(option.option_id), "min_value", option.objective_value_aud);
+    }
   }
 
-  const { text: lpText } = buildLpText(varCoeffs, constraintBounds, objectiveKey);
+  for (const [index, optionSet] of (variant.forbidOptionSets ?? []).entries()) {
+    const ids = optionSet.filter((id) => options.some((option) => option.option_id === id));
+    if (ids.length === 0) continue;
+    const conKey = `nogood:${index}`;
+    constraintBounds.set(conKey, { max: ids.length - 1 });
+    for (const optionId of ids) {
+      addCoef(varCoeffs, optionVarKey(optionId), conKey, 1);
+    }
+  }
+
+  const objectiveKey = "objective";
+  if (objectiveMode === "smoothness") {
+    continuousVars.add("peak_labour");
+    addCoef(varCoeffs, "peak_labour", objectiveKey, 1);
+    for (const { t, active } of labourSlots) {
+      const peakCon = `peak:${t}`;
+      constraintBounds.set(peakCon, { max: 0 });
+      for (const flat of active) {
+        addCoef(varCoeffs, optionVarKey(flat.option.option_id), peakCon, flat.action.workers_required);
+      }
+      addCoef(varCoeffs, "peak_labour", peakCon, -1);
+    }
+  } else {
+    for (const option of options) {
+      const metrics = optionMetrics.get(option.option_id);
+      let coeff = option.objective_value_aud;
+      if (objectiveMode === "cost") coeff = metrics?.cost_aud ?? 0;
+      else if (objectiveMode === "risk") coeff = metrics?.risk_score ?? 0;
+      else if (objectiveMode === "earliness" || objectiveMode === "lateness") coeff = metrics?.start_hours ?? 0;
+      addCoef(varCoeffs, optionVarKey(option.option_id), objectiveKey, coeff);
+    }
+  }
+
+  const { text: lpText } = buildLpText(varCoeffs, constraintBounds, objectiveKey, {
+    sense: objectiveSense(objectiveMode),
+    continuousVars,
+  });
 
   const timeoutSeconds = maxSolverSeconds ?? Number(CONFIG.global_optimization.max_solver_seconds);
   const highs = await getHighs();
@@ -317,7 +389,9 @@ export async function optimizeSchedule(
     time_limit: timeoutSeconds,
   });
 
-  if (process.env.DEBUG_SOLVER) console.error("[solver]", solution.Status, solution.ObjectiveValue);
+  if (process.env.DEBUG_SOLVER) {
+    console.error("[solver]", objectiveMode, solution.Status, solution.ObjectiveValue);
+  }
 
   const isOptimal = solution.Status === "Optimal";
   const isTimeLimited = solution.Status === "Time limit reached" && Number.isFinite(solution.ObjectiveValue);

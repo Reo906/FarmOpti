@@ -1,0 +1,9 @@
+option_id,candidate_id,plan_id,field_id,operation,target,start_time,end_time,machine_id,workers_required,water_ml,direct_revenue_aud,direct_cost_aud,direct_cash_effect_aud,state_yield_effect_t_ha
+F1_O006,P01_F1_harvest_20260916_0700,P01,F1,harvest,wheat,2026-09-16 07:00:00,2026-09-16 11:54:00,M1,2,0.0,36711.01,1225.0,35486.01,0.0
+F5_O022,P09_F5_plant_20260917_0700,P09,F5,plant,maize,2026-09-17 07:00:00,2026-09-17 10:48:00,M5,2,0.0,0.0,3154.0,-3154.0,5.8404
+F3_O011,P05_F3_spray_20260918_0700,P05,F3,spray,weed_control,2026-09-18 07:00:00,2026-09-18 10:35:00,M3,1,0.0,0.0,827.75,-827.75,0.4879
+F4_O029,P07_F4_fertilise_20260918_0700,P07,F4,fertilise,nitrogen,2026-09-18 07:00:00,2026-09-18 11:30:00,M4,1,0.0,0.0,3042.0,-3042.0,0.2555
+F5_O022,P10_F5_irrigate_20260918_0700,P10,F5,irrigate,soil_moisture,2026-09-18 07:00:00,2026-09-18 11:45:00,M6,1,4.75,0.0,878.75,-878.75,0.1217
+F3_O011,P06_F3_fertilise_20260922_0700,P06,F3,fertilise,nitrogen,2026-09-22 07:00:00,2026-09-22 10:35:00,M4,1,0.0,0.0,1906.33,-1906.33,0.2444
+F7_O002,P14_F7_harvest_20260923_0700,P14,F7,harvest,wheat,2026-09-23 07:00:00,2026-09-23 11:00:00,M1,2,0.0,28689.06,1000.0,27689.06,0.0
+F4_O029,P08_F4_spray_20260924_0700,P08,F4,spray,disease_control,2026-09-24 07:00:00,2026-09-24 11:30:00,M3,1,0.0,0.0,1228.5,-1228.5,0.3686

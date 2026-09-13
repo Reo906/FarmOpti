@@ -1,7 +1,19 @@
+import { loadFarmCalibration, personalisedUnit, personalisedYieldValue, predictResidual } from "./calibration";
+import type { FarmCalibration } from "./calibration";
 import { CROP_PARAMETERS, RULES } from "./config";
 import { getEconomicValue, getField } from "./externalVariables";
-import { dateOnlyOf, formatIso } from "./datetime";
-import { pyRound, clip } from "./numeric";
+import { dateOnlyOf } from "./datetime";
+import {
+  genericFertiliseYieldEffect,
+  genericIrrigateYieldEffect,
+  genericNextMoisture,
+  genericNextNitrogen,
+  genericNextPressure,
+  genericSprayYieldEffect,
+  normalizeSprayTarget,
+  sprayPressureKey,
+} from "./genericTransitions";
+import { clip, pyRound } from "./numeric";
 import type { Candidate, ExternalVariables, FieldRow, FieldStateSnapshot, ManagementPlanRow, OptionAction } from "./types";
 
 export const TRACKED_STATE = [
@@ -49,11 +61,13 @@ export class FieldSimulator {
   private state: Record<string, number | string> = {};
   private residuals: Record<TrackedKey, number>;
   private decay: Record<string, number>;
+  private calibration: FarmCalibration | null;
 
-  constructor(data: ExternalVariables, config: any, fieldId: string) {
+  constructor(data: ExternalVariables, config: any, fieldId: string, calibration?: FarmCalibration | null) {
     this.data = data;
     this.config = config;
     this.fieldId = fieldId;
+    this.calibration = calibration === undefined ? loadFarmCalibration(config) : calibration;
     this.field = getField(data, fieldId);
     this.baseline = data.state
       .filter((s) => s.field_id === fieldId)
@@ -139,6 +153,15 @@ export class FieldSimulator {
     if (this.harvested) return null;
     if (operation !== "plant" && this.currentCrop === null) return null;
 
+    const before = {
+      soil_moisture: Number(this.state.soil_moisture ?? 0),
+      nitrogen_index: Number(this.state.nitrogen_index ?? 0),
+      weed_pressure: Number(this.state.weed_pressure ?? 0),
+      pest_pressure: Number(this.state.pest_pressure ?? 0),
+      disease_pressure: Number(this.state.disease_pressure ?? 0),
+      growth_stage: String(this.state.growth_stage ?? ""),
+    };
+
     let result: SimResult | null;
     switch (operation) {
       case "harvest":
@@ -161,8 +184,99 @@ export class FieldSimulator {
     }
 
     if (result === null) return null;
+    this.applyPersonalisation(operation, plan, before);
     result.state_after = this.snapshot();
     return result;
+  }
+
+  private cropName(): string {
+    return (this.currentCrop ?? "").trim().toLowerCase();
+  }
+
+  private genericYield(): number {
+    return Math.max(0.0, Number(this.state.expected_yield_t_ha ?? 0.0));
+  }
+
+  personalisedExpectedYield(): number {
+    const generic = this.genericYield();
+    if (!this.calibration?.yield || this.harvested || !this.currentCrop) return generic;
+    return personalisedYieldValue(
+      this.calibration,
+      this.fieldId,
+      this.cropName(),
+      {
+        field_id: this.fieldId,
+        crop: this.cropName(),
+        growth_stage: String(this.state.growth_stage ?? ""),
+        soil_moisture: Number(this.state.soil_moisture ?? 0),
+        nitrogen_index: Number(this.state.nitrogen_index ?? 0),
+        weed_pressure: Number(this.state.weed_pressure ?? 0),
+        pest_pressure: Number(this.state.pest_pressure ?? 0),
+        disease_pressure: Number(this.state.disease_pressure ?? 0),
+        generic_expected_yield_t_ha: generic,
+      },
+      generic,
+    );
+  }
+
+  private applyPersonalisation(
+    operation: string,
+    plan: ManagementPlanRow,
+    before: {
+      soil_moisture: number;
+      nitrogen_index: number;
+      weed_pressure: number;
+      pest_pressure: number;
+      disease_pressure: number;
+      growth_stage: string;
+    },
+  ): void {
+    if (!this.calibration) return;
+    const crop = this.cropName();
+
+    if (operation === "irrigate") {
+      if (this.field.irrigable !== 1 || !this.calibration.irrigation) return;
+      const generic = Number(this.state.soil_moisture);
+      const residual = predictResidual(this.calibration.irrigation, {
+        field_id: this.fieldId,
+        crop,
+        growth_stage: before.growth_stage,
+        soil_moisture: before.soil_moisture,
+        generic_next_soil_moisture: generic,
+      });
+      this.setState("soil_moisture", personalisedUnit(this.calibration, "irrigate", this.fieldId, crop, generic, residual));
+      return;
+    }
+
+    if (operation === "fertilise") {
+      if (!this.calibration.fertiliser) return;
+      const generic = Number(this.state.nitrogen_index);
+      const residual = predictResidual(this.calibration.fertiliser, {
+        field_id: this.fieldId,
+        crop,
+        growth_stage: before.growth_stage,
+        nitrogen_index: before.nitrogen_index,
+        generic_next_nitrogen_index: generic,
+      });
+      this.setState("nitrogen_index", personalisedUnit(this.calibration, "fertilise", this.fieldId, crop, generic, residual));
+      return;
+    }
+
+    if (operation === "spray") {
+      if (!this.calibration.spray) return;
+      const pressureKey = sprayPressureKey(plan.target);
+      if (!pressureKey) return;
+      const generic = Math.max(0.0, Number(this.state[pressureKey]));
+      const residual = predictResidual(this.calibration.spray, {
+        field_id: this.fieldId,
+        crop,
+        growth_stage: before.growth_stage,
+        spray_target: normalizeSprayTarget(plan.target).replace("_control", ""),
+        current_target_pressure: Number(before[pressureKey] ?? 0),
+        generic_next_target_pressure: generic,
+      });
+      this.setState(pressureKey, personalisedUnit(this.calibration, "spray", this.fieldId, crop, generic, residual));
+    }
   }
 
   private evalHarvest(candidate: Candidate | OptionAction): SimResult | null {
@@ -170,7 +284,7 @@ export class FieldSimulator {
     if (Number(this.state.readiness) < Number(rule.feasibility.min_readiness)) return null;
 
     const area = this.field.area_ha;
-    const expectedYield = Math.max(0.0, Number(this.state.expected_yield_t_ha));
+    const expectedYield = this.personalisedExpectedYield();
     const revenue = area * expectedYield * this.price(this.currentDate!);
     const cost = candidate.direct_cost_aud;
 
@@ -186,17 +300,21 @@ export class FieldSimulator {
     const response = RULES.irrigate.response;
     const target = plan.amount !== null ? plan.amount : Number(response.default_target_soil_moisture);
     const moisture = Number(this.state.soil_moisture);
-
-    if (moisture >= target) return null;
+    const nextMoisture = genericNextMoisture(moisture, target);
+    if (nextMoisture === null) return null;
 
     let expectedYield = Number(this.state.expected_yield_t_ha);
     if (expectedYield <= 0) expectedYield = this.potentialYield();
 
-    const deficit = clip((target - moisture) / target, 0.0, 1.0);
-    const yieldEffect = expectedYield * deficit * Number(response.max_yield_loss_fraction);
+    const yieldEffect = genericIrrigateYieldEffect(
+      moisture,
+      target,
+      expectedYield,
+      Number(response.max_yield_loss_fraction),
+    );
     const cost = candidate.direct_cost_aud;
 
-    this.setState("soil_moisture", Math.max(moisture, target));
+    this.setState("soil_moisture", nextMoisture);
     this.increaseYield(yieldEffect);
 
     return this.result(0.0, cost, yieldEffect, Number((candidate as any).water_ml ?? 0.0));
@@ -210,13 +328,19 @@ export class FieldSimulator {
 
     const pressureKey = targetCfg.state_variable as TrackedKey;
     const pressure = Math.max(0.0, Number(this.state[pressureKey]));
-    if (pressure <= 0) return null;
+    const nextPressure = genericNextPressure(pressure, Number(response.efficacy));
+    if (nextPressure === null) return null;
 
     const expectedYield = Number(this.state.expected_yield_t_ha);
-    const yieldEffect = expectedYield * pressure * Number(response.max_yield_loss_fraction) * Number(response.efficacy);
+    const yieldEffect = genericSprayYieldEffect(
+      pressure,
+      expectedYield,
+      Number(response.max_yield_loss_fraction),
+      Number(response.efficacy),
+    );
     const cost = candidate.direct_cost_aud;
 
-    this.setState(pressureKey, pressure * (1.0 - Number(response.efficacy)));
+    this.setState(pressureKey, nextPressure);
     this.increaseYield(yieldEffect);
 
     return this.result(0.0, cost, yieldEffect);
@@ -227,17 +351,23 @@ export class FieldSimulator {
     const currentN = Number(this.state.nitrogen_index);
     const targetN = Number(response.target_nitrogen_index);
 
-    if (currentN >= targetN || plan.amount === null) return null;
-
+    if (plan.amount === null) return null;
     const amount = plan.amount;
-    const deficit = clip((targetN - currentN) / targetN, 0.0, 1.0);
-    const doseResponse = 1.0 - Math.exp(-amount / Number(response.response_scale_kg_per_ha));
+    const nextN = genericNextNitrogen(currentN, targetN, amount, Number(response.response_scale_kg_per_ha));
+    if (nextN === null) return null;
+
     const expectedYield = Number(this.state.expected_yield_t_ha);
-    const yieldEffect = expectedYield * deficit * Number(response.max_yield_gain_fraction) * doseResponse;
+    const yieldEffect = genericFertiliseYieldEffect(
+      currentN,
+      targetN,
+      amount,
+      expectedYield,
+      Number(response.max_yield_gain_fraction),
+      Number(response.response_scale_kg_per_ha),
+    );
     const cost = candidate.direct_cost_aud;
 
-    const newN = currentN + (targetN - currentN) * doseResponse;
-    this.setState("nitrogen_index", Math.min(1.0, newN));
+    this.setState("nitrogen_index", nextN);
     this.increaseYield(yieldEffect);
 
     return this.result(0.0, cost, yieldEffect);
@@ -283,7 +413,7 @@ export class FieldSimulator {
     if (this.harvested || this.currentCrop === null) return 0.0;
 
     const area = this.field.area_ha;
-    const expectedYield = Math.max(0.0, Number(this.state.expected_yield_t_ha));
+    const expectedYield = this.personalisedExpectedYield();
     let value = area * expectedYield * this.price(this.currentDate!);
 
     if (this.newlyPlanted) {
@@ -315,6 +445,7 @@ export class FieldSimulator {
     for (const key of TRACKED_STATE) {
       out[key] = pyRound(Number(this.state[key] ?? 0.0), 4);
     }
+    out.expected_yield_t_ha = pyRound(this.personalisedExpectedYield(), 4);
     return out as FieldStateSnapshot;
   }
 }
