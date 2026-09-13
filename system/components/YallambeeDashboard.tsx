@@ -34,27 +34,6 @@ const navGroups: { label: string; items: { id: ViewKey; label: string; icon: typ
     items: [
       { id: 'command', label: 'Command', icon: Grid2X2 },
       { id: 'harvest', label: 'Harvest operations', icon: Tractor, badge: 'LIVE', tone: 'mute' },
-      { id: 'grain', label: 'Grain & logistics', icon: Truck, badge: '1', tone: 'warn' },
-    ],
-  },
-  {
-    label: 'Crop',
-    items: [
-      { id: 'protection', label: 'Crop protection', icon: Bug, badge: '2', tone: 'warn' },
-      { id: 'agronomy', label: 'Paddocks & agronomy', icon: Leaf },
-    ],
-  },
-  {
-    label: 'Assets & people',
-    items: [
-      { id: 'fleet', label: 'Fleet & maintenance', icon: Wrench },
-      { id: 'people', label: 'People & safety', icon: HardHat, badge: '1', tone: 'warn' },
-    ],
-  },
-  {
-    label: 'Business',
-    items: [
-      { id: 'markets', label: 'Contracts & margin', icon: BarChart3 },
       { id: 'rules', label: 'Farm rules', icon: BookOpen, badge: '3', tone: 'mute' },
     ],
   },
@@ -110,7 +89,6 @@ function FieldBadge({ field }: { field: FarmField }) {
 
 function Timeline({ plan, disrupted }: { plan: OptimiserCandidate; disrupted: boolean }) {
   const span = 18;
-  const max = Math.max(1, plan.deadline);
   const rows = ['H1', 'H2', ...(plan.contractor ? ['C1'] : []), 'T1', 'T2', 'T3'];
   const labels: Record<string, string> = { H1: 'H1 header', H2: 'H2 header', C1: 'Delaney', T1: 'Truck T1', T2: 'Truck T2', T3: 'Truck T3' };
   return (
@@ -137,6 +115,37 @@ function Timeline({ plan, disrupted }: { plan: OptimiserCandidate; disrupted: bo
   );
 }
 
+function DecisionAssistant() {
+  const [question, setQuestion] = useState('');
+  const [messages, setMessages] = useState<{ role: 'assistant' | 'user'; text: string }[]>([
+    { role: 'assistant', text: 'Ask why a schedule decision was made, what evidence supports it, or test a concrete scenario.' },
+  ]);
+  const [busy, setBusy] = useState(false);
+
+  const ask = async (prompt = question) => {
+    const text = prompt.trim();
+    if (!text || busy) return;
+    setQuestion('');
+    setMessages((current) => [...current, { role: 'user', text }]);
+    setBusy(true);
+    try {
+      const response = await fetch('/api/chat', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ question: text }),
+      });
+      const result = (await response.json()) as { answer?: string; error?: string };
+      setMessages((current) => [...current, { role: 'assistant', text: response.ok ? result.answer ?? 'No answer returned.' : result.error ?? 'The assistant could not answer that.' }]);
+    } catch {
+      setMessages((current) => [...current, { role: 'assistant', text: 'The decision assistant could not be reached. Check that the optimizer evidence outputs exist and the configured model is available.' }]);
+    } finally {
+      setBusy(false);
+    }
+  };
+
+  return <section className="yc-card yc-assistant"><header><div><h3>Decision assistant</h3><span>Evidence-grounded explanations</span></div><Badge tone="info">FarmOpti</Badge></header><div className="yc-chat-log">{messages.map((message, index) => <p className={`yc-chat-bubble yc-chat-${message.role}`} key={`${message.role}-${index}`}>{message.text}</p>)}{busy && <p className="yc-chat-bubble yc-chat-assistant">Reviewing optimisation evidence...</p>}</div><div className="yc-chat-suggestions"><button onClick={() => ask('Why was the selected harvest plan chosen?')}>Why this plan?</button><button onClick={() => ask('What changed in the current optimisation?')}>What changed?</button></div><form className="yc-chat-form" onSubmit={(event) => { event.preventDefault(); void ask(); }}><input value={question} onChange={(event) => setQuestion(event.target.value)} placeholder="Ask about a decision or scenario..." aria-label="Ask the decision assistant" /><button className="yc-btn yc-btn-dark" disabled={busy || !question.trim()} aria-label="Send question"><Send size={15} /></button></form></section>;
+}
+
 function CommandView({ plan, disrupted, onNavigate, onDisrupt, onOptimise }: { plan: OptimiserCandidate; disrupted: boolean; onNavigate: (view: ViewKey) => void; onDisrupt: () => void; onOptimise: () => void }) {
   const fields = yallambeeOpsDashboard.fields;
   const remaining = fields.reduce((sum, field) => sum + Math.max(0, field.ha - field.done), 0);
@@ -144,10 +153,8 @@ function CommandView({ plan, disrupted, onNavigate, onDisrupt, onOptimise }: { p
   const completed = Math.round(((total - remaining) / total) * 100);
   const alerts = [
     disrupted ? { tone: 'bad' as Tone, title: 'Rain front moved forward 14 hours', text: 'The current plan is no longer optimal. H2 is capped at dealer-approved 70% throughput.', view: 'harvest' as ViewKey, when: '22 min ago' } : null,
-    { tone: 'bad' as Tone, title: 'Native budworm above threshold in lentils', text: '14 grubs / 10 sweeps at North 4. Harvest timing is the control.', view: 'protection' as ViewKey, when: '1 h ago' },
-    { tone: 'warn' as Tone, title: 'Stony Rise locked out until 05 Dec 07:00', text: 'Glyphosate withholding period is applied as a hard constraint.', view: 'protection' as ViewKey, when: 'Standing' },
-    { tone: 'warn' as Tone, title: 'Bruce Hehir at 132 h over 14 days', text: 'Ange Pirotta is available to cover afternoon Murtoa runs.', view: 'people' as ViewKey, when: '06:00' },
-    { tone: 'info' as Tone, title: 'Murtoa sample lane 2 closed', text: 'Queue is 34 minutes. Dooen is faster but canola-only until midday.', view: 'grain' as ViewKey, when: '06:05' },
+    { tone: 'warn' as Tone, title: 'Field readiness is limiting the candidate set', text: 'The optimizer only schedules fields that meet readiness and weather feasibility rules.', view: 'harvest' as ViewKey, when: 'Current' },
+    { tone: 'info' as Tone, title: 'Resource capacity is binding', text: 'Machine, labour and destination capacity are included when candidates are scored.', view: 'harvest' as ViewKey, when: 'Current' },
   ].filter(Boolean) as { tone: Tone; title: string; text: string; view: ViewKey; when: string }[];
 
   return <>
@@ -156,16 +163,7 @@ function CommandView({ plan, disrupted, onNavigate, onDisrupt, onOptimise }: { p
     <section className="yc-hero"><div className="yc-hero-head"><div><h3>Next 18 hours</h3><span>{plan.label} · {plan.contractor ? 'contractor engaged' : 'own fleet only'} · crews stop 21:30</span></div><div className="yc-hero-legend"><span><i className="yc-legend-wheat" /> Wheat</span><span><i className="yc-legend-canola" /> Canola</span><span><i className="yc-legend-lentil" /> Lentils</span></div></div><Timeline plan={plan} disrupted={disrupted} /></section>
     <div className="yc-grid yc-grid-4"><StatCard label="Standing crop" value={String(Math.round(remaining))} unit="ha" detail={`${completed}% of the program is off`} meter={completed} /><StatCard label="Harvestable before rain" value={String(Math.round(plan.harvested))} unit="ha" detail={plan.truckLimited ? <span className="yc-down">Truck-limited · haulage is the bottleneck</span> : 'Header capacity is the bottleneck'} meter={(plan.harvested / remaining) * 100} tone="blue" /><StatCard label="Exposed to the front" value={String(Math.round(plan.exposedHa))} unit="ha" detail={`Weighted loss ${money(plan.lossValue)} at ${Math.round((disrupted ? 0.8 : 0.35) * 100)}% rain probability`} meter={(plan.exposedHa / remaining) * 100} tone="red" /><StatCard label="APW1 still owed" value="420" unit="t" detail="Contract C-3391 closes 18 Dec" meter={72} tone="amber" /></div>
     <div className="yc-grid yc-grid-main"><section className="yc-card"><header><h3>Needs a decision</h3><span>{alerts.length} total</span></header><div className="yc-feed">{alerts.map((alert) => <button className="yc-feed-item" key={alert.title} onClick={() => onNavigate(alert.view)}><i className={`yc-severity yc-severity-${alert.tone}`} /><span><b>{alert.title}</b><small>{alert.text}</small></span><time>{alert.when}</time></button>)}</div></section><section className="yc-card"><header><h3>Six-day outlook</h3><span>Bureau · Rupanyup</span></header><div className="yc-card-body yc-outlook">{yallambeeOpsDashboard.weather.map((day) => <div className="yc-weather" key={day.day}><span>{day.day} <em>{day.max}°</em></span><i><b style={{ width: `${Math.min(100, day.rain * 4)}%`, background: day.rain ? 'var(--yc-blue)' : 'transparent' }} /></i><strong>{day.rain ? `${day.rain} mm` : '—'}</strong></div>)}<dl className="yc-kv"><dt>Front arrival</dt><dd>{disrupted ? '23:18 tonight' : 'tomorrow afternoon'}</dd><dt>Confidence</dt><dd>{disrupted ? '80%' : '35%'}</dd><dt>Fire danger</dt><dd>GFDI 21 · High</dd><dt>Harvest ban</dt><dd>GFDI 35</dd></dl></div></section></div>
-    <h3 className="yc-section-title">Operating areas</h3><div className="yc-tiles">{[
-      ['harvest', Tractor, 'Harvest operations', `${Math.round(plan.harvested)} ha today`, disrupted ? 'Plan invalid · reoptimise' : 'Plan current as of 05:40', disrupted ? 'bad' : 'ok', disrupted ? 'Action' : 'Live'],
-      ['grain', Truck, 'Grain & logistics', '7,020 t on farm', 'Murtoa queue 34 min · silo 4 sealed', 'warn', '1 issue'],
-      ['protection', Bug, 'Crop protection', '2 above threshold', 'Budworm in lentils · 2 paddocks locked out', 'bad', 'Action'],
-      ['agronomy', Leaf, 'Paddocks & agronomy', '12 paddocks', '3 still green · yield tracking +4%', 'ok', 'On track'],
-      ['fleet', Wrench, 'Fleet & maintenance', disrupted ? 'H2 restricted' : '8 assets nominal', disrupted ? 'Dealer-approved 70% to inspection' : 'H1 service due in 41 h', disrupted ? 'bad' : 'ok', disrupted ? 'Restricted' : 'Nominal'],
-      ['people', HardHat, 'People & safety', '9 on roster', 'Bruce Hehir 132 h / 140 h limit', 'warn', 'Fatigue'],
-      ['markets', BarChart3, 'Contracts & margin', 'A$2.31m committed', '420 t APW1 short of C-3391', 'warn', 'Watch'],
-      ['rules', BookOpen, 'Farm rules', '3 active', 'Captured from the team, used by the optimiser', 'ok', 'Current'],
-    ].map(([id, Icon, title, value, detail, tone, flag]) => <button className="yc-tile" key={id as string} onClick={() => onNavigate(id as ViewKey)}><Badge tone={tone as Tone}>{flag as string}</Badge><span className="yc-tile-title"><Icon size={16} />{title as string}</span><strong>{value as string}</strong><small>{detail as string}</small></button>)}</div>
+    <div className="yc-grid yc-grid-main"><DecisionAssistant /><section className="yc-card yc-scope"><header><h3>Supported system scope</h3><Badge tone="ok">Connected</Badge></header><div className="yc-card-body"><p>The current system can optimise schedules, score economics, apply weather, machine, labour and field-state constraints, and explain recorded decisions.</p><button className="yc-btn" onClick={() => onNavigate('harvest')}>Open supported plan <ArrowRight size={15} /></button></div></section></div>
     {!disrupted && <button className="yc-disrupt" onClick={onDisrupt}><CloudRain size={17} /> Simulate disruption <span>RAIN + MACHINE EVENT</span></button>}
   </>;
 }

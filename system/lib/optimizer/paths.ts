@@ -2,12 +2,12 @@ import path from "node:path";
 import { fileURLToPath } from "node:url";
 
 // This file lives at system/lib/optimizer/paths.ts.
-// The data root (config.yaml, external_variables/, outputs/) stays at
-// FarmOpti/optimizer/ -- the same place the Python pipeline used -- so
+// The data root (config.yaml, external_variables/, outputs/) lives at
+// FarmOpti/data/ so the TypeScript pipeline and chatbot share the generated evidence.
 // nothing else in the repo that points at those paths needs to change.
 const THIS_DIR = path.dirname(fileURLToPath(import.meta.url));
 
-export const OPTIMIZER_ROOT = path.resolve(THIS_DIR, "../../../../optimizer");
+export const OPTIMIZER_ROOT = path.resolve(THIS_DIR, "../../../data");
 export const CONFIG_PATH = path.join(OPTIMIZER_ROOT, "config.yaml");
 export const EXTERNAL_DIR = path.join(OPTIMIZER_ROOT, "external_variables");
 export const OUTPUTS_DIR = path.join(OPTIMIZER_ROOT, "outputs");
