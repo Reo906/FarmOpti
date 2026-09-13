@@ -5,9 +5,11 @@ import { writeCandidateActionsCsv, writeScheduleCsv } from "./csvWriters";
 import { runActionCounterfactuals } from "./decisionAnalysis/analyseCounterfactuals";
 import { buildDecisionIndex, saveDecisionIndex } from "./decisionAnalysis/buildDecisionIndex";
 import { generateDecisionTrace, updateImportance } from "./decisionAnalysis/extractDecisions";
+import { generateAlternativePlans, saveAlternativePlans } from "./alternativePlans";
 import { generateFieldOptions } from "./fieldOptions";
 import { saveFieldOptions } from "./fieldOptionsIO";
 import {
+  ALTERNATIVE_PLANS_PATH,
   CANDIDATE_ACTIONS_PATH,
   DECISION_TRACE_PATH,
   EXTERNAL_DIR,
@@ -15,7 +17,6 @@ import {
   SCHEDULE_PATH,
   SUMMARY_PATH,
 } from "./paths";
-import { optimizeSchedule } from "./scheduleOptimizer";
 
 export async function runPipeline(): Promise<void> {
   fs.mkdirSync(OUTPUTS_DIR, { recursive: true });
@@ -29,9 +30,17 @@ export async function runPipeline(): Promise<void> {
   saveFieldOptions(options);
 
   console.log("[3/6] global optimisation");
-  const { schedule, summary } = await optimizeSchedule(options);
+  const alternatives = await generateAlternativePlans(options);
+  const { schedule, summary } = alternatives.plans[0];
   writeScheduleCsv(SCHEDULE_PATH, schedule);
   fs.writeFileSync(SUMMARY_PATH, JSON.stringify(summary, null, 2));
+  saveAlternativePlans(alternatives);
+  console.log(`  wrote ${alternatives.plans.length} plans to ${ALTERNATIVE_PLANS_PATH}`);
+  for (const [index, plan] of alternatives.plans.entries()) {
+    console.log(
+      `  - optimal_schedule_${index + 1}.csv (${plan.plan_id}): ${plan.objective_value_aud} (${plan.optimality_ratio}) ${plan.reason}`,
+    );
+  }
 
   console.log("[4/6] decision evidence");
   let trace = generateDecisionTrace(candidates, options, schedule, summary);

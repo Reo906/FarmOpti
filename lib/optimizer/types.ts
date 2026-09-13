@@ -191,3 +191,38 @@ export interface OptimizationScenario {
   force_plan_ids?: string[];
   force_candidate_ids?: Record<string, string>;
 }
+
+export type AlternativeObjective = "value" | "cost" | "risk" | "smoothness" | "earliness" | "lateness";
+
+export interface OptimizationVariant {
+  objective?: AlternativeObjective;
+  minObjectiveValue?: number;
+  labourCapacityFactor?: number;
+  forbidOptionSets?: string[][];
+}
+
+export interface ScheduleMetrics {
+  total_cost_aud: number;
+  total_water_ml: number;
+  peak_labour: number;
+  mean_start_time: number;
+  risk_score: number;
+}
+
+export interface AlternativePlan {
+  plan_id: string;
+  label: string;
+  reason: string;
+  objective_value_aud: number;
+  optimality_ratio: number;
+  selected_option_ids: string[];
+  schedule: ScheduleRow[];
+  summary: OptimizationSummary;
+  metrics: ScheduleMetrics;
+}
+
+export interface AlternativePlansResult {
+  baseline_objective_aud: number;
+  min_optimality_ratio: number;
+  plans: AlternativePlan[];
+}

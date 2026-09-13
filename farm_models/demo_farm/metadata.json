@@ -1,0 +1,139 @@
+{
+  "farm_id": "demo_farm",
+  "training_rows": 100,
+  "fields": [
+    "F1",
+    "F2",
+    "F3",
+    "F4",
+    "F5",
+    "F6",
+    "F7"
+  ],
+  "crops": [
+    "barley",
+    "canola",
+    "maize",
+    "wheat"
+  ],
+  "model_version": 1,
+  "trained_at": "2026-09-13T08:53:56.760843+00:00",
+  "samples": {
+    "irrigation": 8,
+    "fertiliser": 22,
+    "spray": 42,
+    "yield_rows": 100,
+    "yield_seasons": 14
+  },
+  "support": {
+    "irrigate": {
+      "all": 8,
+      "by_crop": {
+        "canola": 5,
+        "maize": 3
+      },
+      "by_field_crop": {
+        "F2|canola": 3,
+        "F5|maize": 3,
+        "F6|canola": 2
+      }
+    },
+    "fertilise": {
+      "all": 22,
+      "by_crop": {
+        "wheat": 12,
+        "canola": 4,
+        "barley": 4,
+        "maize": 2
+      },
+      "by_field_crop": {
+        "F1|wheat": 4,
+        "F2|canola": 2,
+        "F3|barley": 4,
+        "F4|wheat": 4,
+        "F5|maize": 2,
+        "F6|canola": 2,
+        "F7|wheat": 4
+      }
+    },
+    "spray": {
+      "all": 42,
+      "by_crop": {
+        "wheat": 18,
+        "canola": 12,
+        "barley": 6,
+        "maize": 6
+      },
+      "by_field_crop": {
+        "F1|wheat": 6,
+        "F2|canola": 6,
+        "F3|barley": 6,
+        "F4|wheat": 6,
+        "F5|maize": 6,
+        "F6|canola": 6,
+        "F7|wheat": 6
+      }
+    },
+    "yield": {
+      "all": 14,
+      "by_crop": {
+        "wheat": 6,
+        "canola": 4,
+        "barley": 2,
+        "maize": 2
+      },
+      "by_field_crop": {
+        "F1|wheat": 2,
+        "F2|canola": 2,
+        "F3|barley": 2,
+        "F4|wheat": 2,
+        "F5|maize": 2,
+        "F6|canola": 2,
+        "F7|wheat": 2
+      }
+    }
+  },
+  "feature_names": {
+    "irrigation": [
+      "field_id",
+      "crop",
+      "growth_stage",
+      "soil_moisture",
+      "generic_next_soil_moisture"
+    ],
+    "fertiliser": [
+      "field_id",
+      "crop",
+      "growth_stage",
+      "nitrogen_index",
+      "generic_next_nitrogen_index"
+    ],
+    "spray": [
+      "field_id",
+      "crop",
+      "growth_stage",
+      "spray_target",
+      "current_target_pressure",
+      "generic_next_target_pressure"
+    ],
+    "yield": [
+      "field_id",
+      "crop",
+      "growth_stage",
+      "soil_moisture",
+      "nitrogen_index",
+      "weed_pressure",
+      "pest_pressure",
+      "disease_pressure",
+      "generic_expected_yield_t_ha"
+    ]
+  },
+  "confidence_k": 5.0,
+  "trained_models": [
+    "irrigation",
+    "fertiliser",
+    "spray",
+    "yield"
+  ],
+  "skipped_models": []
+}
