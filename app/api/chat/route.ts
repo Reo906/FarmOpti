@@ -19,24 +19,28 @@ export async function POST(request: Request) {
 
     // A proposal round-tripped back from a previous response means the user
     // clicked "Yes" on a pending config-update confirmation -- apply it and
-    // re-run the pipeline, rather than treating it as a new question.
+    // re-run the pipeline. This Workers sandbox can't write real files or
+    // load the HiGHS WASM solver itself, so that work is delegated to a
+    // local sidecar (lib/optimizer/server.ts, run via `npm run
+    // optimizer:server`) over plain HTTP, which the sandbox can do freely.
     if (body.proposal && typeof body.proposal === 'object') {
+      const port = process.env.OPTIMIZER_SERVER_PORT ?? '4790';
       try {
-        const outcome = await assistant.confirmConfigUpdate(body.proposal as Parameters<typeof assistant.confirmConfigUpdate>[0]);
+        const sidecarResponse = await fetch(`http://localhost:${port}/confirm-config-update`, {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({ proposal: body.proposal }),
+        });
+        const outcome = (await sidecarResponse.json()) as { answer?: string; error?: string };
+        if (!sidecarResponse.ok) {
+          return Response.json({ error: outcome.error ?? 'Could not apply that change.' }, { status: sidecarResponse.status });
+        }
         return Response.json({ answer: outcome.answer, applied: true });
-      } catch (error) {
-        // Persisting a config change needs to write real files (config.yaml,
-        // the external_variables CSVs) and then re-run the whole-farm solver
-        // (HiGHS's WASM loader) -- neither works in this sandboxed Workers
-        // runtime, and a real Cloudflare Workers deployment has no
-        // persistent local filesystem at all, so this isn't fixable here.
-        const message = String((error as Error)?.message ?? error);
-        const runtimeUnavailable = /wasm|readAll|writeAll|file: URL|no such file or directory|ENOENT/i.test(message);
+      } catch {
         return Response.json(
           {
-            error: runtimeUnavailable
-              ? "Applying a lasting change needs to write to the farm's data files and re-run the whole-farm solver, and this web deployment's runtime can't do either. Run FarmOpti's CLI chatbot (npm run optimizer:chatbot) to apply this change instead."
-              : `Could not apply that change: ${message}`,
+            error:
+              "Applying a lasting change needs a local helper this web runtime can't run itself. Start it with `npm run optimizer:server` (alongside `npm run dev`) and try again.",
           },
           { status: 503 },
         );
