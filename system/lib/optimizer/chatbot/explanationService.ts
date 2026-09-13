@@ -315,7 +315,10 @@ export class ExplanationService {
     return mode;
   }
 
-  private async runScenario(question: string): Promise<AnswerResult> {
+  private async runScenario(
+    question: string,
+    scenarioOverlay?: { mode: string; changes: unknown[] } | null,
+  ): Promise<AnswerResult> {
     processPrint("[SCENARIO] Parsing requested modification...");
 
     let interpretation;
@@ -333,6 +336,21 @@ export class ExplanationService {
       throw exc;
     }
 
+    // Keep a snapshot of just the farmer's new rule before merging with confirmed overlay.
+    const requestedInterpretation = structuredClone(interpretation);
+
+    if (scenarioOverlay?.changes?.length) {
+      interpretation = {
+        mode: "scenario",
+        description: interpretation.description,
+        changes: [
+          ...(structuredClone(scenarioOverlay.changes) as typeof interpretation.changes),
+          ...interpretation.changes,
+        ],
+      };
+      processPrint("[SCENARIO] Merged with confirmed constraint overlay");
+    }
+
     if (SCENARIO_CONFIG.show_parsed_scenario ?? true) {
       processPrint("[SCENARIO] Validated modification:");
       processPrint(JSON.stringify(interpretation, null, 2));
@@ -344,6 +362,7 @@ export class ExplanationService {
     let result;
     try {
       result = await this.scenarioRunner!.run(interpretation);
+      result.requestedScenario = requestedInterpretation;
     } catch (exc: any) {
       processPrint(`[SCENARIO] Re-optimisation failed: ${exc.message ?? exc}`);
       return {
@@ -406,12 +425,24 @@ ${JSON.stringify(context, null, 2)}
     return this.generate(prompt);
   }
 
-  async answer(question: string, returnEvidence = false): Promise<AnswerResult> {
+  async answer(
+    question: string,
+    optsOrReturnEvidence:
+      | boolean
+      | { returnEvidence?: boolean; scenarioOverlay?: { mode: string; changes: unknown[] } | null } = false,
+  ): Promise<AnswerResult> {
+    const opts =
+      typeof optsOrReturnEvidence === "boolean"
+        ? { returnEvidence: optsOrReturnEvidence }
+        : optsOrReturnEvidence;
+    const returnEvidence = opts.returnEvidence ?? false;
+    const scenarioOverlay = opts.scenarioOverlay ?? null;
+
     processPrint(`\n[CHAT] Question: ${question}`);
 
     const mode = await this.classifyRequest(question);
 
-    if (mode === "scenario") return this.runScenario(question);
+    if (mode === "scenario") return this.runScenario(question, scenarioOverlay);
 
     processPrint("[RETRIEVAL] Existing decision -> retrieving optimisation evidence");
     const records = this.retriever.retrieve(question);

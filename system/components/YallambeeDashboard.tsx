@@ -1,6 +1,6 @@
 'use client';
 
-import { useMemo, useState } from 'react';
+import { useCallback, useEffect, useMemo, useRef, useState } from 'react';
 import {
   AlertTriangle,
   ArrowRight,
@@ -12,6 +12,8 @@ import {
   Grid2X2,
   HardHat,
   Leaf,
+  Mic,
+  MicOff,
   PackageOpen,
   RotateCcw,
   Send,
@@ -24,6 +26,7 @@ import {
 } from 'lucide-react';
 import { yallambeeOpsDashboard } from '@/app/yallambee-ops';
 import type { DashboardView, FarmField, OptimiserCandidate } from '@/app/yallambee-ops';
+import { ConfirmedConstraintsPanel } from '@/components/ConfirmedConstraintsPanel';
 
 type ViewKey = DashboardView;
 type Tone = 'ok' | 'warn' | 'bad' | 'info' | 'mute';
@@ -115,35 +118,228 @@ function Timeline({ plan, disrupted }: { plan: OptimiserCandidate; disrupted: bo
   );
 }
 
+type MicState = 'idle' | 'recording' | 'transcribing' | 'thinking' | 'speaking' | 'error';
+
+interface PendingProposal {
+  proposalId: string;
+  sourceText: string;
+  sessionId: string;
+}
+
 function DecisionAssistant() {
   const [question, setQuestion] = useState('');
   const [messages, setMessages] = useState<{ role: 'assistant' | 'user'; text: string }[]>([
-    { role: 'assistant', text: 'Ask why a schedule decision was made, what evidence supports it, or test a concrete scenario.' },
+    { role: 'assistant', text: 'Ask why a schedule decision was made, what evidence supports it, or propose a constraint by voice or text.' },
   ]);
   const [busy, setBusy] = useState(false);
+  const [micState, setMicState] = useState<MicState>('idle');
+  const [pendingProposal, setPendingProposal] = useState<PendingProposal | null>(null);
+  const sessionId = useRef(crypto.randomUUID());
+  const mediaRecorderRef = useRef<MediaRecorder | null>(null);
+  const chunksRef = useRef<Blob[]>([]);
+
+  const askViaVoice = useCallback(async (transcript: string) => {
+    if (!transcript.trim() || busy) return;
+    setQuestion('');
+    setMessages((m) => [...m, { role: 'user', text: transcript }]);
+    setBusy(true);
+    setMicState('thinking');
+    try {
+      const response = await fetch('/api/voice/respond', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ sessionId: sessionId.current, text: transcript }),
+      });
+      const result = (await response.json()) as {
+        answer?: string;
+        error?: string;
+        mode?: string;
+        pendingProposal?: PendingProposal | null;
+      };
+      const answerText = response.ok
+        ? result.answer ?? 'No answer returned.'
+        : result.error ?? 'The assistant could not answer that.';
+      setMessages((m) => [...m, { role: 'assistant', text: answerText }]);
+      if (result.pendingProposal) setPendingProposal({ ...result.pendingProposal, sessionId: sessionId.current });
+      if (result.mode === 'confirm' || result.mode === 'cancel') setPendingProposal(null);
+
+      // Speak the response.
+      setMicState('speaking');
+      const speakResponse = await fetch('/api/voice/speak', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ text: answerText }),
+      });
+      if (speakResponse.ok) {
+        const audioBlob = await speakResponse.blob();
+        const audioUrl = URL.createObjectURL(audioBlob);
+        const audio = new Audio(audioUrl);
+        await new Promise<void>((resolve) => {
+          audio.onended = () => resolve();
+          audio.onerror = () => resolve();
+          void audio.play();
+        });
+        URL.revokeObjectURL(audioUrl);
+      }
+    } catch {
+      setMessages((m) => [...m, { role: 'assistant', text: 'The decision assistant could not be reached.' }]);
+    } finally {
+      setBusy(false);
+      setMicState('idle');
+    }
+  }, [busy]);
 
   const ask = async (prompt = question) => {
     const text = prompt.trim();
     if (!text || busy) return;
     setQuestion('');
-    setMessages((current) => [...current, { role: 'user', text }]);
+    setMessages((m) => [...m, { role: 'user', text }]);
     setBusy(true);
     try {
-      const response = await fetch('/api/chat', {
+      const response = await fetch('/api/voice/respond', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ question: text }),
+        body: JSON.stringify({ sessionId: sessionId.current, text }),
       });
-      const result = (await response.json()) as { answer?: string; error?: string };
-      setMessages((current) => [...current, { role: 'assistant', text: response.ok ? result.answer ?? 'No answer returned.' : result.error ?? 'The assistant could not answer that.' }]);
+      const result = (await response.json()) as {
+        answer?: string;
+        error?: string;
+        mode?: string;
+        pendingProposal?: PendingProposal | null;
+      };
+      const answerText = response.ok
+        ? result.answer ?? 'No answer returned.'
+        : result.error ?? 'The assistant could not answer that.';
+      setMessages((m) => [...m, { role: 'assistant', text: answerText }]);
+      if (result.pendingProposal) setPendingProposal({ ...result.pendingProposal, sessionId: sessionId.current });
+      if (result.mode === 'confirm' || result.mode === 'cancel') setPendingProposal(null);
     } catch {
-      setMessages((current) => [...current, { role: 'assistant', text: 'The decision assistant could not be reached. Check that the optimizer evidence outputs exist and the configured model is available.' }]);
+      setMessages((m) => [...m, { role: 'assistant', text: 'The decision assistant could not be reached. Check that the optimizer evidence outputs exist and the configured model is available.' }]);
     } finally {
       setBusy(false);
     }
   };
 
-  return <section className="yc-card yc-assistant"><header><div><h3>Decision assistant</h3><span>Evidence-grounded explanations</span></div><Badge tone="info">FarmOpti</Badge></header><div className="yc-chat-log">{messages.map((message, index) => <p className={`yc-chat-bubble yc-chat-${message.role}`} key={`${message.role}-${index}`}>{message.text}</p>)}{busy && <p className="yc-chat-bubble yc-chat-assistant">Reviewing optimisation evidence...</p>}</div><div className="yc-chat-suggestions"><button onClick={() => ask('Why was the selected harvest plan chosen?')}>Why this plan?</button><button onClick={() => ask('What changed in the current optimisation?')}>What changed?</button></div><form className="yc-chat-form" onSubmit={(event) => { event.preventDefault(); void ask(); }}><input value={question} onChange={(event) => setQuestion(event.target.value)} placeholder="Ask about a decision or scenario..." aria-label="Ask the decision assistant" /><button className="yc-btn yc-btn-dark" disabled={busy || !question.trim()} aria-label="Send question"><Send size={15} /></button></form></section>;
+  const startRecording = useCallback(async () => {
+    if (micState !== 'idle' || busy) return;
+    try {
+      const stream = await navigator.mediaDevices.getUserMedia({ audio: true });
+      const recorder = new MediaRecorder(stream, { mimeType: 'audio/webm;codecs=opus' });
+      chunksRef.current = [];
+      recorder.ondataavailable = (e) => { if (e.data.size > 0) chunksRef.current.push(e.data); };
+      recorder.onstop = async () => {
+        stream.getTracks().forEach((t) => t.stop());
+        setMicState('transcribing');
+        const blob = new Blob(chunksRef.current, { type: 'audio/webm;codecs=opus' });
+        const form = new FormData();
+        form.append('audio', blob, 'recording.webm');
+        try {
+          const res = await fetch('/api/voice/transcribe', { method: 'POST', body: form });
+          const json = (await res.json()) as { transcript?: string; error?: string };
+          if (!res.ok || !json.transcript) {
+            setMicState('error');
+            setMessages((m) => [...m, { role: 'assistant', text: json.error ?? 'Could not transcribe the recording.' }]);
+            setBusy(false);
+            return;
+          }
+          await askViaVoice(json.transcript);
+        } catch {
+          setMicState('error');
+          setBusy(false);
+        }
+      };
+      mediaRecorderRef.current = recorder;
+      recorder.start();
+      setMicState('recording');
+    } catch {
+      setMicState('error');
+    }
+  }, [micState, busy, askViaVoice]);
+
+  const stopRecording = useCallback(() => {
+    if (micState !== 'recording') return;
+    mediaRecorderRef.current?.stop();
+  }, [micState]);
+
+  useEffect(() => {
+    if (micState === 'error') {
+      const id = setTimeout(() => setMicState('idle'), 3000);
+      return () => clearTimeout(id);
+    }
+  }, [micState]);
+
+  const confirmProposal = async () => {
+    if (!pendingProposal) return;
+    await ask('confirm change');
+  };
+
+  const cancelProposal = async () => {
+    if (!pendingProposal) return;
+    await ask('cancel change');
+  };
+
+  const micLabel: Record<MicState, string> = {
+    idle: 'Hold to speak',
+    recording: 'Release to send',
+    transcribing: 'Transcribing…',
+    thinking: 'Thinking…',
+    speaking: 'Speaking…',
+    error: 'Mic error',
+  };
+
+  return (
+    <section className="yc-card yc-assistant">
+      <header>
+        <div><h3>Decision assistant</h3><span>Voice or text · evidence-grounded</span></div>
+        <Badge tone="info">FarmOpti + ElevenLabs</Badge>
+      </header>
+      <div className="yc-chat-log">
+        {messages.map((message, index) => (
+          <p className={`yc-chat-bubble yc-chat-${message.role}`} key={`${message.role}-${index}`}>{message.text}</p>
+        ))}
+        {busy && micState === 'thinking' && <p className="yc-chat-bubble yc-chat-assistant">Reviewing optimisation evidence…</p>}
+        {micState === 'transcribing' && <p className="yc-chat-bubble yc-chat-assistant">Transcribing…</p>}
+        {micState === 'speaking' && <p className="yc-chat-bubble yc-chat-assistant">Speaking response…</p>}
+      </div>
+      {pendingProposal && (
+        <div className="yc-constraint-preview">
+          <p><strong>Proposed rule:</strong> {pendingProposal.sourceText}</p>
+          <div className="yc-constraint-actions">
+            <button className="yc-btn yc-btn-primary" onClick={() => void confirmProposal()}>Confirm change</button>
+            <button className="yc-btn" onClick={() => void cancelProposal()}>Cancel</button>
+          </div>
+        </div>
+      )}
+      <div className="yc-chat-suggestions">
+        <button onClick={() => void ask('Why was the selected harvest plan chosen?')}>Why this plan?</button>
+        <button onClick={() => void ask('What changed in the current optimisation?')}>What changed?</button>
+      </div>
+      <form className="yc-chat-form" onSubmit={(event) => { event.preventDefault(); void ask(); }}>
+        <input
+          value={question}
+          onChange={(event) => setQuestion(event.target.value)}
+          placeholder="Ask about a decision, or speak a constraint…"
+          aria-label="Ask the decision assistant"
+        />
+        <button
+          type="button"
+          className={`yc-btn yc-mic-btn ${micState === 'recording' ? 'yc-mic-active' : ''} ${micState === 'error' ? 'yc-mic-error' : ''}`}
+          aria-label={micLabel[micState]}
+          title={micLabel[micState]}
+          onMouseDown={() => void startRecording()}
+          onMouseUp={stopRecording}
+          onTouchStart={(e) => { e.preventDefault(); void startRecording(); }}
+          onTouchEnd={stopRecording}
+          disabled={busy && micState === 'thinking'}
+        >
+          {micState === 'error' ? <MicOff size={15} /> : <Mic size={15} />}
+        </button>
+        <button className="yc-btn yc-btn-dark" disabled={busy || !question.trim()} aria-label="Send question">
+          <Send size={15} />
+        </button>
+      </form>
+    </section>
+  );
 }
 
 function CommandView({ plan, disrupted, onNavigate, onDisrupt, onOptimise }: { plan: OptimiserCandidate; disrupted: boolean; onNavigate: (view: ViewKey) => void; onDisrupt: () => void; onOptimise: () => void }) {
@@ -164,6 +360,7 @@ function CommandView({ plan, disrupted, onNavigate, onDisrupt, onOptimise }: { p
     <div className="yc-grid yc-grid-4"><StatCard label="Standing crop" value={String(Math.round(remaining))} unit="ha" detail={`${completed}% of the program is off`} meter={completed} /><StatCard label="Harvestable before rain" value={String(Math.round(plan.harvested))} unit="ha" detail={plan.truckLimited ? <span className="yc-down">Truck-limited · haulage is the bottleneck</span> : 'Header capacity is the bottleneck'} meter={(plan.harvested / remaining) * 100} tone="blue" /><StatCard label="Exposed to the front" value={String(Math.round(plan.exposedHa))} unit="ha" detail={`Weighted loss ${money(plan.lossValue)} at ${Math.round((disrupted ? 0.8 : 0.35) * 100)}% rain probability`} meter={(plan.exposedHa / remaining) * 100} tone="red" /><StatCard label="APW1 still owed" value="420" unit="t" detail="Contract C-3391 closes 18 Dec" meter={72} tone="amber" /></div>
     <div className="yc-grid yc-grid-main"><section className="yc-card"><header><h3>Needs a decision</h3><span>{alerts.length} total</span></header><div className="yc-feed">{alerts.map((alert) => <button className="yc-feed-item" key={alert.title} onClick={() => onNavigate(alert.view)}><i className={`yc-severity yc-severity-${alert.tone}`} /><span><b>{alert.title}</b><small>{alert.text}</small></span><time>{alert.when}</time></button>)}</div></section><section className="yc-card"><header><h3>Six-day outlook</h3><span>Bureau · Rupanyup</span></header><div className="yc-card-body yc-outlook">{yallambeeOpsDashboard.weather.map((day) => <div className="yc-weather" key={day.day}><span>{day.day} <em>{day.max}°</em></span><i><b style={{ width: `${Math.min(100, day.rain * 4)}%`, background: day.rain ? 'var(--yc-blue)' : 'transparent' }} /></i><strong>{day.rain ? `${day.rain} mm` : '—'}</strong></div>)}<dl className="yc-kv"><dt>Front arrival</dt><dd>{disrupted ? '23:18 tonight' : 'tomorrow afternoon'}</dd><dt>Confidence</dt><dd>{disrupted ? '80%' : '35%'}</dd><dt>Fire danger</dt><dd>GFDI 21 · High</dd><dt>Harvest ban</dt><dd>GFDI 35</dd></dl></div></section></div>
     <div className="yc-grid yc-grid-main"><DecisionAssistant /><section className="yc-card yc-scope"><header><h3>Supported system scope</h3><Badge tone="ok">Connected</Badge></header><div className="yc-card-body"><p>The current system can optimise schedules, score economics, apply weather, machine, labour and field-state constraints, and explain recorded decisions.</p><button className="yc-btn" onClick={() => onNavigate('harvest')}>Open supported plan <ArrowRight size={15} /></button></div></section></div>
+    <ConfirmedConstraintsPanel />
     {!disrupted && <button className="yc-disrupt" onClick={onDisrupt}><CloudRain size={17} /> Simulate disruption <span>RAIN + MACHINE EVENT</span></button>}
   </>;
 }

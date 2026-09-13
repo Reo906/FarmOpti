@@ -37,6 +37,7 @@ interface CompiledScenario {
 
 export interface ScenarioRunResult {
   scenario: ScenarioInterpretation;
+  requestedScenario?: ScenarioInterpretation;
   resolved_changes: any[];
   summary: OptimizationSummary;
   comparison: ScenarioComparison;
