@@ -952,7 +952,7 @@
             "expected_yield_t_ha": 3.5812,
             "nitrogen_index": 0.67,
             "weed_pressure": 0.1,
-            "pest_pressure": 0.0514,
+            "pest_pressure": 0.051,
             "disease_pressure": 0.1,
             "seedbed_readiness": 0.12
           }
@@ -987,12 +987,12 @@
             "harvested": false,
             "growth_stage": "pod_fill",
             "readiness": 0.678,
-            "soil_moisture": 0.2708,
+            "soil_moisture": 0.2681,
             "soil_temperature_c": 16.14,
             "expected_yield_t_ha": 3.755,
             "nitrogen_index": 0.67,
             "weed_pressure": 0.1,
-            "pest_pressure": 0.4537,
+            "pest_pressure": 0.4535,
             "disease_pressure": 0.1,
             "seedbed_readiness": 0.12
           }
@@ -1005,12 +1005,12 @@
         "harvested": false,
         "growth_stage": "pod_fill",
         "readiness": 0.678,
-        "soil_moisture": 0.2708,
+        "soil_moisture": 0.2681,
         "soil_temperature_c": 16.14,
         "expected_yield_t_ha": 3.755,
         "nitrogen_index": 0.67,
         "weed_pressure": 0.1,
-        "pest_pressure": 0.4537,
+        "pest_pressure": 0.4535,
         "disease_pressure": 0.1,
         "seedbed_readiness": 0.12
       }
@@ -1097,7 +1097,7 @@
             "expected_yield_t_ha": 3.6472,
             "nitrogen_index": 0.67,
             "weed_pressure": 0.1,
-            "pest_pressure": 0.0514,
+            "pest_pressure": 0.051,
             "disease_pressure": 0.1,
             "seedbed_readiness": 0.12
           }
@@ -1132,12 +1132,12 @@
             "harvested": false,
             "growth_stage": "pod_fill",
             "readiness": 0.678,
-            "soil_moisture": 0.2708,
+            "soil_moisture": 0.2681,
             "soil_temperature_c": 16.14,
             "expected_yield_t_ha": 3.755,
             "nitrogen_index": 0.67,
             "weed_pressure": 0.1,
-            "pest_pressure": 0.4537,
+            "pest_pressure": 0.4535,
             "disease_pressure": 0.1,
             "seedbed_readiness": 0.12
           }
@@ -1150,12 +1150,12 @@
         "harvested": false,
         "growth_stage": "pod_fill",
         "readiness": 0.678,
-        "soil_moisture": 0.2708,
+        "soil_moisture": 0.2681,
         "soil_temperature_c": 16.14,
         "expected_yield_t_ha": 3.755,
         "nitrogen_index": 0.67,
         "weed_pressure": 0.1,
-        "pest_pressure": 0.4537,
+        "pest_pressure": 0.4535,
         "disease_pressure": 0.1,
         "seedbed_readiness": 0.12
       }
@@ -1202,7 +1202,7 @@
             "expected_yield_t_ha": 3.5812,
             "nitrogen_index": 0.67,
             "weed_pressure": 0.1,
-            "pest_pressure": 0.0514,
+            "pest_pressure": 0.051,
             "disease_pressure": 0.1,
             "seedbed_readiness": 0.12
           }
@@ -1220,7 +1220,7 @@
         "expected_yield_t_ha": 3.5812,
         "nitrogen_index": 0.67,
         "weed_pressure": 0.1,
-        "pest_pressure": 0.4537,
+        "pest_pressure": 0.4535,
         "disease_pressure": 0.1,
         "seedbed_readiness": 0.12
       }
@@ -1307,7 +1307,7 @@
             "expected_yield_t_ha": 3.6472,
             "nitrogen_index": 0.67,
             "weed_pressure": 0.1,
-            "pest_pressure": 0.0514,
+            "pest_pressure": 0.051,
             "disease_pressure": 0.1,
             "seedbed_readiness": 0.12
           }
@@ -1325,7 +1325,7 @@
         "expected_yield_t_ha": 3.6472,
         "nitrogen_index": 0.67,
         "weed_pressure": 0.1,
-        "pest_pressure": 0.4537,
+        "pest_pressure": 0.4535,
         "disease_pressure": 0.1,
         "seedbed_readiness": 0.12
       }
@@ -1367,7 +1367,7 @@
             "harvested": false,
             "growth_stage": "pod_fill",
             "readiness": 0.678,
-            "soil_moisture": 0.2708,
+            "soil_moisture": 0.2681,
             "soil_temperature_c": 16.14,
             "expected_yield_t_ha": 3.5129,
             "nitrogen_index": 0.67,
@@ -1385,7 +1385,7 @@
         "harvested": false,
         "growth_stage": "pod_fill",
         "readiness": 0.678,
-        "soil_moisture": 0.2708,
+        "soil_moisture": 0.2681,
         "soil_temperature_c": 16.14,
         "expected_yield_t_ha": 3.5129,
         "nitrogen_index": 0.67,
@@ -1472,7 +1472,7 @@
             "harvested": false,
             "growth_stage": "pod_fill",
             "readiness": 0.678,
-            "soil_moisture": 0.2708,
+            "soil_moisture": 0.2681,
             "soil_temperature_c": 16.14,
             "expected_yield_t_ha": 3.5734,
             "nitrogen_index": 0.67,
@@ -1490,7 +1490,7 @@
         "harvested": false,
         "growth_stage": "pod_fill",
         "readiness": 0.678,
-        "soil_moisture": 0.2708,
+        "soil_moisture": 0.2681,
         "soil_temperature_c": 16.14,
         "expected_yield_t_ha": 3.5734,
         "nitrogen_index": 0.67,
@@ -1631,7 +1631,7 @@
             "expected_yield_t_ha": 3.5812,
             "nitrogen_index": 0.67,
             "weed_pressure": 0.1,
-            "pest_pressure": 0.0514,
+            "pest_pressure": 0.051,
             "disease_pressure": 0.1,
             "seedbed_readiness": 0.12
           }
@@ -1666,12 +1666,12 @@
             "harvested": false,
             "growth_stage": "pod_fill",
             "readiness": 0.678,
-            "soil_moisture": 0.2708,
+            "soil_moisture": 0.2681,
             "soil_temperature_c": 16.14,
             "expected_yield_t_ha": 3.755,
             "nitrogen_index": 0.67,
             "weed_pressure": 0.1,
-            "pest_pressure": 0.4537,
+            "pest_pressure": 0.4535,
             "disease_pressure": 0.1,
             "seedbed_readiness": 0.12
           }
@@ -1684,12 +1684,12 @@
         "harvested": false,
         "growth_stage": "pod_fill",
         "readiness": 0.678,
-        "soil_moisture": 0.2708,
+        "soil_moisture": 0.2681,
         "soil_temperature_c": 16.14,
         "expected_yield_t_ha": 3.755,
         "nitrogen_index": 0.67,
         "weed_pressure": 0.1,
-        "pest_pressure": 0.4537,
+        "pest_pressure": 0.4535,
         "disease_pressure": 0.1,
         "seedbed_readiness": 0.12
       }
@@ -1736,7 +1736,7 @@
             "expected_yield_t_ha": 3.5812,
             "nitrogen_index": 0.67,
             "weed_pressure": 0.1,
-            "pest_pressure": 0.0514,
+            "pest_pressure": 0.051,
             "disease_pressure": 0.1,
             "seedbed_readiness": 0.12
           }
@@ -1771,12 +1771,12 @@
             "harvested": false,
             "growth_stage": "pod_fill",
             "readiness": 0.678,
-            "soil_moisture": 0.2708,
+            "soil_moisture": 0.2681,
             "soil_temperature_c": 16.14,
             "expected_yield_t_ha": 3.755,
             "nitrogen_index": 0.67,
             "weed_pressure": 0.1,
-            "pest_pressure": 0.4537,
+            "pest_pressure": 0.4535,
             "disease_pressure": 0.1,
             "seedbed_readiness": 0.12
           }
@@ -1789,12 +1789,12 @@
         "harvested": false,
         "growth_stage": "pod_fill",
         "readiness": 0.678,
-        "soil_moisture": 0.2708,
+        "soil_moisture": 0.2681,
         "soil_temperature_c": 16.14,
         "expected_yield_t_ha": 3.755,
         "nitrogen_index": 0.67,
         "weed_pressure": 0.1,
-        "pest_pressure": 0.4537,
+        "pest_pressure": 0.4535,
         "disease_pressure": 0.1,
         "seedbed_readiness": 0.12
       }
@@ -1841,7 +1841,7 @@
             "expected_yield_t_ha": 3.5812,
             "nitrogen_index": 0.67,
             "weed_pressure": 0.1,
-            "pest_pressure": 0.0514,
+            "pest_pressure": 0.051,
             "disease_pressure": 0.1,
             "seedbed_readiness": 0.12
           }
@@ -1876,12 +1876,12 @@
             "harvested": false,
             "growth_stage": "pod_fill",
             "readiness": 0.672,
-            "soil_moisture": 0.2708,
+            "soil_moisture": 0.2681,
             "soil_temperature_c": 15.96,
             "expected_yield_t_ha": 3.755,
             "nitrogen_index": 0.67,
             "weed_pressure": 0.1,
-            "pest_pressure": 0.3867,
+            "pest_pressure": 0.3865,
             "disease_pressure": 0.1,
             "seedbed_readiness": 0.12
           }
@@ -1894,12 +1894,12 @@
         "harvested": false,
         "growth_stage": "pod_fill",
         "readiness": 0.678,
-        "soil_moisture": 0.2132,
+        "soil_moisture": 0.2114,
         "soil_temperature_c": 16.14,
         "expected_yield_t_ha": 3.755,
         "nitrogen_index": 0.67,
         "weed_pressure": 0.1,
-        "pest_pressure": 0.4537,
+        "pest_pressure": 0.4535,
         "disease_pressure": 0.1,
         "seedbed_readiness": 0.12
       }
@@ -1946,7 +1946,7 @@
             "expected_yield_t_ha": 3.5812,
             "nitrogen_index": 0.67,
             "weed_pressure": 0.1,
-            "pest_pressure": 0.0514,
+            "pest_pressure": 0.051,
             "disease_pressure": 0.1,
             "seedbed_readiness": 0.12
           }
@@ -1981,12 +1981,12 @@
             "harvested": false,
             "growth_stage": "pod_fill",
             "readiness": 0.672,
-            "soil_moisture": 0.2708,
+            "soil_moisture": 0.2681,
             "soil_temperature_c": 15.96,
             "expected_yield_t_ha": 3.755,
             "nitrogen_index": 0.67,
             "weed_pressure": 0.1,
-            "pest_pressure": 0.3867,
+            "pest_pressure": 0.3865,
             "disease_pressure": 0.1,
             "seedbed_readiness": 0.12
           }
@@ -1999,12 +1999,12 @@
         "harvested": false,
         "growth_stage": "pod_fill",
         "readiness": 0.678,
-        "soil_moisture": 0.2132,
+        "soil_moisture": 0.2114,
         "soil_temperature_c": 16.14,
         "expected_yield_t_ha": 3.755,
         "nitrogen_index": 0.67,
         "weed_pressure": 0.1,
-        "pest_pressure": 0.4537,
+        "pest_pressure": 0.4535,
         "disease_pressure": 0.1,
         "seedbed_readiness": 0.12
       }
@@ -2051,7 +2051,7 @@
             "expected_yield_t_ha": 3.5812,
             "nitrogen_index": 0.67,
             "weed_pressure": 0.1,
-            "pest_pressure": 0.0514,
+            "pest_pressure": 0.051,
             "disease_pressure": 0.1,
             "seedbed_readiness": 0.12
           }
@@ -2086,12 +2086,12 @@
             "harvested": false,
             "growth_stage": "pod_fill",
             "readiness": 0.672,
-            "soil_moisture": 0.2708,
+            "soil_moisture": 0.2681,
             "soil_temperature_c": 15.96,
             "expected_yield_t_ha": 3.755,
             "nitrogen_index": 0.67,
             "weed_pressure": 0.1,
-            "pest_pressure": 0.3867,
+            "pest_pressure": 0.3865,
             "disease_pressure": 0.1,
             "seedbed_readiness": 0.12
           }
@@ -2104,12 +2104,12 @@
         "harvested": false,
         "growth_stage": "pod_fill",
         "readiness": 0.678,
-        "soil_moisture": 0.2132,
+        "soil_moisture": 0.2114,
         "soil_temperature_c": 16.14,
         "expected_yield_t_ha": 3.755,
         "nitrogen_index": 0.67,
         "weed_pressure": 0.1,
-        "pest_pressure": 0.4537,
+        "pest_pressure": 0.4535,
         "disease_pressure": 0.1,
         "seedbed_readiness": 0.12
       }
@@ -2156,7 +2156,7 @@
             "expected_yield_t_ha": 3.5812,
             "nitrogen_index": 0.67,
             "weed_pressure": 0.1,
-            "pest_pressure": 0.0514,
+            "pest_pressure": 0.051,
             "disease_pressure": 0.1,
             "seedbed_readiness": 0.12
           }
@@ -2191,12 +2191,12 @@
             "harvested": false,
             "growth_stage": "pod_fill",
             "readiness": 0.654,
-            "soil_moisture": 0.2722,
+            "soil_moisture": 0.2695,
             "soil_temperature_c": 15.42,
             "expected_yield_t_ha": 3.755,
             "nitrogen_index": 0.67,
             "weed_pressure": 0.1,
-            "pest_pressure": 0.1477,
+            "pest_pressure": 0.1473,
             "disease_pressure": 0.1,
             "seedbed_readiness": 0.12
           }
@@ -2209,12 +2209,12 @@
         "harvested": false,
         "growth_stage": "pod_fill",
         "readiness": 0.678,
-        "soil_moisture": 0.1653,
+        "soil_moisture": 0.1648,
         "soil_temperature_c": 16.14,
         "expected_yield_t_ha": 3.755,
         "nitrogen_index": 0.67,
         "weed_pressure": 0.1,
-        "pest_pressure": 0.4537,
+        "pest_pressure": 0.4535,
         "disease_pressure": 0.1,
         "seedbed_readiness": 0.12
       }
@@ -2261,7 +2261,7 @@
             "expected_yield_t_ha": 3.5812,
             "nitrogen_index": 0.67,
             "weed_pressure": 0.1,
-            "pest_pressure": 0.0514,
+            "pest_pressure": 0.051,
             "disease_pressure": 0.1,
             "seedbed_readiness": 0.12
           }
@@ -2296,12 +2296,12 @@
             "harvested": false,
             "growth_stage": "pod_fill",
             "readiness": 0.654,
-            "soil_moisture": 0.2722,
+            "soil_moisture": 0.2695,
             "soil_temperature_c": 15.42,
             "expected_yield_t_ha": 3.755,
             "nitrogen_index": 0.67,
             "weed_pressure": 0.1,
-            "pest_pressure": 0.1477,
+            "pest_pressure": 0.1473,
             "disease_pressure": 0.1,
             "seedbed_readiness": 0.12
           }
@@ -2314,12 +2314,12 @@
         "harvested": false,
         "growth_stage": "pod_fill",
         "readiness": 0.678,
-        "soil_moisture": 0.1653,
+        "soil_moisture": 0.1648,
         "soil_temperature_c": 16.14,
         "expected_yield_t_ha": 3.755,
         "nitrogen_index": 0.67,
         "weed_pressure": 0.1,
-        "pest_pressure": 0.4537,
+        "pest_pressure": 0.4535,
         "disease_pressure": 0.1,
         "seedbed_readiness": 0.12
       }
@@ -2366,7 +2366,7 @@
             "expected_yield_t_ha": 3.5812,
             "nitrogen_index": 0.67,
             "weed_pressure": 0.1,
-            "pest_pressure": 0.0514,
+            "pest_pressure": 0.051,
             "disease_pressure": 0.1,
             "seedbed_readiness": 0.12
           }
@@ -2401,12 +2401,12 @@
             "harvested": false,
             "growth_stage": "pod_fill",
             "readiness": 0.654,
-            "soil_moisture": 0.2722,
+            "soil_moisture": 0.2695,
             "soil_temperature_c": 15.42,
             "expected_yield_t_ha": 3.755,
             "nitrogen_index": 0.67,
             "weed_pressure": 0.1,
-            "pest_pressure": 0.1477,
+            "pest_pressure": 0.1473,
             "disease_pressure": 0.1,
             "seedbed_readiness": 0.12
           }
@@ -2419,12 +2419,12 @@
         "harvested": false,
         "growth_stage": "pod_fill",
         "readiness": 0.678,
-        "soil_moisture": 0.1653,
+        "soil_moisture": 0.1648,
         "soil_temperature_c": 16.14,
         "expected_yield_t_ha": 3.755,
         "nitrogen_index": 0.67,
         "weed_pressure": 0.1,
-        "pest_pressure": 0.4537,
+        "pest_pressure": 0.4535,
         "disease_pressure": 0.1,
         "seedbed_readiness": 0.12
       }
@@ -2471,7 +2471,7 @@
             "expected_yield_t_ha": 3.5575,
             "nitrogen_index": 0.67,
             "weed_pressure": 0.1,
-            "pest_pressure": 0.0479,
+            "pest_pressure": 0.0475,
             "disease_pressure": 0.1,
             "seedbed_readiness": 0.12
           }
@@ -2506,12 +2506,12 @@
             "harvested": false,
             "growth_stage": "pod_fill",
             "readiness": 0.678,
-            "soil_moisture": 0.2708,
+            "soil_moisture": 0.2681,
             "soil_temperature_c": 16.14,
             "expected_yield_t_ha": 3.755,
             "nitrogen_index": 0.67,
             "weed_pressure": 0.1,
-            "pest_pressure": 0.4928,
+            "pest_pressure": 0.4926,
             "disease_pressure": 0.1,
             "seedbed_readiness": 0.12
           }
@@ -2524,12 +2524,12 @@
         "harvested": false,
         "growth_stage": "pod_fill",
         "readiness": 0.678,
-        "soil_moisture": 0.2708,
+        "soil_moisture": 0.2681,
         "soil_temperature_c": 16.14,
         "expected_yield_t_ha": 3.755,
         "nitrogen_index": 0.67,
         "weed_pressure": 0.1,
-        "pest_pressure": 0.4928,
+        "pest_pressure": 0.4926,
         "disease_pressure": 0.1,
         "seedbed_readiness": 0.12
       }
@@ -2576,7 +2576,7 @@
             "expected_yield_t_ha": 3.5575,
             "nitrogen_index": 0.67,
             "weed_pressure": 0.1,
-            "pest_pressure": 0.0479,
+            "pest_pressure": 0.0475,
             "disease_pressure": 0.1,
             "seedbed_readiness": 0.12
           }
@@ -2611,12 +2611,12 @@
             "harvested": false,
             "growth_stage": "pod_fill",
             "readiness": 0.678,
-            "soil_moisture": 0.2708,
+            "soil_moisture": 0.2681,
             "soil_temperature_c": 16.14,
             "expected_yield_t_ha": 3.755,
             "nitrogen_index": 0.67,
             "weed_pressure": 0.1,
-            "pest_pressure": 0.4928,
+            "pest_pressure": 0.4926,
             "disease_pressure": 0.1,
             "seedbed_readiness": 0.12
           }
@@ -2629,12 +2629,12 @@
         "harvested": false,
         "growth_stage": "pod_fill",
         "readiness": 0.678,
-        "soil_moisture": 0.2708,
+        "soil_moisture": 0.2681,
         "soil_temperature_c": 16.14,
         "expected_yield_t_ha": 3.755,
         "nitrogen_index": 0.67,
         "weed_pressure": 0.1,
-        "pest_pressure": 0.4928,
+        "pest_pressure": 0.4926,
         "disease_pressure": 0.1,
         "seedbed_readiness": 0.12
       }
@@ -2681,7 +2681,7 @@
             "expected_yield_t_ha": 3.5575,
             "nitrogen_index": 0.67,
             "weed_pressure": 0.1,
-            "pest_pressure": 0.0479,
+            "pest_pressure": 0.0475,
             "disease_pressure": 0.1,
             "seedbed_readiness": 0.12
           }
@@ -2716,12 +2716,12 @@
             "harvested": false,
             "growth_stage": "pod_fill",
             "readiness": 0.678,
-            "soil_moisture": 0.2708,
+            "soil_moisture": 0.2681,
             "soil_temperature_c": 16.14,
             "expected_yield_t_ha": 3.755,
             "nitrogen_index": 0.67,
             "weed_pressure": 0.1,
-            "pest_pressure": 0.4928,
+            "pest_pressure": 0.4926,
             "disease_pressure": 0.1,
             "seedbed_readiness": 0.12
           }
@@ -2734,12 +2734,12 @@
         "harvested": false,
         "growth_stage": "pod_fill",
         "readiness": 0.678,
-        "soil_moisture": 0.2708,
+        "soil_moisture": 0.2681,
         "soil_temperature_c": 16.14,
         "expected_yield_t_ha": 3.755,
         "nitrogen_index": 0.67,
         "weed_pressure": 0.1,
-        "pest_pressure": 0.4928,
+        "pest_pressure": 0.4926,
         "disease_pressure": 0.1,
         "seedbed_readiness": 0.12
       }
@@ -2786,7 +2786,7 @@
             "expected_yield_t_ha": 3.5575,
             "nitrogen_index": 0.67,
             "weed_pressure": 0.1,
-            "pest_pressure": 0.0479,
+            "pest_pressure": 0.0475,
             "disease_pressure": 0.1,
             "seedbed_readiness": 0.12
           }
@@ -2821,12 +2821,12 @@
             "harvested": false,
             "growth_stage": "pod_fill",
             "readiness": 0.678,
-            "soil_moisture": 0.2708,
+            "soil_moisture": 0.2681,
             "soil_temperature_c": 16.14,
             "expected_yield_t_ha": 3.755,
             "nitrogen_index": 0.67,
             "weed_pressure": 0.1,
-            "pest_pressure": 0.4928,
+            "pest_pressure": 0.4926,
             "disease_pressure": 0.1,
             "seedbed_readiness": 0.12
           }
@@ -2839,12 +2839,12 @@
         "harvested": false,
         "growth_stage": "pod_fill",
         "readiness": 0.678,
-        "soil_moisture": 0.2708,
+        "soil_moisture": 0.2681,
         "soil_temperature_c": 16.14,
         "expected_yield_t_ha": 3.755,
         "nitrogen_index": 0.67,
         "weed_pressure": 0.1,
-        "pest_pressure": 0.4928,
+        "pest_pressure": 0.4926,
         "disease_pressure": 0.1,
         "seedbed_readiness": 0.12
       }
@@ -2891,7 +2891,7 @@
             "expected_yield_t_ha": 3.5575,
             "nitrogen_index": 0.67,
             "weed_pressure": 0.1,
-            "pest_pressure": 0.0479,
+            "pest_pressure": 0.0475,
             "disease_pressure": 0.1,
             "seedbed_readiness": 0.12
           }
@@ -2926,12 +2926,12 @@
             "harvested": false,
             "growth_stage": "pod_fill",
             "readiness": 0.678,
-            "soil_moisture": 0.2708,
+            "soil_moisture": 0.2681,
             "soil_temperature_c": 16.14,
             "expected_yield_t_ha": 3.755,
             "nitrogen_index": 0.67,
             "weed_pressure": 0.1,
-            "pest_pressure": 0.4928,
+            "pest_pressure": 0.4926,
             "disease_pressure": 0.1,
             "seedbed_readiness": 0.12
           }
@@ -2944,12 +2944,12 @@
         "harvested": false,
         "growth_stage": "pod_fill",
         "readiness": 0.678,
-        "soil_moisture": 0.2708,
+        "soil_moisture": 0.2681,
         "soil_temperature_c": 16.14,
         "expected_yield_t_ha": 3.755,
         "nitrogen_index": 0.67,
         "weed_pressure": 0.1,
-        "pest_pressure": 0.4928,
+        "pest_pressure": 0.4926,
         "disease_pressure": 0.1,
         "seedbed_readiness": 0.12
       }
@@ -2996,7 +2996,7 @@
             "expected_yield_t_ha": 3.5575,
             "nitrogen_index": 0.67,
             "weed_pressure": 0.1,
-            "pest_pressure": 0.0479,
+            "pest_pressure": 0.0475,
             "disease_pressure": 0.1,
             "seedbed_readiness": 0.12
           }
@@ -3031,12 +3031,12 @@
             "harvested": false,
             "growth_stage": "pod_fill",
             "readiness": 0.678,
-            "soil_moisture": 0.2708,
+            "soil_moisture": 0.2681,
             "soil_temperature_c": 16.14,
             "expected_yield_t_ha": 3.755,
             "nitrogen_index": 0.67,
             "weed_pressure": 0.1,
-            "pest_pressure": 0.4928,
+            "pest_pressure": 0.4926,
             "disease_pressure": 0.1,
             "seedbed_readiness": 0.12
           }
@@ -3049,12 +3049,12 @@
         "harvested": false,
         "growth_stage": "pod_fill",
         "readiness": 0.678,
-        "soil_moisture": 0.2708,
+        "soil_moisture": 0.2681,
         "soil_temperature_c": 16.14,
         "expected_yield_t_ha": 3.755,
         "nitrogen_index": 0.67,
         "weed_pressure": 0.1,
-        "pest_pressure": 0.4928,
+        "pest_pressure": 0.4926,
         "disease_pressure": 0.1,
         "seedbed_readiness": 0.12
       }
@@ -3101,7 +3101,7 @@
             "expected_yield_t_ha": 3.5575,
             "nitrogen_index": 0.67,
             "weed_pressure": 0.1,
-            "pest_pressure": 0.0479,
+            "pest_pressure": 0.0475,
             "disease_pressure": 0.1,
             "seedbed_readiness": 0.12
           }
@@ -3136,12 +3136,12 @@
             "harvested": false,
             "growth_stage": "pod_fill",
             "readiness": 0.678,
-            "soil_moisture": 0.2708,
+            "soil_moisture": 0.2681,
             "soil_temperature_c": 16.14,
             "expected_yield_t_ha": 3.755,
             "nitrogen_index": 0.67,
             "weed_pressure": 0.1,
-            "pest_pressure": 0.4928,
+            "pest_pressure": 0.4926,
             "disease_pressure": 0.1,
             "seedbed_readiness": 0.12
           }
@@ -3154,12 +3154,12 @@
         "harvested": false,
         "growth_stage": "pod_fill",
         "readiness": 0.678,
-        "soil_moisture": 0.2708,
+        "soil_moisture": 0.2681,
         "soil_temperature_c": 16.14,
         "expected_yield_t_ha": 3.755,
         "nitrogen_index": 0.67,
         "weed_pressure": 0.1,
-        "pest_pressure": 0.4928,
+        "pest_pressure": 0.4926,
         "disease_pressure": 0.1,
         "seedbed_readiness": 0.12
       }
@@ -3206,7 +3206,7 @@
             "expected_yield_t_ha": 3.5575,
             "nitrogen_index": 0.67,
             "weed_pressure": 0.1,
-            "pest_pressure": 0.0479,
+            "pest_pressure": 0.0475,
             "disease_pressure": 0.1,
             "seedbed_readiness": 0.12
           }
@@ -3241,12 +3241,12 @@
             "harvested": false,
             "growth_stage": "pod_fill",
             "readiness": 0.678,
-            "soil_moisture": 0.2708,
+            "soil_moisture": 0.2681,
             "soil_temperature_c": 16.14,
             "expected_yield_t_ha": 3.755,
             "nitrogen_index": 0.67,
             "weed_pressure": 0.1,
-            "pest_pressure": 0.4928,
+            "pest_pressure": 0.4926,
             "disease_pressure": 0.1,
             "seedbed_readiness": 0.12
           }
@@ -3259,12 +3259,12 @@
         "harvested": false,
         "growth_stage": "pod_fill",
         "readiness": 0.678,
-        "soil_moisture": 0.2708,
+        "soil_moisture": 0.2681,
         "soil_temperature_c": 16.14,
         "expected_yield_t_ha": 3.755,
         "nitrogen_index": 0.67,
         "weed_pressure": 0.1,
-        "pest_pressure": 0.4928,
+        "pest_pressure": 0.4926,
         "disease_pressure": 0.1,
         "seedbed_readiness": 0.12
       }
@@ -3311,7 +3311,7 @@
             "expected_yield_t_ha": 3.5575,
             "nitrogen_index": 0.67,
             "weed_pressure": 0.1,
-            "pest_pressure": 0.0479,
+            "pest_pressure": 0.0475,
             "disease_pressure": 0.1,
             "seedbed_readiness": 0.12
           }
@@ -3346,12 +3346,12 @@
             "harvested": false,
             "growth_stage": "pod_fill",
             "readiness": 0.678,
-            "soil_moisture": 0.2708,
+            "soil_moisture": 0.2681,
             "soil_temperature_c": 16.14,
             "expected_yield_t_ha": 3.755,
             "nitrogen_index": 0.67,
             "weed_pressure": 0.1,
-            "pest_pressure": 0.4928,
+            "pest_pressure": 0.4926,
             "disease_pressure": 0.1,
             "seedbed_readiness": 0.12
           }
@@ -3364,12 +3364,12 @@
         "harvested": false,
         "growth_stage": "pod_fill",
         "readiness": 0.678,
-        "soil_moisture": 0.2708,
+        "soil_moisture": 0.2681,
         "soil_temperature_c": 16.14,
         "expected_yield_t_ha": 3.755,
         "nitrogen_index": 0.67,
         "weed_pressure": 0.1,
-        "pest_pressure": 0.4928,
+        "pest_pressure": 0.4926,
         "disease_pressure": 0.1,
         "seedbed_readiness": 0.12
       }
@@ -3416,7 +3416,7 @@
             "expected_yield_t_ha": 3.5251,
             "nitrogen_index": 0.67,
             "weed_pressure": 0.1,
-            "pest_pressure": 0.0444,
+            "pest_pressure": 0.044,
             "disease_pressure": 0.1,
             "seedbed_readiness": 0.12
           }
@@ -3451,12 +3451,12 @@
             "harvested": false,
             "growth_stage": "pod_fill",
             "readiness": 0.678,
-            "soil_moisture": 0.2708,
+            "soil_moisture": 0.2681,
             "soil_temperature_c": 16.14,
             "expected_yield_t_ha": 3.755,
             "nitrogen_index": 0.67,
             "weed_pressure": 0.1,
-            "pest_pressure": 0.5242,
+            "pest_pressure": 0.5241,
             "disease_pressure": 0.1,
             "seedbed_readiness": 0.12
           }
@@ -3469,12 +3469,12 @@
         "harvested": false,
         "growth_stage": "pod_fill",
         "readiness": 0.678,
-        "soil_moisture": 0.2708,
+        "soil_moisture": 0.2681,
         "soil_temperature_c": 16.14,
         "expected_yield_t_ha": 3.755,
         "nitrogen_index": 0.67,
         "weed_pressure": 0.1,
-        "pest_pressure": 0.5242,
+        "pest_pressure": 0.5241,
         "disease_pressure": 0.1,
         "seedbed_readiness": 0.12
       }
@@ -3521,7 +3521,7 @@
             "expected_yield_t_ha": 3.5251,
             "nitrogen_index": 0.67,
             "weed_pressure": 0.1,
-            "pest_pressure": 0.0444,
+            "pest_pressure": 0.044,
             "disease_pressure": 0.1,
             "seedbed_readiness": 0.12
           }
@@ -3556,12 +3556,12 @@
             "harvested": false,
             "growth_stage": "pod_fill",
             "readiness": 0.678,
-            "soil_moisture": 0.2708,
+            "soil_moisture": 0.2681,
             "soil_temperature_c": 16.14,
             "expected_yield_t_ha": 3.755,
             "nitrogen_index": 0.67,
             "weed_pressure": 0.1,
-            "pest_pressure": 0.5242,
+            "pest_pressure": 0.5241,
             "disease_pressure": 0.1,
             "seedbed_readiness": 0.12
           }
@@ -3574,12 +3574,12 @@
         "harvested": false,
         "growth_stage": "pod_fill",
         "readiness": 0.678,
-        "soil_moisture": 0.2708,
+        "soil_moisture": 0.2681,
         "soil_temperature_c": 16.14,
         "expected_yield_t_ha": 3.755,
         "nitrogen_index": 0.67,
         "weed_pressure": 0.1,
-        "pest_pressure": 0.5242,
+        "pest_pressure": 0.5241,
         "disease_pressure": 0.1,
         "seedbed_readiness": 0.12
       }
@@ -3626,7 +3626,7 @@
             "expected_yield_t_ha": 3.5251,
             "nitrogen_index": 0.67,
             "weed_pressure": 0.1,
-            "pest_pressure": 0.0444,
+            "pest_pressure": 0.044,
             "disease_pressure": 0.1,
             "seedbed_readiness": 0.12
           }
@@ -3661,12 +3661,12 @@
             "harvested": false,
             "growth_stage": "pod_fill",
             "readiness": 0.678,
-            "soil_moisture": 0.2708,
+            "soil_moisture": 0.2681,
             "soil_temperature_c": 16.14,
             "expected_yield_t_ha": 3.755,
             "nitrogen_index": 0.67,
             "weed_pressure": 0.1,
-            "pest_pressure": 0.5242,
+            "pest_pressure": 0.5241,
             "disease_pressure": 0.1,
             "seedbed_readiness": 0.12
           }
@@ -3679,12 +3679,12 @@
         "harvested": false,
         "growth_stage": "pod_fill",
         "readiness": 0.678,
-        "soil_moisture": 0.2708,
+        "soil_moisture": 0.2681,
         "soil_temperature_c": 16.14,
         "expected_yield_t_ha": 3.755,
         "nitrogen_index": 0.67,
         "weed_pressure": 0.1,
-        "pest_pressure": 0.5242,
+        "pest_pressure": 0.5241,
         "disease_pressure": 0.1,
         "seedbed_readiness": 0.12
       }
@@ -3731,7 +3731,7 @@
             "expected_yield_t_ha": 3.5052,
             "nitrogen_index": 0.67,
             "weed_pressure": 0.1,
-            "pest_pressure": 0.0409,
+            "pest_pressure": 0.0405,
             "disease_pressure": 0.1,
             "seedbed_readiness": 0.12
           }
@@ -3766,12 +3766,12 @@
             "harvested": false,
             "growth_stage": "pod_fill",
             "readiness": 0.678,
-            "soil_moisture": 0.2708,
+            "soil_moisture": 0.2681,
             "soil_temperature_c": 16.14,
             "expected_yield_t_ha": 3.755,
             "nitrogen_index": 0.67,
             "weed_pressure": 0.1,
-            "pest_pressure": 0.5494,
+            "pest_pressure": 0.5493,
             "disease_pressure": 0.1,
             "seedbed_readiness": 0.12
           }
@@ -3784,12 +3784,12 @@
         "harvested": false,
         "growth_stage": "pod_fill",
         "readiness": 0.678,
-        "soil_moisture": 0.2708,
+        "soil_moisture": 0.2681,
         "soil_temperature_c": 16.14,
         "expected_yield_t_ha": 3.755,
         "nitrogen_index": 0.67,
         "weed_pressure": 0.1,
-        "pest_pressure": 0.5494,
+        "pest_pressure": 0.5493,
         "disease_pressure": 0.1,
         "seedbed_readiness": 0.12
       }
@@ -3836,7 +3836,7 @@
             "expected_yield_t_ha": 3.5052,
             "nitrogen_index": 0.67,
             "weed_pressure": 0.1,
-            "pest_pressure": 0.0409,
+            "pest_pressure": 0.0405,
             "disease_pressure": 0.1,
             "seedbed_readiness": 0.12
           }
@@ -3871,12 +3871,12 @@
             "harvested": false,
             "growth_stage": "pod_fill",
             "readiness": 0.678,
-            "soil_moisture": 0.2708,
+            "soil_moisture": 0.2681,
             "soil_temperature_c": 16.14,
             "expected_yield_t_ha": 3.755,
             "nitrogen_index": 0.67,
             "weed_pressure": 0.1,
-            "pest_pressure": 0.5494,
+            "pest_pressure": 0.5493,
             "disease_pressure": 0.1,
             "seedbed_readiness": 0.12
           }
@@ -3889,12 +3889,12 @@
         "harvested": false,
         "growth_stage": "pod_fill",
         "readiness": 0.678,
-        "soil_moisture": 0.2708,
+        "soil_moisture": 0.2681,
         "soil_temperature_c": 16.14,
         "expected_yield_t_ha": 3.755,
         "nitrogen_index": 0.67,
         "weed_pressure": 0.1,
-        "pest_pressure": 0.5494,
+        "pest_pressure": 0.5493,
         "disease_pressure": 0.1,
         "seedbed_readiness": 0.12
       }
@@ -3979,7 +3979,7 @@
             "soil_moisture": 0.21,
             "soil_temperature_c": 15.4,
             "expected_yield_t_ha": 5.1305,
-            "nitrogen_index": 0.6657,
+            "nitrogen_index": 0.6531,
             "weed_pressure": 0.497,
             "pest_pressure": 0.08,
             "disease_pressure": 0.28,
@@ -3997,7 +3997,7 @@
         "soil_moisture": 0.21,
         "soil_temperature_c": 15.91,
         "expected_yield_t_ha": 5.1305,
-        "nitrogen_index": 0.5829,
+        "nitrogen_index": 0.571,
         "weed_pressure": 0.6803,
         "pest_pressure": 0.08,
         "disease_pressure": 0.34,
@@ -4084,7 +4084,7 @@
             "soil_moisture": 0.31,
             "soil_temperature_c": 14.72,
             "expected_yield_t_ha": 4.9933,
-            "nitrogen_index": 0.7041,
+            "nitrogen_index": 0.6855,
             "weed_pressure": 0.3177,
             "pest_pressure": 0.08,
             "disease_pressure": 0.2,
@@ -4124,7 +4124,7 @@
             "soil_moisture": 0.226,
             "soil_temperature_c": 15.74,
             "expected_yield_t_ha": 5.2407,
-            "nitrogen_index": 0.5451,
+            "nitrogen_index": 0.5286,
             "weed_pressure": 0.6786,
             "pest_pressure": 0.08,
             "disease_pressure": 0.047,
@@ -4142,7 +4142,7 @@
         "soil_moisture": 0.21,
         "soil_temperature_c": 15.91,
         "expected_yield_t_ha": 5.2535,
-        "nitrogen_index": 0.5189,
+        "nitrogen_index": 0.5028,
         "weed_pressure": 0.7273,
         "pest_pressure": 0.08,
         "disease_pressure": 0.0943,
@@ -4229,7 +4229,7 @@
             "soil_moisture": 0.21,
             "soil_temperature_c": 15.4,
             "expected_yield_t_ha": 5.1305,
-            "nitrogen_index": 0.6657,
+            "nitrogen_index": 0.6531,
             "weed_pressure": 0.497,
             "pest_pressure": 0.08,
             "disease_pressure": 0.28,
@@ -4247,7 +4247,7 @@
         "soil_moisture": 0.21,
         "soil_temperature_c": 15.91,
         "expected_yield_t_ha": 5.1305,
-        "nitrogen_index": 0.5829,
+        "nitrogen_index": 0.571,
         "weed_pressure": 0.6803,
         "pest_pressure": 0.08,
         "disease_pressure": 0.34,
@@ -4334,7 +4334,7 @@
             "soil_moisture": 0.21,
             "soil_temperature_c": 15.4,
             "expected_yield_t_ha": 5.1305,
-            "nitrogen_index": 0.6657,
+            "nitrogen_index": 0.6531,
             "weed_pressure": 0.497,
             "pest_pressure": 0.08,
             "disease_pressure": 0.28,
@@ -4352,7 +4352,7 @@
         "soil_moisture": 0.21,
         "soil_temperature_c": 15.91,
         "expected_yield_t_ha": 5.1305,
-        "nitrogen_index": 0.5829,
+        "nitrogen_index": 0.571,
         "weed_pressure": 0.6803,
         "pest_pressure": 0.08,
         "disease_pressure": 0.34,
@@ -4439,7 +4439,7 @@
             "soil_moisture": 0.21,
             "soil_temperature_c": 15.4,
             "expected_yield_t_ha": 5.1305,
-            "nitrogen_index": 0.6657,
+            "nitrogen_index": 0.6531,
             "weed_pressure": 0.497,
             "pest_pressure": 0.08,
             "disease_pressure": 0.28,
@@ -4457,7 +4457,7 @@
         "soil_moisture": 0.21,
         "soil_temperature_c": 15.91,
         "expected_yield_t_ha": 5.1305,
-        "nitrogen_index": 0.5829,
+        "nitrogen_index": 0.571,
         "weed_pressure": 0.6803,
         "pest_pressure": 0.08,
         "disease_pressure": 0.34,
@@ -4544,7 +4544,7 @@
             "soil_moisture": 0.21,
             "soil_temperature_c": 15.4,
             "expected_yield_t_ha": 5.1305,
-            "nitrogen_index": 0.6657,
+            "nitrogen_index": 0.6531,
             "weed_pressure": 0.497,
             "pest_pressure": 0.08,
             "disease_pressure": 0.28,
@@ -4562,7 +4562,7 @@
         "soil_moisture": 0.21,
         "soil_temperature_c": 15.91,
         "expected_yield_t_ha": 5.1305,
-        "nitrogen_index": 0.5829,
+        "nitrogen_index": 0.571,
         "weed_pressure": 0.6803,
         "pest_pressure": 0.08,
         "disease_pressure": 0.34,
@@ -4649,7 +4649,7 @@
             "soil_moisture": 0.21,
             "soil_temperature_c": 15.4,
             "expected_yield_t_ha": 5.1305,
-            "nitrogen_index": 0.6657,
+            "nitrogen_index": 0.6531,
             "weed_pressure": 0.497,
             "pest_pressure": 0.08,
             "disease_pressure": 0.28,
@@ -4667,7 +4667,7 @@
         "soil_moisture": 0.21,
         "soil_temperature_c": 15.91,
         "expected_yield_t_ha": 5.1305,
-        "nitrogen_index": 0.5829,
+        "nitrogen_index": 0.571,
         "weed_pressure": 0.6803,
         "pest_pressure": 0.08,
         "disease_pressure": 0.34,
@@ -4754,7 +4754,7 @@
             "soil_moisture": 0.21,
             "soil_temperature_c": 15.4,
             "expected_yield_t_ha": 5.1305,
-            "nitrogen_index": 0.6657,
+            "nitrogen_index": 0.6531,
             "weed_pressure": 0.497,
             "pest_pressure": 0.08,
             "disease_pressure": 0.28,
@@ -4772,7 +4772,7 @@
         "soil_moisture": 0.21,
         "soil_temperature_c": 15.91,
         "expected_yield_t_ha": 5.1305,
-        "nitrogen_index": 0.5829,
+        "nitrogen_index": 0.571,
         "weed_pressure": 0.6803,
         "pest_pressure": 0.08,
         "disease_pressure": 0.34,
@@ -4859,7 +4859,7 @@
             "soil_moisture": 0.21,
             "soil_temperature_c": 15.4,
             "expected_yield_t_ha": 5.1305,
-            "nitrogen_index": 0.6657,
+            "nitrogen_index": 0.6531,
             "weed_pressure": 0.497,
             "pest_pressure": 0.08,
             "disease_pressure": 0.28,
@@ -4877,7 +4877,7 @@
         "soil_moisture": 0.21,
         "soil_temperature_c": 15.91,
         "expected_yield_t_ha": 5.1305,
-        "nitrogen_index": 0.5829,
+        "nitrogen_index": 0.571,
         "weed_pressure": 0.6803,
         "pest_pressure": 0.08,
         "disease_pressure": 0.34,
@@ -4964,7 +4964,7 @@
             "soil_moisture": 0.21,
             "soil_temperature_c": 15.4,
             "expected_yield_t_ha": 5.1305,
-            "nitrogen_index": 0.6657,
+            "nitrogen_index": 0.6531,
             "weed_pressure": 0.497,
             "pest_pressure": 0.08,
             "disease_pressure": 0.28,
@@ -4982,7 +4982,7 @@
         "soil_moisture": 0.21,
         "soil_temperature_c": 15.91,
         "expected_yield_t_ha": 5.1305,
-        "nitrogen_index": 0.5829,
+        "nitrogen_index": 0.571,
         "weed_pressure": 0.6803,
         "pest_pressure": 0.08,
         "disease_pressure": 0.34,
@@ -5069,7 +5069,7 @@
             "soil_moisture": 0.214,
             "soil_temperature_c": 15.23,
             "expected_yield_t_ha": 5.115,
-            "nitrogen_index": 0.6738,
+            "nitrogen_index": 0.6612,
             "weed_pressure": 0.4262,
             "pest_pressure": 0.08,
             "disease_pressure": 0.26,
@@ -5087,7 +5087,7 @@
         "soil_moisture": 0.21,
         "soil_temperature_c": 15.91,
         "expected_yield_t_ha": 5.115,
-        "nitrogen_index": 0.5647,
+        "nitrogen_index": 0.5531,
         "weed_pressure": 0.6803,
         "pest_pressure": 0.08,
         "disease_pressure": 0.34,
@@ -5174,7 +5174,7 @@
             "soil_moisture": 0.214,
             "soil_temperature_c": 15.23,
             "expected_yield_t_ha": 5.115,
-            "nitrogen_index": 0.6738,
+            "nitrogen_index": 0.6612,
             "weed_pressure": 0.4262,
             "pest_pressure": 0.08,
             "disease_pressure": 0.26,
@@ -5192,7 +5192,7 @@
         "soil_moisture": 0.21,
         "soil_temperature_c": 15.91,
         "expected_yield_t_ha": 5.115,
-        "nitrogen_index": 0.5647,
+        "nitrogen_index": 0.5531,
         "weed_pressure": 0.6803,
         "pest_pressure": 0.08,
         "disease_pressure": 0.34,
@@ -5279,7 +5279,7 @@
             "soil_moisture": 0.214,
             "soil_temperature_c": 15.23,
             "expected_yield_t_ha": 5.115,
-            "nitrogen_index": 0.6738,
+            "nitrogen_index": 0.6612,
             "weed_pressure": 0.4262,
             "pest_pressure": 0.08,
             "disease_pressure": 0.26,
@@ -5297,7 +5297,7 @@
         "soil_moisture": 0.21,
         "soil_temperature_c": 15.91,
         "expected_yield_t_ha": 5.115,
-        "nitrogen_index": 0.5647,
+        "nitrogen_index": 0.5531,
         "weed_pressure": 0.6803,
         "pest_pressure": 0.08,
         "disease_pressure": 0.34,
@@ -5384,7 +5384,7 @@
             "soil_moisture": 0.214,
             "soil_temperature_c": 15.23,
             "expected_yield_t_ha": 5.115,
-            "nitrogen_index": 0.6738,
+            "nitrogen_index": 0.6612,
             "weed_pressure": 0.4262,
             "pest_pressure": 0.08,
             "disease_pressure": 0.26,
@@ -5402,7 +5402,7 @@
         "soil_moisture": 0.21,
         "soil_temperature_c": 15.91,
         "expected_yield_t_ha": 5.115,
-        "nitrogen_index": 0.5647,
+        "nitrogen_index": 0.5531,
         "weed_pressure": 0.6803,
         "pest_pressure": 0.08,
         "disease_pressure": 0.34,
@@ -5489,7 +5489,7 @@
             "soil_moisture": 0.214,
             "soil_temperature_c": 15.23,
             "expected_yield_t_ha": 5.115,
-            "nitrogen_index": 0.6738,
+            "nitrogen_index": 0.6612,
             "weed_pressure": 0.4262,
             "pest_pressure": 0.08,
             "disease_pressure": 0.26,
@@ -5507,7 +5507,7 @@
         "soil_moisture": 0.21,
         "soil_temperature_c": 15.91,
         "expected_yield_t_ha": 5.115,
-        "nitrogen_index": 0.5647,
+        "nitrogen_index": 0.5531,
         "weed_pressure": 0.6803,
         "pest_pressure": 0.08,
         "disease_pressure": 0.34,
@@ -5594,7 +5594,7 @@
             "soil_moisture": 0.214,
             "soil_temperature_c": 15.23,
             "expected_yield_t_ha": 5.115,
-            "nitrogen_index": 0.6738,
+            "nitrogen_index": 0.6612,
             "weed_pressure": 0.4262,
             "pest_pressure": 0.08,
             "disease_pressure": 0.26,
@@ -5612,7 +5612,7 @@
         "soil_moisture": 0.21,
         "soil_temperature_c": 15.91,
         "expected_yield_t_ha": 5.115,
-        "nitrogen_index": 0.5647,
+        "nitrogen_index": 0.5531,
         "weed_pressure": 0.6803,
         "pest_pressure": 0.08,
         "disease_pressure": 0.34,
@@ -5699,7 +5699,7 @@
             "soil_moisture": 0.214,
             "soil_temperature_c": 15.23,
             "expected_yield_t_ha": 5.115,
-            "nitrogen_index": 0.6738,
+            "nitrogen_index": 0.6612,
             "weed_pressure": 0.4262,
             "pest_pressure": 0.08,
             "disease_pressure": 0.26,
@@ -5717,7 +5717,7 @@
         "soil_moisture": 0.21,
         "soil_temperature_c": 15.91,
         "expected_yield_t_ha": 5.115,
-        "nitrogen_index": 0.5647,
+        "nitrogen_index": 0.5531,
         "weed_pressure": 0.6803,
         "pest_pressure": 0.08,
         "disease_pressure": 0.34,
@@ -5804,7 +5804,7 @@
             "soil_moisture": 0.214,
             "soil_temperature_c": 15.23,
             "expected_yield_t_ha": 5.115,
-            "nitrogen_index": 0.6738,
+            "nitrogen_index": 0.6612,
             "weed_pressure": 0.4262,
             "pest_pressure": 0.08,
             "disease_pressure": 0.26,
@@ -5822,7 +5822,7 @@
         "soil_moisture": 0.21,
         "soil_temperature_c": 15.91,
         "expected_yield_t_ha": 5.115,
-        "nitrogen_index": 0.5647,
+        "nitrogen_index": 0.5531,
         "weed_pressure": 0.6803,
         "pest_pressure": 0.08,
         "disease_pressure": 0.34,
@@ -5909,7 +5909,7 @@
             "soil_moisture": 0.214,
             "soil_temperature_c": 15.23,
             "expected_yield_t_ha": 5.115,
-            "nitrogen_index": 0.6738,
+            "nitrogen_index": 0.6612,
             "weed_pressure": 0.4262,
             "pest_pressure": 0.08,
             "disease_pressure": 0.26,
@@ -5927,7 +5927,7 @@
         "soil_moisture": 0.21,
         "soil_temperature_c": 15.91,
         "expected_yield_t_ha": 5.115,
-        "nitrogen_index": 0.5647,
+        "nitrogen_index": 0.5531,
         "weed_pressure": 0.6803,
         "pest_pressure": 0.08,
         "disease_pressure": 0.34,
@@ -6014,8 +6014,8 @@
             "soil_moisture": 0.246,
             "soil_temperature_c": 15.06,
             "expected_yield_t_ha": 5.0996,
-            "nitrogen_index": 0.6819,
-            "weed_pressure": 0.349,
+            "nitrogen_index": 0.6693,
+            "weed_pressure": 0.3491,
             "pest_pressure": 0.08,
             "disease_pressure": 0.24,
             "seedbed_readiness": 0.12
@@ -6032,7 +6032,7 @@
         "soil_moisture": 0.21,
         "soil_temperature_c": 15.91,
         "expected_yield_t_ha": 5.0996,
-        "nitrogen_index": 0.5471,
+        "nitrogen_index": 0.5357,
         "weed_pressure": 0.6803,
         "pest_pressure": 0.08,
         "disease_pressure": 0.34,
@@ -6119,8 +6119,8 @@
             "soil_moisture": 0.246,
             "soil_temperature_c": 15.06,
             "expected_yield_t_ha": 5.0996,
-            "nitrogen_index": 0.6819,
-            "weed_pressure": 0.349,
+            "nitrogen_index": 0.6693,
+            "weed_pressure": 0.3491,
             "pest_pressure": 0.08,
             "disease_pressure": 0.24,
             "seedbed_readiness": 0.12
@@ -6137,7 +6137,7 @@
         "soil_moisture": 0.21,
         "soil_temperature_c": 15.91,
         "expected_yield_t_ha": 5.0996,
-        "nitrogen_index": 0.5471,
+        "nitrogen_index": 0.5357,
         "weed_pressure": 0.6803,
         "pest_pressure": 0.08,
         "disease_pressure": 0.34,
@@ -6224,8 +6224,8 @@
             "soil_moisture": 0.246,
             "soil_temperature_c": 15.06,
             "expected_yield_t_ha": 5.0996,
-            "nitrogen_index": 0.6819,
-            "weed_pressure": 0.349,
+            "nitrogen_index": 0.6693,
+            "weed_pressure": 0.3491,
             "pest_pressure": 0.08,
             "disease_pressure": 0.24,
             "seedbed_readiness": 0.12
@@ -6242,7 +6242,7 @@
         "soil_moisture": 0.21,
         "soil_temperature_c": 15.91,
         "expected_yield_t_ha": 5.0996,
-        "nitrogen_index": 0.5471,
+        "nitrogen_index": 0.5357,
         "weed_pressure": 0.6803,
         "pest_pressure": 0.08,
         "disease_pressure": 0.34,
@@ -6329,8 +6329,8 @@
             "soil_moisture": 0.246,
             "soil_temperature_c": 15.06,
             "expected_yield_t_ha": 5.0996,
-            "nitrogen_index": 0.6819,
-            "weed_pressure": 0.349,
+            "nitrogen_index": 0.6693,
+            "weed_pressure": 0.3491,
             "pest_pressure": 0.08,
             "disease_pressure": 0.24,
             "seedbed_readiness": 0.12
@@ -6347,7 +6347,7 @@
         "soil_moisture": 0.21,
         "soil_temperature_c": 15.91,
         "expected_yield_t_ha": 5.0996,
-        "nitrogen_index": 0.5471,
+        "nitrogen_index": 0.5357,
         "weed_pressure": 0.6803,
         "pest_pressure": 0.08,
         "disease_pressure": 0.34,
@@ -6434,8 +6434,8 @@
             "soil_moisture": 0.246,
             "soil_temperature_c": 15.06,
             "expected_yield_t_ha": 5.0996,
-            "nitrogen_index": 0.6819,
-            "weed_pressure": 0.349,
+            "nitrogen_index": 0.6693,
+            "weed_pressure": 0.3491,
             "pest_pressure": 0.08,
             "disease_pressure": 0.24,
             "seedbed_readiness": 0.12
@@ -6452,7 +6452,7 @@
         "soil_moisture": 0.21,
         "soil_temperature_c": 15.91,
         "expected_yield_t_ha": 5.0996,
-        "nitrogen_index": 0.5471,
+        "nitrogen_index": 0.5357,
         "weed_pressure": 0.6803,
         "pest_pressure": 0.08,
         "disease_pressure": 0.34,
@@ -6539,8 +6539,8 @@
             "soil_moisture": 0.246,
             "soil_temperature_c": 15.06,
             "expected_yield_t_ha": 5.0996,
-            "nitrogen_index": 0.6819,
-            "weed_pressure": 0.349,
+            "nitrogen_index": 0.6693,
+            "weed_pressure": 0.3491,
             "pest_pressure": 0.08,
             "disease_pressure": 0.24,
             "seedbed_readiness": 0.12
@@ -6557,7 +6557,7 @@
         "soil_moisture": 0.21,
         "soil_temperature_c": 15.91,
         "expected_yield_t_ha": 5.0996,
-        "nitrogen_index": 0.5471,
+        "nitrogen_index": 0.5357,
         "weed_pressure": 0.6803,
         "pest_pressure": 0.08,
         "disease_pressure": 0.34,
@@ -6644,8 +6644,8 @@
             "soil_moisture": 0.246,
             "soil_temperature_c": 15.06,
             "expected_yield_t_ha": 5.0996,
-            "nitrogen_index": 0.6819,
-            "weed_pressure": 0.349,
+            "nitrogen_index": 0.6693,
+            "weed_pressure": 0.3491,
             "pest_pressure": 0.08,
             "disease_pressure": 0.24,
             "seedbed_readiness": 0.12
@@ -6662,7 +6662,7 @@
         "soil_moisture": 0.21,
         "soil_temperature_c": 15.91,
         "expected_yield_t_ha": 5.0996,
-        "nitrogen_index": 0.5471,
+        "nitrogen_index": 0.5357,
         "weed_pressure": 0.6803,
         "pest_pressure": 0.08,
         "disease_pressure": 0.34,
@@ -6749,8 +6749,8 @@
             "soil_moisture": 0.246,
             "soil_temperature_c": 15.06,
             "expected_yield_t_ha": 5.0996,
-            "nitrogen_index": 0.6819,
-            "weed_pressure": 0.349,
+            "nitrogen_index": 0.6693,
+            "weed_pressure": 0.3491,
             "pest_pressure": 0.08,
             "disease_pressure": 0.24,
             "seedbed_readiness": 0.12
@@ -6767,7 +6767,7 @@
         "soil_moisture": 0.21,
         "soil_temperature_c": 15.91,
         "expected_yield_t_ha": 5.0996,
-        "nitrogen_index": 0.5471,
+        "nitrogen_index": 0.5357,
         "weed_pressure": 0.6803,
         "pest_pressure": 0.08,
         "disease_pressure": 0.34,
@@ -6854,8 +6854,8 @@
             "soil_moisture": 0.246,
             "soil_temperature_c": 15.06,
             "expected_yield_t_ha": 5.0996,
-            "nitrogen_index": 0.6819,
-            "weed_pressure": 0.349,
+            "nitrogen_index": 0.6693,
+            "weed_pressure": 0.3491,
             "pest_pressure": 0.08,
             "disease_pressure": 0.24,
             "seedbed_readiness": 0.12
@@ -6872,7 +6872,7 @@
         "soil_moisture": 0.21,
         "soil_temperature_c": 15.91,
         "expected_yield_t_ha": 5.0996,
-        "nitrogen_index": 0.5471,
+        "nitrogen_index": 0.5357,
         "weed_pressure": 0.6803,
         "pest_pressure": 0.08,
         "disease_pressure": 0.34,
@@ -6959,7 +6959,7 @@
             "soil_moisture": 0.31,
             "soil_temperature_c": 14.72,
             "expected_yield_t_ha": 4.9933,
-            "nitrogen_index": 0.7041,
+            "nitrogen_index": 0.6855,
             "weed_pressure": 0.3177,
             "pest_pressure": 0.08,
             "disease_pressure": 0.2,
@@ -6999,7 +6999,7 @@
             "soil_moisture": 0.226,
             "soil_temperature_c": 15.74,
             "expected_yield_t_ha": 5.2407,
-            "nitrogen_index": 0.5451,
+            "nitrogen_index": 0.5286,
             "weed_pressure": 0.6786,
             "pest_pressure": 0.08,
             "disease_pressure": 0.047,
@@ -7017,7 +7017,7 @@
         "soil_moisture": 0.21,
         "soil_temperature_c": 15.91,
         "expected_yield_t_ha": 5.2535,
-        "nitrogen_index": 0.5189,
+        "nitrogen_index": 0.5028,
         "weed_pressure": 0.7273,
         "pest_pressure": 0.08,
         "disease_pressure": 0.0943,
@@ -7104,7 +7104,7 @@
             "soil_moisture": 0.31,
             "soil_temperature_c": 14.72,
             "expected_yield_t_ha": 4.9933,
-            "nitrogen_index": 0.7041,
+            "nitrogen_index": 0.6855,
             "weed_pressure": 0.3177,
             "pest_pressure": 0.08,
             "disease_pressure": 0.2,
@@ -7144,7 +7144,7 @@
             "soil_moisture": 0.226,
             "soil_temperature_c": 15.74,
             "expected_yield_t_ha": 5.2407,
-            "nitrogen_index": 0.5451,
+            "nitrogen_index": 0.5286,
             "weed_pressure": 0.6786,
             "pest_pressure": 0.08,
             "disease_pressure": 0.047,
@@ -7162,7 +7162,7 @@
         "soil_moisture": 0.21,
         "soil_temperature_c": 15.91,
         "expected_yield_t_ha": 5.2535,
-        "nitrogen_index": 0.5189,
+        "nitrogen_index": 0.5028,
         "weed_pressure": 0.7273,
         "pest_pressure": 0.08,
         "disease_pressure": 0.0943,
@@ -7209,7 +7209,7 @@
             "soil_moisture": 0.33,
             "soil_temperature_c": 14.86,
             "expected_yield_t_ha": 4.9857,
-            "nitrogen_index": 0.7034,
+            "nitrogen_index": 0.6754,
             "weed_pressure": 0.1,
             "pest_pressure": 0.08,
             "disease_pressure": 0.292,
@@ -7249,10 +7249,10 @@
             "soil_moisture": 0.262,
             "soil_temperature_c": 15.66,
             "expected_yield_t_ha": 5.3284,
-            "nitrogen_index": 0.5743,
+            "nitrogen_index": 0.549,
             "weed_pressure": 0.1,
             "pest_pressure": 0.08,
-            "disease_pressure": 0.0493,
+            "disease_pressure": 0.0497,
             "seedbed_readiness": 0.1
           }
         }
@@ -7267,10 +7267,10 @@
         "soil_moisture": 0.23,
         "soil_temperature_c": 15.98,
         "expected_yield_t_ha": 5.3411,
-        "nitrogen_index": 0.5234,
+        "nitrogen_index": 0.4991,
         "weed_pressure": 0.1,
         "pest_pressure": 0.08,
-        "disease_pressure": 0.1308,
+        "disease_pressure": 0.1311,
         "seedbed_readiness": 0.1
       }
     },
@@ -7314,7 +7314,7 @@
             "soil_moisture": 0.266,
             "soil_temperature_c": 15.18,
             "expected_yield_t_ha": 5.0295,
-            "nitrogen_index": 0.6929,
+            "nitrogen_index": 0.6686,
             "weed_pressure": 0.1,
             "pest_pressure": 0.08,
             "disease_pressure": 0.316,
@@ -7332,7 +7332,7 @@
         "soil_moisture": 0.23,
         "soil_temperature_c": 15.98,
         "expected_yield_t_ha": 5.0295,
-        "nitrogen_index": 0.5609,
+        "nitrogen_index": 0.5389,
         "weed_pressure": 0.1,
         "pest_pressure": 0.08,
         "disease_pressure": 0.376,
@@ -7379,7 +7379,7 @@
             "soil_moisture": 0.33,
             "soil_temperature_c": 14.86,
             "expected_yield_t_ha": 4.9857,
-            "nitrogen_index": 0.7034,
+            "nitrogen_index": 0.6754,
             "weed_pressure": 0.1,
             "pest_pressure": 0.08,
             "disease_pressure": 0.292,
@@ -7419,10 +7419,10 @@
             "soil_moisture": 0.262,
             "soil_temperature_c": 15.66,
             "expected_yield_t_ha": 5.3284,
-            "nitrogen_index": 0.5743,
+            "nitrogen_index": 0.549,
             "weed_pressure": 0.1,
             "pest_pressure": 0.08,
-            "disease_pressure": 0.0493,
+            "disease_pressure": 0.0497,
             "seedbed_readiness": 0.1
           }
         }
@@ -7437,10 +7437,10 @@
         "soil_moisture": 0.23,
         "soil_temperature_c": 15.98,
         "expected_yield_t_ha": 5.3411,
-        "nitrogen_index": 0.5234,
+        "nitrogen_index": 0.4991,
         "weed_pressure": 0.1,
         "pest_pressure": 0.08,
-        "disease_pressure": 0.1308,
+        "disease_pressure": 0.1311,
         "seedbed_readiness": 0.1
       }
     },
@@ -7484,7 +7484,7 @@
             "soil_moisture": 0.33,
             "soil_temperature_c": 14.86,
             "expected_yield_t_ha": 4.9857,
-            "nitrogen_index": 0.7034,
+            "nitrogen_index": 0.6754,
             "weed_pressure": 0.1,
             "pest_pressure": 0.08,
             "disease_pressure": 0.292,
@@ -7524,10 +7524,10 @@
             "soil_moisture": 0.262,
             "soil_temperature_c": 15.66,
             "expected_yield_t_ha": 5.3284,
-            "nitrogen_index": 0.5743,
+            "nitrogen_index": 0.549,
             "weed_pressure": 0.1,
             "pest_pressure": 0.08,
-            "disease_pressure": 0.0493,
+            "disease_pressure": 0.0497,
             "seedbed_readiness": 0.1
           }
         }
@@ -7542,10 +7542,10 @@
         "soil_moisture": 0.23,
         "soil_temperature_c": 15.98,
         "expected_yield_t_ha": 5.3411,
-        "nitrogen_index": 0.5234,
+        "nitrogen_index": 0.4991,
         "weed_pressure": 0.1,
         "pest_pressure": 0.08,
-        "disease_pressure": 0.1308,
+        "disease_pressure": 0.1311,
         "seedbed_readiness": 0.1
       }
     },
@@ -7589,7 +7589,7 @@
             "soil_moisture": 0.33,
             "soil_temperature_c": 14.86,
             "expected_yield_t_ha": 4.9857,
-            "nitrogen_index": 0.7034,
+            "nitrogen_index": 0.6754,
             "weed_pressure": 0.1,
             "pest_pressure": 0.08,
             "disease_pressure": 0.292,
@@ -7629,10 +7629,10 @@
             "soil_moisture": 0.23,
             "soil_temperature_c": 15.5,
             "expected_yield_t_ha": 5.3284,
-            "nitrogen_index": 0.5998,
+            "nitrogen_index": 0.574,
             "weed_pressure": 0.1,
             "pest_pressure": 0.08,
-            "disease_pressure": 0.0481,
+            "disease_pressure": 0.0485,
             "seedbed_readiness": 0.1
           }
         }
@@ -7647,10 +7647,10 @@
         "soil_moisture": 0.23,
         "soil_temperature_c": 15.98,
         "expected_yield_t_ha": 5.3411,
-        "nitrogen_index": 0.5234,
+        "nitrogen_index": 0.4991,
         "weed_pressure": 0.1,
         "pest_pressure": 0.08,
-        "disease_pressure": 0.1632,
+        "disease_pressure": 0.1635,
         "seedbed_readiness": 0.1
       }
     },
@@ -7694,7 +7694,7 @@
             "soil_moisture": 0.33,
             "soil_temperature_c": 14.86,
             "expected_yield_t_ha": 4.9857,
-            "nitrogen_index": 0.7034,
+            "nitrogen_index": 0.6754,
             "weed_pressure": 0.1,
             "pest_pressure": 0.08,
             "disease_pressure": 0.292,
@@ -7734,10 +7734,10 @@
             "soil_moisture": 0.23,
             "soil_temperature_c": 15.5,
             "expected_yield_t_ha": 5.3284,
-            "nitrogen_index": 0.5998,
+            "nitrogen_index": 0.574,
             "weed_pressure": 0.1,
             "pest_pressure": 0.08,
-            "disease_pressure": 0.0481,
+            "disease_pressure": 0.0485,
             "seedbed_readiness": 0.1
           }
         }
@@ -7752,10 +7752,10 @@
         "soil_moisture": 0.23,
         "soil_temperature_c": 15.98,
         "expected_yield_t_ha": 5.3411,
-        "nitrogen_index": 0.5234,
+        "nitrogen_index": 0.4991,
         "weed_pressure": 0.1,
         "pest_pressure": 0.08,
-        "disease_pressure": 0.1632,
+        "disease_pressure": 0.1635,
         "seedbed_readiness": 0.1
       }
     },
@@ -7799,7 +7799,7 @@
             "soil_moisture": 0.33,
             "soil_temperature_c": 14.86,
             "expected_yield_t_ha": 4.9857,
-            "nitrogen_index": 0.7034,
+            "nitrogen_index": 0.6754,
             "weed_pressure": 0.1,
             "pest_pressure": 0.08,
             "disease_pressure": 0.292,
@@ -7839,10 +7839,10 @@
             "soil_moisture": 0.23,
             "soil_temperature_c": 15.5,
             "expected_yield_t_ha": 5.3284,
-            "nitrogen_index": 0.5998,
+            "nitrogen_index": 0.574,
             "weed_pressure": 0.1,
             "pest_pressure": 0.08,
-            "disease_pressure": 0.0481,
+            "disease_pressure": 0.0485,
             "seedbed_readiness": 0.1
           }
         }
@@ -7857,10 +7857,10 @@
         "soil_moisture": 0.23,
         "soil_temperature_c": 15.98,
         "expected_yield_t_ha": 5.3411,
-        "nitrogen_index": 0.5234,
+        "nitrogen_index": 0.4991,
         "weed_pressure": 0.1,
         "pest_pressure": 0.08,
-        "disease_pressure": 0.1632,
+        "disease_pressure": 0.1635,
         "seedbed_readiness": 0.1
       }
     },
@@ -7904,7 +7904,7 @@
             "soil_moisture": 0.33,
             "soil_temperature_c": 14.86,
             "expected_yield_t_ha": 4.9857,
-            "nitrogen_index": 0.7034,
+            "nitrogen_index": 0.6754,
             "weed_pressure": 0.1,
             "pest_pressure": 0.08,
             "disease_pressure": 0.292,
@@ -7944,10 +7944,10 @@
             "soil_moisture": 0.234,
             "soil_temperature_c": 15.34,
             "expected_yield_t_ha": 5.3284,
-            "nitrogen_index": 0.6256,
+            "nitrogen_index": 0.5992,
             "weed_pressure": 0.1,
             "pest_pressure": 0.08,
-            "disease_pressure": 0.0469,
+            "disease_pressure": 0.0473,
             "seedbed_readiness": 0.1
           }
         }
@@ -7962,10 +7962,10 @@
         "soil_moisture": 0.23,
         "soil_temperature_c": 15.98,
         "expected_yield_t_ha": 5.3411,
-        "nitrogen_index": 0.5234,
+        "nitrogen_index": 0.4991,
         "weed_pressure": 0.1,
         "pest_pressure": 0.08,
-        "disease_pressure": 0.1916,
+        "disease_pressure": 0.1918,
         "seedbed_readiness": 0.1
       }
     },
@@ -8009,7 +8009,7 @@
             "soil_moisture": 0.33,
             "soil_temperature_c": 14.86,
             "expected_yield_t_ha": 4.9857,
-            "nitrogen_index": 0.7034,
+            "nitrogen_index": 0.6754,
             "weed_pressure": 0.1,
             "pest_pressure": 0.08,
             "disease_pressure": 0.292,
@@ -8049,10 +8049,10 @@
             "soil_moisture": 0.234,
             "soil_temperature_c": 15.34,
             "expected_yield_t_ha": 5.3284,
-            "nitrogen_index": 0.6256,
+            "nitrogen_index": 0.5992,
             "weed_pressure": 0.1,
             "pest_pressure": 0.08,
-            "disease_pressure": 0.0469,
+            "disease_pressure": 0.0473,
             "seedbed_readiness": 0.1
           }
         }
@@ -8067,10 +8067,10 @@
         "soil_moisture": 0.23,
         "soil_temperature_c": 15.98,
         "expected_yield_t_ha": 5.3411,
-        "nitrogen_index": 0.5234,
+        "nitrogen_index": 0.4991,
         "weed_pressure": 0.1,
         "pest_pressure": 0.08,
-        "disease_pressure": 0.1916,
+        "disease_pressure": 0.1918,
         "seedbed_readiness": 0.1
       }
     },
@@ -8114,7 +8114,7 @@
             "soil_moisture": 0.33,
             "soil_temperature_c": 14.86,
             "expected_yield_t_ha": 4.9857,
-            "nitrogen_index": 0.7034,
+            "nitrogen_index": 0.6754,
             "weed_pressure": 0.1,
             "pest_pressure": 0.08,
             "disease_pressure": 0.292,
@@ -8154,10 +8154,10 @@
             "soil_moisture": 0.234,
             "soil_temperature_c": 15.34,
             "expected_yield_t_ha": 5.3284,
-            "nitrogen_index": 0.6256,
+            "nitrogen_index": 0.5992,
             "weed_pressure": 0.1,
             "pest_pressure": 0.08,
-            "disease_pressure": 0.0469,
+            "disease_pressure": 0.0473,
             "seedbed_readiness": 0.1
           }
         }
@@ -8172,10 +8172,10 @@
         "soil_moisture": 0.23,
         "soil_temperature_c": 15.98,
         "expected_yield_t_ha": 5.3411,
-        "nitrogen_index": 0.5234,
+        "nitrogen_index": 0.4991,
         "weed_pressure": 0.1,
         "pest_pressure": 0.08,
-        "disease_pressure": 0.1916,
+        "disease_pressure": 0.1918,
         "seedbed_readiness": 0.1
       }
     },
@@ -8219,7 +8219,7 @@
             "soil_moisture": 0.33,
             "soil_temperature_c": 14.86,
             "expected_yield_t_ha": 4.9857,
-            "nitrogen_index": 0.7034,
+            "nitrogen_index": 0.6754,
             "weed_pressure": 0.1,
             "pest_pressure": 0.08,
             "disease_pressure": 0.292,
@@ -8259,10 +8259,10 @@
             "soil_moisture": 0.262,
             "soil_temperature_c": 15.66,
             "expected_yield_t_ha": 5.3284,
-            "nitrogen_index": 0.5743,
+            "nitrogen_index": 0.549,
             "weed_pressure": 0.1,
             "pest_pressure": 0.08,
-            "disease_pressure": 0.0493,
+            "disease_pressure": 0.0497,
             "seedbed_readiness": 0.1
           }
         }
@@ -8277,10 +8277,10 @@
         "soil_moisture": 0.23,
         "soil_temperature_c": 15.98,
         "expected_yield_t_ha": 5.3411,
-        "nitrogen_index": 0.5234,
+        "nitrogen_index": 0.4991,
         "weed_pressure": 0.1,
         "pest_pressure": 0.08,
-        "disease_pressure": 0.1308,
+        "disease_pressure": 0.1311,
         "seedbed_readiness": 0.1
       }
     },
@@ -8324,7 +8324,7 @@
             "soil_moisture": 0.33,
             "soil_temperature_c": 14.86,
             "expected_yield_t_ha": 4.9857,
-            "nitrogen_index": 0.7034,
+            "nitrogen_index": 0.6754,
             "weed_pressure": 0.1,
             "pest_pressure": 0.08,
             "disease_pressure": 0.292,
@@ -8364,10 +8364,10 @@
             "soil_moisture": 0.262,
             "soil_temperature_c": 15.66,
             "expected_yield_t_ha": 5.3284,
-            "nitrogen_index": 0.5743,
+            "nitrogen_index": 0.549,
             "weed_pressure": 0.1,
             "pest_pressure": 0.08,
-            "disease_pressure": 0.0493,
+            "disease_pressure": 0.0497,
             "seedbed_readiness": 0.1
           }
         }
@@ -8382,10 +8382,10 @@
         "soil_moisture": 0.23,
         "soil_temperature_c": 15.98,
         "expected_yield_t_ha": 5.3411,
-        "nitrogen_index": 0.5234,
+        "nitrogen_index": 0.4991,
         "weed_pressure": 0.1,
         "pest_pressure": 0.08,
-        "disease_pressure": 0.1308,
+        "disease_pressure": 0.1311,
         "seedbed_readiness": 0.1
       }
     },
@@ -8429,7 +8429,7 @@
             "soil_moisture": 0.33,
             "soil_temperature_c": 14.86,
             "expected_yield_t_ha": 4.9857,
-            "nitrogen_index": 0.7034,
+            "nitrogen_index": 0.6754,
             "weed_pressure": 0.1,
             "pest_pressure": 0.08,
             "disease_pressure": 0.292,
@@ -8469,10 +8469,10 @@
             "soil_moisture": 0.262,
             "soil_temperature_c": 15.66,
             "expected_yield_t_ha": 5.3284,
-            "nitrogen_index": 0.5743,
+            "nitrogen_index": 0.549,
             "weed_pressure": 0.1,
             "pest_pressure": 0.08,
-            "disease_pressure": 0.0493,
+            "disease_pressure": 0.0497,
             "seedbed_readiness": 0.1
           }
         }
@@ -8487,10 +8487,10 @@
         "soil_moisture": 0.23,
         "soil_temperature_c": 15.98,
         "expected_yield_t_ha": 5.3411,
-        "nitrogen_index": 0.5234,
+        "nitrogen_index": 0.4991,
         "weed_pressure": 0.1,
         "pest_pressure": 0.08,
-        "disease_pressure": 0.1308,
+        "disease_pressure": 0.1311,
         "seedbed_readiness": 0.1
       }
     },
@@ -8534,7 +8534,7 @@
             "soil_moisture": 0.33,
             "soil_temperature_c": 14.86,
             "expected_yield_t_ha": 4.9857,
-            "nitrogen_index": 0.7034,
+            "nitrogen_index": 0.6754,
             "weed_pressure": 0.1,
             "pest_pressure": 0.08,
             "disease_pressure": 0.292,
@@ -8574,10 +8574,10 @@
             "soil_moisture": 0.23,
             "soil_temperature_c": 15.5,
             "expected_yield_t_ha": 5.3284,
-            "nitrogen_index": 0.5998,
+            "nitrogen_index": 0.574,
             "weed_pressure": 0.1,
             "pest_pressure": 0.08,
-            "disease_pressure": 0.0481,
+            "disease_pressure": 0.0485,
             "seedbed_readiness": 0.1
           }
         }
@@ -8592,10 +8592,10 @@
         "soil_moisture": 0.23,
         "soil_temperature_c": 15.98,
         "expected_yield_t_ha": 5.3411,
-        "nitrogen_index": 0.5234,
+        "nitrogen_index": 0.4991,
         "weed_pressure": 0.1,
         "pest_pressure": 0.08,
-        "disease_pressure": 0.1632,
+        "disease_pressure": 0.1635,
         "seedbed_readiness": 0.1
       }
     },
@@ -8639,7 +8639,7 @@
             "soil_moisture": 0.33,
             "soil_temperature_c": 14.86,
             "expected_yield_t_ha": 4.9857,
-            "nitrogen_index": 0.7034,
+            "nitrogen_index": 0.6754,
             "weed_pressure": 0.1,
             "pest_pressure": 0.08,
             "disease_pressure": 0.292,
@@ -8679,10 +8679,10 @@
             "soil_moisture": 0.23,
             "soil_temperature_c": 15.5,
             "expected_yield_t_ha": 5.3284,
-            "nitrogen_index": 0.5998,
+            "nitrogen_index": 0.574,
             "weed_pressure": 0.1,
             "pest_pressure": 0.08,
-            "disease_pressure": 0.0481,
+            "disease_pressure": 0.0485,
             "seedbed_readiness": 0.1
           }
         }
@@ -8697,10 +8697,10 @@
         "soil_moisture": 0.23,
         "soil_temperature_c": 15.98,
         "expected_yield_t_ha": 5.3411,
-        "nitrogen_index": 0.5234,
+        "nitrogen_index": 0.4991,
         "weed_pressure": 0.1,
         "pest_pressure": 0.08,
-        "disease_pressure": 0.1632,
+        "disease_pressure": 0.1635,
         "seedbed_readiness": 0.1
       }
     },
@@ -8744,7 +8744,7 @@
             "soil_moisture": 0.33,
             "soil_temperature_c": 14.86,
             "expected_yield_t_ha": 4.9857,
-            "nitrogen_index": 0.7034,
+            "nitrogen_index": 0.6754,
             "weed_pressure": 0.1,
             "pest_pressure": 0.08,
             "disease_pressure": 0.292,
@@ -8784,10 +8784,10 @@
             "soil_moisture": 0.23,
             "soil_temperature_c": 15.5,
             "expected_yield_t_ha": 5.3284,
-            "nitrogen_index": 0.5998,
+            "nitrogen_index": 0.574,
             "weed_pressure": 0.1,
             "pest_pressure": 0.08,
-            "disease_pressure": 0.0481,
+            "disease_pressure": 0.0485,
             "seedbed_readiness": 0.1
           }
         }
@@ -8802,10 +8802,10 @@
         "soil_moisture": 0.23,
         "soil_temperature_c": 15.98,
         "expected_yield_t_ha": 5.3411,
-        "nitrogen_index": 0.5234,
+        "nitrogen_index": 0.4991,
         "weed_pressure": 0.1,
         "pest_pressure": 0.08,
-        "disease_pressure": 0.1632,
+        "disease_pressure": 0.1635,
         "seedbed_readiness": 0.1
       }
     },
@@ -8849,7 +8849,7 @@
             "soil_moisture": 0.33,
             "soil_temperature_c": 14.86,
             "expected_yield_t_ha": 4.9857,
-            "nitrogen_index": 0.7034,
+            "nitrogen_index": 0.6754,
             "weed_pressure": 0.1,
             "pest_pressure": 0.08,
             "disease_pressure": 0.292,
@@ -8889,10 +8889,10 @@
             "soil_moisture": 0.234,
             "soil_temperature_c": 15.34,
             "expected_yield_t_ha": 5.3284,
-            "nitrogen_index": 0.6256,
+            "nitrogen_index": 0.5992,
             "weed_pressure": 0.1,
             "pest_pressure": 0.08,
-            "disease_pressure": 0.0469,
+            "disease_pressure": 0.0473,
             "seedbed_readiness": 0.1
           }
         }
@@ -8907,10 +8907,10 @@
         "soil_moisture": 0.23,
         "soil_temperature_c": 15.98,
         "expected_yield_t_ha": 5.3411,
-        "nitrogen_index": 0.5234,
+        "nitrogen_index": 0.4991,
         "weed_pressure": 0.1,
         "pest_pressure": 0.08,
-        "disease_pressure": 0.1916,
+        "disease_pressure": 0.1918,
         "seedbed_readiness": 0.1
       }
     },
@@ -8954,7 +8954,7 @@
             "soil_moisture": 0.33,
             "soil_temperature_c": 14.86,
             "expected_yield_t_ha": 4.9857,
-            "nitrogen_index": 0.7034,
+            "nitrogen_index": 0.6754,
             "weed_pressure": 0.1,
             "pest_pressure": 0.08,
             "disease_pressure": 0.292,
@@ -8994,10 +8994,10 @@
             "soil_moisture": 0.234,
             "soil_temperature_c": 15.34,
             "expected_yield_t_ha": 5.3284,
-            "nitrogen_index": 0.6256,
+            "nitrogen_index": 0.5992,
             "weed_pressure": 0.1,
             "pest_pressure": 0.08,
-            "disease_pressure": 0.0469,
+            "disease_pressure": 0.0473,
             "seedbed_readiness": 0.1
           }
         }
@@ -9012,10 +9012,10 @@
         "soil_moisture": 0.23,
         "soil_temperature_c": 15.98,
         "expected_yield_t_ha": 5.3411,
-        "nitrogen_index": 0.5234,
+        "nitrogen_index": 0.4991,
         "weed_pressure": 0.1,
         "pest_pressure": 0.08,
-        "disease_pressure": 0.1916,
+        "disease_pressure": 0.1918,
         "seedbed_readiness": 0.1
       }
     },
@@ -9059,7 +9059,7 @@
             "soil_moisture": 0.33,
             "soil_temperature_c": 14.86,
             "expected_yield_t_ha": 4.9857,
-            "nitrogen_index": 0.7034,
+            "nitrogen_index": 0.6754,
             "weed_pressure": 0.1,
             "pest_pressure": 0.08,
             "disease_pressure": 0.292,
@@ -9099,10 +9099,10 @@
             "soil_moisture": 0.234,
             "soil_temperature_c": 15.34,
             "expected_yield_t_ha": 5.3284,
-            "nitrogen_index": 0.6256,
+            "nitrogen_index": 0.5992,
             "weed_pressure": 0.1,
             "pest_pressure": 0.08,
-            "disease_pressure": 0.0469,
+            "disease_pressure": 0.0473,
             "seedbed_readiness": 0.1
           }
         }
@@ -9117,10 +9117,10 @@
         "soil_moisture": 0.23,
         "soil_temperature_c": 15.98,
         "expected_yield_t_ha": 5.3411,
-        "nitrogen_index": 0.5234,
+        "nitrogen_index": 0.4991,
         "weed_pressure": 0.1,
         "pest_pressure": 0.08,
-        "disease_pressure": 0.1916,
+        "disease_pressure": 0.1918,
         "seedbed_readiness": 0.1
       }
     },
@@ -9164,7 +9164,7 @@
             "soil_moisture": 0.33,
             "soil_temperature_c": 14.86,
             "expected_yield_t_ha": 4.9857,
-            "nitrogen_index": 0.7034,
+            "nitrogen_index": 0.6754,
             "weed_pressure": 0.1,
             "pest_pressure": 0.08,
             "disease_pressure": 0.292,
@@ -9204,10 +9204,10 @@
             "soil_moisture": 0.262,
             "soil_temperature_c": 15.66,
             "expected_yield_t_ha": 5.3284,
-            "nitrogen_index": 0.5743,
+            "nitrogen_index": 0.549,
             "weed_pressure": 0.1,
             "pest_pressure": 0.08,
-            "disease_pressure": 0.0493,
+            "disease_pressure": 0.0497,
             "seedbed_readiness": 0.1
           }
         }
@@ -9222,10 +9222,10 @@
         "soil_moisture": 0.23,
         "soil_temperature_c": 15.98,
         "expected_yield_t_ha": 5.3411,
-        "nitrogen_index": 0.5234,
+        "nitrogen_index": 0.4991,
         "weed_pressure": 0.1,
         "pest_pressure": 0.08,
-        "disease_pressure": 0.1308,
+        "disease_pressure": 0.1311,
         "seedbed_readiness": 0.1
       }
     },
@@ -9269,7 +9269,7 @@
             "soil_moisture": 0.33,
             "soil_temperature_c": 14.86,
             "expected_yield_t_ha": 4.9857,
-            "nitrogen_index": 0.7034,
+            "nitrogen_index": 0.6754,
             "weed_pressure": 0.1,
             "pest_pressure": 0.08,
             "disease_pressure": 0.292,
@@ -9309,10 +9309,10 @@
             "soil_moisture": 0.262,
             "soil_temperature_c": 15.66,
             "expected_yield_t_ha": 5.3284,
-            "nitrogen_index": 0.5743,
+            "nitrogen_index": 0.549,
             "weed_pressure": 0.1,
             "pest_pressure": 0.08,
-            "disease_pressure": 0.0493,
+            "disease_pressure": 0.0497,
             "seedbed_readiness": 0.1
           }
         }
@@ -9327,10 +9327,10 @@
         "soil_moisture": 0.23,
         "soil_temperature_c": 15.98,
         "expected_yield_t_ha": 5.3411,
-        "nitrogen_index": 0.5234,
+        "nitrogen_index": 0.4991,
         "weed_pressure": 0.1,
         "pest_pressure": 0.08,
-        "disease_pressure": 0.1308,
+        "disease_pressure": 0.1311,
         "seedbed_readiness": 0.1
       }
     },
@@ -9374,7 +9374,7 @@
             "soil_moisture": 0.33,
             "soil_temperature_c": 14.86,
             "expected_yield_t_ha": 4.9857,
-            "nitrogen_index": 0.7034,
+            "nitrogen_index": 0.6754,
             "weed_pressure": 0.1,
             "pest_pressure": 0.08,
             "disease_pressure": 0.292,
@@ -9414,10 +9414,10 @@
             "soil_moisture": 0.262,
             "soil_temperature_c": 15.66,
             "expected_yield_t_ha": 5.3284,
-            "nitrogen_index": 0.5743,
+            "nitrogen_index": 0.549,
             "weed_pressure": 0.1,
             "pest_pressure": 0.08,
-            "disease_pressure": 0.0493,
+            "disease_pressure": 0.0497,
             "seedbed_readiness": 0.1
           }
         }
@@ -9432,10 +9432,10 @@
         "soil_moisture": 0.23,
         "soil_temperature_c": 15.98,
         "expected_yield_t_ha": 5.3411,
-        "nitrogen_index": 0.5234,
+        "nitrogen_index": 0.4991,
         "weed_pressure": 0.1,
         "pest_pressure": 0.08,
-        "disease_pressure": 0.1308,
+        "disease_pressure": 0.1311,
         "seedbed_readiness": 0.1
       }
     },
@@ -9479,7 +9479,7 @@
             "soil_moisture": 0.33,
             "soil_temperature_c": 14.86,
             "expected_yield_t_ha": 4.9857,
-            "nitrogen_index": 0.7034,
+            "nitrogen_index": 0.6754,
             "weed_pressure": 0.1,
             "pest_pressure": 0.08,
             "disease_pressure": 0.292,
@@ -9519,10 +9519,10 @@
             "soil_moisture": 0.23,
             "soil_temperature_c": 15.5,
             "expected_yield_t_ha": 5.3284,
-            "nitrogen_index": 0.5998,
+            "nitrogen_index": 0.574,
             "weed_pressure": 0.1,
             "pest_pressure": 0.08,
-            "disease_pressure": 0.0481,
+            "disease_pressure": 0.0485,
             "seedbed_readiness": 0.1
           }
         }
@@ -9537,10 +9537,10 @@
         "soil_moisture": 0.23,
         "soil_temperature_c": 15.98,
         "expected_yield_t_ha": 5.3411,
-        "nitrogen_index": 0.5234,
+        "nitrogen_index": 0.4991,
         "weed_pressure": 0.1,
         "pest_pressure": 0.08,
-        "disease_pressure": 0.1632,
+        "disease_pressure": 0.1635,
         "seedbed_readiness": 0.1
       }
     },
@@ -9584,7 +9584,7 @@
             "soil_moisture": 0.33,
             "soil_temperature_c": 14.86,
             "expected_yield_t_ha": 4.9857,
-            "nitrogen_index": 0.7034,
+            "nitrogen_index": 0.6754,
             "weed_pressure": 0.1,
             "pest_pressure": 0.08,
             "disease_pressure": 0.292,
@@ -9624,10 +9624,10 @@
             "soil_moisture": 0.23,
             "soil_temperature_c": 15.5,
             "expected_yield_t_ha": 5.3284,
-            "nitrogen_index": 0.5998,
+            "nitrogen_index": 0.574,
             "weed_pressure": 0.1,
             "pest_pressure": 0.08,
-            "disease_pressure": 0.0481,
+            "disease_pressure": 0.0485,
             "seedbed_readiness": 0.1
           }
         }
@@ -9642,10 +9642,10 @@
         "soil_moisture": 0.23,
         "soil_temperature_c": 15.98,
         "expected_yield_t_ha": 5.3411,
-        "nitrogen_index": 0.5234,
+        "nitrogen_index": 0.4991,
         "weed_pressure": 0.1,
         "pest_pressure": 0.08,
-        "disease_pressure": 0.1632,
+        "disease_pressure": 0.1635,
         "seedbed_readiness": 0.1
       }
     },
@@ -9689,7 +9689,7 @@
             "soil_moisture": 0.33,
             "soil_temperature_c": 14.86,
             "expected_yield_t_ha": 4.9857,
-            "nitrogen_index": 0.7034,
+            "nitrogen_index": 0.6754,
             "weed_pressure": 0.1,
             "pest_pressure": 0.08,
             "disease_pressure": 0.292,
@@ -9729,10 +9729,10 @@
             "soil_moisture": 0.23,
             "soil_temperature_c": 15.5,
             "expected_yield_t_ha": 5.3284,
-            "nitrogen_index": 0.5998,
+            "nitrogen_index": 0.574,
             "weed_pressure": 0.1,
             "pest_pressure": 0.08,
-            "disease_pressure": 0.0481,
+            "disease_pressure": 0.0485,
             "seedbed_readiness": 0.1
           }
         }
@@ -9747,10 +9747,10 @@
         "soil_moisture": 0.23,
         "soil_temperature_c": 15.98,
         "expected_yield_t_ha": 5.3411,
-        "nitrogen_index": 0.5234,
+        "nitrogen_index": 0.4991,
         "weed_pressure": 0.1,
         "pest_pressure": 0.08,
-        "disease_pressure": 0.1632,
+        "disease_pressure": 0.1635,
         "seedbed_readiness": 0.1
       }
     },
@@ -9794,7 +9794,7 @@
             "soil_moisture": 0.33,
             "soil_temperature_c": 14.86,
             "expected_yield_t_ha": 4.9857,
-            "nitrogen_index": 0.7034,
+            "nitrogen_index": 0.6754,
             "weed_pressure": 0.1,
             "pest_pressure": 0.08,
             "disease_pressure": 0.292,
@@ -9834,10 +9834,10 @@
             "soil_moisture": 0.234,
             "soil_temperature_c": 15.34,
             "expected_yield_t_ha": 5.3284,
-            "nitrogen_index": 0.6256,
+            "nitrogen_index": 0.5992,
             "weed_pressure": 0.1,
             "pest_pressure": 0.08,
-            "disease_pressure": 0.0469,
+            "disease_pressure": 0.0473,
             "seedbed_readiness": 0.1
           }
         }
@@ -9852,10 +9852,10 @@
         "soil_moisture": 0.23,
         "soil_temperature_c": 15.98,
         "expected_yield_t_ha": 5.3411,
-        "nitrogen_index": 0.5234,
+        "nitrogen_index": 0.4991,
         "weed_pressure": 0.1,
         "pest_pressure": 0.08,
-        "disease_pressure": 0.1916,
+        "disease_pressure": 0.1918,
         "seedbed_readiness": 0.1
       }
     },
@@ -9899,7 +9899,7 @@
             "soil_moisture": 0.33,
             "soil_temperature_c": 14.86,
             "expected_yield_t_ha": 4.9857,
-            "nitrogen_index": 0.7034,
+            "nitrogen_index": 0.6754,
             "weed_pressure": 0.1,
             "pest_pressure": 0.08,
             "disease_pressure": 0.292,
@@ -9939,10 +9939,10 @@
             "soil_moisture": 0.234,
             "soil_temperature_c": 15.34,
             "expected_yield_t_ha": 5.3284,
-            "nitrogen_index": 0.6256,
+            "nitrogen_index": 0.5992,
             "weed_pressure": 0.1,
             "pest_pressure": 0.08,
-            "disease_pressure": 0.0469,
+            "disease_pressure": 0.0473,
             "seedbed_readiness": 0.1
           }
         }
@@ -9957,10 +9957,10 @@
         "soil_moisture": 0.23,
         "soil_temperature_c": 15.98,
         "expected_yield_t_ha": 5.3411,
-        "nitrogen_index": 0.5234,
+        "nitrogen_index": 0.4991,
         "weed_pressure": 0.1,
         "pest_pressure": 0.08,
-        "disease_pressure": 0.1916,
+        "disease_pressure": 0.1918,
         "seedbed_readiness": 0.1
       }
     },
@@ -10004,7 +10004,7 @@
             "soil_moisture": 0.33,
             "soil_temperature_c": 14.86,
             "expected_yield_t_ha": 4.9857,
-            "nitrogen_index": 0.7034,
+            "nitrogen_index": 0.6754,
             "weed_pressure": 0.1,
             "pest_pressure": 0.08,
             "disease_pressure": 0.292,
@@ -10044,10 +10044,10 @@
             "soil_moisture": 0.234,
             "soil_temperature_c": 15.34,
             "expected_yield_t_ha": 5.3284,
-            "nitrogen_index": 0.6256,
+            "nitrogen_index": 0.5992,
             "weed_pressure": 0.1,
             "pest_pressure": 0.08,
-            "disease_pressure": 0.0469,
+            "disease_pressure": 0.0473,
             "seedbed_readiness": 0.1
           }
         }
@@ -10062,10 +10062,10 @@
         "soil_moisture": 0.23,
         "soil_temperature_c": 15.98,
         "expected_yield_t_ha": 5.3411,
-        "nitrogen_index": 0.5234,
+        "nitrogen_index": 0.4991,
         "weed_pressure": 0.1,
         "pest_pressure": 0.08,
-        "disease_pressure": 0.1916,
+        "disease_pressure": 0.1918,
         "seedbed_readiness": 0.1
       }
     },
@@ -10109,7 +10109,7 @@
             "soil_moisture": 0.25,
             "soil_temperature_c": 14.7,
             "expected_yield_t_ha": 4.9638,
-            "nitrogen_index": 0.7077,
+            "nitrogen_index": 0.6807,
             "weed_pressure": 0.1,
             "pest_pressure": 0.08,
             "disease_pressure": 0.16,
@@ -10149,10 +10149,10 @@
             "soil_moisture": 0.262,
             "soil_temperature_c": 15.66,
             "expected_yield_t_ha": 5.3284,
-            "nitrogen_index": 0.5549,
+            "nitrogen_index": 0.5309,
             "weed_pressure": 0.1,
             "pest_pressure": 0.08,
-            "disease_pressure": 0.0493,
+            "disease_pressure": 0.0497,
             "seedbed_readiness": 0.1
           }
         }
@@ -10167,10 +10167,10 @@
         "soil_moisture": 0.23,
         "soil_temperature_c": 15.98,
         "expected_yield_t_ha": 5.3411,
-        "nitrogen_index": 0.5048,
+        "nitrogen_index": 0.4818,
         "weed_pressure": 0.1,
         "pest_pressure": 0.08,
-        "disease_pressure": 0.1308,
+        "disease_pressure": 0.1311,
         "seedbed_readiness": 0.1
       }
     },
@@ -10214,7 +10214,7 @@
             "soil_moisture": 0.25,
             "soil_temperature_c": 14.7,
             "expected_yield_t_ha": 4.9638,
-            "nitrogen_index": 0.7077,
+            "nitrogen_index": 0.6807,
             "weed_pressure": 0.1,
             "pest_pressure": 0.08,
             "disease_pressure": 0.16,
@@ -10254,10 +10254,10 @@
             "soil_moisture": 0.262,
             "soil_temperature_c": 15.66,
             "expected_yield_t_ha": 5.3284,
-            "nitrogen_index": 0.5549,
+            "nitrogen_index": 0.5309,
             "weed_pressure": 0.1,
             "pest_pressure": 0.08,
-            "disease_pressure": 0.0493,
+            "disease_pressure": 0.0497,
             "seedbed_readiness": 0.1
           }
         }
@@ -10272,10 +10272,10 @@
         "soil_moisture": 0.23,
         "soil_temperature_c": 15.98,
         "expected_yield_t_ha": 5.3411,
-        "nitrogen_index": 0.5048,
+        "nitrogen_index": 0.4818,
         "weed_pressure": 0.1,
         "pest_pressure": 0.08,
-        "disease_pressure": 0.1308,
+        "disease_pressure": 0.1311,
         "seedbed_readiness": 0.1
       }
     },
@@ -10356,7 +10356,7 @@
             "harvested": false,
             "growth_stage": "planted",
             "readiness": 0,
-            "soil_moisture": 0.2618,
+            "soil_moisture": 0.2645,
             "soil_temperature_c": 17.2,
             "expected_yield_t_ha": 5.9476,
             "nitrogen_index": 0.6,
@@ -10374,7 +10374,7 @@
         "harvested": false,
         "growth_stage": "planted",
         "readiness": 0,
-        "soil_moisture": 0.2208,
+        "soil_moisture": 0.2213,
         "soil_temperature_c": 18.4,
         "expected_yield_t_ha": 5.9476,
         "nitrogen_index": 0.6,
@@ -10526,7 +10526,7 @@
             "harvested": false,
             "growth_stage": "planted",
             "readiness": 0,
-            "soil_moisture": 0.2618,
+            "soil_moisture": 0.2645,
             "soil_temperature_c": 17.2,
             "expected_yield_t_ha": 5.9476,
             "nitrogen_index": 0.6,
@@ -10544,7 +10544,7 @@
         "harvested": false,
         "growth_stage": "planted",
         "readiness": 0,
-        "soil_moisture": 0.2208,
+        "soil_moisture": 0.2213,
         "soil_temperature_c": 18.4,
         "expected_yield_t_ha": 5.9476,
         "nitrogen_index": 0.6,
@@ -10631,7 +10631,7 @@
             "harvested": false,
             "growth_stage": "planted",
             "readiness": 0,
-            "soil_moisture": 0.2618,
+            "soil_moisture": 0.2645,
             "soil_temperature_c": 17.2,
             "expected_yield_t_ha": 5.9476,
             "nitrogen_index": 0.6,
@@ -10649,7 +10649,7 @@
         "harvested": false,
         "growth_stage": "planted",
         "readiness": 0,
-        "soil_moisture": 0.2208,
+        "soil_moisture": 0.2213,
         "soil_temperature_c": 18.4,
         "expected_yield_t_ha": 5.9476,
         "nitrogen_index": 0.6,
@@ -10736,7 +10736,7 @@
             "harvested": false,
             "growth_stage": "planted",
             "readiness": 0,
-            "soil_moisture": 0.2618,
+            "soil_moisture": 0.2645,
             "soil_temperature_c": 17.2,
             "expected_yield_t_ha": 5.9476,
             "nitrogen_index": 0.6,
@@ -10754,7 +10754,7 @@
         "harvested": false,
         "growth_stage": "planted",
         "readiness": 0,
-        "soil_moisture": 0.2208,
+        "soil_moisture": 0.2213,
         "soil_temperature_c": 18.4,
         "expected_yield_t_ha": 5.9476,
         "nitrogen_index": 0.6,
@@ -10841,7 +10841,7 @@
             "harvested": false,
             "growth_stage": "planted",
             "readiness": 0,
-            "soil_moisture": 0.2618,
+            "soil_moisture": 0.2645,
             "soil_temperature_c": 17.2,
             "expected_yield_t_ha": 5.9476,
             "nitrogen_index": 0.6,
@@ -10859,7 +10859,7 @@
         "harvested": false,
         "growth_stage": "planted",
         "readiness": 0,
-        "soil_moisture": 0.2208,
+        "soil_moisture": 0.2213,
         "soil_temperature_c": 18.4,
         "expected_yield_t_ha": 5.9476,
         "nitrogen_index": 0.6,
@@ -10946,7 +10946,7 @@
             "harvested": false,
             "growth_stage": "planted",
             "readiness": 0,
-            "soil_moisture": 0.2618,
+            "soil_moisture": 0.2645,
             "soil_temperature_c": 17.2,
             "expected_yield_t_ha": 5.9476,
             "nitrogen_index": 0.6,
@@ -10964,7 +10964,7 @@
         "harvested": false,
         "growth_stage": "planted",
         "readiness": 0,
-        "soil_moisture": 0.2208,
+        "soil_moisture": 0.2213,
         "soil_temperature_c": 18.4,
         "expected_yield_t_ha": 5.9476,
         "nitrogen_index": 0.6,
@@ -11051,7 +11051,7 @@
             "harvested": false,
             "growth_stage": "planted",
             "readiness": 0,
-            "soil_moisture": 0.2618,
+            "soil_moisture": 0.2645,
             "soil_temperature_c": 17.2,
             "expected_yield_t_ha": 5.9476,
             "nitrogen_index": 0.6,
@@ -11069,7 +11069,7 @@
         "harvested": false,
         "growth_stage": "planted",
         "readiness": 0,
-        "soil_moisture": 0.2208,
+        "soil_moisture": 0.2213,
         "soil_temperature_c": 18.4,
         "expected_yield_t_ha": 5.9476,
         "nitrogen_index": 0.6,
@@ -11156,7 +11156,7 @@
             "harvested": false,
             "growth_stage": "planted",
             "readiness": 0,
-            "soil_moisture": 0.2618,
+            "soil_moisture": 0.2645,
             "soil_temperature_c": 17.2,
             "expected_yield_t_ha": 5.9476,
             "nitrogen_index": 0.6,
@@ -11174,7 +11174,7 @@
         "harvested": false,
         "growth_stage": "planted",
         "readiness": 0,
-        "soil_moisture": 0.2208,
+        "soil_moisture": 0.2213,
         "soil_temperature_c": 18.4,
         "expected_yield_t_ha": 5.9476,
         "nitrogen_index": 0.6,
@@ -11261,7 +11261,7 @@
             "harvested": false,
             "growth_stage": "planted",
             "readiness": 0,
-            "soil_moisture": 0.2618,
+            "soil_moisture": 0.2645,
             "soil_temperature_c": 17.2,
             "expected_yield_t_ha": 5.9476,
             "nitrogen_index": 0.6,
@@ -11279,7 +11279,7 @@
         "harvested": false,
         "growth_stage": "planted",
         "readiness": 0,
-        "soil_moisture": 0.2208,
+        "soil_moisture": 0.2213,
         "soil_temperature_c": 18.4,
         "expected_yield_t_ha": 5.9476,
         "nitrogen_index": 0.6,
@@ -11366,7 +11366,7 @@
             "harvested": false,
             "growth_stage": "planted",
             "readiness": 0,
-            "soil_moisture": 0.2618,
+            "soil_moisture": 0.2645,
             "soil_temperature_c": 18.4,
             "expected_yield_t_ha": 5.9281,
             "nitrogen_index": 0.6,
@@ -11384,7 +11384,7 @@
         "harvested": false,
         "growth_stage": "planted",
         "readiness": 0,
-        "soil_moisture": 0.2618,
+        "soil_moisture": 0.2645,
         "soil_temperature_c": 18.4,
         "expected_yield_t_ha": 5.9281,
         "nitrogen_index": 0.6,
@@ -11471,7 +11471,7 @@
             "harvested": false,
             "growth_stage": "planted",
             "readiness": 0,
-            "soil_moisture": 0.2618,
+            "soil_moisture": 0.2645,
             "soil_temperature_c": 18.4,
             "expected_yield_t_ha": 5.9281,
             "nitrogen_index": 0.6,
@@ -11489,7 +11489,7 @@
         "harvested": false,
         "growth_stage": "planted",
         "readiness": 0,
-        "soil_moisture": 0.2618,
+        "soil_moisture": 0.2645,
         "soil_temperature_c": 18.4,
         "expected_yield_t_ha": 5.9281,
         "nitrogen_index": 0.6,
@@ -11576,7 +11576,7 @@
             "harvested": false,
             "growth_stage": "planted",
             "readiness": 0,
-            "soil_moisture": 0.2618,
+            "soil_moisture": 0.2645,
             "soil_temperature_c": 18.4,
             "expected_yield_t_ha": 5.9281,
             "nitrogen_index": 0.6,
@@ -11594,7 +11594,7 @@
         "harvested": false,
         "growth_stage": "planted",
         "readiness": 0,
-        "soil_moisture": 0.2618,
+        "soil_moisture": 0.2645,
         "soil_temperature_c": 18.4,
         "expected_yield_t_ha": 5.9281,
         "nitrogen_index": 0.6,
@@ -11681,7 +11681,7 @@
             "harvested": false,
             "growth_stage": "planted",
             "readiness": 0,
-            "soil_moisture": 0.2618,
+            "soil_moisture": 0.2645,
             "soil_temperature_c": 18.4,
             "expected_yield_t_ha": 5.9281,
             "nitrogen_index": 0.6,
@@ -11699,7 +11699,7 @@
         "harvested": false,
         "growth_stage": "planted",
         "readiness": 0,
-        "soil_moisture": 0.2618,
+        "soil_moisture": 0.2645,
         "soil_temperature_c": 18.4,
         "expected_yield_t_ha": 5.9281,
         "nitrogen_index": 0.6,
@@ -11786,7 +11786,7 @@
             "harvested": false,
             "growth_stage": "planted",
             "readiness": 0,
-            "soil_moisture": 0.2618,
+            "soil_moisture": 0.2645,
             "soil_temperature_c": 18.4,
             "expected_yield_t_ha": 5.9281,
             "nitrogen_index": 0.6,
@@ -11804,7 +11804,7 @@
         "harvested": false,
         "growth_stage": "planted",
         "readiness": 0,
-        "soil_moisture": 0.2618,
+        "soil_moisture": 0.2645,
         "soil_temperature_c": 18.4,
         "expected_yield_t_ha": 5.9281,
         "nitrogen_index": 0.6,
@@ -11891,7 +11891,7 @@
             "harvested": false,
             "growth_stage": "planted",
             "readiness": 0,
-            "soil_moisture": 0.2618,
+            "soil_moisture": 0.2645,
             "soil_temperature_c": 18.4,
             "expected_yield_t_ha": 5.9281,
             "nitrogen_index": 0.6,
@@ -11909,7 +11909,7 @@
         "harvested": false,
         "growth_stage": "planted",
         "readiness": 0,
-        "soil_moisture": 0.2618,
+        "soil_moisture": 0.2645,
         "soil_temperature_c": 18.4,
         "expected_yield_t_ha": 5.9281,
         "nitrogen_index": 0.6,
@@ -11996,7 +11996,7 @@
             "harvested": false,
             "growth_stage": "planted",
             "readiness": 0,
-            "soil_moisture": 0.2618,
+            "soil_moisture": 0.2645,
             "soil_temperature_c": 18.4,
             "expected_yield_t_ha": 5.9281,
             "nitrogen_index": 0.6,
@@ -12014,7 +12014,7 @@
         "harvested": false,
         "growth_stage": "planted",
         "readiness": 0,
-        "soil_moisture": 0.2618,
+        "soil_moisture": 0.2645,
         "soil_temperature_c": 18.4,
         "expected_yield_t_ha": 5.9281,
         "nitrogen_index": 0.6,
@@ -12101,7 +12101,7 @@
             "harvested": false,
             "growth_stage": "planted",
             "readiness": 0,
-            "soil_moisture": 0.2618,
+            "soil_moisture": 0.2645,
             "soil_temperature_c": 18.4,
             "expected_yield_t_ha": 5.9281,
             "nitrogen_index": 0.6,
@@ -12119,7 +12119,7 @@
         "harvested": false,
         "growth_stage": "planted",
         "readiness": 0,
-        "soil_moisture": 0.2618,
+        "soil_moisture": 0.2645,
         "soil_temperature_c": 18.4,
         "expected_yield_t_ha": 5.9281,
         "nitrogen_index": 0.6,
@@ -12206,7 +12206,7 @@
             "harvested": false,
             "growth_stage": "planted",
             "readiness": 0,
-            "soil_moisture": 0.2618,
+            "soil_moisture": 0.2645,
             "soil_temperature_c": 18.4,
             "expected_yield_t_ha": 5.9281,
             "nitrogen_index": 0.6,
@@ -12224,7 +12224,7 @@
         "harvested": false,
         "growth_stage": "planted",
         "readiness": 0,
-        "soil_moisture": 0.2618,
+        "soil_moisture": 0.2645,
         "soil_temperature_c": 18.4,
         "expected_yield_t_ha": 5.9281,
         "nitrogen_index": 0.6,
@@ -12441,7 +12441,7 @@
             "harvested": false,
             "growth_stage": "planted",
             "readiness": 0,
-            "soil_moisture": 0.2618,
+            "soil_moisture": 0.2645,
             "soil_temperature_c": 16,
             "expected_yield_t_ha": 5.9087,
             "nitrogen_index": 0.6,
@@ -12459,7 +12459,7 @@
         "harvested": false,
         "growth_stage": "planted",
         "readiness": 0,
-        "soil_moisture": 0.2125,
+        "soil_moisture": 0.2126,
         "soil_temperature_c": 18.4,
         "expected_yield_t_ha": 5.9087,
         "nitrogen_index": 0.6,
@@ -12546,7 +12546,7 @@
             "harvested": false,
             "growth_stage": "planted",
             "readiness": 0,
-            "soil_moisture": 0.2618,
+            "soil_moisture": 0.2645,
             "soil_temperature_c": 16,
             "expected_yield_t_ha": 5.9087,
             "nitrogen_index": 0.6,
@@ -12564,7 +12564,7 @@
         "harvested": false,
         "growth_stage": "planted",
         "readiness": 0,
-        "soil_moisture": 0.2125,
+        "soil_moisture": 0.2126,
         "soil_temperature_c": 18.4,
         "expected_yield_t_ha": 5.9087,
         "nitrogen_index": 0.6,
@@ -12651,7 +12651,7 @@
             "harvested": false,
             "growth_stage": "planted",
             "readiness": 0,
-            "soil_moisture": 0.2618,
+            "soil_moisture": 0.2645,
             "soil_temperature_c": 16,
             "expected_yield_t_ha": 5.9087,
             "nitrogen_index": 0.6,
@@ -12669,7 +12669,7 @@
         "harvested": false,
         "growth_stage": "planted",
         "readiness": 0,
-        "soil_moisture": 0.2125,
+        "soil_moisture": 0.2126,
         "soil_temperature_c": 18.4,
         "expected_yield_t_ha": 5.9087,
         "nitrogen_index": 0.6,
@@ -12756,7 +12756,7 @@
             "harvested": false,
             "growth_stage": "planted",
             "readiness": 0,
-            "soil_moisture": 0.2618,
+            "soil_moisture": 0.2645,
             "soil_temperature_c": 16,
             "expected_yield_t_ha": 5.9087,
             "nitrogen_index": 0.6,
@@ -12774,7 +12774,7 @@
         "harvested": false,
         "growth_stage": "planted",
         "readiness": 0,
-        "soil_moisture": 0.2125,
+        "soil_moisture": 0.2126,
         "soil_temperature_c": 18.4,
         "expected_yield_t_ha": 5.9087,
         "nitrogen_index": 0.6,
@@ -12861,7 +12861,7 @@
             "harvested": false,
             "growth_stage": "planted",
             "readiness": 0,
-            "soil_moisture": 0.2618,
+            "soil_moisture": 0.2645,
             "soil_temperature_c": 16,
             "expected_yield_t_ha": 5.9087,
             "nitrogen_index": 0.6,
@@ -12879,7 +12879,7 @@
         "harvested": false,
         "growth_stage": "planted",
         "readiness": 0,
-        "soil_moisture": 0.2125,
+        "soil_moisture": 0.2126,
         "soil_temperature_c": 18.4,
         "expected_yield_t_ha": 5.9087,
         "nitrogen_index": 0.6,
@@ -12966,7 +12966,7 @@
             "harvested": false,
             "growth_stage": "planted",
             "readiness": 0,
-            "soil_moisture": 0.2618,
+            "soil_moisture": 0.2645,
             "soil_temperature_c": 16,
             "expected_yield_t_ha": 5.9087,
             "nitrogen_index": 0.6,
@@ -12984,7 +12984,7 @@
         "harvested": false,
         "growth_stage": "planted",
         "readiness": 0,
-        "soil_moisture": 0.2125,
+        "soil_moisture": 0.2126,
         "soil_temperature_c": 18.4,
         "expected_yield_t_ha": 5.9087,
         "nitrogen_index": 0.6,
@@ -13071,7 +13071,7 @@
             "harvested": false,
             "growth_stage": "planted",
             "readiness": 0,
-            "soil_moisture": 0.2618,
+            "soil_moisture": 0.2645,
             "soil_temperature_c": 16,
             "expected_yield_t_ha": 5.9087,
             "nitrogen_index": 0.6,
@@ -13089,7 +13089,7 @@
         "harvested": false,
         "growth_stage": "planted",
         "readiness": 0,
-        "soil_moisture": 0.2125,
+        "soil_moisture": 0.2126,
         "soil_temperature_c": 18.4,
         "expected_yield_t_ha": 5.9087,
         "nitrogen_index": 0.6,
@@ -13176,7 +13176,7 @@
             "harvested": false,
             "growth_stage": "planted",
             "readiness": 0,
-            "soil_moisture": 0.2618,
+            "soil_moisture": 0.2645,
             "soil_temperature_c": 16,
             "expected_yield_t_ha": 5.9087,
             "nitrogen_index": 0.6,
@@ -13194,7 +13194,7 @@
         "harvested": false,
         "growth_stage": "planted",
         "readiness": 0,
-        "soil_moisture": 0.2125,
+        "soil_moisture": 0.2126,
         "soil_temperature_c": 18.4,
         "expected_yield_t_ha": 5.9087,
         "nitrogen_index": 0.6,
@@ -13281,7 +13281,7 @@
             "harvested": false,
             "growth_stage": "planted",
             "readiness": 0,
-            "soil_moisture": 0.2618,
+            "soil_moisture": 0.2645,
             "soil_temperature_c": 16,
             "expected_yield_t_ha": 5.9087,
             "nitrogen_index": 0.6,
@@ -13299,7 +13299,7 @@
         "harvested": false,
         "growth_stage": "planted",
         "readiness": 0,
-        "soil_moisture": 0.2125,
+        "soil_moisture": 0.2126,
         "soil_temperature_c": 18.4,
         "expected_yield_t_ha": 5.9087,
         "nitrogen_index": 0.6,
@@ -13351,7 +13351,7 @@
             "expected_yield_t_ha": 3.7364,
             "nitrogen_index": 0.64,
             "weed_pressure": 0.12,
-            "pest_pressure": 0.0733,
+            "pest_pressure": 0.0741,
             "disease_pressure": 0.208,
             "seedbed_readiness": 0.1
           }
@@ -13369,7 +13369,7 @@
         "expected_yield_t_ha": 3.7364,
         "nitrogen_index": 0.64,
         "weed_pressure": 0.12,
-        "pest_pressure": 0.4898,
+        "pest_pressure": 0.4902,
         "disease_pressure": 0.256,
         "seedbed_readiness": 0.1
       }
@@ -13411,7 +13411,7 @@
             "harvested": false,
             "growth_stage": "flowering",
             "readiness": 0.585,
-            "soil_moisture": 0.2664,
+            "soil_moisture": 0.2685,
             "soil_temperature_c": 14.9,
             "expected_yield_t_ha": 3.4261,
             "nitrogen_index": 0.64,
@@ -13451,12 +13451,12 @@
             "harvested": false,
             "growth_stage": "flowering",
             "readiness": 0.592,
-            "soil_moisture": 0.3207,
+            "soil_moisture": 0.322,
             "soil_temperature_c": 15.08,
             "expected_yield_t_ha": 3.7364,
             "nitrogen_index": 0.64,
             "weed_pressure": 0.12,
-            "pest_pressure": 0.0613,
+            "pest_pressure": 0.0621,
             "disease_pressure": 0.172,
             "seedbed_readiness": 0.1
           }
@@ -13469,12 +13469,12 @@
         "harvested": false,
         "growth_stage": "flowering",
         "readiness": 0.641,
-        "soil_moisture": 0.1438,
+        "soil_moisture": 0.1439,
         "soil_temperature_c": 16.34,
         "expected_yield_t_ha": 3.7484,
         "nitrogen_index": 0.64,
         "weed_pressure": 0.12,
-        "pest_pressure": 0.6326,
+        "pest_pressure": 0.6328,
         "disease_pressure": 0.256,
         "seedbed_readiness": 0.1
       }
@@ -13610,7 +13610,7 @@
             "expected_yield_t_ha": 3.7364,
             "nitrogen_index": 0.64,
             "weed_pressure": 0.12,
-            "pest_pressure": 0.0733,
+            "pest_pressure": 0.0741,
             "disease_pressure": 0.208,
             "seedbed_readiness": 0.1
           }
@@ -13628,7 +13628,7 @@
         "expected_yield_t_ha": 3.7364,
         "nitrogen_index": 0.64,
         "weed_pressure": 0.12,
-        "pest_pressure": 0.4898,
+        "pest_pressure": 0.4902,
         "disease_pressure": 0.256,
         "seedbed_readiness": 0.1
       }
@@ -13675,7 +13675,7 @@
             "expected_yield_t_ha": 3.7364,
             "nitrogen_index": 0.64,
             "weed_pressure": 0.12,
-            "pest_pressure": 0.0733,
+            "pest_pressure": 0.0741,
             "disease_pressure": 0.208,
             "seedbed_readiness": 0.1
           }
@@ -13693,7 +13693,7 @@
         "expected_yield_t_ha": 3.7364,
         "nitrogen_index": 0.64,
         "weed_pressure": 0.12,
-        "pest_pressure": 0.4898,
+        "pest_pressure": 0.4902,
         "disease_pressure": 0.256,
         "seedbed_readiness": 0.1
       }
@@ -13740,7 +13740,7 @@
             "expected_yield_t_ha": 3.7317,
             "nitrogen_index": 0.64,
             "weed_pressure": 0.12,
-            "pest_pressure": 0.0693,
+            "pest_pressure": 0.0701,
             "disease_pressure": 0.196,
             "seedbed_readiness": 0.1
           }
@@ -13758,7 +13758,7 @@
         "expected_yield_t_ha": 3.7317,
         "nitrogen_index": 0.64,
         "weed_pressure": 0.12,
-        "pest_pressure": 0.5478,
+        "pest_pressure": 0.5482,
         "disease_pressure": 0.256,
         "seedbed_readiness": 0.1
       }
@@ -13805,7 +13805,7 @@
             "expected_yield_t_ha": 3.6971,
             "nitrogen_index": 0.64,
             "weed_pressure": 0.12,
-            "pest_pressure": 0.0653,
+            "pest_pressure": 0.0661,
             "disease_pressure": 0.184,
             "seedbed_readiness": 0.1
           }
@@ -13823,7 +13823,7 @@
         "expected_yield_t_ha": 3.7031,
         "nitrogen_index": 0.64,
         "weed_pressure": 0.12,
-        "pest_pressure": 0.5947,
+        "pest_pressure": 0.595,
         "disease_pressure": 0.256,
         "seedbed_readiness": 0.1
       }
@@ -13870,7 +13870,7 @@
             "expected_yield_t_ha": 3.6971,
             "nitrogen_index": 0.64,
             "weed_pressure": 0.12,
-            "pest_pressure": 0.0653,
+            "pest_pressure": 0.0661,
             "disease_pressure": 0.184,
             "seedbed_readiness": 0.1
           }
@@ -13888,7 +13888,7 @@
         "expected_yield_t_ha": 3.7031,
         "nitrogen_index": 0.64,
         "weed_pressure": 0.12,
-        "pest_pressure": 0.5947,
+        "pest_pressure": 0.595,
         "disease_pressure": 0.256,
         "seedbed_readiness": 0.1
       }
@@ -13935,7 +13935,7 @@
             "expected_yield_t_ha": 3.6971,
             "nitrogen_index": 0.64,
             "weed_pressure": 0.12,
-            "pest_pressure": 0.0653,
+            "pest_pressure": 0.0661,
             "disease_pressure": 0.184,
             "seedbed_readiness": 0.1
           }
@@ -13953,7 +13953,7 @@
         "expected_yield_t_ha": 3.7031,
         "nitrogen_index": 0.64,
         "weed_pressure": 0.12,
-        "pest_pressure": 0.5947,
+        "pest_pressure": 0.595,
         "disease_pressure": 0.256,
         "seedbed_readiness": 0.1
       }
@@ -13995,7 +13995,7 @@
             "harvested": false,
             "growth_stage": "flowering",
             "readiness": 0.585,
-            "soil_moisture": 0.2664,
+            "soil_moisture": 0.2685,
             "soil_temperature_c": 14.9,
             "expected_yield_t_ha": 3.4261,
             "nitrogen_index": 0.64,
@@ -14035,12 +14035,12 @@
             "harvested": false,
             "growth_stage": "flowering",
             "readiness": 0.592,
-            "soil_moisture": 0.3207,
+            "soil_moisture": 0.322,
             "soil_temperature_c": 15.08,
             "expected_yield_t_ha": 3.7364,
             "nitrogen_index": 0.64,
             "weed_pressure": 0.12,
-            "pest_pressure": 0.0613,
+            "pest_pressure": 0.0621,
             "disease_pressure": 0.172,
             "seedbed_readiness": 0.1
           }
@@ -14053,12 +14053,12 @@
         "harvested": false,
         "growth_stage": "flowering",
         "readiness": 0.641,
-        "soil_moisture": 0.1438,
+        "soil_moisture": 0.1439,
         "soil_temperature_c": 16.34,
         "expected_yield_t_ha": 3.7484,
         "nitrogen_index": 0.64,
         "weed_pressure": 0.12,
-        "pest_pressure": 0.6326,
+        "pest_pressure": 0.6328,
         "disease_pressure": 0.256,
         "seedbed_readiness": 0.1
       }
@@ -14100,7 +14100,7 @@
             "harvested": false,
             "growth_stage": "flowering",
             "readiness": 0.585,
-            "soil_moisture": 0.2664,
+            "soil_moisture": 0.2685,
             "soil_temperature_c": 14.9,
             "expected_yield_t_ha": 3.4261,
             "nitrogen_index": 0.64,
@@ -14140,12 +14140,12 @@
             "harvested": false,
             "growth_stage": "flowering",
             "readiness": 0.592,
-            "soil_moisture": 0.3207,
+            "soil_moisture": 0.322,
             "soil_temperature_c": 15.08,
             "expected_yield_t_ha": 3.7364,
             "nitrogen_index": 0.64,
             "weed_pressure": 0.12,
-            "pest_pressure": 0.0613,
+            "pest_pressure": 0.0621,
             "disease_pressure": 0.172,
             "seedbed_readiness": 0.1
           }
@@ -14158,12 +14158,12 @@
         "harvested": false,
         "growth_stage": "flowering",
         "readiness": 0.641,
-        "soil_moisture": 0.1438,
+        "soil_moisture": 0.1439,
         "soil_temperature_c": 16.34,
         "expected_yield_t_ha": 3.7484,
         "nitrogen_index": 0.64,
         "weed_pressure": 0.12,
-        "pest_pressure": 0.6326,
+        "pest_pressure": 0.6328,
         "disease_pressure": 0.256,
         "seedbed_readiness": 0.1
       }
@@ -14210,7 +14210,7 @@
             "expected_yield_t_ha": 3.6626,
             "nitrogen_index": 0.64,
             "weed_pressure": 0.12,
-            "pest_pressure": 0.0613,
+            "pest_pressure": 0.0621,
             "disease_pressure": 0.172,
             "seedbed_readiness": 0.1
           }
@@ -14228,7 +14228,7 @@
         "expected_yield_t_ha": 3.6746,
         "nitrogen_index": 0.64,
         "weed_pressure": 0.12,
-        "pest_pressure": 0.6326,
+        "pest_pressure": 0.6328,
         "disease_pressure": 0.256,
         "seedbed_readiness": 0.1
       }
@@ -14270,7 +14270,7 @@
             "harvested": false,
             "growth_stage": "flowering",
             "readiness": 0.585,
-            "soil_moisture": 0.2664,
+            "soil_moisture": 0.2685,
             "soil_temperature_c": 14.9,
             "expected_yield_t_ha": 3.4261,
             "nitrogen_index": 0.64,
@@ -14310,12 +14310,12 @@
             "harvested": false,
             "growth_stage": "flowering",
             "readiness": 0.599,
-            "soil_moisture": 0.2698,
+            "soil_moisture": 0.2707,
             "soil_temperature_c": 15.26,
             "expected_yield_t_ha": 3.7364,
             "nitrogen_index": 0.64,
             "weed_pressure": 0.12,
-            "pest_pressure": 0.0653,
+            "pest_pressure": 0.0661,
             "disease_pressure": 0.184,
             "seedbed_readiness": 0.1
           }
@@ -14328,12 +14328,12 @@
         "harvested": false,
         "growth_stage": "flowering",
         "readiness": 0.641,
-        "soil_moisture": 0.1438,
+        "soil_moisture": 0.1439,
         "soil_temperature_c": 16.34,
         "expected_yield_t_ha": 3.7424,
         "nitrogen_index": 0.64,
         "weed_pressure": 0.12,
-        "pest_pressure": 0.5947,
+        "pest_pressure": 0.595,
         "disease_pressure": 0.256,
         "seedbed_readiness": 0.1
       }
@@ -14375,7 +14375,7 @@
             "harvested": false,
             "growth_stage": "flowering",
             "readiness": 0.585,
-            "soil_moisture": 0.2664,
+            "soil_moisture": 0.2685,
             "soil_temperature_c": 14.9,
             "expected_yield_t_ha": 3.4261,
             "nitrogen_index": 0.64,
@@ -14415,12 +14415,12 @@
             "harvested": false,
             "growth_stage": "flowering",
             "readiness": 0.599,
-            "soil_moisture": 0.2698,
+            "soil_moisture": 0.2707,
             "soil_temperature_c": 15.26,
             "expected_yield_t_ha": 3.7364,
             "nitrogen_index": 0.64,
             "weed_pressure": 0.12,
-            "pest_pressure": 0.0653,
+            "pest_pressure": 0.0661,
             "disease_pressure": 0.184,
             "seedbed_readiness": 0.1
           }
@@ -14433,12 +14433,12 @@
         "harvested": false,
         "growth_stage": "flowering",
         "readiness": 0.641,
-        "soil_moisture": 0.1438,
+        "soil_moisture": 0.1439,
         "soil_temperature_c": 16.34,
         "expected_yield_t_ha": 3.7424,
         "nitrogen_index": 0.64,
         "weed_pressure": 0.12,
-        "pest_pressure": 0.5947,
+        "pest_pressure": 0.595,
         "disease_pressure": 0.256,
         "seedbed_readiness": 0.1
       }
@@ -14480,7 +14480,7 @@
             "harvested": false,
             "growth_stage": "flowering",
             "readiness": 0.585,
-            "soil_moisture": 0.2664,
+            "soil_moisture": 0.2685,
             "soil_temperature_c": 14.9,
             "expected_yield_t_ha": 3.4261,
             "nitrogen_index": 0.64,
@@ -14520,12 +14520,12 @@
             "harvested": false,
             "growth_stage": "flowering",
             "readiness": 0.599,
-            "soil_moisture": 0.2698,
+            "soil_moisture": 0.2707,
             "soil_temperature_c": 15.26,
             "expected_yield_t_ha": 3.7364,
             "nitrogen_index": 0.64,
             "weed_pressure": 0.12,
-            "pest_pressure": 0.0653,
+            "pest_pressure": 0.0661,
             "disease_pressure": 0.184,
             "seedbed_readiness": 0.1
           }
@@ -14538,12 +14538,12 @@
         "harvested": false,
         "growth_stage": "flowering",
         "readiness": 0.641,
-        "soil_moisture": 0.1438,
+        "soil_moisture": 0.1439,
         "soil_temperature_c": 16.34,
         "expected_yield_t_ha": 3.7424,
         "nitrogen_index": 0.64,
         "weed_pressure": 0.12,
-        "pest_pressure": 0.5947,
+        "pest_pressure": 0.595,
         "disease_pressure": 0.256,
         "seedbed_readiness": 0.1
       }
@@ -14585,7 +14585,7 @@
             "harvested": false,
             "growth_stage": "flowering",
             "readiness": 0.585,
-            "soil_moisture": 0.2664,
+            "soil_moisture": 0.2685,
             "soil_temperature_c": 14.9,
             "expected_yield_t_ha": 3.4261,
             "nitrogen_index": 0.64,
@@ -14625,12 +14625,12 @@
             "harvested": false,
             "growth_stage": "flowering",
             "readiness": 0.599,
-            "soil_moisture": 0.2698,
+            "soil_moisture": 0.2707,
             "soil_temperature_c": 15.26,
             "expected_yield_t_ha": 3.7364,
             "nitrogen_index": 0.64,
             "weed_pressure": 0.12,
-            "pest_pressure": 0.0653,
+            "pest_pressure": 0.0661,
             "disease_pressure": 0.184,
             "seedbed_readiness": 0.1
           }
@@ -14643,12 +14643,12 @@
         "harvested": false,
         "growth_stage": "flowering",
         "readiness": 0.641,
-        "soil_moisture": 0.1438,
+        "soil_moisture": 0.1439,
         "soil_temperature_c": 16.34,
         "expected_yield_t_ha": 3.7424,
         "nitrogen_index": 0.64,
         "weed_pressure": 0.12,
-        "pest_pressure": 0.5947,
+        "pest_pressure": 0.595,
         "disease_pressure": 0.256,
         "seedbed_readiness": 0.1
       }
@@ -14690,7 +14690,7 @@
             "harvested": false,
             "growth_stage": "flowering",
             "readiness": 0.585,
-            "soil_moisture": 0.2664,
+            "soil_moisture": 0.2685,
             "soil_temperature_c": 14.9,
             "expected_yield_t_ha": 3.4261,
             "nitrogen_index": 0.64,
@@ -14730,12 +14730,12 @@
             "harvested": false,
             "growth_stage": "flowering",
             "readiness": 0.599,
-            "soil_moisture": 0.2698,
+            "soil_moisture": 0.2707,
             "soil_temperature_c": 15.26,
             "expected_yield_t_ha": 3.7364,
             "nitrogen_index": 0.64,
             "weed_pressure": 0.12,
-            "pest_pressure": 0.0653,
+            "pest_pressure": 0.0661,
             "disease_pressure": 0.184,
             "seedbed_readiness": 0.1
           }
@@ -14748,12 +14748,12 @@
         "harvested": false,
         "growth_stage": "flowering",
         "readiness": 0.641,
-        "soil_moisture": 0.1438,
+        "soil_moisture": 0.1439,
         "soil_temperature_c": 16.34,
         "expected_yield_t_ha": 3.7424,
         "nitrogen_index": 0.64,
         "weed_pressure": 0.12,
-        "pest_pressure": 0.5947,
+        "pest_pressure": 0.595,
         "disease_pressure": 0.256,
         "seedbed_readiness": 0.1
       }
@@ -14795,7 +14795,7 @@
             "harvested": false,
             "growth_stage": "flowering",
             "readiness": 0.585,
-            "soil_moisture": 0.2664,
+            "soil_moisture": 0.2685,
             "soil_temperature_c": 14.9,
             "expected_yield_t_ha": 3.4261,
             "nitrogen_index": 0.64,
@@ -14835,12 +14835,12 @@
             "harvested": false,
             "growth_stage": "flowering",
             "readiness": 0.599,
-            "soil_moisture": 0.2698,
+            "soil_moisture": 0.2707,
             "soil_temperature_c": 15.26,
             "expected_yield_t_ha": 3.7364,
             "nitrogen_index": 0.64,
             "weed_pressure": 0.12,
-            "pest_pressure": 0.0653,
+            "pest_pressure": 0.0661,
             "disease_pressure": 0.184,
             "seedbed_readiness": 0.1
           }
@@ -14853,12 +14853,12 @@
         "harvested": false,
         "growth_stage": "flowering",
         "readiness": 0.641,
-        "soil_moisture": 0.1438,
+        "soil_moisture": 0.1439,
         "soil_temperature_c": 16.34,
         "expected_yield_t_ha": 3.7424,
         "nitrogen_index": 0.64,
         "weed_pressure": 0.12,
-        "pest_pressure": 0.5947,
+        "pest_pressure": 0.595,
         "disease_pressure": 0.256,
         "seedbed_readiness": 0.1
       }
@@ -14900,7 +14900,7 @@
             "harvested": false,
             "growth_stage": "flowering",
             "readiness": 0.585,
-            "soil_moisture": 0.2664,
+            "soil_moisture": 0.2685,
             "soil_temperature_c": 14.9,
             "expected_yield_t_ha": 3.4261,
             "nitrogen_index": 0.64,
@@ -14940,12 +14940,12 @@
             "harvested": false,
             "growth_stage": "flowering",
             "readiness": 0.599,
-            "soil_moisture": 0.2698,
+            "soil_moisture": 0.2707,
             "soil_temperature_c": 15.26,
             "expected_yield_t_ha": 3.7364,
             "nitrogen_index": 0.64,
             "weed_pressure": 0.12,
-            "pest_pressure": 0.0653,
+            "pest_pressure": 0.0661,
             "disease_pressure": 0.184,
             "seedbed_readiness": 0.1
           }
@@ -14958,12 +14958,12 @@
         "harvested": false,
         "growth_stage": "flowering",
         "readiness": 0.641,
-        "soil_moisture": 0.1438,
+        "soil_moisture": 0.1439,
         "soil_temperature_c": 16.34,
         "expected_yield_t_ha": 3.7424,
         "nitrogen_index": 0.64,
         "weed_pressure": 0.12,
-        "pest_pressure": 0.5947,
+        "pest_pressure": 0.595,
         "disease_pressure": 0.256,
         "seedbed_readiness": 0.1
       }
@@ -15005,7 +15005,7 @@
             "harvested": false,
             "growth_stage": "flowering",
             "readiness": 0.585,
-            "soil_moisture": 0.2664,
+            "soil_moisture": 0.2685,
             "soil_temperature_c": 14.9,
             "expected_yield_t_ha": 3.4261,
             "nitrogen_index": 0.64,
@@ -15045,12 +15045,12 @@
             "harvested": false,
             "growth_stage": "flowering",
             "readiness": 0.599,
-            "soil_moisture": 0.2698,
+            "soil_moisture": 0.2707,
             "soil_temperature_c": 15.26,
             "expected_yield_t_ha": 3.7364,
             "nitrogen_index": 0.64,
             "weed_pressure": 0.12,
-            "pest_pressure": 0.0653,
+            "pest_pressure": 0.0661,
             "disease_pressure": 0.184,
             "seedbed_readiness": 0.1
           }
@@ -15063,12 +15063,12 @@
         "harvested": false,
         "growth_stage": "flowering",
         "readiness": 0.641,
-        "soil_moisture": 0.1438,
+        "soil_moisture": 0.1439,
         "soil_temperature_c": 16.34,
         "expected_yield_t_ha": 3.7424,
         "nitrogen_index": 0.64,
         "weed_pressure": 0.12,
-        "pest_pressure": 0.5947,
+        "pest_pressure": 0.595,
         "disease_pressure": 0.256,
         "seedbed_readiness": 0.1
       }
@@ -15110,7 +15110,7 @@
             "harvested": false,
             "growth_stage": "flowering",
             "readiness": 0.585,
-            "soil_moisture": 0.2664,
+            "soil_moisture": 0.2685,
             "soil_temperature_c": 14.9,
             "expected_yield_t_ha": 3.4261,
             "nitrogen_index": 0.64,
@@ -15150,12 +15150,12 @@
             "harvested": false,
             "growth_stage": "flowering",
             "readiness": 0.599,
-            "soil_moisture": 0.2698,
+            "soil_moisture": 0.2707,
             "soil_temperature_c": 15.26,
             "expected_yield_t_ha": 3.7364,
             "nitrogen_index": 0.64,
             "weed_pressure": 0.12,
-            "pest_pressure": 0.0653,
+            "pest_pressure": 0.0661,
             "disease_pressure": 0.184,
             "seedbed_readiness": 0.1
           }
@@ -15168,12 +15168,12 @@
         "harvested": false,
         "growth_stage": "flowering",
         "readiness": 0.641,
-        "soil_moisture": 0.1438,
+        "soil_moisture": 0.1439,
         "soil_temperature_c": 16.34,
         "expected_yield_t_ha": 3.7424,
         "nitrogen_index": 0.64,
         "weed_pressure": 0.12,
-        "pest_pressure": 0.5947,
+        "pest_pressure": 0.595,
         "disease_pressure": 0.256,
         "seedbed_readiness": 0.1
       }
@@ -15215,7 +15215,7 @@
             "harvested": false,
             "growth_stage": "flowering",
             "readiness": 0.578,
-            "soil_moisture": 0.2723,
+            "soil_moisture": 0.2727,
             "soil_temperature_c": 14.72,
             "expected_yield_t_ha": 3.3559,
             "nitrogen_index": 0.64,
@@ -15255,12 +15255,12 @@
             "harvested": false,
             "growth_stage": "flowering",
             "readiness": 0.599,
-            "soil_moisture": 0.256,
+            "soil_moisture": 0.2561,
             "soil_temperature_c": 15.26,
             "expected_yield_t_ha": 3.7357,
             "nitrogen_index": 0.64,
             "weed_pressure": 0.12,
-            "pest_pressure": 0.0653,
+            "pest_pressure": 0.0661,
             "disease_pressure": 0.184,
             "seedbed_readiness": 0.1
           }
@@ -15278,7 +15278,7 @@
         "expected_yield_t_ha": 3.7417,
         "nitrogen_index": 0.64,
         "weed_pressure": 0.12,
-        "pest_pressure": 0.5947,
+        "pest_pressure": 0.595,
         "disease_pressure": 0.256,
         "seedbed_readiness": 0.1
       }
@@ -15320,7 +15320,7 @@
             "harvested": false,
             "growth_stage": "flowering",
             "readiness": 0.578,
-            "soil_moisture": 0.2723,
+            "soil_moisture": 0.2727,
             "soil_temperature_c": 14.72,
             "expected_yield_t_ha": 3.3559,
             "nitrogen_index": 0.64,
@@ -15360,12 +15360,12 @@
             "harvested": false,
             "growth_stage": "flowering",
             "readiness": 0.599,
-            "soil_moisture": 0.256,
+            "soil_moisture": 0.2561,
             "soil_temperature_c": 15.26,
             "expected_yield_t_ha": 3.7357,
             "nitrogen_index": 0.64,
             "weed_pressure": 0.12,
-            "pest_pressure": 0.0653,
+            "pest_pressure": 0.0661,
             "disease_pressure": 0.184,
             "seedbed_readiness": 0.1
           }
@@ -15383,7 +15383,7 @@
         "expected_yield_t_ha": 3.7417,
         "nitrogen_index": 0.64,
         "weed_pressure": 0.12,
-        "pest_pressure": 0.5947,
+        "pest_pressure": 0.595,
         "disease_pressure": 0.256,
         "seedbed_readiness": 0.1
       }
@@ -15425,7 +15425,7 @@
             "harvested": false,
             "growth_stage": "flowering",
             "readiness": 0.578,
-            "soil_moisture": 0.2723,
+            "soil_moisture": 0.2727,
             "soil_temperature_c": 14.72,
             "expected_yield_t_ha": 3.3559,
             "nitrogen_index": 0.64,
@@ -15465,12 +15465,12 @@
             "harvested": false,
             "growth_stage": "flowering",
             "readiness": 0.599,
-            "soil_moisture": 0.256,
+            "soil_moisture": 0.2561,
             "soil_temperature_c": 15.26,
             "expected_yield_t_ha": 3.7357,
             "nitrogen_index": 0.64,
             "weed_pressure": 0.12,
-            "pest_pressure": 0.0653,
+            "pest_pressure": 0.0661,
             "disease_pressure": 0.184,
             "seedbed_readiness": 0.1
           }
@@ -15488,7 +15488,7 @@
         "expected_yield_t_ha": 3.7417,
         "nitrogen_index": 0.64,
         "weed_pressure": 0.12,
-        "pest_pressure": 0.5947,
+        "pest_pressure": 0.595,
         "disease_pressure": 0.256,
         "seedbed_readiness": 0.1
       }
@@ -15530,7 +15530,7 @@
             "harvested": false,
             "growth_stage": "flowering",
             "readiness": 0.578,
-            "soil_moisture": 0.2723,
+            "soil_moisture": 0.2727,
             "soil_temperature_c": 14.72,
             "expected_yield_t_ha": 3.3559,
             "nitrogen_index": 0.64,
@@ -15570,12 +15570,12 @@
             "harvested": false,
             "growth_stage": "flowering",
             "readiness": 0.599,
-            "soil_moisture": 0.256,
+            "soil_moisture": 0.2561,
             "soil_temperature_c": 15.26,
             "expected_yield_t_ha": 3.7357,
             "nitrogen_index": 0.64,
             "weed_pressure": 0.12,
-            "pest_pressure": 0.0653,
+            "pest_pressure": 0.0661,
             "disease_pressure": 0.184,
             "seedbed_readiness": 0.1
           }
@@ -15593,7 +15593,7 @@
         "expected_yield_t_ha": 3.7417,
         "nitrogen_index": 0.64,
         "weed_pressure": 0.12,
-        "pest_pressure": 0.5947,
+        "pest_pressure": 0.595,
         "disease_pressure": 0.256,
         "seedbed_readiness": 0.1
       }
@@ -15635,7 +15635,7 @@
             "harvested": false,
             "growth_stage": "flowering",
             "readiness": 0.578,
-            "soil_moisture": 0.2723,
+            "soil_moisture": 0.2727,
             "soil_temperature_c": 14.72,
             "expected_yield_t_ha": 3.3559,
             "nitrogen_index": 0.64,
@@ -15675,12 +15675,12 @@
             "harvested": false,
             "growth_stage": "flowering",
             "readiness": 0.599,
-            "soil_moisture": 0.256,
+            "soil_moisture": 0.2561,
             "soil_temperature_c": 15.26,
             "expected_yield_t_ha": 3.7357,
             "nitrogen_index": 0.64,
             "weed_pressure": 0.12,
-            "pest_pressure": 0.0653,
+            "pest_pressure": 0.0661,
             "disease_pressure": 0.184,
             "seedbed_readiness": 0.1
           }
@@ -15698,7 +15698,7 @@
         "expected_yield_t_ha": 3.7417,
         "nitrogen_index": 0.64,
         "weed_pressure": 0.12,
-        "pest_pressure": 0.5947,
+        "pest_pressure": 0.595,
         "disease_pressure": 0.256,
         "seedbed_readiness": 0.1
       }
@@ -15740,7 +15740,7 @@
             "harvested": false,
             "growth_stage": "flowering",
             "readiness": 0.578,
-            "soil_moisture": 0.2723,
+            "soil_moisture": 0.2727,
             "soil_temperature_c": 14.72,
             "expected_yield_t_ha": 3.3559,
             "nitrogen_index": 0.64,
@@ -15780,12 +15780,12 @@
             "harvested": false,
             "growth_stage": "flowering",
             "readiness": 0.599,
-            "soil_moisture": 0.256,
+            "soil_moisture": 0.2561,
             "soil_temperature_c": 15.26,
             "expected_yield_t_ha": 3.7357,
             "nitrogen_index": 0.64,
             "weed_pressure": 0.12,
-            "pest_pressure": 0.0653,
+            "pest_pressure": 0.0661,
             "disease_pressure": 0.184,
             "seedbed_readiness": 0.1
           }
@@ -15803,7 +15803,7 @@
         "expected_yield_t_ha": 3.7417,
         "nitrogen_index": 0.64,
         "weed_pressure": 0.12,
-        "pest_pressure": 0.5947,
+        "pest_pressure": 0.595,
         "disease_pressure": 0.256,
         "seedbed_readiness": 0.1
       }
@@ -15845,7 +15845,7 @@
             "harvested": false,
             "growth_stage": "flowering",
             "readiness": 0.578,
-            "soil_moisture": 0.2723,
+            "soil_moisture": 0.2727,
             "soil_temperature_c": 14.72,
             "expected_yield_t_ha": 3.3559,
             "nitrogen_index": 0.64,
@@ -15885,12 +15885,12 @@
             "harvested": false,
             "growth_stage": "flowering",
             "readiness": 0.599,
-            "soil_moisture": 0.256,
+            "soil_moisture": 0.2561,
             "soil_temperature_c": 15.26,
             "expected_yield_t_ha": 3.7357,
             "nitrogen_index": 0.64,
             "weed_pressure": 0.12,
-            "pest_pressure": 0.0653,
+            "pest_pressure": 0.0661,
             "disease_pressure": 0.184,
             "seedbed_readiness": 0.1
           }
@@ -15908,7 +15908,7 @@
         "expected_yield_t_ha": 3.7417,
         "nitrogen_index": 0.64,
         "weed_pressure": 0.12,
-        "pest_pressure": 0.5947,
+        "pest_pressure": 0.595,
         "disease_pressure": 0.256,
         "seedbed_readiness": 0.1
       }
@@ -15950,7 +15950,7 @@
             "harvested": false,
             "growth_stage": "flowering",
             "readiness": 0.578,
-            "soil_moisture": 0.2723,
+            "soil_moisture": 0.2727,
             "soil_temperature_c": 14.72,
             "expected_yield_t_ha": 3.3559,
             "nitrogen_index": 0.64,
@@ -15990,12 +15990,12 @@
             "harvested": false,
             "growth_stage": "flowering",
             "readiness": 0.599,
-            "soil_moisture": 0.256,
+            "soil_moisture": 0.2561,
             "soil_temperature_c": 15.26,
             "expected_yield_t_ha": 3.7357,
             "nitrogen_index": 0.64,
             "weed_pressure": 0.12,
-            "pest_pressure": 0.0653,
+            "pest_pressure": 0.0661,
             "disease_pressure": 0.184,
             "seedbed_readiness": 0.1
           }
@@ -16013,7 +16013,7 @@
         "expected_yield_t_ha": 3.7417,
         "nitrogen_index": 0.64,
         "weed_pressure": 0.12,
-        "pest_pressure": 0.5947,
+        "pest_pressure": 0.595,
         "disease_pressure": 0.256,
         "seedbed_readiness": 0.1
       }
@@ -16061,7 +16061,7 @@
             "nitrogen_index": 0.65,
             "weed_pressure": 0.09,
             "pest_pressure": 0.08,
-            "disease_pressure": 0.0448,
+            "disease_pressure": 0.0452,
             "seedbed_readiness": 0.1
           }
         },
@@ -16101,7 +16101,7 @@
             "nitrogen_index": 0.65,
             "weed_pressure": 0.09,
             "pest_pressure": 0.08,
-            "disease_pressure": 0.3261,
+            "disease_pressure": 0.3263,
             "seedbed_readiness": 0.1
           }
         }
@@ -16119,7 +16119,7 @@
         "nitrogen_index": 0.65,
         "weed_pressure": 0.09,
         "pest_pressure": 0.08,
-        "disease_pressure": 0.4044,
+        "disease_pressure": 0.4045,
         "seedbed_readiness": 0.1
       }
     },
@@ -16231,7 +16231,7 @@
             "nitrogen_index": 0.65,
             "weed_pressure": 0.09,
             "pest_pressure": 0.08,
-            "disease_pressure": 0.0448,
+            "disease_pressure": 0.0452,
             "seedbed_readiness": 0.1
           }
         },
@@ -16271,7 +16271,7 @@
             "nitrogen_index": 0.65,
             "weed_pressure": 0.09,
             "pest_pressure": 0.08,
-            "disease_pressure": 0.3261,
+            "disease_pressure": 0.3263,
             "seedbed_readiness": 0.1
           }
         }
@@ -16289,7 +16289,7 @@
         "nitrogen_index": 0.65,
         "weed_pressure": 0.09,
         "pest_pressure": 0.08,
-        "disease_pressure": 0.4044,
+        "disease_pressure": 0.4045,
         "seedbed_readiness": 0.1
       }
     },
@@ -16336,7 +16336,7 @@
             "nitrogen_index": 0.65,
             "weed_pressure": 0.09,
             "pest_pressure": 0.08,
-            "disease_pressure": 0.0448,
+            "disease_pressure": 0.0452,
             "seedbed_readiness": 0.1
           }
         },
@@ -16376,7 +16376,7 @@
             "nitrogen_index": 0.65,
             "weed_pressure": 0.09,
             "pest_pressure": 0.08,
-            "disease_pressure": 0.3261,
+            "disease_pressure": 0.3263,
             "seedbed_readiness": 0.1
           }
         }
@@ -16394,7 +16394,7 @@
         "nitrogen_index": 0.65,
         "weed_pressure": 0.09,
         "pest_pressure": 0.08,
-        "disease_pressure": 0.4044,
+        "disease_pressure": 0.4045,
         "seedbed_readiness": 0.1
       }
     },
@@ -16441,7 +16441,7 @@
             "nitrogen_index": 0.65,
             "weed_pressure": 0.09,
             "pest_pressure": 0.08,
-            "disease_pressure": 0.0448,
+            "disease_pressure": 0.0452,
             "seedbed_readiness": 0.1
           }
         },
@@ -16481,7 +16481,7 @@
             "nitrogen_index": 0.65,
             "weed_pressure": 0.09,
             "pest_pressure": 0.08,
-            "disease_pressure": 0.3261,
+            "disease_pressure": 0.3263,
             "seedbed_readiness": 0.1
           }
         }
@@ -16499,7 +16499,7 @@
         "nitrogen_index": 0.65,
         "weed_pressure": 0.09,
         "pest_pressure": 0.08,
-        "disease_pressure": 0.4044,
+        "disease_pressure": 0.4045,
         "seedbed_readiness": 0.1
       }
     },
@@ -16546,7 +16546,7 @@
             "nitrogen_index": 0.65,
             "weed_pressure": 0.09,
             "pest_pressure": 0.08,
-            "disease_pressure": 0.0448,
+            "disease_pressure": 0.0452,
             "seedbed_readiness": 0.1
           }
         },
@@ -16586,7 +16586,7 @@
             "nitrogen_index": 0.65,
             "weed_pressure": 0.09,
             "pest_pressure": 0.08,
-            "disease_pressure": 0.3261,
+            "disease_pressure": 0.3263,
             "seedbed_readiness": 0.1
           }
         }
@@ -16604,7 +16604,7 @@
         "nitrogen_index": 0.65,
         "weed_pressure": 0.09,
         "pest_pressure": 0.08,
-        "disease_pressure": 0.4044,
+        "disease_pressure": 0.4045,
         "seedbed_readiness": 0.1
       }
     },
@@ -16651,7 +16651,7 @@
             "nitrogen_index": 0.65,
             "weed_pressure": 0.09,
             "pest_pressure": 0.08,
-            "disease_pressure": 0.0448,
+            "disease_pressure": 0.0452,
             "seedbed_readiness": 0.1
           }
         },
@@ -16691,7 +16691,7 @@
             "nitrogen_index": 0.65,
             "weed_pressure": 0.09,
             "pest_pressure": 0.08,
-            "disease_pressure": 0.3261,
+            "disease_pressure": 0.3263,
             "seedbed_readiness": 0.1
           }
         }
@@ -16709,7 +16709,7 @@
         "nitrogen_index": 0.65,
         "weed_pressure": 0.09,
         "pest_pressure": 0.08,
-        "disease_pressure": 0.4044,
+        "disease_pressure": 0.4045,
         "seedbed_readiness": 0.1
       }
     },
@@ -16756,7 +16756,7 @@
             "nitrogen_index": 0.65,
             "weed_pressure": 0.09,
             "pest_pressure": 0.08,
-            "disease_pressure": 0.0448,
+            "disease_pressure": 0.0452,
             "seedbed_readiness": 0.1
           }
         },
@@ -16796,7 +16796,7 @@
             "nitrogen_index": 0.65,
             "weed_pressure": 0.09,
             "pest_pressure": 0.08,
-            "disease_pressure": 0.3261,
+            "disease_pressure": 0.3263,
             "seedbed_readiness": 0.1
           }
         }
@@ -16814,7 +16814,7 @@
         "nitrogen_index": 0.65,
         "weed_pressure": 0.09,
         "pest_pressure": 0.08,
-        "disease_pressure": 0.4044,
+        "disease_pressure": 0.4045,
         "seedbed_readiness": 0.1
       }
     },
@@ -16861,7 +16861,7 @@
             "nitrogen_index": 0.65,
             "weed_pressure": 0.09,
             "pest_pressure": 0.08,
-            "disease_pressure": 0.0448,
+            "disease_pressure": 0.0452,
             "seedbed_readiness": 0.1
           }
         },
@@ -16901,7 +16901,7 @@
             "nitrogen_index": 0.65,
             "weed_pressure": 0.09,
             "pest_pressure": 0.08,
-            "disease_pressure": 0.3261,
+            "disease_pressure": 0.3263,
             "seedbed_readiness": 0.1
           }
         }
@@ -16919,7 +16919,7 @@
         "nitrogen_index": 0.65,
         "weed_pressure": 0.09,
         "pest_pressure": 0.08,
-        "disease_pressure": 0.4044,
+        "disease_pressure": 0.4045,
         "seedbed_readiness": 0.1
       }
     },
@@ -16966,7 +16966,7 @@
             "nitrogen_index": 0.65,
             "weed_pressure": 0.09,
             "pest_pressure": 0.08,
-            "disease_pressure": 0.0448,
+            "disease_pressure": 0.0452,
             "seedbed_readiness": 0.1
           }
         },
@@ -17006,7 +17006,7 @@
             "nitrogen_index": 0.65,
             "weed_pressure": 0.09,
             "pest_pressure": 0.08,
-            "disease_pressure": 0.3261,
+            "disease_pressure": 0.3263,
             "seedbed_readiness": 0.1
           }
         }
@@ -17024,7 +17024,7 @@
         "nitrogen_index": 0.65,
         "weed_pressure": 0.09,
         "pest_pressure": 0.08,
-        "disease_pressure": 0.4044,
+        "disease_pressure": 0.4045,
         "seedbed_readiness": 0.1
       }
     },
@@ -17071,7 +17071,7 @@
             "nitrogen_index": 0.65,
             "weed_pressure": 0.09,
             "pest_pressure": 0.08,
-            "disease_pressure": 0.0448,
+            "disease_pressure": 0.0452,
             "seedbed_readiness": 0.1
           }
         },
@@ -17111,7 +17111,7 @@
             "nitrogen_index": 0.65,
             "weed_pressure": 0.09,
             "pest_pressure": 0.08,
-            "disease_pressure": 0.2846,
+            "disease_pressure": 0.2848,
             "seedbed_readiness": 0.1
           }
         }
@@ -17129,7 +17129,7 @@
         "nitrogen_index": 0.65,
         "weed_pressure": 0.09,
         "pest_pressure": 0.08,
-        "disease_pressure": 0.4044,
+        "disease_pressure": 0.4045,
         "seedbed_readiness": 0.1
       }
     },
@@ -17176,7 +17176,7 @@
             "nitrogen_index": 0.65,
             "weed_pressure": 0.09,
             "pest_pressure": 0.08,
-            "disease_pressure": 0.0448,
+            "disease_pressure": 0.0452,
             "seedbed_readiness": 0.1
           }
         },
@@ -17216,7 +17216,7 @@
             "nitrogen_index": 0.65,
             "weed_pressure": 0.09,
             "pest_pressure": 0.08,
-            "disease_pressure": 0.2846,
+            "disease_pressure": 0.2848,
             "seedbed_readiness": 0.1
           }
         }
@@ -17234,7 +17234,7 @@
         "nitrogen_index": 0.65,
         "weed_pressure": 0.09,
         "pest_pressure": 0.08,
-        "disease_pressure": 0.4044,
+        "disease_pressure": 0.4045,
         "seedbed_readiness": 0.1
       }
     },
@@ -17281,7 +17281,7 @@
             "nitrogen_index": 0.65,
             "weed_pressure": 0.09,
             "pest_pressure": 0.08,
-            "disease_pressure": 0.0448,
+            "disease_pressure": 0.0452,
             "seedbed_readiness": 0.1
           }
         },
@@ -17321,7 +17321,7 @@
             "nitrogen_index": 0.65,
             "weed_pressure": 0.09,
             "pest_pressure": 0.08,
-            "disease_pressure": 0.2846,
+            "disease_pressure": 0.2848,
             "seedbed_readiness": 0.1
           }
         }
@@ -17339,7 +17339,7 @@
         "nitrogen_index": 0.65,
         "weed_pressure": 0.09,
         "pest_pressure": 0.08,
-        "disease_pressure": 0.4044,
+        "disease_pressure": 0.4045,
         "seedbed_readiness": 0.1
       }
     },
@@ -17386,7 +17386,7 @@
             "nitrogen_index": 0.65,
             "weed_pressure": 0.09,
             "pest_pressure": 0.08,
-            "disease_pressure": 0.0448,
+            "disease_pressure": 0.0452,
             "seedbed_readiness": 0.1
           }
         },
@@ -17426,7 +17426,7 @@
             "nitrogen_index": 0.65,
             "weed_pressure": 0.09,
             "pest_pressure": 0.08,
-            "disease_pressure": 0.2846,
+            "disease_pressure": 0.2848,
             "seedbed_readiness": 0.1
           }
         }
@@ -17444,7 +17444,7 @@
         "nitrogen_index": 0.65,
         "weed_pressure": 0.09,
         "pest_pressure": 0.08,
-        "disease_pressure": 0.4044,
+        "disease_pressure": 0.4045,
         "seedbed_readiness": 0.1
       }
     },
@@ -17491,7 +17491,7 @@
             "nitrogen_index": 0.65,
             "weed_pressure": 0.09,
             "pest_pressure": 0.08,
-            "disease_pressure": 0.0448,
+            "disease_pressure": 0.0452,
             "seedbed_readiness": 0.1
           }
         },
@@ -17531,7 +17531,7 @@
             "nitrogen_index": 0.65,
             "weed_pressure": 0.09,
             "pest_pressure": 0.08,
-            "disease_pressure": 0.2846,
+            "disease_pressure": 0.2848,
             "seedbed_readiness": 0.1
           }
         }
@@ -17549,7 +17549,7 @@
         "nitrogen_index": 0.65,
         "weed_pressure": 0.09,
         "pest_pressure": 0.08,
-        "disease_pressure": 0.4044,
+        "disease_pressure": 0.4045,
         "seedbed_readiness": 0.1
       }
     },
@@ -17596,7 +17596,7 @@
             "nitrogen_index": 0.65,
             "weed_pressure": 0.09,
             "pest_pressure": 0.08,
-            "disease_pressure": 0.0448,
+            "disease_pressure": 0.0452,
             "seedbed_readiness": 0.1
           }
         },
@@ -17636,7 +17636,7 @@
             "nitrogen_index": 0.65,
             "weed_pressure": 0.09,
             "pest_pressure": 0.08,
-            "disease_pressure": 0.2846,
+            "disease_pressure": 0.2848,
             "seedbed_readiness": 0.1
           }
         }
@@ -17654,7 +17654,7 @@
         "nitrogen_index": 0.65,
         "weed_pressure": 0.09,
         "pest_pressure": 0.08,
-        "disease_pressure": 0.4044,
+        "disease_pressure": 0.4045,
         "seedbed_readiness": 0.1
       }
     },
@@ -17701,7 +17701,7 @@
             "nitrogen_index": 0.65,
             "weed_pressure": 0.09,
             "pest_pressure": 0.08,
-            "disease_pressure": 0.0448,
+            "disease_pressure": 0.0452,
             "seedbed_readiness": 0.1
           }
         },
@@ -17741,7 +17741,7 @@
             "nitrogen_index": 0.65,
             "weed_pressure": 0.09,
             "pest_pressure": 0.08,
-            "disease_pressure": 0.2846,
+            "disease_pressure": 0.2848,
             "seedbed_readiness": 0.1
           }
         }
@@ -17759,7 +17759,7 @@
         "nitrogen_index": 0.65,
         "weed_pressure": 0.09,
         "pest_pressure": 0.08,
-        "disease_pressure": 0.4044,
+        "disease_pressure": 0.4045,
         "seedbed_readiness": 0.1
       }
     },
@@ -17806,7 +17806,7 @@
             "nitrogen_index": 0.65,
             "weed_pressure": 0.09,
             "pest_pressure": 0.08,
-            "disease_pressure": 0.0448,
+            "disease_pressure": 0.0452,
             "seedbed_readiness": 0.1
           }
         },
@@ -17846,7 +17846,7 @@
             "nitrogen_index": 0.65,
             "weed_pressure": 0.09,
             "pest_pressure": 0.08,
-            "disease_pressure": 0.2846,
+            "disease_pressure": 0.2848,
             "seedbed_readiness": 0.1
           }
         }
@@ -17864,7 +17864,7 @@
         "nitrogen_index": 0.65,
         "weed_pressure": 0.09,
         "pest_pressure": 0.08,
-        "disease_pressure": 0.4044,
+        "disease_pressure": 0.4045,
         "seedbed_readiness": 0.1
       }
     },
@@ -17911,7 +17911,7 @@
             "nitrogen_index": 0.65,
             "weed_pressure": 0.09,
             "pest_pressure": 0.08,
-            "disease_pressure": 0.0448,
+            "disease_pressure": 0.0452,
             "seedbed_readiness": 0.1
           }
         },
@@ -17951,7 +17951,7 @@
             "nitrogen_index": 0.65,
             "weed_pressure": 0.09,
             "pest_pressure": 0.08,
-            "disease_pressure": 0.2846,
+            "disease_pressure": 0.2848,
             "seedbed_readiness": 0.1
           }
         }
@@ -17969,7 +17969,7 @@
         "nitrogen_index": 0.65,
         "weed_pressure": 0.09,
         "pest_pressure": 0.08,
-        "disease_pressure": 0.4044,
+        "disease_pressure": 0.4045,
         "seedbed_readiness": 0.1
       }
     },
@@ -18016,7 +18016,7 @@
             "nitrogen_index": 0.65,
             "weed_pressure": 0.09,
             "pest_pressure": 0.08,
-            "disease_pressure": 0.0448,
+            "disease_pressure": 0.0452,
             "seedbed_readiness": 0.1
           }
         },
@@ -18056,7 +18056,7 @@
             "nitrogen_index": 0.65,
             "weed_pressure": 0.09,
             "pest_pressure": 0.08,
-            "disease_pressure": 0.4044,
+            "disease_pressure": 0.4045,
             "seedbed_readiness": 0.1
           }
         }
@@ -18074,7 +18074,7 @@
         "nitrogen_index": 0.65,
         "weed_pressure": 0.09,
         "pest_pressure": 0.08,
-        "disease_pressure": 0.4044,
+        "disease_pressure": 0.4045,
         "seedbed_readiness": 0.1
       }
     },
@@ -18121,7 +18121,7 @@
             "nitrogen_index": 0.65,
             "weed_pressure": 0.09,
             "pest_pressure": 0.08,
-            "disease_pressure": 0.0448,
+            "disease_pressure": 0.0452,
             "seedbed_readiness": 0.1
           }
         },
@@ -18161,7 +18161,7 @@
             "nitrogen_index": 0.65,
             "weed_pressure": 0.09,
             "pest_pressure": 0.08,
-            "disease_pressure": 0.4044,
+            "disease_pressure": 0.4045,
             "seedbed_readiness": 0.1
           }
         }
@@ -18179,7 +18179,7 @@
         "nitrogen_index": 0.65,
         "weed_pressure": 0.09,
         "pest_pressure": 0.08,
-        "disease_pressure": 0.4044,
+        "disease_pressure": 0.4045,
         "seedbed_readiness": 0.1
       }
     },
@@ -18226,7 +18226,7 @@
             "nitrogen_index": 0.65,
             "weed_pressure": 0.09,
             "pest_pressure": 0.08,
-            "disease_pressure": 0.0448,
+            "disease_pressure": 0.0452,
             "seedbed_readiness": 0.1
           }
         },
@@ -18266,7 +18266,7 @@
             "nitrogen_index": 0.65,
             "weed_pressure": 0.09,
             "pest_pressure": 0.08,
-            "disease_pressure": 0.4044,
+            "disease_pressure": 0.4045,
             "seedbed_readiness": 0.1
           }
         }
@@ -18284,7 +18284,7 @@
         "nitrogen_index": 0.65,
         "weed_pressure": 0.09,
         "pest_pressure": 0.08,
-        "disease_pressure": 0.4044,
+        "disease_pressure": 0.4045,
         "seedbed_readiness": 0.1
       }
     },
@@ -18331,7 +18331,7 @@
             "nitrogen_index": 0.65,
             "weed_pressure": 0.09,
             "pest_pressure": 0.08,
-            "disease_pressure": 0.0448,
+            "disease_pressure": 0.0452,
             "seedbed_readiness": 0.1
           }
         },
@@ -18371,7 +18371,7 @@
             "nitrogen_index": 0.65,
             "weed_pressure": 0.09,
             "pest_pressure": 0.08,
-            "disease_pressure": 0.4044,
+            "disease_pressure": 0.4045,
             "seedbed_readiness": 0.1
           }
         }
@@ -18389,7 +18389,7 @@
         "nitrogen_index": 0.65,
         "weed_pressure": 0.09,
         "pest_pressure": 0.08,
-        "disease_pressure": 0.4044,
+        "disease_pressure": 0.4045,
         "seedbed_readiness": 0.1
       }
     },
@@ -18436,7 +18436,7 @@
             "nitrogen_index": 0.65,
             "weed_pressure": 0.09,
             "pest_pressure": 0.08,
-            "disease_pressure": 0.0448,
+            "disease_pressure": 0.0452,
             "seedbed_readiness": 0.1
           }
         },
@@ -18476,7 +18476,7 @@
             "nitrogen_index": 0.65,
             "weed_pressure": 0.09,
             "pest_pressure": 0.08,
-            "disease_pressure": 0.4044,
+            "disease_pressure": 0.4045,
             "seedbed_readiness": 0.1
           }
         }
@@ -18494,7 +18494,7 @@
         "nitrogen_index": 0.65,
         "weed_pressure": 0.09,
         "pest_pressure": 0.08,
-        "disease_pressure": 0.4044,
+        "disease_pressure": 0.4045,
         "seedbed_readiness": 0.1
       }
     },
@@ -18541,7 +18541,7 @@
             "nitrogen_index": 0.65,
             "weed_pressure": 0.09,
             "pest_pressure": 0.08,
-            "disease_pressure": 0.0448,
+            "disease_pressure": 0.0452,
             "seedbed_readiness": 0.1
           }
         },
@@ -18581,7 +18581,7 @@
             "nitrogen_index": 0.65,
             "weed_pressure": 0.09,
             "pest_pressure": 0.08,
-            "disease_pressure": 0.4044,
+            "disease_pressure": 0.4045,
             "seedbed_readiness": 0.1
           }
         }
@@ -18599,7 +18599,7 @@
         "nitrogen_index": 0.65,
         "weed_pressure": 0.09,
         "pest_pressure": 0.08,
-        "disease_pressure": 0.4044,
+        "disease_pressure": 0.4045,
         "seedbed_readiness": 0.1
       }
     },
@@ -18646,7 +18646,7 @@
             "nitrogen_index": 0.65,
             "weed_pressure": 0.09,
             "pest_pressure": 0.08,
-            "disease_pressure": 0.0448,
+            "disease_pressure": 0.0452,
             "seedbed_readiness": 0.1
           }
         },
@@ -18686,7 +18686,7 @@
             "nitrogen_index": 0.65,
             "weed_pressure": 0.09,
             "pest_pressure": 0.08,
-            "disease_pressure": 0.4044,
+            "disease_pressure": 0.4045,
             "seedbed_readiness": 0.1
           }
         }
@@ -18704,7 +18704,7 @@
         "nitrogen_index": 0.65,
         "weed_pressure": 0.09,
         "pest_pressure": 0.08,
-        "disease_pressure": 0.4044,
+        "disease_pressure": 0.4045,
         "seedbed_readiness": 0.1
       }
     },
@@ -18751,7 +18751,7 @@
             "nitrogen_index": 0.65,
             "weed_pressure": 0.09,
             "pest_pressure": 0.08,
-            "disease_pressure": 0.0448,
+            "disease_pressure": 0.0452,
             "seedbed_readiness": 0.1
           }
         },
@@ -18791,7 +18791,7 @@
             "nitrogen_index": 0.65,
             "weed_pressure": 0.09,
             "pest_pressure": 0.08,
-            "disease_pressure": 0.4044,
+            "disease_pressure": 0.4045,
             "seedbed_readiness": 0.1
           }
         }
@@ -18809,7 +18809,7 @@
         "nitrogen_index": 0.65,
         "weed_pressure": 0.09,
         "pest_pressure": 0.08,
-        "disease_pressure": 0.4044,
+        "disease_pressure": 0.4045,
         "seedbed_readiness": 0.1
       }
     },
@@ -18856,7 +18856,7 @@
             "nitrogen_index": 0.65,
             "weed_pressure": 0.09,
             "pest_pressure": 0.08,
-            "disease_pressure": 0.0448,
+            "disease_pressure": 0.0452,
             "seedbed_readiness": 0.1
           }
         },
@@ -18896,7 +18896,7 @@
             "nitrogen_index": 0.65,
             "weed_pressure": 0.09,
             "pest_pressure": 0.08,
-            "disease_pressure": 0.4044,
+            "disease_pressure": 0.4045,
             "seedbed_readiness": 0.1
           }
         }
@@ -18914,7 +18914,7 @@
         "nitrogen_index": 0.65,
         "weed_pressure": 0.09,
         "pest_pressure": 0.08,
-        "disease_pressure": 0.4044,
+        "disease_pressure": 0.4045,
         "seedbed_readiness": 0.1
       }
     },
@@ -18961,7 +18961,7 @@
             "nitrogen_index": 0.65,
             "weed_pressure": 0.09,
             "pest_pressure": 0.08,
-            "disease_pressure": 0.0448,
+            "disease_pressure": 0.0452,
             "seedbed_readiness": 0.1
           }
         },
@@ -19001,7 +19001,7 @@
             "nitrogen_index": 0.65,
             "weed_pressure": 0.09,
             "pest_pressure": 0.08,
-            "disease_pressure": 0.366,
+            "disease_pressure": 0.3662,
             "seedbed_readiness": 0.1
           }
         }
@@ -19019,7 +19019,7 @@
         "nitrogen_index": 0.65,
         "weed_pressure": 0.09,
         "pest_pressure": 0.08,
-        "disease_pressure": 0.4044,
+        "disease_pressure": 0.4045,
         "seedbed_readiness": 0.1
       }
     },
@@ -19066,7 +19066,7 @@
             "nitrogen_index": 0.65,
             "weed_pressure": 0.09,
             "pest_pressure": 0.08,
-            "disease_pressure": 0.0448,
+            "disease_pressure": 0.0452,
             "seedbed_readiness": 0.1
           }
         },
@@ -19106,7 +19106,7 @@
             "nitrogen_index": 0.65,
             "weed_pressure": 0.09,
             "pest_pressure": 0.08,
-            "disease_pressure": 0.366,
+            "disease_pressure": 0.3662,
             "seedbed_readiness": 0.1
           }
         }
@@ -19124,7 +19124,7 @@
         "nitrogen_index": 0.65,
         "weed_pressure": 0.09,
         "pest_pressure": 0.08,
-        "disease_pressure": 0.4044,
+        "disease_pressure": 0.4045,
         "seedbed_readiness": 0.1
       }
     }

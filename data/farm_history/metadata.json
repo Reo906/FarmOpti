@@ -17,7 +17,7 @@
     "wheat"
   ],
   "model_version": 1,
-  "trained_at": "2026-09-13T09:07:50.106513+00:00",
+  "trained_at": "2026-09-13T09:52:01.374Z",
   "samples": {
     "irrigation": 8,
     "fertiliser": 22,
@@ -128,7 +128,7 @@
       "generic_expected_yield_t_ha"
     ]
   },
-  "confidence_k": 5.0,
+  "confidence_k": 5,
   "trained_models": [
     "irrigation",
     "fertiliser",
@@ -138,23 +138,23 @@
   "skipped_models": [],
   "fit": {
     "irrigation": {
-      "samples": 8.0,
+      "samples": 8,
       "generic_mae": 0.08524999999999999,
       "generic_bias": 0.08524999999999999,
-      "calibrated_mae": 0.0014044364661438278,
+      "calibrated_mae": 0.0014044364661438295,
       "mae_improvement": 0.9835256719513921,
       "mean_correction": 0.08524999999999999
     },
     "fertiliser": {
-      "samples": 22.0,
+      "samples": 22,
       "generic_mae": 0.1055473061608713,
       "generic_bias": 0.09763837980441385,
-      "calibrated_mae": 0.015831350453670352,
-      "mae_improvement": 0.8500070629037108,
+      "calibrated_mae": 0.01583135045367036,
+      "mae_improvement": 0.8500070629037106,
       "mean_correction": 0.09763837980441387
     },
     "spray": {
-      "samples": 42.0,
+      "samples": 42,
       "generic_mae": 0.00924761904761905,
       "generic_bias": 0.00825714285714286,
       "calibrated_mae": 0.003733761927716383,
@@ -162,10 +162,10 @@
       "mean_correction": 0.008257142857142862
     },
     "yield": {
-      "samples": 100.0,
+      "samples": 100,
       "generic_mae": 2.5157106928774917,
       "generic_bias": 2.128031083537164,
-      "calibrated_mae": 0.08279983730623428,
+      "calibrated_mae": 0.08279983730623432,
       "mae_improvement": 0.9670869001190566,
       "mean_correction": 2.1280310835371625
     }

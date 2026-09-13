@@ -14,7 +14,7 @@
     "format": "oxfmt",
     "optimizer:pipeline": "tsx lib/optimizer/pipeline.ts",
     "optimizer:chatbot": "tsx lib/optimizer/chatbot/chatbot.ts",
-    "optimizer:calibrate": "python3 -m farm_calibration --history data/farm_history/history.csv --farm-id demo_farm --output data/farm_history"
+    "optimizer:calibrate": "tsx lib/optimizer/calibration/cli.ts --history data/farm_history/history.csv --farm-id demo_farm --output data/farm_history"
   },
   "dependencies": {
     "@base-ui/react": "1.7.0",

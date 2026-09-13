@@ -21,7 +21,7 @@
         "total_cost_aud": 17414.83,
         "total_water_ml": 9.25,
         "peak_labour": 4,
-        "risk_score": 6.479,
+        "risk_score": 6.4796,
         "mean_start": "2026-09-20T22:36:55"
       },
       "summary": {
@@ -506,7 +506,7 @@
         "total_cost_aud": 13262.33,
         "total_water_ml": 4.75,
         "peak_labour": 3,
-        "risk_score": 3.6355,
+        "risk_score": 3.6358,
         "mean_start": "2026-09-19T19:00:00"
       },
       "summary": {
@@ -725,7 +725,7 @@
         "total_cost_aud": 16504.83,
         "total_water_ml": 9.25,
         "peak_labour": 2,
-        "risk_score": 6.7012,
+        "risk_score": 6.7017,
         "mean_start": "2026-09-21T09:55:00"
       },
       "summary": {

@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-09-13T09:40:14.563Z",
+  "generated_at": "2026-09-13T09:52:43.784Z",
   "summary": {
     "status": "optimal",
     "total_direct_cash_effect_aud": 50483.9,
@@ -356,7 +356,7 @@
           "expected_yield_t_ha": 3.5575,
           "nitrogen_index": 0.67,
           "weed_pressure": 0.1,
-          "pest_pressure": 0.0479,
+          "pest_pressure": 0.0475,
           "disease_pressure": 0.1,
           "seedbed_readiness": 0.12
         },
@@ -368,8 +368,8 @@
           },
           "pest_pressure": {
             "before": 0.425,
-            "after": 0.0479,
-            "change": -0.3771
+            "after": 0.0475,
+            "change": -0.3775
           }
         },
         "direct_revenue_aud": 0,
@@ -503,7 +503,7 @@
           "expected_yield_t_ha": 3.5575,
           "nitrogen_index": 0.67,
           "weed_pressure": 0.1,
-          "pest_pressure": 0.4928,
+          "pest_pressure": 0.4926,
           "disease_pressure": 0.1,
           "seedbed_readiness": 0.12
         },
@@ -514,12 +514,12 @@
           "harvested": false,
           "growth_stage": "pod_fill",
           "readiness": 0.678,
-          "soil_moisture": 0.2708,
+          "soil_moisture": 0.2681,
           "soil_temperature_c": 16.14,
           "expected_yield_t_ha": 3.755,
           "nitrogen_index": 0.67,
           "weed_pressure": 0.1,
-          "pest_pressure": 0.4928,
+          "pest_pressure": 0.4926,
           "disease_pressure": 0.1,
           "seedbed_readiness": 0.12
         },
@@ -531,8 +531,8 @@
           },
           "soil_moisture": {
             "before": 0.149,
-            "after": 0.2708,
-            "change": 0.1218
+            "after": 0.2681,
+            "change": 0.1191
           }
         },
         "direct_revenue_aud": 0,
@@ -815,7 +815,7 @@
           "soil_moisture": 0.31,
           "soil_temperature_c": 14.72,
           "expected_yield_t_ha": 4.9933,
-          "nitrogen_index": 0.7041,
+          "nitrogen_index": 0.6855,
           "weed_pressure": 0.3177,
           "pest_pressure": 0.08,
           "disease_pressure": 0.2,
@@ -829,8 +829,8 @@
           },
           "nitrogen_index": {
             "before": 0.468,
-            "after": 0.7041,
-            "change": 0.2361
+            "after": 0.6855,
+            "change": 0.2175
           }
         },
         "direct_revenue_aud": 0,
@@ -926,7 +926,7 @@
           "soil_moisture": 0.25,
           "soil_temperature_c": 14.7,
           "expected_yield_t_ha": 4.9638,
-          "nitrogen_index": 0.7077,
+          "nitrogen_index": 0.6807,
           "weed_pressure": 0.1,
           "pest_pressure": 0.08,
           "disease_pressure": 0.16,
@@ -940,8 +940,8 @@
           },
           "nitrogen_index": {
             "before": 0.42,
-            "after": 0.7077,
-            "change": 0.2877
+            "after": 0.6807,
+            "change": 0.2607
           }
         },
         "direct_revenue_aud": 0,
@@ -1021,7 +1021,7 @@
           "soil_moisture": 0.262,
           "soil_temperature_c": 15.66,
           "expected_yield_t_ha": 4.9818,
-          "nitrogen_index": 0.5549,
+          "nitrogen_index": 0.5309,
           "weed_pressure": 0.1,
           "pest_pressure": 0.08,
           "disease_pressure": 0.352,
@@ -1037,17 +1037,17 @@
           "soil_moisture": 0.262,
           "soil_temperature_c": 15.66,
           "expected_yield_t_ha": 5.3284,
-          "nitrogen_index": 0.5549,
+          "nitrogen_index": 0.5309,
           "weed_pressure": 0.1,
           "pest_pressure": 0.08,
-          "disease_pressure": 0.0493,
+          "disease_pressure": 0.0497,
           "seedbed_readiness": 0.1
         },
         "state_changes": {
           "disease_pressure": {
             "before": 0.352,
-            "after": 0.0493,
-            "change": -0.3027
+            "after": 0.0497,
+            "change": -0.3023
           },
           "expected_yield_t_ha": {
             "before": 4.9818,
@@ -1327,7 +1327,7 @@
           "harvested": false,
           "growth_stage": "planted",
           "readiness": 0,
-          "soil_moisture": 0.2618,
+          "soil_moisture": 0.2645,
           "soil_temperature_c": 17.2,
           "expected_yield_t_ha": 5.9476,
           "nitrogen_index": 0.6,
@@ -1344,8 +1344,8 @@
           },
           "soil_moisture": {
             "before": 0.207,
-            "after": 0.2618,
-            "change": 0.0548
+            "after": 0.2645,
+            "change": 0.0575
           }
         },
         "direct_revenue_aud": 0,
@@ -1487,7 +1487,7 @@
           "expected_yield_t_ha": 3.7364,
           "nitrogen_index": 0.64,
           "weed_pressure": 0.12,
-          "pest_pressure": 0.0733,
+          "pest_pressure": 0.0741,
           "disease_pressure": 0.208,
           "seedbed_readiness": 0.1
         },
@@ -1499,8 +1499,8 @@
           },
           "pest_pressure": {
             "before": 0.61,
-            "after": 0.0733,
-            "change": -0.5367
+            "after": 0.0741,
+            "change": -0.5359
           }
         },
         "direct_revenue_aud": 0,
@@ -1741,14 +1741,14 @@
           "nitrogen_index": 0.65,
           "weed_pressure": 0.09,
           "pest_pressure": 0.08,
-          "disease_pressure": 0.0448,
+          "disease_pressure": 0.0452,
           "seedbed_readiness": 0.1
         },
         "state_changes": {
           "disease_pressure": {
             "before": 0.325,
-            "after": 0.0448,
-            "change": -0.2802
+            "after": 0.0452,
+            "change": -0.2798
           },
           "expected_yield_t_ha": {
             "before": 4.5884,
@@ -1926,7 +1926,7 @@
           "nitrogen_index": 0.65,
           "weed_pressure": 0.09,
           "pest_pressure": 0.08,
-          "disease_pressure": 0.3261,
+          "disease_pressure": 0.3263,
           "seedbed_readiness": 0.1
         },
         "state_after": {
@@ -1942,7 +1942,7 @@
           "nitrogen_index": 0.65,
           "weed_pressure": 0.09,
           "pest_pressure": 0.08,
-          "disease_pressure": 0.3261,
+          "disease_pressure": 0.3263,
           "seedbed_readiness": 0.1
         },
         "state_changes": {
@@ -2041,7 +2041,7 @@
           "soil_moisture": 0.226,
           "soil_temperature_c": 15.74,
           "expected_yield_t_ha": 4.9993,
-          "nitrogen_index": 0.5451,
+          "nitrogen_index": 0.5286,
           "weed_pressure": 0.6786,
           "pest_pressure": 0.08,
           "disease_pressure": 0.32,
@@ -2057,7 +2057,7 @@
           "soil_moisture": 0.226,
           "soil_temperature_c": 15.74,
           "expected_yield_t_ha": 5.2407,
-          "nitrogen_index": 0.5451,
+          "nitrogen_index": 0.5286,
           "weed_pressure": 0.6786,
           "pest_pressure": 0.08,
           "disease_pressure": 0.047,

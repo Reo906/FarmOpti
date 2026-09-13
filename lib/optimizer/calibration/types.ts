@@ -43,6 +43,19 @@ export interface FarmCalibrationMetadata {
   support: Record<string, SupportCounts>;
   feature_names: Record<string, string[]>;
   confidence_k: number;
+  trained_models: string[];
+  skipped_models: string[];
+  fit: Record<
+    string,
+    {
+      samples: number;
+      generic_mae: number;
+      generic_bias: number;
+      calibrated_mae: number;
+      mae_improvement: number;
+      mean_correction: number;
+    }
+  >;
 }
 
 export interface FarmCalibration {
