@@ -8,17 +8,16 @@ import { ConfigUpdateParser, ConfigUpdateValidationError, type ConfigChangePropo
 import { applyConfigChangeProposal } from "./configUpdate/applier";
 import fs from "node:fs";
 import { generateCandidates } from "../candidateGeneration";
-import { writeCandidateActionsCsv, writeScheduleCsv } from "../csvWriters";
+import { writeCandidateActionsCsv, writeScheduleCsv, readScheduleCsv } from "../csvWriters";
 import { runActionCounterfactuals } from "../decisionAnalysis/analyseCounterfactuals";
 import { buildDecisionIndex, saveDecisionIndex } from "../decisionAnalysis/buildDecisionIndex";
 import { generateDecisionTrace, updateImportance } from "../decisionAnalysis/extractDecisions";
 import { generateFieldOptions } from "../fieldOptions";
 import { saveFieldOptions } from "../fieldOptionsIO";
 import { optimizeSchedule } from "../scheduleOptimizer";
-import { CANDIDATE_ACTIONS_PATH, DECISION_TRACE_PATH, EXTERNAL_DIR, SCHEDULE_PATH, SUMMARY_PATH } from "../paths";
-import { readCsv } from "../csv";
-import { parseTimestamp } from "../datetime";
-import { compareScenarios } from "./scenario/comparator";
+import { CANDIDATE_ACTIONS_PATH, DECISION_TRACE_PATH, EXTERNAL_DIR, PLAN_CHANGE_SUMMARY_PATH, SCHEDULE_PATH, SUMMARY_PATH } from "../paths";
+import { logStage, resetRunLog, runLogSteps } from "../runLog";
+import { summarizePlanChange, type PlanChangeSummary } from "./planChangeSummary";
 import type { OptimizationSummary, ScheduleRow } from "../types";
 
 // config.yaml's explanation.llm can hold either one flat provider config, or
@@ -511,31 +510,17 @@ Explain what changed and whether the requested scenario improved or reduced the 
   }
 
   /** Persistently applies a proposal from runConfigUpdate() and re-runs the full pipeline. */
-  async confirmConfigUpdate(proposal: ConfigChangeProposal): Promise<{ answer: string; before: OptimizationSummary | null; after: OptimizationSummary }> {
+  async confirmConfigUpdate(proposal: ConfigChangeProposal): Promise<{
+    answer: string;
+    before: OptimizationSummary | null;
+    after: OptimizationSummary;
+    schedule: ScheduleRow[];
+    changeSummary: PlanChangeSummary;
+  }> {
     const before = fs.existsSync(SUMMARY_PATH) ? (JSON.parse(fs.readFileSync(SUMMARY_PATH, "utf-8")) as OptimizationSummary) : null;
-    const beforeSchedule: ScheduleRow[] = fs.existsSync(SCHEDULE_PATH)
-      ? readCsv(SCHEDULE_PATH).map((r) => ({
-          option_id: r.option_id,
-          candidate_id: r.candidate_id,
-          plan_id: r.plan_id,
-          field_id: r.field_id,
-          operation: r.operation,
-          target: r.target,
-          start_time: parseTimestamp(r.start_time),
-          end_time: parseTimestamp(r.end_time),
-          machine_id: r.machine_id,
-          workers_required: Number(r.workers_required),
-          water_ml: Number(r.water_ml),
-          direct_revenue_aud: Number(r.direct_revenue_aud),
-          direct_cost_aud: Number(r.direct_cost_aud),
-          direct_cash_effect_aud: Number(r.direct_cash_effect_aud),
-          state_yield_effect_t_ha: Number(r.state_yield_effect_t_ha),
-          work_hours: Number(r.work_hours ?? (parseTimestamp(r.end_time) - parseTimestamp(r.start_time)) / 3_600_000),
-          workload_hours: Number(r.workload_hours ?? r.work_hours ?? 0),
-          remaining_workload_hours: Number(r.remaining_workload_hours ?? 0),
-          completion_time: parseTimestamp(r.completion_time || r.end_time),
-        }))
-      : [];
+    const beforeSchedule: ScheduleRow[] = fs.existsSync(SCHEDULE_PATH) ? readScheduleCsv(SCHEDULE_PATH) : [];
+
+    resetRunLog();
 
     processPrint("[CONFIG] Applying change...");
     applyConfigChangeProposal(proposal);
@@ -543,48 +528,47 @@ Explain what changed and whether the requested scenario improved or reduced the 
     processPrint("[CONFIG] Re-running the full optimizer pipeline...");
     const candidates = generateCandidates();
     writeCandidateActionsCsv(CANDIDATE_ACTIONS_PATH, candidates);
+    logStage("candidates", `Regenerated ${candidates.length} candidate actions`, { count: candidates.length });
 
     const options = generateFieldOptions();
     saveFieldOptions(options);
+    logStage("field_options", `Rebuilt ${options.length} field option${options.length === 1 ? "" : "s"}`, { count: options.length });
 
     const { schedule, summary: after } = await optimizeSchedule(options);
     writeScheduleCsv(SCHEDULE_PATH, schedule);
     fs.writeFileSync(SUMMARY_PATH, JSON.stringify(after, null, 2));
+    logStage("optimise", `Re-solved to ${after.status} (${after.num_scheduled_actions} actions, objective $${after.total_objective_value_aud.toLocaleString()})`, {
+      status: after.status,
+      num_scheduled_actions: after.num_scheduled_actions,
+      objective_value_aud: after.total_objective_value_aud,
+    });
 
     let trace = generateDecisionTrace(candidates, options, schedule, after);
     trace.counterfactuals = await runActionCounterfactuals(trace, options, schedule, after, EXTERNAL_DIR);
     trace = updateImportance(trace);
     fs.writeFileSync(DECISION_TRACE_PATH, JSON.stringify(trace, null, 2));
+    logStage("decision_evidence", `Refreshed evidence for ${trace.actions.length} scheduling decisions`, { count: trace.actions.length });
 
     const index = buildDecisionIndex(trace);
     saveDecisionIndex(index);
+    logStage("retrieval_index", `Rebuilt the chatbot's retrieval index (${index.length} facts)`, { count: index.length });
 
     // The retriever/index were built from the pre-change decision index; reload so
     // subsequent EXPLAIN questions in this same chat session see the new plan.
     this.retriever = new DecisionRetriever();
 
+    const changeSummary = summarizePlanChange({ beforeSchedule, beforeSummary: before, afterSchedule: schedule, afterSummary: after, steps: runLogSteps() });
+    fs.writeFileSync(PLAN_CHANGE_SUMMARY_PATH, JSON.stringify(changeSummary, null, 2));
+
     const delta = before ? after.total_objective_value_aud - before.total_objective_value_aud : null;
     const deltaText = delta === null ? "" : ` (${delta >= 0 ? "+" : ""}${delta.toFixed(2)} AUD)`;
 
-    let planChangeText = "The plan was not changed.";
-    if (before) {
-      const comparison = compareScenarios(beforeSchedule, before, schedule, after);
-      const { actions_added: added, actions_removed: removed, actions_rescheduled: rescheduled } = comparison;
-      if (added.length + removed.length + rescheduled.length === 0) {
-        planChangeText = "The plan was not changed -- the same schedule is still optimal.";
-      } else {
-        const parts: string[] = [];
-        if (added.length) parts.push(`${added.length} action${added.length === 1 ? "" : "s"} added`);
-        if (removed.length) parts.push(`${removed.length} action${removed.length === 1 ? "" : "s"} removed`);
-        if (rescheduled.length) parts.push(`${rescheduled.length} action${rescheduled.length === 1 ? "" : "s"} rescheduled`);
-        planChangeText = `The plan was changed: ${parts.join(", ")}.`;
-      }
-    }
-
     return {
-      answer: `Applied: ${describeProposal(proposal)}\n\n${planChangeText}\n\nRe-optimised whole-farm objective: ${before ? `$${before.total_objective_value_aud.toLocaleString()} -> ` : ""}$${after.total_objective_value_aud.toLocaleString()}${deltaText}.`,
+      answer: `Applied: ${describeProposal(proposal)}\n\n${changeSummary.narrative}\n\nRe-optimised whole-farm objective: ${before ? `$${before.total_objective_value_aud.toLocaleString()} -> ` : ""}$${after.total_objective_value_aud.toLocaleString()}${deltaText}.`,
       before,
       after,
+      schedule,
+      changeSummary,
     };
   }
 

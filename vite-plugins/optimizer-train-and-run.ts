@@ -126,7 +126,9 @@ async function handle(req: IncomingMessage, res: ServerResponse): Promise<void> 
     const summary = JSON.parse(fs.readFileSync(path.join(root, "data/outputs/optimization_summary.json"), "utf-8"));
     const scheduleCsv = fs.readFileSync(path.join(root, "data/outputs/optimal_schedule.csv"), "utf-8");
     const calibration = JSON.parse(fs.readFileSync(path.join(root, "data/farm_history/metadata.json"), "utf-8"));
-    sendJson(res, 200, { farmId, calibration, summary, scheduleCsv });
+    const changeSummaryPath = path.join(root, "data/outputs/plan_change_summary.json");
+    const changeSummary = fs.existsSync(changeSummaryPath) ? JSON.parse(fs.readFileSync(changeSummaryPath, "utf-8")) : null;
+    sendJson(res, 200, { farmId, calibration, summary, scheduleCsv, changeSummary });
   } catch (error) {
     const message = error instanceof Error ? error.message : "Training and optimisation failed.";
     sendJson(res, 500, { error: message });

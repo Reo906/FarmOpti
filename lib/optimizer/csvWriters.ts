@@ -1,5 +1,5 @@
-import { formatCsvTimestamp } from "./datetime";
-import { formatPyBool, formatPyFloat, writeCsv, writeEmptyCsv } from "./csv";
+import { formatCsvTimestamp, parseTimestamp } from "./datetime";
+import { formatPyBool, formatPyFloat, readCsv, writeCsv, writeEmptyCsv } from "./csv";
 import type { Candidate, ScheduleRow } from "./types";
 
 const CANDIDATE_COLUMNS = [
@@ -62,4 +62,29 @@ export function writeScheduleCsv(filePath: string, rows: ScheduleRow[]): void {
     return;
   }
   writeCsv(filePath, rows, SCHEDULE_COLUMNS);
+}
+
+/** Inverse of writeScheduleCsv -- parses a previously-written schedule CSV back into ScheduleRow[]. */
+export function readScheduleCsv(filePath: string): ScheduleRow[] {
+  return readCsv(filePath).map((r) => ({
+    option_id: r.option_id,
+    candidate_id: r.candidate_id,
+    plan_id: r.plan_id,
+    field_id: r.field_id,
+    operation: r.operation,
+    target: r.target,
+    start_time: parseTimestamp(r.start_time),
+    end_time: parseTimestamp(r.end_time),
+    machine_id: r.machine_id,
+    workers_required: Number(r.workers_required),
+    water_ml: Number(r.water_ml),
+    direct_revenue_aud: Number(r.direct_revenue_aud),
+    direct_cost_aud: Number(r.direct_cost_aud),
+    direct_cash_effect_aud: Number(r.direct_cash_effect_aud),
+    state_yield_effect_t_ha: Number(r.state_yield_effect_t_ha),
+    work_hours: Number(r.work_hours ?? (parseTimestamp(r.end_time) - parseTimestamp(r.start_time)) / 3_600_000),
+    workload_hours: Number(r.workload_hours ?? r.work_hours ?? 0),
+    remaining_workload_hours: Number(r.remaining_workload_hours ?? 0),
+    completion_time: parseTimestamp(r.completion_time || r.end_time),
+  }));
 }

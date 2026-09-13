@@ -1,8 +1,10 @@
+import fs from "node:fs";
 import http from "node:http";
 import { ExplanationService } from "./chatbot/explanationService";
 import { RULES } from "./config";
 import { loadExternalVariables } from "./externalVariables";
 import { loadRules } from "./rules/store";
+import { SCHEDULE_PATH } from "./paths";
 import type { ConfigChangeProposal } from "./chatbot/configUpdate/parser";
 
 /**
@@ -64,7 +66,13 @@ const server = http.createServer(async (request, response) => {
       }
 
       const outcome = await getService().confirmConfigUpdate(proposal);
-      sendJson(response, 200, { answer: outcome.answer, applied: true });
+      sendJson(response, 200, {
+        answer: outcome.answer,
+        applied: true,
+        summary: outcome.after,
+        scheduleCsv: fs.readFileSync(SCHEDULE_PATH, "utf-8"),
+        changeSummary: outcome.changeSummary,
+      });
       return;
     }
 

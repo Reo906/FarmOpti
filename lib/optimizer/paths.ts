@@ -37,3 +37,5 @@ export function schedulePath(index: number): string {
 export const ALTERNATIVE_PLANS_PATH = path.join(OUTPUTS_DIR, "alternative_plans.json");
 export const DECISION_TRACE_PATH = path.join(OUTPUTS_DIR, "decision_trace.json");
 export const DECISION_INDEX_PATH = path.join(OUTPUTS_DIR, "decision_index.jsonl");
+export const RUN_LOG_PATH = path.join(OUTPUTS_DIR, "run_log.jsonl");
+export const PLAN_CHANGE_SUMMARY_PATH = path.join(OUTPUTS_DIR, "plan_change_summary.json");

@@ -31,11 +31,23 @@ export async function POST(request: Request) {
           headers: { 'Content-Type': 'application/json' },
           body: JSON.stringify({ proposal: body.proposal }),
         });
-        const outcome = (await sidecarResponse.json()) as { answer?: string; error?: string };
+        const outcome = (await sidecarResponse.json()) as {
+          answer?: string;
+          error?: string;
+          summary?: unknown;
+          scheduleCsv?: string;
+          changeSummary?: unknown;
+        };
         if (!sidecarResponse.ok) {
           return Response.json({ error: outcome.error ?? 'Could not apply that change.' }, { status: sidecarResponse.status });
         }
-        return Response.json({ answer: outcome.answer, applied: true });
+        return Response.json({
+          answer: outcome.answer,
+          applied: true,
+          summary: outcome.summary,
+          scheduleCsv: outcome.scheduleCsv,
+          changeSummary: outcome.changeSummary,
+        });
       } catch {
         return Response.json(
           {

@@ -28,7 +28,7 @@ import {
   X,
 } from 'lucide-react';
 import { yallambeeOpsDashboard } from '@/app/yallambee-ops';
-import { dashboardPlanFrom, managementPlanInputs, parseSchedule, persistedDashboardPlan, persistedSchedule, persistedSummary, scheduleAnchorFrom, type ManagementPlanInput, type PersistedOptimizerSummary, type PersistedScheduleRow } from '@/lib/ui/persisted-optimizer-output';
+import { dashboardPlanFrom, managementPlanInputs, parseSchedule, persistedDashboardPlan, persistedPlanChangeSummary, persistedSchedule, persistedSummary, scheduleAnchorFrom, type ManagementPlanInput, type PersistedOptimizerSummary, type PersistedScheduleRow, type PlanChangeSummary } from '@/lib/ui/persisted-optimizer-output';
 import type { DashboardView, FarmField, HarvestBlock, OptimiserCandidate } from '@/app/yallambee-ops';
 
 type ViewKey = DashboardView;
@@ -87,6 +87,7 @@ type OptimizerOutput = {
   plan: OptimiserCandidate;
   anchorTime: number;
   live: boolean;
+  changeSummary: PlanChangeSummary;
 };
 
 const initialOutput: OptimizerOutput = {
@@ -95,6 +96,7 @@ const initialOutput: OptimizerOutput = {
   plan: persistedDashboardPlan(),
   anchorTime: scheduleAnchorFrom(persistedSchedule),
   live: false,
+  changeSummary: persistedPlanChangeSummary,
 };
 
 const OptimizerOutputContext = createContext<OptimizerOutput>(initialOutput);
@@ -114,6 +116,7 @@ type TrainAndRunResponse = {
   calibration?: CalibrationSummary;
   summary?: PersistedOptimizerSummary;
   scheduleCsv?: string;
+  changeSummary?: PlanChangeSummary;
 };
 
 function money(value: number) {
@@ -508,6 +511,7 @@ function HistoryUploadDialog({ open, onClose, onApplied }: { open: boolean; onCl
         plan: dashboardPlanFrom(result.summary, schedule),
         anchorTime: scheduleAnchorFrom(schedule),
         live: true,
+        changeSummary: result.changeSummary ?? initialOutput.changeSummary,
       }, result.calibration);
     } catch (caught) {
       setError(caught instanceof Error ? caught.message : 'Training and optimisation failed.');
@@ -560,12 +564,16 @@ function HistoryUploadDialog({ open, onClose, onApplied }: { open: boolean; onCl
 }
 
 function CommandView({ evaluated, improvement, onNavigate, onOpenUpload, historyStatus }: { evaluated: number; improvement: number; onNavigate: (view: ViewKey) => void; onOpenUpload: () => void; historyStatus?: string }) {
-  const { plan, summary, live } = useOptimizerOutput();
+  const { plan, summary, live, changeSummary } = useOptimizerOutput();
   return <>
     <div className="yc-page-head"><div><h2>Home</h2></div><div className="yc-actions"><button className="yc-btn" type="button" onClick={onOpenUpload}><Upload size={15} /> Calibrate farm model</button></div></div>
     <section className="yc-hero yc-hero-tall"><div className="yc-hero-head"><div><h3>Optimised Farming Plan</h3></div></div><Timeline plan={plan} disrupted={false} /></section>
     <div className="yc-grid yc-grid-4"><StatCard label="Upcoming jobs" value={String(summary.num_scheduled_actions)} detail={live ? 'Selected after history retraining' : 'Selected by the persisted optimizer'} /><StatCard label="Total cash effect" value={money(summary.total_direct_cash_effect_aud)} /><StatCard label="Future crop value" value={money(summary.total_terminal_value_aud)} /><StatCard label="Total farm value" value={money(summary.total_objective_value_aud)} detail={`Status: ${summary.status}`} /></div>
     <div className="yc-result-source"><CheckCircle2 size={15} /> {historyStatus || (live ? 'Displaying the schedule produced after the latest history.csv upload.' : 'Displaying the latest persisted pipeline result. Upload history.csv to retrain and refresh this snapshot.')}</div>
+    <div className="yc-grid yc-grid-2">
+      <section className="yc-card yc-change-card"><header><div><h3>What changed</h3><span>{changeSummary.narrative}</span></div><Badge tone="info"><BarChart3 size={13} /> {changeSummary.change_bullets.length}</Badge></header><div className="yc-card-body">{changeSummary.change_bullets.length === 0 ? <p className="yc-empty-note">No changes yet -- this is the current optimizer output. Add a farm rule or retrain from history to see what moves.</p> : <ul className="yc-bullet-list">{changeSummary.change_bullets.map((bullet, index) => <li key={index}>{bullet}</li>)}</ul>}</div></section>
+      <section className="yc-card yc-change-card"><header><div><h3>Why this plan</h3><span>Reasons this optimised approach is worth keeping</span></div><Badge tone="ok"><ShieldCheck size={13} /> {changeSummary.positive_bullets.length}</Badge></header><div className="yc-card-body"><ul className="yc-bullet-list yc-bullet-list-positive">{changeSummary.positive_bullets.map((bullet, index) => <li key={index}>{bullet}</li>)}</ul></div></section>
+    </div>
   </>;
 }
 
@@ -615,7 +623,7 @@ function ConfirmModal({ title, body, confirmLabel, busy, onConfirm, onCancel }: 
   </div>;
 }
 
-function FarmRulesPanel() {
+function FarmRulesPanel({ onOutputChange }: { onOutputChange: (next: OptimizerOutput) => void }) {
   const [rules, setRules] = useState<FarmRule[]>([]);
   const [fields, setFields] = useState<string[]>([]);
   const [machines, setMachines] = useState<{ id: string; type: string }[]>([]);
@@ -689,13 +697,24 @@ function FarmRulesPanel() {
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({ proposal: pending.proposal }),
       });
-      const result = (await response.json()) as { answer?: string; error?: string };
+      const result = (await response.json()) as { answer?: string; error?: string; summary?: PersistedOptimizerSummary; scheduleCsv?: string; changeSummary?: PlanChangeSummary };
       if (!response.ok) {
         setResultBanner({ tone: 'warn', text: result.error ?? 'Could not apply that change.' });
       } else {
         setResultBanner({ tone: 'ok', text: result.answer ?? 'Applied.' });
         setDescription('');
         await load();
+        if (result.summary && result.scheduleCsv) {
+          const schedule = parseSchedule(result.scheduleCsv);
+          onOutputChange({
+            summary: result.summary,
+            schedule,
+            plan: dashboardPlanFrom(result.summary, schedule),
+            anchorTime: scheduleAnchorFrom(schedule),
+            live: true,
+            changeSummary: result.changeSummary ?? initialOutput.changeSummary,
+          });
+        }
       }
     } catch {
       setResultBanner({ tone: 'warn', text: 'Could not reach the local optimizer helper.' });
@@ -748,9 +767,9 @@ function FarmRulesPanel() {
   </section>;
 }
 
-function DetailView({ view, plan, disrupted, onNavigate, onOpenUpload, historyStatus }: { view: ViewKey; plan: OptimiserCandidate; disrupted: boolean; onNavigate: (view: ViewKey) => void; onOpenUpload: () => void; historyStatus?: string }) {
+function DetailView({ view, plan, disrupted, onNavigate, onOpenUpload, historyStatus, onOutputChange }: { view: ViewKey; plan: OptimiserCandidate; disrupted: boolean; onNavigate: (view: ViewKey) => void; onOpenUpload: () => void; historyStatus?: string; onOutputChange: (next: OptimizerOutput) => void }) {
   const { summary, schedule, live } = useOptimizerOutput();
-  if (view === 'rules') return <><div className="yc-page-head"><div><h2>Farm rules & optimizer inputs</h2><p>Add or remove hard scheduling rules, or edit management-plan inputs for a later pipeline run.</p></div><div className="yc-actions"><button className="yc-btn yc-btn-dark" onClick={() => onNavigate('command')}><Home size={15} /> Back to command</button></div></div><FarmRulesPanel /><OptimizerInputPanel /><Table title="Current management plan"><thead><tr><th>Plan</th><th>Field</th><th>Operation</th><th>Target</th><th>Window</th><th>Required</th></tr></thead><tbody>{managementPlanInputs.map((input) => <tr key={input.plan_id}><td><b>{input.plan_id}</b></td><td>{input.field_id}</td><td>{input.operation}</td><td>{input.target || '—'}</td><td>{input.allowed_from} to {input.allowed_to}</td><td><Badge tone={input.required ? 'ok' : 'mute'}>{input.required ? 'Required' : 'Optional'}</Badge></td></tr>)}</tbody></Table></>;
+  if (view === 'rules') return <><div className="yc-page-head"><div><h2>Farm rules & optimizer inputs</h2><p>Add or remove hard scheduling rules, or edit management-plan inputs for a later pipeline run.</p></div><div className="yc-actions"><button className="yc-btn yc-btn-dark" onClick={() => onNavigate('command')}><Home size={15} /> Back to command</button></div></div><FarmRulesPanel onOutputChange={onOutputChange} /><OptimizerInputPanel /><Table title="Current management plan"><thead><tr><th>Plan</th><th>Field</th><th>Operation</th><th>Target</th><th>Window</th><th>Required</th></tr></thead><tbody>{managementPlanInputs.map((input) => <tr key={input.plan_id}><td><b>{input.plan_id}</b></td><td>{input.field_id}</td><td>{input.operation}</td><td>{input.target || '—'}</td><td>{input.allowed_from} to {input.allowed_to}</td><td><Badge tone={input.required ? 'ok' : 'mute'}>{input.required ? 'Required' : 'Optional'}</Badge></td></tr>)}</tbody></Table></>;
   if (view === 'harvest') return <><div className="yc-page-head"><div><h2>Harvest operations</h2><p>This view mirrors the {live ? 'latest trained' : 'persisted'} schedule generated by the optimizer pipeline.</p></div><div className="yc-actions"><button className="yc-btn" type="button" onClick={onOpenUpload}><Upload size={15} /> Calibrate farm model</button><button className="yc-btn yc-btn-primary" onClick={() => onNavigate('command')}>Back to command</button></div></div><section className="yc-hero"><div className="yc-hero-head"><div><h3>{live ? 'Updated resource plan' : 'Persisted resource plan'}</h3><span>{summary.num_scheduled_actions} actions / {schedule.length} work segments · source: optimal_schedule.csv</span></div></div><Timeline plan={plan} disrupted={disrupted} /></section><Table title={live ? 'Updated schedule assignments' : 'Persisted schedule assignments'}><thead><tr><th>Field</th><th>Operation</th><th>Target</th><th>Machine</th><th>Work hours</th><th>Remaining</th><th>Start</th><th>End</th><th>Complete</th><th className="yc-right">Cash effect</th></tr></thead><tbody>{schedule.map((row) => <tr key={`${row.option_id}-${row.plan_id}-${row.start_time}`}><td><b>{row.field_id}</b><small>{row.plan_id} · {row.option_id}</small></td><td>{row.operation}</td><td>{row.target}</td><td>{row.machine_id}</td><td>{row.work_hours ?? '—'}</td><td>{row.remaining_workload_hours ?? '—'}</td><td>{row.start_time}</td><td>{row.end_time}</td><td>{row.completion_time ?? row.end_time}</td><td className="yc-right">{signedMoney(row.direct_cash_effect_aud)}</td></tr>)}</tbody></Table></>;
   const rows = view === 'fleet' ? yallambeeOpsDashboard.machines.map((machine) => [machine.id, machine.make, machine.oper ?? '—', machine.rate ? `${(machine.rate * (disrupted && machine.id === 'H2' ? 0.7 : 1)).toFixed(1)} ha/h` : '—', machine.health]) : view === 'people' ? yallambeeOpsDashboard.people.map((person) => [person.name, person.role, person.on, `${person.hours14} h`, person.fatigue]) : view === 'markets' ? yallambeeOpsDashboard.contracts.map((contract) => [contract.id, contract.buyer, contract.grade, `${contract.filled}/${contract.tonnes} t`, contract.due]) : yallambeeOpsDashboard.fields.map((field) => [field.name, field.prop, yallambeeOpsDashboard.crops[field.crop].label, `${field.moist}%`, field.ready]);
   const headings = view === 'fleet' ? ['Asset', 'Make', 'Operator', 'Rate', 'Health'] : view === 'people' ? ['Name', 'Role', 'On', '14-day hours', 'Fatigue'] : view === 'markets' ? ['Contract', 'Buyer', 'Grade', 'Filled', 'Due'] : ['Paddock', 'Property', 'Crop', 'Moisture', 'Ready'];
@@ -777,5 +796,5 @@ export default function YallambeeDashboard() {
     setView('command');
   };
 
-  return <OptimizerOutputContext.Provider value={outputValue}><div className="yc-shell"><HistoryUploadDialog open={uploadOpen} onClose={() => setUploadOpen(false)} onApplied={applyHistoryRun} /><DecisionAssistant /><aside className="yc-rail"><div className="yc-brand"><div><img className="yc-brand-logo" src="/farmOpti.png" alt="FarmOpti logo" width={22} height={22} /><h1>FarmOpti</h1></div></div><nav className="yc-nav">{navGroups.map((group) => <div key={group.label}><span className="yc-nav-group">{group.label}</span>{group.items.map(({ id, label, icon: Icon, badge, tone }) => <button className={`yc-nav-link ${view === id ? 'yc-nav-active' : ''}`} key={id} onClick={() => setView(id)}><Icon size={16} /><span>{label}</span>{badge && <Badge tone={tone}>{badge}</Badge>}</button>)}</div>)}</nav><div className="yc-rail-user"><span className="yc-rail-avatar"><User size={16} /></span><div><b>Alex Morgan</b><small>Farm Manager</small></div></div></aside><main className="yc-main"><div className="yc-page">{view === 'command' ? <CommandView evaluated={evaluated} improvement={improvement} onNavigate={setView} onOpenUpload={() => setUploadOpen(true)} historyStatus={historyStatus} /> : <DetailView view={view} plan={output.plan} disrupted={false} onNavigate={setView} onOpenUpload={() => setUploadOpen(true)} historyStatus={historyStatus} />}</div></main></div></OptimizerOutputContext.Provider>;
+  return <OptimizerOutputContext.Provider value={outputValue}><div className="yc-shell"><HistoryUploadDialog open={uploadOpen} onClose={() => setUploadOpen(false)} onApplied={applyHistoryRun} /><DecisionAssistant /><aside className="yc-rail"><div className="yc-brand"><div><img className="yc-brand-logo" src="/farmOpti.png" alt="FarmOpti logo" width={22} height={22} /><h1>FarmOpti</h1></div></div><nav className="yc-nav">{navGroups.map((group) => <div key={group.label}><span className="yc-nav-group">{group.label}</span>{group.items.map(({ id, label, icon: Icon, badge, tone }) => <button className={`yc-nav-link ${view === id ? 'yc-nav-active' : ''}`} key={id} onClick={() => setView(id)}><Icon size={16} /><span>{label}</span>{badge && <Badge tone={tone}>{badge}</Badge>}</button>)}</div>)}</nav><div className="yc-rail-user"><span className="yc-rail-avatar"><User size={16} /></span><div><b>Alex Morgan</b><small>Farm Manager</small></div></div></aside><main className="yc-main"><div className="yc-page">{view === 'command' ? <CommandView evaluated={evaluated} improvement={improvement} onNavigate={setView} onOpenUpload={() => setUploadOpen(true)} historyStatus={historyStatus} /> : <DetailView view={view} plan={output.plan} disrupted={false} onNavigate={setView} onOpenUpload={() => setUploadOpen(true)} historyStatus={historyStatus} onOutputChange={setOutput} />}</div></main></div></OptimizerOutputContext.Provider>;
 }

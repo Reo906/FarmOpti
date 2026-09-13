@@ -2,7 +2,18 @@ import summary from '@/data/outputs/optimization_summary.json';
 import scheduleCsv from '@/data/outputs/optimal_schedule.csv?raw';
 import managementPlanCsv from '@/data/external_variables/management_plan.csv?raw';
 import fieldsCsv from '@/data/external_variables/fields.csv?raw';
+import planChangeSummary from '@/data/outputs/plan_change_summary.json';
 import type { OptimiserCandidate } from '@/app/yallambee-ops';
+
+export interface PlanChangeSummary {
+  generated_at: string;
+  narrative: string;
+  change_bullets: string[];
+  positive_bullets: string[];
+  steps: string[];
+}
+
+export const persistedPlanChangeSummary: PlanChangeSummary = planChangeSummary;
 
 export interface PersistedScheduleRow {
   option_id: string;

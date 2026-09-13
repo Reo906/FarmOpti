@@ -850,3 +850,13 @@ footer {
 .yc-modal-body { margin: 0 0 16px; color: var(--yc-muted); font-size: 13px; line-height: 1.5; white-space: pre-wrap; }
 .yc-modal-actions { display: flex; justify-content: flex-end; gap: 8px; }
 @media (max-width: 620px) { .yc-rules-form-grid { grid-template-columns: 1fr 1fr; } }
+.yc-grid-2 { grid-template-columns: 1fr 1fr; }
+.yc-change-card > header { align-items: flex-start; }
+.yc-change-card > header span { margin-left: 0; }
+.yc-change-card .yc-pill { flex-shrink: 0; gap: 4px; }
+.yc-bullet-list { display: flex; flex-direction: column; gap: 9px; margin: 0; padding: 0; list-style: none; }
+.yc-bullet-list li { position: relative; padding-left: 16px; color: var(--yc-text); font-size: 13px; line-height: 1.45; }
+.yc-bullet-list li::before { content: ''; position: absolute; left: 0; top: 7px; width: 6px; height: 6px; border-radius: 50%; background: var(--yc-muted); }
+.yc-bullet-list-positive li::before { background: var(--yc-green); }
+.yc-empty-note { margin: 0; color: var(--yc-faint); font-size: 12.5px; font-style: italic; }
+@media (max-width: 900px) { .yc-grid-2 { grid-template-columns: 1fr; } }
