@@ -1,5 +1,5 @@
-import fs from "node:fs";
 import path from "node:path";
+import { listDataDir } from "../../bundledData";
 import { readCsv, type RawRow } from "../../csv";
 import { EXTERNAL_DIR } from "../../paths";
 
@@ -163,8 +163,7 @@ export class ScenarioValidator {
 
   private discoverTables(): Record<string, TableSpec> {
     const tables: Record<string, TableSpec> = {};
-    const files = fs
-      .readdirSync(this.externalVariablesDir)
+    const files = listDataDir(this.externalVariablesDir)
       .filter((f) => f.endsWith(".csv"))
       .sort();
 

@@ -112,13 +112,38 @@ transport:
 
 explanation:
   llm:
-    provider: ollama
-    model: qwen2.5-coder:7b-instruct
-    base_url: http://localhost:11434
-    api_key_env: LLM_API_KEY
-    temperature: 0.1
-    timeout_seconds: 180
-    max_output_tokens: 250
+    # Which provider profile below is active. Override without editing this
+    # file via the LLM_PROVIDER environment variable (e.g. LLM_PROVIDER=groq)
+    # -- e.g. keep "ollama" for local dev and set LLM_PROVIDER=groq once
+    # deployed somewhere (like Render) that has no local model server.
+    active: ollama
+
+    providers:
+      ollama:
+        provider: ollama
+        model: qwen2.5-coder:7b-instruct
+        base_url: http://localhost:11434
+        api_key_env: LLM_API_KEY
+        temperature: 0.1
+        timeout_seconds: 180
+        max_output_tokens: 250
+
+      # Groq's OpenAI-compatible API: free tier, no local model server to
+      # host, so it also works once the app is deployed and not just on a
+      # machine that happens to be running Ollama. Get a free key at
+      # https://console.groq.com/keys and put it in LLM_API_KEY (see .dev.vars.example).
+      groq:
+        provider: openai_compatible
+        model: openai/gpt-oss-120b
+        base_url: https://api.groq.com/openai/v1
+        api_key_env: LLM_API_KEY
+        temperature: 0.1
+        timeout_seconds: 180
+        # Higher than the other profiles: gpt-oss is a reasoning model that
+        # spends part of its output budget thinking before the final answer,
+        # so 250 (fine for non-reasoning models like the Ollama profile
+        # above) truncated or emptied out responses.
+        max_output_tokens: 1200
 
   retrieval:
     top_k: 8

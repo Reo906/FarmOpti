@@ -1,4 +1,5 @@
 import fs from "node:fs";
+import { readDataFile } from "./bundledData";
 import { formatIso, parseTimestamp } from "./datetime";
 import { FIELD_OPTIONS_PATH } from "./paths";
 import type { FieldOption, OptionAction } from "./types";
@@ -35,7 +36,7 @@ function deserializeAction(raw: any): OptionAction {
 }
 
 export function loadFieldOptions(path: string = FIELD_OPTIONS_PATH): FieldOption[] {
-  const raw = JSON.parse(fs.readFileSync(path, "utf-8"));
+  const raw = JSON.parse(readDataFile(path));
   return raw.options.map((option: any) => ({
     ...option,
     actions: option.actions.map(deserializeAction),

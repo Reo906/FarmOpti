@@ -1,5 +1,5 @@
-import FarmControl from '@/components/FarmControl';
+import YallambeeDashboard from '@/components/YallambeeDashboard';
 
 export default function Home() {
-  return <FarmControl />;
+  return <YallambeeDashboard />;
 }

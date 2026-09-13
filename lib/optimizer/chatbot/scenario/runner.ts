@@ -1,6 +1,7 @@
 import fs from "node:fs";
 import os from "node:os";
 import path from "node:path";
+import { dataFileExists, readDataFile } from "../../bundledData";
 import { readCsv, writeRawCsv, type RawRow } from "../../csv";
 import { addDays, compareDateOnly, parseDateOnly, parseTimestamp } from "../../datetime";
 import { generateFieldOptions } from "../../fieldOptions";
@@ -53,7 +54,7 @@ export class ScenarioRunner {
   }
 
   private loadBaseline(): { schedule: ScheduleRow[]; summary: OptimizationSummary } {
-    if (!fs.existsSync(BASELINE_SCHEDULE_PATH) || !fs.existsSync(BASELINE_SUMMARY_PATH)) {
+    if (!dataFileExists(BASELINE_SCHEDULE_PATH) || !dataFileExists(BASELINE_SUMMARY_PATH)) {
       throw new Error("Baseline optimisation outputs are missing. Run the optimizer pipeline first.");
     }
     const rows = readCsv(BASELINE_SCHEDULE_PATH);
@@ -74,7 +75,7 @@ export class ScenarioRunner {
       direct_cash_effect_aud: Number(r.direct_cash_effect_aud),
       state_yield_effect_t_ha: Number(r.state_yield_effect_t_ha),
     }));
-    const summary = JSON.parse(fs.readFileSync(BASELINE_SUMMARY_PATH, "utf-8")) as OptimizationSummary;
+    const summary = JSON.parse(readDataFile(BASELINE_SUMMARY_PATH)) as OptimizationSummary;
     return { schedule, summary };
   }
 
@@ -332,7 +333,22 @@ export class ScenarioRunner {
       ));
     } else {
       console.log("[SCENARIO] Applying validated scenario to temporary farm inputs");
-      const tempDir = fs.mkdtempSync(path.join(os.tmpdir(), "farmopti_scenario_"));
+      // This branch mutates input tables on disk (temp dir copy + rewrite) and
+      // re-derives field options/candidates from them, mirroring how the CLI
+      // pipeline works from real files. Some web deployments of this chatbot
+      // (this one included) run in a sandbox with no writable filesystem at
+      // all, so make that failure mode a clear, actionable message instead of
+      // a raw fs/OS error leaking out of a temp-directory operation.
+      let tempDir: string;
+      try {
+        tempDir = fs.mkdtempSync(path.join(os.tmpdir(), "farmopti_scenario_"));
+      } catch (exc: any) {
+        throw new Error(
+          "This scenario needs to rewrite input values or timing, which requires temporary disk storage that " +
+            "isn't available in this deployment. Try a scenario that only forces or forbids an existing action " +
+            `(e.g. "don't spray F2") instead of one that changes input values, dates, or times. (${exc.message ?? exc})`,
+        );
+      }
       try {
         const tempExternal = path.join(tempDir, "external_variables");
         fs.cpSync(this.externalVariablesDir, tempExternal, { recursive: true });

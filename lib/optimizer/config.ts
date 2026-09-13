@@ -1,5 +1,5 @@
-import fs from "node:fs";
 import { load as loadYaml } from "js-yaml";
+import { readDataFile } from "./bundledData";
 import { CONFIG_PATH } from "./paths";
 
 // The config schema is large (operations, crop parameters, beam search,
@@ -10,7 +10,7 @@ import { CONFIG_PATH } from "./paths";
 export type ConfigDict = any;
 
 export function loadConfig(path: string = CONFIG_PATH): ConfigDict {
-  const text = fs.readFileSync(path, "utf-8");
+  const text = readDataFile(path);
   return loadYaml(text) as ConfigDict;
 }
 

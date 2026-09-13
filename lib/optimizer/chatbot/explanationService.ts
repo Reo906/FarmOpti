@@ -1,8 +1,8 @@
-import { CONFIG } from "../config";
+import { CONFIG, type ConfigDict } from "../config";
 import { DecisionRetriever, type RetrievedRecord } from "./retrieveDecisions";
 import { ScenarioParser } from "./scenario/parser";
-import { ScenarioRunner } from "./scenario/runner";
-import { ScenarioValidationError } from "./scenario/validator";
+import { ScenarioValidationError, ScenarioValidator } from "./scenario/validator";
+import type { ScenarioRunner } from "./scenario/runner";
 import type { ChatMessage } from "./scenario/parser";
 import { ConfigUpdateParser, ConfigUpdateValidationError, type ConfigChangeProposal } from "./configUpdate/parser";
 import { applyConfigChangeProposal } from "./configUpdate/applier";
@@ -18,7 +18,23 @@ import { optimizeSchedule } from "../scheduleOptimizer";
 import { CANDIDATE_ACTIONS_PATH, DECISION_TRACE_PATH, EXTERNAL_DIR, SCHEDULE_PATH, SUMMARY_PATH } from "../paths";
 import type { OptimizationSummary } from "../types";
 
-const LLM_CONFIG = CONFIG.explanation.llm;
+// config.yaml's explanation.llm can hold either one flat provider config, or
+// a set of named provider profiles ("providers") plus which one is "active".
+// The LLM_PROVIDER environment variable overrides "active" without editing
+// the file -- e.g. keep "ollama" as the checked-in default for local dev and
+// set LLM_PROVIDER=groq wherever there's no local model server to talk to.
+function resolveLlmConfig(section: ConfigDict): ConfigDict {
+  if (!section.providers) return section;
+  const name = process.env.LLM_PROVIDER || section.active;
+  const profile = section.providers[name];
+  if (!profile) {
+    const source = process.env.LLM_PROVIDER ? "LLM_PROVIDER environment variable" : "explanation.llm.active in config.yaml";
+    throw new Error(`Unknown LLM provider "${name}" (from ${source}). Available: ${Object.keys(section.providers).join(", ")}`);
+  }
+  return profile;
+}
+
+const LLM_CONFIG = resolveLlmConfig(CONFIG.explanation.llm);
 const PROCESS_CONFIG = CONFIG.explanation.process_display ?? {};
 const SCENARIO_CONFIG = CONFIG.explanation.scenario ?? {};
 
@@ -221,8 +237,8 @@ function describeProposal(proposal: ConfigChangeProposal): string {
 export class ExplanationService {
   retriever: DecisionRetriever;
   llm: LLMClient;
-  private scenarioRunner: ScenarioRunner | null = null;
   private scenarioParser: ScenarioParser | null = null;
+  private scenarioRunner: ScenarioRunner | null = null;
   private configUpdateParser: ConfigUpdateParser;
 
   constructor() {
@@ -232,11 +248,26 @@ export class ExplanationService {
     this.configUpdateParser = new ConfigUpdateParser(this.llm);
 
     if (SCENARIO_CONFIG.enabled ?? true) {
-      this.scenarioRunner = new ScenarioRunner();
-      this.scenarioParser = new ScenarioParser(this.llm, this.scenarioRunner.validator);
+      // Classifying a request and parsing a scenario only need the schema/
+      // validation layer (ScenarioValidator), so build that eagerly. The
+      // actual ScenarioRunner additionally pulls in the whole-farm LP solver
+      // and its WASM loader, which some web runtimes (this one included)
+      // cannot resolve outside a real Node process -- so that stays a lazy
+      // import in ensureScenarioRunner(), loaded only once a scenario is
+      // actually requested, instead of failing every question up front.
+      const validator = new ScenarioValidator(EXTERNAL_DIR);
+      this.scenarioParser = new ScenarioParser(this.llm, validator);
     }
 
     processPrint("[INIT] Explanation service ready");
+  }
+
+  private async ensureScenarioRunner(): Promise<ScenarioRunner> {
+    if (!this.scenarioRunner) {
+      const { ScenarioRunner: Runner } = await import("./scenario/runner");
+      this.scenarioRunner = new Runner();
+    }
+    return this.scenarioRunner;
   }
 
   private compactActionEvidence(action: any): any {
@@ -381,11 +412,20 @@ export class ExplanationService {
 
     let result;
     try {
-      result = await this.scenarioRunner!.run(interpretation);
+      const runner = await this.ensureScenarioRunner();
+      result = await runner.run(interpretation);
     } catch (exc: any) {
-      processPrint(`[SCENARIO] Re-optimisation failed: ${exc.message ?? exc}`);
+      const message = String(exc?.message ?? exc);
+      processPrint(`[SCENARIO] Re-optimisation failed: ${message}`);
+      // Re-running the whole-farm solver needs its WASM binary and (for
+      // scenarios that change input values or timing) writable temp storage,
+      // neither of which this web deployment's runtime can provide. Give a
+      // clear, honest answer instead of surfacing that raw platform error.
+      const runtimeUnavailable = !(exc instanceof ScenarioValidationError) && /wasm|readAll|file: URL/i.test(message);
       return {
-        answer: `FarmOpti understood the requested modification, but could not produce a feasible scenario result: ${exc.message ?? exc}`,
+        answer: runtimeUnavailable
+          ? "Testing a concrete scenario needs to re-run the whole-farm solver, and this web deployment's runtime can't load it. Ask about the existing schedule's decisions and evidence instead, or run FarmOpti's CLI pipeline to test what-if scenarios."
+          : `FarmOpti understood the requested modification, but could not produce a feasible scenario result: ${message}`,
         needs_reoptimization: false,
         scenario_error: true,
       };
