@@ -11,7 +11,7 @@ The predefined demo follows four steps:
 
 ## Architecture
 
-The app is a React/TypeScript site in **farmopti**. Its main layers are:
+The app is a React/TypeScript site at the repo root. Its main layers are:
 
 - **lib/farm/data.ts** — synthetic farm state and operating assumptions
 - **lib/farm/optimizer.ts** — deterministic schedule simulation and exhaustive candidate search
@@ -31,7 +31,6 @@ All farm names, field data, yields, prices, throughput, losses, costs, weather, 
 Requires Node.js 22.13 or later.
 
 ~~~bash
-cd farmopti
 npm install
 npm run dev
 ~~~
