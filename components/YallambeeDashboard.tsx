@@ -16,6 +16,7 @@ import {
   RotateCcw,
   Send,
   ShieldCheck,
+  SlidersHorizontal,
   Tractor,
   Truck,
   Users,
@@ -26,6 +27,9 @@ import {
 import { yallambeeOpsDashboard } from '@/app/yallambee-ops';
 import { managementPlanInputs, persistedDashboardPlan, persistedSchedule, persistedSummary, scheduleAnchorTime, type ManagementPlanInput } from '@/lib/ui/persisted-optimizer-output';
 import type { DashboardView, FarmField, OptimiserCandidate } from '@/app/yallambee-ops';
+import fieldsCsvRaw from '@/data/external_variables/fields.csv?raw';
+import machinesCsvRaw from '@/data/external_variables/machines.csv?raw';
+import labourCsvRaw from '@/data/external_variables/labour_availability_daily.csv?raw';
 
 type ViewKey = DashboardView;
 type Tone = 'ok' | 'warn' | 'bad' | 'info' | 'mute';
@@ -37,6 +41,12 @@ const navGroups: { label: string; items: { id: ViewKey; label: string; icon: typ
       { id: 'command', label: 'Command', icon: Grid2X2 },
       { id: 'harvest', label: 'Harvest operations', icon: Tractor},
       { id: 'rules', label: 'Farm rules', icon: BookOpen},
+    ],
+  },
+  {
+    label: 'Configure',
+    items: [
+      { id: 'variables', label: 'Farm setup', icon: SlidersHorizontal },
     ],
   },
 ];
@@ -51,6 +61,7 @@ const titleByView: Record<ViewKey, string> = {
   people: 'People & safety',
   markets: 'Contracts & margin',
   rules: 'Farm rules',
+  variables: 'Farm setup',
 };
 
 const cropClass: Record<string, string> = {
@@ -279,8 +290,352 @@ function CommandView({ plan, evaluated, improvement, onNavigate }: { plan: Optim
   </>;
 }
 
+const CROP_OPTIONS = ['', 'wheat', 'barley', 'canola', 'lentil', 'beans', 'oats', 'maize', 'none'] as const;
+
+interface FieldRow {
+  field_id: string;
+  area_ha: string;
+  current_crop: string;
+  planned_crop: string;
+  irrigable: string;
+  x_km: string;
+  y_km: string;
+}
+
+function parseFieldsCsv(raw: string): FieldRow[] {
+  const lines = raw.trim().split(/\r?\n/);
+  const headers = lines[0]?.split(',') ?? [];
+  return lines.slice(1).filter(Boolean).map((line) => {
+    const vals = line.split(',');
+    const obj: Record<string, string> = {};
+    headers.forEach((h, i) => { obj[h.trim()] = (vals[i] ?? '').trim(); });
+    return obj as unknown as FieldRow;
+  });
+}
+
+function fieldsToCSV(rows: FieldRow[]): string {
+  const header = 'field_id,area_ha,current_crop,planned_crop,irrigable,x_km,y_km';
+  const body = rows.map((r) =>
+    [r.field_id, r.area_ha, r.current_crop, r.planned_crop, r.irrigable, r.x_km, r.y_km].join(',')
+  );
+  return [header, ...body].join('\n');
+}
+
+const MACHINE_TYPE_OPTIONS = ['harvester', 'tractor', 'sprayer', 'fertiliser_spreader', 'seeder', 'irrigator'];
+
+interface MachineRow {
+  machine_id: string;
+  machine_type: string;
+  cost_per_hour_aud: string;
+  current_field: string;
+}
+
+function parseMachinesCsv(raw: string): MachineRow[] {
+  const lines = raw.trim().split(/\r?\n/);
+  const headers = lines[0]?.split(',') ?? [];
+  return lines.slice(1).filter(Boolean).map((line) => {
+    const vals = line.split(',');
+    const obj: Record<string, string> = {};
+    headers.forEach((h, i) => { obj[h.trim()] = (vals[i] ?? '').trim(); });
+    return obj as unknown as MachineRow;
+  });
+}
+
+function machinesToCSV(rows: MachineRow[]): string {
+  const header = 'machine_id,machine_type,cost_per_hour_aud,current_field';
+  const body = rows.map((r) =>
+    [r.machine_id, r.machine_type, r.cost_per_hour_aud, r.current_field].join(',')
+  );
+  return [header, ...body].join('\n');
+}
+
+const EMPTY_NEW_MACHINE: MachineRow = { machine_id: '', machine_type: 'harvester', cost_per_hour_aud: '', current_field: '' };
+
+interface LabourRow {
+  date: string;
+  available_workers: string;
+  workday_start: string;
+  workday_end: string;
+}
+
+function parseLabourCsv(raw: string): LabourRow[] {
+  const lines = raw.trim().split(/\r?\n/);
+  const headers = lines[0]?.split(',') ?? [];
+  return lines.slice(1).filter(Boolean).map((line) => {
+    const vals = line.split(',');
+    const obj: Record<string, string> = {};
+    headers.forEach((h, i) => { obj[h.trim()] = (vals[i] ?? '').trim(); });
+    return obj as unknown as LabourRow;
+  });
+}
+
+function labourToCSV(rows: LabourRow[]): string {
+  const header = 'date,available_workers,workday_start,workday_end';
+  return [header, ...rows.map((r) => [r.date, r.available_workers, r.workday_start, r.workday_end].join(','))].join('\n');
+}
+
+
+const EMPTY_NEW_FIELD: FieldRow = { field_id: '', area_ha: '', current_crop: '', planned_crop: '', irrigable: '0', x_km: '0', y_km: '0' };
+
+function VariablesEditorView({ onNavigate }: { onNavigate: (view: ViewKey) => void }) {
+  const [rows, setRows] = useState<FieldRow[]>(() => parseFieldsCsv(fieldsCsvRaw));
+  const [adding, setAdding] = useState(false);
+  const [newField, setNewField] = useState<FieldRow>(EMPTY_NEW_FIELD);
+  const [newError, setNewError] = useState('');
+
+  const [machineRows, setMachineRows] = useState<MachineRow[]>(() => parseMachinesCsv(machinesCsvRaw));
+  const [addingMachine, setAddingMachine] = useState(false);
+  const [newMachine, setNewMachine] = useState<MachineRow>(EMPTY_NEW_MACHINE);
+  const [newMachineError, setNewMachineError] = useState('');
+
+  const [labourRows, setLabourRows] = useState<LabourRow[]>(() => parseLabourCsv(labourCsvRaw));
+
+  function updateRow(index: number, key: keyof FieldRow, value: string) {
+    setRows((prev) => prev.map((r, i) => i === index ? { ...r, [key]: value } : r));
+  }
+
+  function submitNewField() {
+    if (!newField.field_id.trim()) { setNewError('Field ID is required.'); return; }
+    if (!newField.area_ha || isNaN(Number(newField.area_ha))) { setNewError('Area must be a number.'); return; }
+    if (rows.some((r) => r.field_id === newField.field_id.trim())) { setNewError('Field ID already exists.'); return; }
+    setRows((prev) => [...prev, { ...newField, field_id: newField.field_id.trim(), x_km: newField.x_km || '0', y_km: newField.y_km || '0' }]);
+    setAdding(false);
+    setNewField(EMPTY_NEW_FIELD);
+    setNewError('');
+  }
+
+  function updateMachineRow(index: number, key: keyof MachineRow, value: string) {
+    setMachineRows((prev) => prev.map((r, i) => i === index ? { ...r, [key]: value } : r));
+  }
+
+  function submitNewMachine() {
+    if (!newMachine.machine_id.trim()) { setNewMachineError('Machine ID is required.'); return; }
+    if (!newMachine.cost_per_hour_aud || isNaN(Number(newMachine.cost_per_hour_aud))) { setNewMachineError('Cost must be a number.'); return; }
+    if (machineRows.some((r) => r.machine_id === newMachine.machine_id.trim())) { setNewMachineError('Machine ID already exists.'); return; }
+    setMachineRows((prev) => [...prev, { ...newMachine, machine_id: newMachine.machine_id.trim() }]);
+    setAddingMachine(false);
+    setNewMachine(EMPTY_NEW_MACHINE);
+    setNewMachineError('');
+  }
+
+  function downloadCSV() {
+    const blob = new Blob([fieldsToCSV(rows)], { type: 'text/csv' });
+    const url = URL.createObjectURL(blob);
+    const a = document.createElement('a');
+    a.href = url; a.download = 'fields.csv'; a.click();
+    URL.revokeObjectURL(url);
+  }
+
+  function downloadMachinesCSV() {
+    const blob = new Blob([machinesToCSV(machineRows)], { type: 'text/csv' });
+    const url = URL.createObjectURL(blob);
+    const a = document.createElement('a');
+    a.href = url; a.download = 'machines.csv'; a.click();
+    URL.revokeObjectURL(url);
+  }
+
+  function updateLabourRow(index: number, key: keyof LabourRow, value: string) {
+    setLabourRows((prev) => prev.map((r, i) => i === index ? { ...r, [key]: value } : r));
+  }
+
+  function downloadLabourCSV() {
+    const blob = new Blob([labourToCSV(labourRows)], { type: 'text/csv' });
+    const url = URL.createObjectURL(blob);
+    const a = document.createElement('a');
+    a.href = url; a.download = 'labour_availability_daily.csv'; a.click();
+    URL.revokeObjectURL(url);
+  }
+
+
+  return (
+    <div>
+      <div className="yc-page-head">
+        <div><h2>Farm setup</h2><p>Edit fields, machines and labour used by the optimizer. Download the updated CSVs to apply changes to the pipeline.</p></div>
+        <div className="yc-actions">
+          <button className="yc-btn" onClick={() => onNavigate('command')}><Grid2X2 size={15} /> Back to command</button>
+        </div>
+      </div>
+
+      <section className="yc-card yc-table-card" style={{ marginBottom: 14 }}>
+        <header style={{ flexWrap: 'wrap', gap: 8 }}>
+          <h3>Fields</h3>
+          <span style={{ marginLeft: 0 }}>{rows.length} fields</span>
+          <div style={{ display: 'flex', gap: 8, marginLeft: 'auto' }}>
+            <button className="yc-btn" onClick={downloadCSV}>Download fields.csv</button>
+            <button className="yc-btn yc-btn-dark" onClick={() => { setAdding(true); setNewError(''); setNewField(EMPTY_NEW_FIELD); }}>+ Add field</button>
+          </div>
+        </header>
+
+        <div className="yc-table-wrap">
+          <table>
+            <thead>
+              <tr>
+                <th>Field ID</th>
+                <th>Area (ha)</th>
+                <th>Current crop</th>
+                <th>Planned crop</th>
+                <th>Irrigable</th>
+              </tr>
+            </thead>
+            <tbody>
+              {rows.map((row, index) => (
+                <tr key={row.field_id}>
+                  <td><b>{row.field_id}</b></td>
+                  <td>{row.area_ha} ha</td>
+                  <td>{row.current_crop || '—'}</td>
+                  <td>
+                    <select
+                      className="yc-ve-select"
+                      value={row.planned_crop}
+                      onChange={(e) => updateRow(index, 'planned_crop', e.target.value)}
+                    >
+                      {CROP_OPTIONS.map((c) => <option key={c} value={c}>{c || '— none —'}</option>)}
+                    </select>
+                  </td>
+                  <td>
+                    <label className="yc-ve-switch" aria-label="Irrigable">
+                      <input type="checkbox" checked={row.irrigable === '1'} onChange={(e) => updateRow(index, 'irrigable', e.target.checked ? '1' : '0')} />
+                      <span className="yc-ve-switch-track" />
+                      <span className="yc-ve-switch-thumb" />
+                    </label>
+                  </td>
+                </tr>
+              ))}
+            </tbody>
+          </table>
+        </div>
+
+        {adding && (
+          <div className="yc-ve-add-form">
+            <div className="yc-ve-add-title">New field</div>
+            <div className="yc-input-grid" style={{ gridTemplateColumns: 'repeat(3, 1fr)' }}>
+              <label>Field ID<input placeholder="e.g. F8" value={newField.field_id} onChange={(e) => setNewField((f) => ({ ...f, field_id: e.target.value }))} /></label>
+              <label>Area (ha)<input type="number" min="0" step="0.1" placeholder="e.g. 20.0" value={newField.area_ha} onChange={(e) => setNewField((f) => ({ ...f, area_ha: e.target.value }))} /></label>
+              <label>Current crop
+                <select value={newField.current_crop} onChange={(e) => setNewField((f) => ({ ...f, current_crop: e.target.value }))}>
+                  {CROP_OPTIONS.map((c) => <option key={c} value={c}>{c || '— none —'}</option>)}
+                </select>
+              </label>
+              <label>Planned crop
+                <select value={newField.planned_crop} onChange={(e) => setNewField((f) => ({ ...f, planned_crop: e.target.value }))}>
+                  {CROP_OPTIONS.map((c) => <option key={c} value={c}>{c || '— none —'}</option>)}
+                </select>
+              </label>
+              <label>X position (km)<input type="number" step="0.1" placeholder="0.0" value={newField.x_km} onChange={(e) => setNewField((f) => ({ ...f, x_km: e.target.value }))} /></label>
+              <label>Y position (km)<input type="number" step="0.1" placeholder="0.0" value={newField.y_km} onChange={(e) => setNewField((f) => ({ ...f, y_km: e.target.value }))} /></label>
+            </div>
+            <div className="yc-ve-add-irrigable">
+              <span>Irrigable</span>
+              <label className="yc-ve-switch" aria-label="Irrigable">
+                <input type="checkbox" checked={newField.irrigable === '1'} onChange={(e) => setNewField((f) => ({ ...f, irrigable: e.target.checked ? '1' : '0' }))} />
+                <span className="yc-ve-switch-track" />
+                <span className="yc-ve-switch-thumb" />
+              </label>
+            </div>
+            {newError && <p className="yc-ve-error">{newError}</p>}
+            <div className="yc-input-actions">
+              <span />
+              <button className="yc-btn" onClick={() => { setAdding(false); setNewError(''); }}>Cancel</button>
+              <button className="yc-btn yc-btn-primary" onClick={submitNewField}>Add field</button>
+            </div>
+          </div>
+        )}
+      </section>
+
+      <section className="yc-card yc-table-card">
+        <header style={{ flexWrap: 'wrap', gap: 8 }}>
+          <h3>Machines</h3>
+          <span style={{ marginLeft: 0 }}>{machineRows.length} machines</span>
+          <div style={{ display: 'flex', gap: 8, marginLeft: 'auto' }}>
+            <button className="yc-btn" onClick={downloadMachinesCSV}>Download machines.csv</button>
+            <button className="yc-btn yc-btn-dark" onClick={() => { setAddingMachine(true); setNewMachineError(''); setNewMachine(EMPTY_NEW_MACHINE); }}>+ Add machine</button>
+          </div>
+        </header>
+
+        <div className="yc-table-wrap">
+          <table>
+            <thead>
+              <tr>
+                <th>Machine ID</th>
+                <th>Type</th>
+                <th>Cost / hr (AUD)</th>
+              </tr>
+            </thead>
+            <tbody>
+              {machineRows.map((row, index) => (
+                <tr key={row.machine_id}>
+                  <td><b>{row.machine_id}</b></td>
+                  <td>
+                    <select className="yc-ve-select" value={row.machine_type} onChange={(e) => updateMachineRow(index, 'machine_type', e.target.value)}>
+                      {MACHINE_TYPE_OPTIONS.map((t) => <option key={t} value={t}>{t.replace(/_/g, ' ')}</option>)}
+                    </select>
+                  </td>
+                  <td>
+                    <input className="yc-ve-number" type="number" min="0" step="0.5" value={row.cost_per_hour_aud} onChange={(e) => updateMachineRow(index, 'cost_per_hour_aud', e.target.value)} />
+                  </td>
+                </tr>
+              ))}
+            </tbody>
+          </table>
+        </div>
+
+        {addingMachine && (
+          <div className="yc-ve-add-form">
+            <div className="yc-ve-add-title">New machine</div>
+            <div className="yc-input-grid" style={{ gridTemplateColumns: 'repeat(3, 1fr)' }}>
+              <label>Machine ID<input placeholder="e.g. M7" value={newMachine.machine_id} onChange={(e) => setNewMachine((m) => ({ ...m, machine_id: e.target.value }))} /></label>
+              <label>Type
+                <select value={newMachine.machine_type} onChange={(e) => setNewMachine((m) => ({ ...m, machine_type: e.target.value }))}>
+                  {MACHINE_TYPE_OPTIONS.map((t) => <option key={t} value={t}>{t.replace(/_/g, ' ')}</option>)}
+                </select>
+              </label>
+              <label>Cost / hr (AUD)<input type="number" min="0" step="0.5" placeholder="e.g. 90.0" value={newMachine.cost_per_hour_aud} onChange={(e) => setNewMachine((m) => ({ ...m, cost_per_hour_aud: e.target.value }))} /></label>
+            </div>
+            {newMachineError && <p className="yc-ve-error">{newMachineError}</p>}
+            <div className="yc-input-actions">
+              <span />
+              <button className="yc-btn" onClick={() => { setAddingMachine(false); setNewMachineError(''); }}>Cancel</button>
+              <button className="yc-btn yc-btn-primary" onClick={submitNewMachine}>Add machine</button>
+            </div>
+          </div>
+        )}
+      </section>
+
+      {/* Labour availability */}
+      <section className="yc-card yc-table-card" style={{ marginBottom: 14 }}>
+        <header style={{ flexWrap: 'wrap', gap: 8 }}>
+          <h3>Labour availability</h3>
+          <span style={{ marginLeft: 0 }}>{labourRows.length} days</span>
+          <div style={{ marginLeft: 'auto' }}>
+            <button className="yc-btn" onClick={downloadLabourCSV}>Download labour_availability_daily.csv</button>
+          </div>
+        </header>
+        <div className="yc-table-wrap">
+          <table>
+            <thead>
+              <tr><th>Date</th><th>Workers</th><th>Day start</th><th>Day end</th></tr>
+            </thead>
+            <tbody>
+              {labourRows.map((row, index) => (
+                <tr key={row.date}>
+                  <td><b>{row.date}</b></td>
+                  <td><input className="yc-ve-number" type="number" min="0" max="20" step="1" value={row.available_workers} onChange={(e) => updateLabourRow(index, 'available_workers', e.target.value)} /></td>
+                  <td><input className="yc-ve-time" type="time" value={row.workday_start} onChange={(e) => updateLabourRow(index, 'workday_start', e.target.value)} /></td>
+                  <td><input className="yc-ve-time" type="time" value={row.workday_end} onChange={(e) => updateLabourRow(index, 'workday_end', e.target.value)} /></td>
+                </tr>
+              ))}
+            </tbody>
+          </table>
+        </div>
+      </section>
+
+    </div>
+  );
+}
+
 function DetailView({ view, plan, disrupted, onNavigate }: { view: ViewKey; plan: OptimiserCandidate; disrupted: boolean; onNavigate: (view: ViewKey) => void }) {
   const fields = yallambeeOpsDashboard.fields;
+  if (view === 'variables') return <VariablesEditorView onNavigate={onNavigate} />;
   if (view === 'rules') return <><div className="yc-page-head"><div><h2>Farm rules & optimizer inputs</h2><p>Modify the management-plan inputs used by the existing optimizer pipeline. Changes are prepared in the browser and exported as a replacement CSV.</p></div><div className="yc-actions"><button className="yc-btn yc-btn-dark" onClick={() => onNavigate('command')}><Grid2X2 size={15} /> Back to command</button></div></div><OptimizerInputPanel /><Table title="Current management plan"><thead><tr><th>Plan</th><th>Field</th><th>Operation</th><th>Target</th><th>Window</th><th>Required</th></tr></thead><tbody>{managementPlanInputs.map((input) => <tr key={input.plan_id}><td><b>{input.plan_id}</b></td><td>{input.field_id}</td><td>{input.operation}</td><td>{input.target || '—'}</td><td>{input.allowed_from} to {input.allowed_to}</td><td><Badge tone={input.required ? 'ok' : 'mute'}>{input.required ? 'Required' : 'Optional'}</Badge></td></tr>)}</tbody></Table></>;
   if (view === 'harvest') return <><div className="yc-page-head"><div><h2>Harvest operations</h2><p>This view mirrors the persisted schedule generated by the optimizer pipeline.</p></div><div className="yc-actions"><button className="yc-btn yc-btn-primary" onClick={() => onNavigate('command')}>Back to command</button></div></div><section className="yc-hero"><div className="yc-hero-head"><div><h3>Persisted resource plan</h3><span>{persistedSchedule.length} scheduled actions · source: optimal_schedule.csv</span></div></div><Timeline plan={plan} disrupted={disrupted} /></section><Table title="Persisted schedule assignments"><thead><tr><th>Field</th><th>Operation</th><th>Target</th><th>Machine</th><th>Start</th><th>End</th><th className="yc-right">Cash effect</th></tr></thead><tbody>{persistedSchedule.map((row) => <tr key={`${row.option_id}-${row.plan_id}`}><td><b>{row.field_id}</b><small>{row.plan_id} · {row.option_id}</small></td><td>{row.operation}</td><td>{row.target}</td><td>{row.machine_id}</td><td>{row.start_time}</td><td>{row.end_time}</td><td className="yc-right">{signedMoney(row.direct_cash_effect_aud)}</td></tr>)}</tbody></Table></>;
   const rows = view === 'fleet' ? yallambeeOpsDashboard.machines.map((machine) => [machine.id, machine.make, machine.oper ?? '—', machine.rate ? `${(machine.rate * (disrupted && machine.id === 'H2' ? 0.7 : 1)).toFixed(1)} ha/h` : '—', machine.health]) : view === 'people' ? yallambeeOpsDashboard.people.map((person) => [person.name, person.role, person.on, `${person.hours14} h`, person.fatigue]) : view === 'markets' ? yallambeeOpsDashboard.contracts.map((contract) => [contract.id, contract.buyer, contract.grade, `${contract.filled}/${contract.tonnes} t`, contract.due]) : yallambeeOpsDashboard.fields.map((field) => [field.name, field.prop, yallambeeOpsDashboard.crops[field.crop].label, `${field.moist}%`, field.ready]);
