@@ -31,11 +31,11 @@ selects the lowest-cost plan. It then explains the decision in plain English.
 ## Architecture
 
 ```
-app/                  Next.js app router (layout + page)
-components/
+system/app/            Next.js app router (layout + page)
+system/components/
   FarmControl.tsx     Top-level UI component — all demo state and layout
-  ui/                 shadcn component library (table, badge, etc.)
-lib/farm/
+   ui/                 shadcn component library (table, badge, etc.)
+system/lib/farm/
   types.ts            Shared TypeScript types
   data.ts             Farm scenario: fields, machines, trucks, contractor, weather
   optimizer.ts        Exhaustive search over (strategy × route × field order)
@@ -118,7 +118,7 @@ All financial outputs are computed from these inputs — they are not hardcoded.
 **Prerequisites:** Node.js 22+, npm.
 
 ```bash
-cd app
+cd system
 npm install
 npm run dev
 ```

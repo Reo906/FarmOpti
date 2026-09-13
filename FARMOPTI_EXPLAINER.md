@@ -327,7 +327,7 @@ inputs every time. They are not hardcoded.
 ## The file map
 
 ```
-app/
+system/
 ├── lib/farm/
 │   ├── types.ts         All data types: Field, Scenario, Plan, Rule, Economics, etc.
 │   ├── data.ts          The farm: 6 fields, machines, trucks, contractor, scenarios
@@ -349,7 +349,7 @@ app/
 ## Run it
 
 ```bash
-cd app
+cd system
 npm install
 npm run dev
 # open http://localhost:3000
