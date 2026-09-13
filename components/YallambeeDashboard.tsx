@@ -3,7 +3,6 @@
 import { createContext, useContext, useEffect, useMemo, useRef, useState } from 'react';
 import {
   AlertTriangle,
-  ArrowRight,
   BarChart3,
   BookOpen,
   Bug,
@@ -18,6 +17,7 @@ import {
   Send,
   ShieldCheck,
   Tractor,
+  Trash2,
   Truck,
   Upload,
   Users,
@@ -39,7 +39,7 @@ const navGroups: { label: string; items: { id: ViewKey; label: string; icon: typ
     items: [
       { id: 'command', label: 'Command', icon: Grid2X2 },
       { id: 'harvest', label: 'Harvest operations', icon: Tractor},
-      { id: 'rules', label: 'Farm rules', icon: BookOpen},
+      { id: 'rules', label: 'Management plans', icon: BookOpen},
     ],
   },
 ];
@@ -53,7 +53,7 @@ const titleByView: Record<ViewKey, string> = {
   fleet: 'Fleet & maintenance',
   people: 'People & safety',
   markets: 'Contracts & margin',
-  rules: 'Farm rules',
+  rules: 'Management plans',
 };
 
 const cropClass: Record<string, string> = {
@@ -261,7 +261,7 @@ function ResourcePlanSection({ disrupted, showLegend = false }: { disrupted: boo
     <section className="yc-hero">
       <div className="yc-hero-head">
         <div>
-          <h3>{live ? 'Updated resource plan' : 'Persisted resource plan'}</h3>
+          <h3>{live ? 'Resource plan' : 'Resource plan'}</h3>
           <span>{selected ? `${selected.name} · ${displaySummary.num_scheduled_actions} actions / ${displaySchedule.length} work segments` : `${displayPlan.label} · ${displaySchedule.length} actions from the pipeline ${live ? 'run' : 'snapshot'}`}</span>
         </div>
         {showLegend && <div className="yc-hero-legend"><span><i className="yc-legend-wheat" /> Wheat</span><span><i className="yc-legend-canola" /> Other operations</span><span><i className="yc-legend-rain" /> Rain</span><span><i className="yc-legend-wind" /> High wind</span></div>}
@@ -381,34 +381,146 @@ function DecisionAssistant() {
   </div>;
 }
 
-function OptimizerInputPanel() {
-  const [selectedId, setSelectedId] = useState(managementPlanInputs[0]?.plan_id ?? '');
-  const [drafts, setDrafts] = useState<Record<string, ManagementPlanInput>>(() => Object.fromEntries(managementPlanInputs.map((input) => [input.plan_id, { ...input }])));
-  const [saved, setSaved] = useState(false);
-  const draft = drafts[selectedId] ?? managementPlanInputs[0];
+const PLAN_FIELDS = [
+  { id: 'F1', crop: 'wheat' },
+  { id: 'F2', crop: 'canola' },
+  { id: 'F3', crop: 'barley' },
+  { id: 'F4', crop: 'wheat' },
+  { id: 'F5', crop: 'maize' },
+  { id: 'F6', crop: 'canola' },
+  { id: 'F7', crop: 'wheat' },
+] as const;
 
-  const selectPlan = (planId: string) => {
-    setSelectedId(planId);
-    setSaved(false);
+const PLAN_ACTIONS = ['harvest', 'irrigate', 'spray', 'fertilise', 'plant'] as const;
+
+function nextManagementPlanId(plans: ManagementPlanInput[]) {
+  const max = plans.reduce((highest, plan) => {
+    const match = /^P(\d+)$/.exec(plan.plan_id);
+    return match ? Math.max(highest, Number(match[1])) : highest;
+  }, 0);
+  return `P${String(max + 1).padStart(2, '0')}`;
+}
+
+function defaultsForAction(operation: string, fieldId: string): Pick<ManagementPlanInput, 'target' | 'unit'> {
+  if (operation === 'irrigate') return { target: 'soil_moisture', unit: 'fraction' };
+  if (operation === 'spray') return { target: 'pest_control', unit: '' };
+  if (operation === 'fertilise') return { target: 'nitrogen', unit: 'kg_per_ha' };
+  if (operation === 'plant') return { target: 'maize', unit: '' };
+  return { target: PLAN_FIELDS.find((field) => field.id === fieldId)?.crop ?? '', unit: '' };
+}
+
+function emptyPlanDraft(fieldId: string = PLAN_FIELDS[0].id): Omit<ManagementPlanInput, 'plan_id'> {
+  return {
+    field_id: fieldId,
+    operation: 'harvest',
+    ...defaultsForAction('harvest', fieldId),
+    amount: '',
+    allowed_from: '',
+    allowed_to: '',
+    required: false,
+    depends_on: '',
+    min_gap_hours: '',
+  };
+}
+
+function FarmRulesView({ plans, onPlansChange, onNavigate }: { plans: ManagementPlanInput[]; onPlansChange: (plans: ManagementPlanInput[]) => void; onNavigate: (view: ViewKey) => void }) {
+  const [draft, setDraft] = useState(() => emptyPlanDraft());
+  const [pendingRemove, setPendingRemove] = useState<ManagementPlanInput | null>(null);
+  const nextId = nextManagementPlanId(plans);
+
+  useEffect(() => {
+    if (!pendingRemove) return;
+    const onKey = (event: KeyboardEvent) => {
+      if (event.key === 'Escape') setPendingRemove(null);
+    };
+    window.addEventListener('keydown', onKey);
+    return () => window.removeEventListener('keydown', onKey);
+  }, [pendingRemove]);
+  const canAdd = Boolean(draft.field_id && draft.operation && draft.allowed_from && draft.allowed_to);
+
+  const updateDraft = (key: keyof Omit<ManagementPlanInput, 'plan_id'>, value: string | boolean) => {
+    setDraft((current) => {
+      const next = { ...current, [key]: value };
+      if (key === 'operation' || key === 'field_id') {
+        Object.assign(next, defaultsForAction(next.operation, next.field_id));
+      }
+      return next;
+    });
   };
 
-  const update = (key: keyof ManagementPlanInput, value: string | boolean) => {
-    setDrafts((current) => ({ ...current, [selectedId]: { ...current[selectedId], [key]: value } }));
-    setSaved(false);
+  const addPlan = () => {
+    if (!canAdd) return;
+    onPlansChange([...plans, { ...draft, ...defaultsForAction(draft.operation, draft.field_id), plan_id: nextId }]);
+    setDraft(emptyPlanDraft(draft.field_id));
   };
 
-  const exportPlan = () => {
-    const rows = managementPlanInputs.map((input) => drafts[input.plan_id] ?? input);
-    const header = 'plan_id,field_id,operation,target,amount,unit,allowed_from,allowed_to,required,depends_on,min_gap_hours';
-    const csv = [header, ...rows.map((input) => [input.plan_id, input.field_id, input.operation, input.target, input.amount, input.unit, input.allowed_from, input.allowed_to, input.required ? '1' : '0', input.depends_on, input.min_gap_hours].join(','))].join('\n');
-    const link = document.createElement('a');
-    link.href = URL.createObjectURL(new Blob([csv], { type: 'text/csv' }));
-    link.download = 'management_plan.csv';
-    link.click();
-    URL.revokeObjectURL(link.href);
+  const confirmRemove = () => {
+    if (!pendingRemove) return;
+    onPlansChange(plans.filter((plan) => plan.plan_id !== pendingRemove.plan_id));
+    setPendingRemove(null);
   };
 
-  return <section className="yc-card yc-input-panel"><header><div><h3>Management plan editor</h3><span>Modify the fields used by the next optimizer pipeline run</span></div><Badge tone="info">UI draft</Badge></header><div className="yc-card-body"><div className="yc-input-grid"><label>Action<select value={selectedId} onChange={(event) => selectPlan(event.target.value)}>{managementPlanInputs.map((input) => <option key={input.plan_id} value={input.plan_id}>{input.plan_id} · {input.field_id} · {input.operation}</option>)}</select></label><label>Allowed from<input type="date" value={draft.allowed_from} onChange={(event) => update('allowed_from', event.target.value)} /></label><label>Allowed to<input type="date" value={draft.allowed_to} onChange={(event) => update('allowed_to', event.target.value)} /></label><label>Amount {draft.unit && `(${draft.unit})`}<input value={draft.amount} placeholder="Optional" onChange={(event) => update('amount', event.target.value)} /></label></div><div className="yc-input-meta"><span><b>{draft.field_id}</b> · {draft.operation} · {draft.target || 'no target'}</span><label className="yc-check"><input type="checkbox" checked={draft.required} onChange={(event) => update('required', event.target.checked)} /> Required action</label></div><div className="yc-input-actions"><span>{saved ? 'All edits are retained in this editor. Export the CSV to use them in the pipeline.' : 'Edit multiple actions, then export one complete management_plan.csv.'}</span><button className="yc-btn" onClick={() => setSaved(true)}>Save edits</button><button className="yc-btn yc-btn-dark" onClick={exportPlan}>Download management_plan.csv</button></div></div></section>;
+  return <>
+    <div className="yc-page-head"><div><h2>Management plans</h2><p>Add management plans to organise upcoming field activities.
+      </p></div><div className="yc-actions"><button className="yc-btn yc-btn-dark" onClick={() => onNavigate('command')}><Grid2X2 size={15} /> Back to command</button></div></div>
+    <section className="yc-card yc-input-panel">
+      <header><div><h3>Management plan editor</h3><span>Next plan will be saved as {nextId}</span></div>
+      </header>
+      <div className="yc-card-body">
+        <div className="yc-input-grid yc-input-grid-plan">
+          <label>Field<select value={draft.field_id} onChange={(event) => updateDraft('field_id', event.target.value)}>{PLAN_FIELDS.map((field) => <option key={field.id} value={field.id}>{field.id} · {field.crop}</option>)}</select></label>
+          <label>Action<select value={draft.operation} onChange={(event) => updateDraft('operation', event.target.value)}>{PLAN_ACTIONS.map((action) => <option key={action} value={action}>{action}</option>)}</select></label>
+          <label>Amount {draft.unit && `(${draft.unit})`}<input value={draft.amount} placeholder="Optional" onChange={(event) => updateDraft('amount', event.target.value)} /></label>
+          <label>Allowed from<input type="date" value={draft.allowed_from} onChange={(event) => updateDraft('allowed_from', event.target.value)} /></label>
+          <label>Allowed to<input type="date" value={draft.allowed_to} onChange={(event) => updateDraft('allowed_to', event.target.value)} /></label>
+        </div>
+        <div className="yc-input-meta">
+          <label className="yc-check"><input type="checkbox" checked={draft.required} onChange={(event) => updateDraft('required', event.target.checked)} /> Required action</label>
+        </div>
+        <div className="yc-input-actions">
+          <span>Choose a field, action and window, then add the plan.</span>
+          <button className="yc-btn yc-btn-dark" type="button" disabled={!canAdd} onClick={addPlan}>Add plan</button>
+        </div>
+      </div>
+    </section>
+    <Table title="Current management plan">
+      <thead><tr><th>Plan</th><th>Field</th><th>Action</th><th>Amount</th><th>Window</th><th>Required</th><th className="yc-right"> </th></tr></thead>
+      <tbody>
+        {plans.length === 0 && <tr><td colSpan={7}>No management plans yet. Add one above.</td></tr>}
+        {plans.map((input) => (
+          <tr key={input.plan_id}>
+            <td><b>{input.plan_id}</b></td>
+            <td>{input.field_id}</td>
+            <td>{input.operation}</td>
+            <td>{input.amount ? `${input.amount}${input.unit ? ` ${input.unit}` : ''}` : '—'}</td>
+            <td>{input.allowed_from} to {input.allowed_to}</td>
+            <td><Badge tone={input.required ? 'ok' : 'mute'}>{input.required ? 'Required' : 'Optional'}</Badge></td>
+            <td className="yc-right"><button className="yc-btn yc-btn-light" type="button" onClick={() => setPendingRemove(input)}><Trash2 size={14} /></button></td>
+          </tr>
+        ))}
+      </tbody>
+    </Table>
+    {pendingRemove && (
+      <div className="yc-modal-backdrop" onClick={() => setPendingRemove(null)}>
+        <section className="yc-modal" role="dialog" aria-modal="true" aria-labelledby="yc-remove-plan-title" onClick={(event) => event.stopPropagation()}>
+          <header>
+            <div>
+              <h3 id="yc-remove-plan-title">Remove plan {pendingRemove.plan_id}?</h3>
+              <span>{pendingRemove.field_id} · {pendingRemove.operation} · {pendingRemove.allowed_from} to {pendingRemove.allowed_to}</span>
+            </div>
+            <button className="yc-icon-button" type="button" onClick={() => setPendingRemove(null)} aria-label="Close remove dialog"><X size={15} /></button>
+          </header>
+          <div className="yc-modal-body">
+            <p className="yc-upload-copy">This removes the plan from the current list.</p>
+          </div>
+          <div className="yc-modal-actions">
+            <button className="yc-btn" type="button" onClick={() => setPendingRemove(null)}>Keep plan</button>
+            <button className="yc-btn yc-btn-light" type="button" onClick={confirmRemove}><Trash2 size={15} /> Remove plan</button>
+          </div>
+        </section>
+      </div>
+    )}
+  </>;
 }
 
 function HistoryUploadDialog({ open, onClose, onApplied }: { open: boolean; onClose: () => void; onApplied: (output: OptimizerOutput, calibration: CalibrationSummary) => void }) {
@@ -513,37 +625,33 @@ function HistoryUploadDialog({ open, onClose, onApplied }: { open: boolean; onCl
   );
 }
 
-function CommandView({ evaluated, improvement, onNavigate, onOpenUpload, historyStatus }: { evaluated: number; improvement: number; onNavigate: (view: ViewKey) => void; onOpenUpload: () => void; historyStatus?: string }) {
-  const { plan, summary, live } = useOptimizerOutput();
-  const alerts = [
-    { tone: 'warn' as Tone, title: 'Field readiness is limiting the candidate set', text: 'The optimizer only schedules fields that meet readiness and weather feasibility rules.', view: 'harvest' as ViewKey, when: 'Current' },
-    { tone: 'info' as Tone, title: 'Resource capacity is binding', text: 'Machine, labour and destination capacity are included when candidates are scored.', view: 'harvest' as ViewKey, when: 'Current' },
-  ].filter(Boolean) as { tone: Tone; title: string; text: string; view: ViewKey; when: string }[];
+function CommandView({ onNavigate, onOpenUpload, historyStatus }: { onNavigate: (view: ViewKey) => void; onOpenUpload: () => void; historyStatus?: string }) {
+  const { summary, live } = useOptimizerOutput();
 
   return <>
     <div className="yc-page-head"><div><h2>Command</h2><p>Everything that could change today&apos;s plan, in one place. This view reflects the latest {live ? 'trained' : 'persisted'} pipeline result.</p></div><div className="yc-actions"><button className="yc-btn" type="button" onClick={onOpenUpload}><Upload size={15} /> Calibrate farm model</button><button className="yc-btn yc-btn-dark" onClick={() => onNavigate('harvest')}><Tractor size={15} /> Open schedule</button></div></div>
     <ResourcePlanSection disrupted={false} showLegend />
     <WhyThisPlanPanel />
     <div className="yc-grid yc-grid-4"><StatCard label="Scheduled actions" value={String(summary.num_scheduled_actions)} detail={live ? 'Selected after history retraining' : 'Selected by the persisted optimizer'} meter={100} /><StatCard label="Direct cash effect" value={money(summary.total_direct_cash_effect_aud)} detail="Sum of optimal_schedule.csv" tone="blue" /><StatCard label="Terminal value" value={money(summary.total_terminal_value_aud)} detail="Value carried into the objective" tone="green" /><StatCard label="Objective value" value={money(summary.total_objective_value_aud)} detail={`Status: ${summary.status}`} meter={100} tone="amber" /></div>
-    <div className="yc-grid yc-grid-main"><section className="yc-card"><header><h3>Needs a decision</h3><span>{alerts.length} total</span></header><div className="yc-feed">{alerts.map((alert) => <button className="yc-feed-item" key={alert.title} onClick={() => onNavigate(alert.view)}><i className={`yc-severity yc-severity-${alert.tone}`} /><span><b>{alert.title}</b><small>{alert.text}</small></span><time>{alert.when}</time></button>)}</div></section><section className="yc-card"><header><h3>Optimiser result</h3><span>{evaluated.toLocaleString('en-AU')} actions selected</span></header><div className="yc-card-body"><dl className="yc-kv"><dt>Selected strategy</dt><dd>{plan.label}</dd><dt>Route</dt><dd>{plan.haul > 25.5 ? 'Split route' : 'Receival route'}</dd><dt>Modelled cost</dt><dd>{money(Math.abs(plan.net))}</dd><dt>Improvement</dt><dd className={improvement > 0 ? 'yc-up' : ''}>{improvement > 0 ? '+' : ''}{money(improvement)}</dd></dl><p className="yc-result-note">These values come directly from the current optimiser run. Upload history.csv to retrain the simulator and refresh this plan.</p></div></section></div>
-    <section className="yc-card yc-scope"><header><h3>Supported system scope</h3><Badge tone="ok">Connected</Badge></header><div className="yc-card-body"><p>The current system can optimise schedules, score economics, apply weather, machine, labour and field-state constraints, and explain recorded decisions.</p><button className="yc-btn" onClick={() => onNavigate('harvest')}>Open supported plan <ArrowRight size={15} /></button></div></section>
     <div className="yc-result-source"><CheckCircle2 size={15} /> {historyStatus || (live ? 'Displaying the schedule produced after the latest history.csv upload.' : 'Displaying the latest persisted pipeline result. Upload history.csv to retrain and refresh this snapshot.')}</div>
   </>;
 }
 
-function DetailView({ view, plan, disrupted, onNavigate, onOpenUpload, historyStatus }: { view: ViewKey; plan: OptimiserCandidate; disrupted: boolean; onNavigate: (view: ViewKey) => void; onOpenUpload: () => void; historyStatus?: string }) {
+function DetailView({ view, plan, disrupted, onNavigate, managementPlans, onManagementPlansChange }: { view: ViewKey; plan: OptimiserCandidate; disrupted: boolean; onNavigate: (view: ViewKey) => void; managementPlans: ManagementPlanInput[]; onManagementPlansChange: (plans: ManagementPlanInput[]) => void }) {
   const { schedule, live, resourcePlans, selectedPlanId } = useOptimizerOutput();
   const selectedResourcePlan = resourcePlans.find((item) => item.id === selectedPlanId) ?? resourcePlans[0];
   const harvestSchedule = selectedResourcePlan?.schedule ?? schedule;
-  if (view === 'rules') return <><div className="yc-page-head"><div><h2>Farm rules & optimizer inputs</h2><p>Upload farm history to retrain calibration models and re-run the optimizer, or edit management-plan inputs for a later pipeline run.</p></div><div className="yc-actions"><button className="yc-btn" type="button" onClick={onOpenUpload}><Upload size={15} /> Calibrate farm model</button><button className="yc-btn yc-btn-dark" onClick={() => onNavigate('command')}><Grid2X2 size={15} /> Back to command</button></div></div><section className="yc-card yc-input-panel"><header><div><h3>Farm history</h3><span>Retrain calibration models, then re-run the optimizer</span></div><Badge tone="info">Train & optimise</Badge></header><div className="yc-card-body"><p className="yc-upload-copy">Upload a history.csv to train farm-specific irrigation, fertiliser, spray and yield models, then re-run the optimizer with the new simulator.</p><div className="yc-input-actions"><span>{historyStatus || 'Choose a history.csv file to start training and optimisation.'}</span><button className="yc-btn yc-btn-dark" type="button" onClick={onOpenUpload}><Upload size={15} /> Calibrate farm model</button></div></div></section><OptimizerInputPanel /><Table title="Current management plan"><thead><tr><th>Plan</th><th>Field</th><th>Operation</th><th>Target</th><th>Window</th><th>Required</th></tr></thead><tbody>{managementPlanInputs.map((input) => <tr key={input.plan_id}><td><b>{input.plan_id}</b></td><td>{input.field_id}</td><td>{input.operation}</td><td>{input.target || '—'}</td><td>{input.allowed_from} to {input.allowed_to}</td><td><Badge tone={input.required ? 'ok' : 'mute'}>{input.required ? 'Required' : 'Optional'}</Badge></td></tr>)}</tbody></Table></>;
-  if (view === 'harvest') return <><div className="yc-page-head"><div><h2>Harvest operations</h2><p>This view mirrors the {live ? 'latest trained' : 'persisted'} schedule generated by the optimizer pipeline.</p></div><div className="yc-actions"><button className="yc-btn" type="button" onClick={onOpenUpload}><Upload size={15} /> Calibrate farm model</button><button className="yc-btn yc-btn-primary" onClick={() => onNavigate('command')}>Back to command</button></div></div><ResourcePlanSection disrupted={disrupted} /><WhyThisPlanPanel /><Table title={live ? 'Updated schedule assignments' : 'Persisted schedule assignments'}><thead><tr><th>Field</th><th>Operation</th><th>Target</th><th>Machine</th><th>Work hours</th><th>Remaining</th><th>Start</th><th>End</th><th>Complete</th><th className="yc-right">Cash effect</th></tr></thead><tbody>{harvestSchedule.map((row) => <tr key={`${row.option_id}-${row.plan_id}-${row.start_time}`}><td><b>{row.field_id}</b><small>{row.plan_id} · {row.option_id}</small></td><td>{row.operation}</td><td>{row.target}</td><td>{row.machine_id}</td><td>{row.work_hours ?? '—'}</td><td>{row.remaining_workload_hours ?? '—'}</td><td>{row.start_time}</td><td>{row.end_time}</td><td>{row.completion_time ?? row.end_time}</td><td className="yc-right">{signedMoney(row.direct_cash_effect_aud)}</td></tr>)}</tbody></Table></>;
+  if (view === 'rules') return <FarmRulesView plans={managementPlans} onPlansChange={onManagementPlansChange} onNavigate={onNavigate} />;
+  if (view === 'harvest') return <><div className="yc-page-head"><div><h2>Harvest operations</h2><p>This view mirrors the {live ? 'latest trained' : 'persisted'} schedule generated by the optimizer pipeline.</p></div><div className="yc-actions"><button className="yc-btn yc-btn-primary" onClick={() => onNavigate('command')}>Back to command</button></div></div><Table title={live ? 'Updated schedule assignments' : 'Persisted schedule assignments'}><thead><tr><th>Field</th><th>Operation</th><th>Target</th><th>Machine</th><th>Work hours</th><th>Remaining</th><th>Start</th><th>End</th><th>Complete</th><th className="yc-right">Cash effect</th></tr></thead><tbody>{harvestSchedule.map((row) => <tr key={`${row.option_id}-${row.plan_id}-${row.start_time}`}><td><b>{row.field_id}</b><small>{row.plan_id} · {row.option_id}</small></td><td>{row.operation}</td><td>{row.target}</td><td>{row.machine_id}</td><td>{row.work_hours ?? '—'}</td><td>{row.remaining_workload_hours ?? '—'}</td><td>{row.start_time}</td><td>{row.end_time}</td><td>{row.completion_time ?? row.end_time}</td><td className="yc-right">{signedMoney(row.direct_cash_effect_aud)}</td></tr>)}</tbody></Table></>;
   const rows = view === 'fleet' ? yallambeeOpsDashboard.machines.map((machine) => [machine.id, machine.make, machine.oper ?? '—', machine.rate ? `${(machine.rate * (disrupted && machine.id === 'H2' ? 0.7 : 1)).toFixed(1)} ha/h` : '—', machine.health]) : view === 'people' ? yallambeeOpsDashboard.people.map((person) => [person.name, person.role, person.on, `${person.hours14} h`, person.fatigue]) : view === 'markets' ? yallambeeOpsDashboard.contracts.map((contract) => [contract.id, contract.buyer, contract.grade, `${contract.filled}/${contract.tonnes} t`, contract.due]) : yallambeeOpsDashboard.fields.map((field) => [field.name, field.prop, yallambeeOpsDashboard.crops[field.crop].label, `${field.moist}%`, field.ready]);
   const headings = view === 'fleet' ? ['Asset', 'Make', 'Operator', 'Rate', 'Health'] : view === 'people' ? ['Name', 'Role', 'On', '14-day hours', 'Fatigue'] : view === 'markets' ? ['Contract', 'Buyer', 'Grade', 'Filled', 'Due'] : ['Paddock', 'Property', 'Crop', 'Moisture', 'Ready'];
   return <><div className="yc-page-head"><div><h2>{titleByView[view]}</h2><p>Operational information connected to the same constraints used by the harvest plan.</p></div><div className="yc-actions"><button className="yc-btn yc-btn-dark" onClick={() => onNavigate('harvest')}><Tractor size={15} /> See harvest impact</button></div></div><div className="yc-grid yc-grid-4"><StatCard label="Records" value={String(rows.length)} detail="Current synthetic operating dataset" /><StatCard label="Status" value={disrupted ? 'Changed' : 'Nominal'} detail={disrupted ? 'Reoptimisation required' : 'Tracking to plan'} tone={disrupted ? 'red' : 'green'} /><StatCard label="Coverage" value="100%" detail="Validated for this demo" meter={100} /><StatCard label="Updated" value="06:12" detail="Thu 4 Dec · harvest day 19" /></div><Table title="{titleByView[view]}"><thead><tr>{headings.map((heading) => <th key={heading}>{heading}</th>)}</tr></thead><tbody>{rows.map((row, index) => <tr key={`${row[0]}-${index}`}>{row.map((cell, cellIndex) => <td key={`${cell}-${cellIndex}`}><b>{cellIndex === 0 ? cell : undefined}</b>{cellIndex !== 0 ? cell : undefined}</td>)}</tr>)}</tbody></Table></>;
 }
 
 function Table({ title, children }: { title: string; children: React.ReactNode }) {
-  return <section className="yc-card yc-table-card"><header><h3>{title}</h3><span>Live synthetic data</span></header><div className="yc-table-wrap"><table>{children}</table></div></section>;
+  return <section className="yc-card yc-table-card"><header><h3>{title}</h3>
+  {/* <span>Live synthetic data</span> */}
+  </header><div className="yc-table-wrap"><table>{children}</table></div></section>;
 }
 
 export default function YallambeeDashboard() {
@@ -553,8 +661,7 @@ export default function YallambeeDashboard() {
   const [selectedPlanId, setSelectedPlanId] = useState(defaultResourcePlanId);
   const [historyStatus, setHistoryStatus] = useState('');
   const [uploadOpen, setUploadOpen] = useState(false);
-  const evaluated = output.summary.num_scheduled_actions;
-  const improvement = 0;
+  const [managementPlans, setManagementPlans] = useState<ManagementPlanInput[]>(() => managementPlanInputs.map((input) => ({ ...input })));
   const outputValue = useMemo<OptimizerOutput>(() => ({
     ...output,
     selectedPlanId,
@@ -570,5 +677,5 @@ export default function YallambeeDashboard() {
   };
 
   const reset = () => { setView('command'); setDisrupted(false); setSelectedPlanId(defaultResourcePlanId); };
-  return <OptimizerOutputContext.Provider value={outputValue}><div className="yc-shell"><HistoryUploadDialog open={uploadOpen} onClose={() => setUploadOpen(false)} onApplied={applyHistoryRun} /><DecisionAssistant /><aside className="yc-rail"><div className="yc-brand"><div><Warehouse size={21} /><h1>Yallambee Ops</h1></div><p>FarmOpti {output.live ? 'live output' : 'persisted output'}<br />{output.live ? 'retrained from history.csv' : 'schedule snapshot · pipeline result'}</p></div><nav className="yc-nav">{navGroups.map((group) => <div key={group.label}><span className="yc-nav-group">{group.label}</span>{group.items.map(({ id, label, icon: Icon, badge, tone }) => <button className={`yc-nav-link ${view === id ? 'yc-nav-active' : ''}`} key={id} onClick={() => setView(id)}><Icon size={16} /><span>{label}</span>{badge && <Badge tone={tone}>{badge}</Badge>}</button>)}</div>)}</nav><div className="yc-rail-foot">{output.live ? 'Updated schedule' : 'Persisted schedule'}<br /><b>{output.summary.num_scheduled_actions}</b> actions selected</div></aside><main className="yc-main"><header className="yc-top"><span>FarmOpti · <b>{titleByView[view]}</b></span><span className="yc-top-spacer" /><span><i className={output.live ? 'yc-dot yc-dot-amber' : 'yc-dot'} /> {output.live ? 'Live pipeline result' : 'Pipeline snapshot'}</span><span className="yc-divider" /><span>Status <b>{output.summary.status}</b></span><span className="yc-divider" /><span>Objective <b>{money(output.summary.total_objective_value_aud)}</b></span><span className="yc-divider" /><span><b>{output.schedule.length} schedule rows</b></span><button className="yc-icon-button" onClick={reset} aria-label="Reset dashboard" title="Reset dashboard"><RotateCcw size={15} /></button></header><div className="yc-page">{view === 'command' ? <CommandView evaluated={evaluated} improvement={improvement} onNavigate={setView} onOpenUpload={() => setUploadOpen(true)} historyStatus={historyStatus} /> : <DetailView view={view} plan={output.plan} disrupted={false} onNavigate={setView} onOpenUpload={() => setUploadOpen(true)} historyStatus={historyStatus} />}<footer className="yc-footer"><span>FarmOpti · {output.live ? 'live optimiser output' : 'persisted optimiser output'}</span><span>Source: {output.live ? 'latest history.csv training run' : 'optimization_summary.json + optimal_schedule.csv'}</span></footer></div></main></div></OptimizerOutputContext.Provider>;
+  return <OptimizerOutputContext.Provider value={outputValue}><div className="yc-shell"><HistoryUploadDialog open={uploadOpen} onClose={() => setUploadOpen(false)} onApplied={applyHistoryRun} /><DecisionAssistant /><aside className="yc-rail"><div className="yc-brand"><div><Warehouse size={21} /><h1>Yallambee Ops</h1></div><p>FarmOpti {output.live ? 'live output' : 'persisted output'}<br />{output.live ? 'retrained from history.csv' : 'schedule snapshot · pipeline result'}</p></div><nav className="yc-nav">{navGroups.map((group) => <div key={group.label}><span className="yc-nav-group">{group.label}</span>{group.items.map(({ id, label, icon: Icon, badge, tone }) => <button className={`yc-nav-link ${view === id ? 'yc-nav-active' : ''}`} key={id} onClick={() => setView(id)}><Icon size={16} /><span>{label}</span>{badge && <Badge tone={tone}>{badge}</Badge>}</button>)}</div>)}</nav></aside><main className="yc-main"><header className="yc-top"><span>FarmOpti · <b>{titleByView[view]}</b></span><span className="yc-top-spacer" /><span><i className={output.live ? 'yc-dot yc-dot-amber' : 'yc-dot'} /> {output.live ? 'Live pipeline result' : 'Pipeline snapshot'}</span><span className="yc-divider" /><span>Status <b>{output.summary.status}</b></span><span className="yc-divider" /><span>Objective <b>{money(output.summary.total_objective_value_aud)}</b></span><span className="yc-divider" /><span><b>{output.schedule.length} schedule rows</b></span><button className="yc-icon-button" onClick={reset} aria-label="Reset dashboard" title="Reset dashboard"><RotateCcw size={15} /></button></header><div className="yc-page">{view === 'command' ? <CommandView onNavigate={setView} onOpenUpload={() => setUploadOpen(true)} historyStatus={historyStatus} /> : <DetailView view={view} plan={output.plan} disrupted={false} onNavigate={setView} managementPlans={managementPlans} onManagementPlansChange={setManagementPlans} />}<footer className="yc-footer"><span>FarmOpti · {output.live ? 'live optimiser output' : 'persisted optimiser output'}</span><span>Source: {output.live ? 'latest history.csv training run' : 'optimization_summary.json + optimal_schedule.csv'}</span></footer></div></main></div></OptimizerOutputContext.Provider>;
 }
