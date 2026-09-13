@@ -1,0 +1,181 @@
+candidate_generation:
+  workday_start_hour: 7
+  workday_end_hour: 18
+  time_step_hours: 1
+
+operations:
+  harvest:
+    machine_type: harvester
+    workers: 2
+    work_rate_ha_per_hour: 5.0
+    feasibility:
+      min_readiness: 0.90
+      max_rain_mm_per_hour: 0.2
+      max_wind_kmh: 35.0
+
+  irrigate:
+    machine_type: irrigator
+    workers: 1
+    work_rate_ha_per_hour: 4.0
+    feasibility:
+      max_rain_mm_per_hour: 5.0
+    response:
+      default_target_soil_moisture: 0.25
+      water_ml_per_ha: 0.25
+      max_yield_loss_fraction: 0.20
+
+  spray:
+    machine_type: sprayer
+    workers: 1
+    work_rate_ha_per_hour: 6.0
+    feasibility:
+      max_rain_mm_per_hour: 0.0
+      max_wind_kmh: 18.0
+    response:
+      efficacy: 0.90
+      max_yield_loss_fraction: 0.25
+      chemical_l_per_ha: 2.0
+      targets:
+        weed_control:
+          state_variable: weed_pressure
+          chemical: herbicide
+        pest_control:
+          state_variable: pest_pressure
+          chemical: pesticide
+        disease_control:
+          state_variable: disease_pressure
+          chemical: fungicide
+
+  fertilise:
+    machine_type: fertiliser_spreader
+    workers: 1
+    work_rate_ha_per_hour: 6.0
+    feasibility:
+      max_rain_mm_per_hour: 2.0
+      max_wind_kmh: 30.0
+    response:
+      target_nitrogen_index: 0.75
+      max_yield_gain_fraction: 0.18
+      response_scale_kg_per_ha: 60.0
+      fertiliser_item: nitrogen_fertiliser
+
+  plant:
+    machine_type: seeder
+    workers: 2
+    work_rate_ha_per_hour: 5.0
+    feasibility:
+      min_seedbed_readiness: 0.65
+      min_soil_temperature_c: 10.0
+      max_rain_mm_per_hour: 1.0
+      max_wind_kmh: 35.0
+    response:
+      ideal_soil_moisture: 0.24
+      soil_moisture_tolerance: 0.10
+      ideal_soil_temperature_c: 18.0
+      seed_rate_kg_per_ha: 20.0
+
+crop_parameters:
+  wheat:
+    potential_yield_t_per_ha: 5.0
+  barley:
+    potential_yield_t_per_ha: 5.0
+  canola:
+    potential_yield_t_per_ha: 3.5
+  maize:
+    potential_yield_t_per_ha: 10.0
+
+state_simulation:
+  residual_decay_per_day:
+    soil_moisture: 0.65
+    nitrogen_index: 0.98
+    weed_pressure: 0.85
+    pest_pressure: 0.85
+    disease_pressure: 0.90
+    expected_yield_t_ha: 1.0
+
+terminal_value:
+  newly_planted_remaining_variable_cost_per_ha: 1200.0
+
+field_option_generation:
+  beam_width: 80
+  max_options_per_field: 30
+  max_candidates_per_plan: 30
+  max_candidates_per_plan_per_day: 3
+
+global_optimization:
+  max_solver_seconds: 30
+  objective_scale: 100
+
+transport:
+  enforce_travel_time: true
+  machine_speed_kmh: 20.0
+
+explanation:
+  llm:
+    provider: ollama
+    model: qwen2.5:3b
+    base_url: http://localhost:11434
+    api_key_env: LLM_API_KEY
+    temperature: 0.1
+    timeout_seconds: 180
+    max_output_tokens: 250
+
+  retrieval:
+    top_k: 8
+    specific_target_max_records: 5
+    default_summary_decisions: 7
+
+    scoring:
+      text_weight: 4.0
+      importance_weight: 1.5
+      plan_match: 8.0
+      plan_mismatch: -2.0
+      field_match: 5.0
+      field_mismatch: -1.0
+      operation_match: 4.0
+      operation_mismatch: -0.5
+      type_match: 2.5
+
+    operation_aliases:
+      harvest: [harvest, harvesting]
+      irrigate: [irrigate, irrigation, water, watering]
+      spray: [spray, spraying, pesticide, herbicide, fungicide]
+      fertilise: [fertilise, fertilize, fertiliser, fertilizer, nitrogen]
+      plant: [plant, planting, seed, seeding]
+
+    type_keywords:
+      ACTION_SELECTED: [selected, choose, chosen, perform]
+      ACTION_SKIPPED: [skip, skipped, "didn't", "did not"]
+      TIMING_SELECTION: [when, timing, time, date, earlier, later]
+      STATE_TRANSITION: [state, yield, moisture, pest, weed, disease, nitrogen]
+      COUNTERFACTUAL: [without, forcing, force, forbid, difference]
+      RESOURCE_CONSTRAINT: [resource, machine, labour, labor, water, capacity, constraint]
+      FIELD_OPTION_SELECTED: ["field option", strategy, combination]
+
+  chatbot:
+    detect_counterfactual_questions: true
+    counterfactual_phrases:
+      - what if
+      - what would happen if
+      - if we
+      - if i
+      - suppose
+      - increase water
+      - decrease water
+      - more workers
+      - less workers
+      - change the
+
+  scenario:
+    enabled: true
+    max_parser_repairs: 1
+    show_parsed_scenario: true
+    show_comparison: true
+    show_progress: true
+
+  process_display:
+    enabled: true
+    show_query_metadata: true
+    show_retrieved_evidence: true
+    show_retrieval_scores: true
+    show_llm_timing: true

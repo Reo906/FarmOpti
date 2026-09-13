@@ -1,0 +1,16 @@
+plan_id,field_id,operation,target,amount,unit,allowed_from,allowed_to,required,depends_on,min_gap_hours
+P01,F1,harvest,wheat,,,2026-09-15,2026-09-22,1,,
+P02,F2,irrigate,soil_moisture,0.25,fraction,2026-09-13,2026-09-18,0,,
+P03,F2,spray,pest_control,,,2026-09-15,2026-09-21,0,,
+P04,F2,irrigate,soil_moisture,0.25,fraction,2026-09-20,2026-09-26,0,,48
+P05,F3,spray,weed_control,,,2026-09-14,2026-09-19,1,,
+P06,F3,fertilise,nitrogen,60,kg_per_ha,2026-09-16,2026-09-23,1,P05,24
+P07,F4,fertilise,nitrogen,80,kg_per_ha,2026-09-14,2026-09-21,1,,
+P08,F4,spray,disease_control,,,2026-09-17,2026-09-24,0,,
+P09,F5,plant,maize,,,2026-09-16,2026-09-22,1,,
+P10,F5,irrigate,soil_moisture,0.24,fraction,2026-09-17,2026-09-26,0,P09,12
+P11,F6,spray,pest_control,,,2026-09-15,2026-09-22,0,,
+P12,F6,irrigate,soil_moisture,0.25,fraction,2026-09-14,2026-09-26,0,,
+P13,F7,spray,disease_control,,,2026-09-14,2026-09-18,0,,
+P14,F7,harvest,wheat,,,2026-09-20,2026-09-26,1,,
+P15,F3,spray,disease_control,,,2026-09-20,2026-09-25,0,P06,24

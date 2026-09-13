@@ -1,0 +1,9 @@
+{
+  "start_date": "2026-09-13",
+  "end_date": "2026-09-26",
+  "timezone": "Australia/Melbourne",
+  "field_state_resolution": "daily",
+  "weather_resolution": "hourly",
+  "labour_resolution": "daily",
+  "notes": "Synthetic multi-operation showcase dataset. Field-state forecasts represent the no-new-action baseline."
+}
