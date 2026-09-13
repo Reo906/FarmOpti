@@ -47,6 +47,15 @@ export default defineConfig(async () => {
 
   return {
     css: { postcss: { plugins: [tailwindcss()] } },
+    // .jsonl/.yaml/.csv have no built-in Vite loader (unlike .json, which
+    // Vite parses natively). Without this, any request for one of these
+    // paths that loses its explicit `?raw` query along the way -- e.g. an
+    // HMR invalidation broadcast for a file bundledData.ts glob-imports --
+    // falls through to Vite's default JS/TS transform, which then tries to
+    // parse raw CSV/JSONL/YAML text as JavaScript and fails with a
+    // confusing "Expected a semicolon" parse error. Declaring them as
+    // assets makes Vite treat them as opaque files by default instead.
+    assetsInclude: ['**/*.jsonl', '**/*.yaml', '**/*.csv'],
     server: {
       watch: {
         ...(isCodexSeatbeltSandbox ? { useFsEvents: false, usePolling: true } : {}),
