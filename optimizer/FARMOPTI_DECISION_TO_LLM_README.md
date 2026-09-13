@@ -96,7 +96,7 @@ For that reason, FarmOpti generates an additional structured decision-evidence l
 Implemented mainly in:
 
 ```text
-optimizer/src/decision_analysis/extract_decisions.py
+farmopti/first_demo/lib/optimizer/decisionAnalysis/extractDecisions.ts
 ```
 
 The decision analyser converts optimisation outputs into structured decision records.
@@ -193,7 +193,7 @@ The treatment can modify field state and increase later crop value.
 The selected actions are replayed through:
 
 ```text
-optimizer/src/optimization/simulate_field.py
+farmopti/first_demo/lib/optimizer/fieldSimulator.ts
 ```
 
 For each action, FarmOpti records:
@@ -316,7 +316,7 @@ This captures action interactions within a field.
 Implemented in:
 
 ```text
-optimizer/src/decision_analysis/analyse_counterfactuals.py
+farmopti/first_demo/lib/optimizer/decisionAnalysis/analyseCounterfactuals.ts
 ```
 
 Counterfactual analysis provides stronger evidence than simply reading the selected schedule.
@@ -486,7 +486,7 @@ The underlying evidence remains available even for low-importance decisions.
 Implemented in:
 
 ```text
-optimizer/src/decision_analysis/build_decision_index.py
+farmopti/first_demo/lib/optimizer/decisionAnalysis/buildDecisionIndex.ts
 ```
 
 The full `decision_trace.json` is hierarchical and relatively large.
@@ -533,7 +533,7 @@ The detailed numerical evidence remains in `decision_trace.json`.
 Runtime interaction begins in:
 
 ```text
-optimizer/src/chatbot/explanation_service.py
+farmopti/first_demo/lib/optimizer/chatbot/explanationService.ts
 ```
 
 Before retrieving evidence or changing the optimisation problem, FarmOpti classifies the request into one of two modes:
@@ -543,7 +543,7 @@ EXPLAIN
 SCENARIO
 ```
 
-The classification prompt is kept in `explanation_service.py`.
+The classification prompt is kept in `explanationService.ts`.
 
 It is separate from the scenario parser.
 
@@ -619,7 +619,7 @@ Its only responsibility is deciding which processing path should be used.
 For an explanation request, FarmOpti calls:
 
 ```text
-optimizer/src/chatbot/explanation/retrieve_decisions.py
+farmopti/first_demo/lib/optimizer/chatbot/retrieveDecisions.ts
 ```
 
 Example:
@@ -846,13 +846,13 @@ Scenario functionality is isolated under:
 
 ```text
 optimizer/src/chatbot/scenario/
-├── parser.py
-├── validator.py
-├── runner.py
-└── comparator.py
+├── parser.ts
+├── validator.ts
+├── runner.ts
+└── comparator.ts
 ```
 
-Once `explanation_service.py` classifies the request as `SCENARIO`, it sends the request to `chatbot/scenario/parser.py`.
+Once `explanationService.ts` classifies the request as `SCENARIO`, it sends the request to `chatbot/scenario/parser.ts`.
 
 The parser does **not** classify requests.
 
@@ -971,7 +971,7 @@ FarmOpti context
 Implemented in:
 
 ```text
-optimizer/src/chatbot/scenario/validator.py
+farmopti/first_demo/lib/optimizer/chatbot/scenario/validator.ts
 ```
 
 The LLM output is never passed directly to the optimiser.
@@ -1014,7 +1014,7 @@ The LLM therefore interprets language, but deterministic Python controls whether
 Implemented in:
 
 ```text
-optimizer/src/chatbot/scenario/runner.py
+farmopti/first_demo/lib/optimizer/chatbot/scenario/runner.ts
 ```
 
 The scenario runner applies the validated change to temporary optimisation inputs.
@@ -1060,7 +1060,7 @@ The mathematical optimiser still makes the new scheduling decision.
 Implemented in:
 
 ```text
-optimizer/src/chatbot/scenario/comparator.py
+farmopti/first_demo/lib/optimizer/chatbot/scenario/comparator.ts
 ```
 
 The scenario solution is compared with the original baseline.
@@ -1133,34 +1133,34 @@ It only communicates the output of the re-optimisation.
 # 25. Component Responsibilities
 
 ```text
-decision_analysis/extract_decisions.py
+decisionAnalysis/extractDecisions.ts
     Extract selected/skipped decisions, financial evidence, timing and state changes.
 
-decision_analysis/analyse_counterfactuals.py
+decisionAnalysis/analyseCounterfactuals.ts
     Re-run optimisation under controlled decision changes.
 
-decision_analysis/build_decision_index.py
+decisionAnalysis/buildDecisionIndex.ts
     Convert the canonical decision trace into retrieval-friendly records.
 
-chatbot/explanation/retrieve_decisions.py
+chatbot/retrieveDecisions.ts
     Resolve the user's target decision and retrieve relevant evidence.
 
-chatbot/explanation_service.py
+chatbot/explanationService.ts
     Classify EXPLAIN vs SCENARIO, consolidate evidence and call the LLM.
 
-chatbot/chatbot.py
+chatbot/chatbot.ts
     Interactive terminal interface.
 
-chatbot/scenario/parser.py
+chatbot/scenario/parser.ts
     Convert an already-classified scenario request into structured modifications.
 
-chatbot/scenario/validator.py
+chatbot/scenario/validator.ts
     Check scenario modifications against real FarmOpti data.
 
-chatbot/scenario/runner.py
+chatbot/scenario/runner.ts
     Apply temporary modifications and rerun the optimiser.
 
-chatbot/scenario/comparator.py
+chatbot/scenario/comparator.ts
     Compare the scenario solution with the baseline.
 
 LLM

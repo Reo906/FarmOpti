@@ -113,7 +113,7 @@ transport:
 explanation:
   llm:
     provider: ollama
-    model: qwen2.5:3b
+    model: qwen2.5-coder:7b-instruct
     base_url: http://localhost:11434
     api_key_env: LLM_API_KEY
     temperature: 0.1
