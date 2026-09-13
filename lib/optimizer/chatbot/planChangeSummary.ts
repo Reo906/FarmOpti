@@ -1,4 +1,5 @@
 import { compareScenarios, type ScenarioComparison } from "./scenario/comparator";
+import { processPrint, type LLMClient } from "./llmClient";
 import type { OptimizationSummary, ScheduleRow } from "../types";
 
 export interface PlanChangeSummary {
@@ -95,4 +96,115 @@ export function summarizePlanChange(params: {
     : `The plan was updated: ${change_bullets.length} action${change_bullets.length === 1 ? "" : "s"} changed. Whole-farm objective value ${deltaText}.`;
 
   return { generated_at, narrative, change_bullets, positive_bullets, steps };
+}
+
+const NARRATION_SCHEMA = {
+  type: "object",
+  properties: {
+    change_bullets: { type: "array", items: { type: "string" } },
+    positive_bullets: { type: "array", items: { type: "string" } },
+    narrative: { type: "string" },
+  },
+  required: ["change_bullets", "positive_bullets", "narrative"],
+  additionalProperties: false,
+};
+
+const NARRATION_SYSTEM_PROMPT = `
+You summarise the result of re-running a farm scheduling optimiser after a change.
+
+You are given "steps_taken" (the pipeline stages that just executed, for context on what kind of run this was) and an "evidence" object holding the EXACT set of actions added, removed and rescheduled, plus before/after summary metrics. The evidence is ground truth -- every fact you write must come from it. Never invent a field, operation, time, machine, or number that is not present in the evidence.
+
+Write:
+- change_bullets: one bullet per added/removed/rescheduled action in the evidence, in plain English, naming the field and operation from that entry (e.g. "spray on F3", never a plan_id like "P1"), and what changed (added/removed/moved time/changed machine). One short sentence each. Do not omit any action that is in the evidence, and do not add any that are not.
+- positive_bullets: 1-4 short bullets explaining the metric deltas honestly.
+- narrative: one sentence overall summary.
+
+CRITICAL rule on objective_change_aud, the single most important number: it is the change in whole-farm value, and a NEGATIVE value is bad news, not good news, even though the number itself is written as an unsigned magnitude in the evidence (you must read the sign of objective_change_aud, not the wording around it). Never phrase a fall in objective value as an achievement (e.g. never write "reduced the objective value" as if that were a goal). If objective_change_aud is negative, the bullet must say the value FELL/DROPPED by that amount and explain it as a necessary trade-off for satisfying the new constraint -- do not put a bare negative-value bullet in positive_bullets without that trade-off framing in the same sentence. If objective_change_aud is positive, say the value ROSE/IMPROVED.
+
+Example -- evidence has objective_change_aud: -81490.17, direct_cash_effect delta: +7692:
+{
+  "change_bullets": ["Removed the spray on F3 that was scheduled for 18 Sep, 22:00."],
+  "positive_bullets": [
+    "Whole-farm objective value fell by $81,490 to satisfy the new constraint -- a necessary trade-off, not a loss to be concerned about.",
+    "Direct cash effect improved by $7,692 despite that trade-off."
+  ],
+  "narrative": "One action was removed to satisfy the new rule, lowering whole-farm value by $81,490 as an accepted trade-off."
+}
+
+Output only the JSON object matching the schema -- no markdown, no extra commentary, no fields beyond the schema.
+`.trim();
+
+/**
+ * Same output shape as summarizePlanChange(), but has the LLM write the
+ * bullet text instead of fixed templates -- the diff (compareScenarios) and
+ * the run log still supply the actual facts, so the model's only job is
+ * phrasing, not computing the change. Falls back to the deterministic
+ * version if the LLM is unavailable or returns something unusable, so a
+ * reoptimization never fails just because Ollama isn't running.
+ */
+export async function narratePlanChange(
+  llm: LLMClient,
+  params: {
+    beforeSchedule: ScheduleRow[];
+    beforeSummary: OptimizationSummary | null;
+    afterSchedule: ScheduleRow[];
+    afterSummary: OptimizationSummary;
+    steps: string[];
+  },
+): Promise<PlanChangeSummary> {
+  const fallback = summarizePlanChange(params);
+  const { beforeSchedule, beforeSummary, afterSchedule, afterSummary, steps } = params;
+
+  // Nothing to narrate: the very first run has no prior plan, and an
+  // unchanged plan is already covered by a clear canned message -- an LLM
+  // call would only add latency for a case with no interesting content.
+  if (!beforeSummary) return fallback;
+  const comparison = compareScenarios(beforeSchedule, beforeSummary, afterSchedule, afterSummary);
+  const totalChanges = comparison.actions_added.length + comparison.actions_removed.length + comparison.actions_rescheduled.length;
+  if (totalChanges === 0) return fallback;
+
+  try {
+    const evidence = {
+      added: comparison.actions_added,
+      removed: comparison.actions_removed,
+      rescheduled: comparison.actions_rescheduled,
+      before: {
+        objective_value_aud: beforeSummary.total_objective_value_aud,
+        direct_cash_effect_aud: beforeSummary.total_direct_cash_effect_aud,
+        terminal_value_aud: beforeSummary.total_terminal_value_aud,
+        num_scheduled_actions: beforeSummary.num_scheduled_actions,
+      },
+      after: {
+        objective_value_aud: afterSummary.total_objective_value_aud,
+        direct_cash_effect_aud: afterSummary.total_direct_cash_effect_aud,
+        terminal_value_aud: afterSummary.total_terminal_value_aud,
+        num_scheduled_actions: afterSummary.num_scheduled_actions,
+      },
+      objective_change_aud: comparison.objective_change_aud,
+    };
+
+    const raw = await llm.chat(
+      [
+        { role: "system", content: NARRATION_SYSTEM_PROMPT },
+        { role: "user", content: JSON.stringify({ steps_taken: steps, evidence }, null, 2) },
+      ],
+      { responseSchema: NARRATION_SCHEMA, maxOutputTokens: 700 },
+    );
+
+    const parsed = JSON.parse(raw) as { change_bullets?: unknown; positive_bullets?: unknown; narrative?: unknown };
+    if (!Array.isArray(parsed.change_bullets) || !Array.isArray(parsed.positive_bullets) || typeof parsed.narrative !== "string") {
+      throw new Error("LLM response did not match the expected shape");
+    }
+
+    return {
+      generated_at: new Date().toISOString(),
+      narrative: parsed.narrative,
+      change_bullets: parsed.change_bullets.map(String),
+      positive_bullets: parsed.positive_bullets.map(String),
+      steps,
+    };
+  } catch (error) {
+    processPrint(`[CHANGE_SUMMARY] LLM narration failed, using templated summary instead: ${error instanceof Error ? error.message : error}`);
+    return fallback;
+  }
 }

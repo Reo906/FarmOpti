@@ -4,7 +4,8 @@ import { createDefaultToolRegistry } from "./tools/definitions";
 import { ALTERNATIVE_PLANS_PATH, DECISION_TRACE_PATH, EXTERNAL_DIR, OUTPUTS_DIR, PLAN_CHANGE_SUMMARY_PATH, SCHEDULE_PATH, SUMMARY_PATH } from "./paths";
 import { readScheduleCsv } from "./csvWriters";
 import { logStage, resetRunLog, runLogSteps } from "./runLog";
-import { summarizePlanChange } from "./chatbot/planChangeSummary";
+import { narratePlanChange } from "./chatbot/planChangeSummary";
+import { LLMClient } from "./chatbot/llmClient";
 import type { DecisionTrace } from "./decisionAnalysis/extractDecisions";
 import type { AlternativePlansResult, Candidate, FieldOption, OptimizationSummary, ScheduleRow } from "./types";
 
@@ -68,7 +69,7 @@ export async function runPipeline(): Promise<void> {
   const index = await tools.call<unknown[]>("build_decision_index", { trace });
   logStage("retrieval_index", `Indexed ${index.length} retrievable facts for the chatbot`, { count: index.length });
 
-  const changeSummary = summarizePlanChange({ beforeSchedule, beforeSummary, afterSchedule: schedule, afterSummary: summary, steps: runLogSteps() });
+  const changeSummary = await narratePlanChange(new LLMClient(), { beforeSchedule, beforeSummary, afterSchedule: schedule, afterSummary: summary, steps: runLogSteps() });
   fs.writeFileSync(PLAN_CHANGE_SUMMARY_PATH, JSON.stringify(changeSummary, null, 2));
 
   console.log("complete");
