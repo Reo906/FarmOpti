@@ -7,15 +7,18 @@ import {
   BookOpen,
   Bug,
   CheckCircle2,
-  Grid2X2,
+  Home,
   HardHat,
   Leaf,
   MessageCircle,
   PackageOpen,
+  ChevronLeft,
+  ChevronRight,
   Send,
   ShieldCheck,
   Tractor,
   Truck,
+  User,
   Users,
   Wrench,
   X,
@@ -27,11 +30,11 @@ import type { DashboardView, FarmField, HarvestBlock, OptimiserCandidate } from 
 type ViewKey = DashboardView;
 type Tone = 'ok' | 'warn' | 'bad' | 'info' | 'mute';
 
-const navGroups: { label: string; items: { id: ViewKey; label: string; icon: typeof Grid2X2; badge?: string; tone?: Tone }[] }[] = [
+const navGroups: { label: string; items: { id: ViewKey; label: string; icon: typeof Home; badge?: string; tone?: Tone }[] }[] = [
   {
     label: 'Today',
     items: [
-      { id: 'command', label: 'Home', icon: Grid2X2 },
+      { id: 'command', label: 'Home', icon: Home },
       { id: 'harvest', label: 'Harvest operations', icon: Tractor},
       { id: 'rules', label: 'Farm rules', icon: BookOpen},
     ],
@@ -92,12 +95,12 @@ function Badge({ tone = 'mute', children }: { tone?: Tone; children: React.React
   return <span className={`yc-pill yc-pill-${tone}`}>{children}</span>;
 }
 
-function StatCard({ label, value, unit, detail, meter, tone = 'green' }: { label: string; value: string; unit?: string; detail: React.ReactNode; meter?: number; tone?: 'green' | 'amber' | 'red' | 'blue' }) {
+function StatCard({ label, value, unit, detail, meter, tone = 'green' }: { label: string; value: string; unit?: string; detail?: React.ReactNode; meter?: number; tone?: 'green' | 'amber' | 'red' | 'blue' }) {
   return (
     <article className="yc-card yc-stat">
       <span className="yc-kicker">{label}</span>
       <strong>{value} {unit && <small>{unit}</small>}</strong>
-      <span className="yc-detail">{detail}</span>
+      {detail !== undefined && <span className="yc-detail">{detail}</span>}
       {meter !== undefined && <div className="yc-meter"><i className={`yc-meter-${tone}`} style={{ width: `${Math.min(100, meter)}%` }} /></div>}
     </article>
   );
@@ -127,16 +130,30 @@ function timelineDateTime(hour: number) {
   return `${timelineDay(hour)}, ${timelineClock(hour)}`;
 }
 
+// Hour 0 is scheduleAnchorTime, whatever time of day that happens to be (e.g.
+// 08:00) -- but "1 day" should mean an actual calendar day, midnight to
+// midnight, not an arbitrary 24h slice starting wherever the data begins.
+// This finds the hour-offset of the midnight at or before the anchor, i.e.
+// the true start of "day 1" (typically negative, since the anchor is usually
+// partway through that day).
+function calendarDayZeroHour(): number {
+  const anchor = new Date(scheduleAnchorTime);
+  const midnight = Date.UTC(anchor.getUTCFullYear(), anchor.getUTCMonth(), anchor.getUTCDate());
+  return (midnight - scheduleAnchorTime) / 3_600_000;
+}
+
 function Timeline({ plan, disrupted }: { plan: OptimiserCandidate; disrupted: boolean }) {
   const fullHours = Math.max(24, ...plan.blocks.map((block) => block.e));
+  const dayZeroHour = calendarDayZeroHour();
   const [rangeHours, setRangeHours] = useState<number | null>(null);
+  const [pageIndex, setPageIndex] = useState(0);
+
   // The detail card can't just be an absolutely-positioned child of the
-  // block: .yc-timeline-scroll needs overflow-y hidden to keep the
-  // horizontal scrollbar from pairing with a vertical one, and that clips
-  // any descendant that extends past its box -- cutting the card off for
-  // the bottom row. So on hover we compute the block's position relative to
-  // the outer .yc-timeline (a sibling of .yc-timeline-scroll, unclipped) and
-  // render the card there instead.
+  // block: .yc-timeline-viewport is overflow-hidden so one page doesn't
+  // bleed into the next, and that clips any descendant that extends past
+  // its box -- cutting the card off for the bottom row. So on hover we
+  // compute the block's position relative to the outer .yc-timeline (a
+  // sibling of .yc-timeline-viewport, unclipped) and render the card there.
   const timelineRef = useRef<HTMLDivElement>(null);
   const [hoverDetail, setHoverDetail] = useState<{ block: HarvestBlock; left: number; top: number } | null>(null);
 
@@ -149,62 +166,109 @@ function Timeline({ plan, disrupted }: { plan: OptimiserCandidate; disrupted: bo
     const top = blockRect.bottom - containerRect.top + 8;
     setHoverDetail({ block, left, top });
   };
-  // The preset is a zoom level, not a content filter: it says how many hours
-  // fill one screen-width ("frame"). The full schedule always renders behind
-  // it -- so at "1 week" the content is wider than the viewport (however
-  // much of the schedule is left beyond that first week) and you scroll
-  // horizontally to pan across it, one frame's worth of hours at a time.
-  const hoursPerFrame = Math.min(fullHours, rangeHours ?? fullHours);
+
+  // The preset is a zoom level -- how many hours fill one screen ("page") --
+  // not a content filter. Pages are calendar-day-aligned (day 0 starts at
+  // dayZeroHour, the midnight at/before the schedule's start) so "1 day"
+  // is a real Wed-00:00-to-Thu-00:00, not an arbitrary 24h window. Like a
+  // calendar app, only the current page renders; the buttons/swipe below
+  // move one page at a time instead of free-scrolling a long strip.
   const isFullRange = rangeHours === null;
-  const contentWidthPct = (fullHours / hoursPerFrame) * 100;
+  const hoursPerFrame = rangeHours ?? fullHours;
+  const totalPages = isFullRange ? 1 : Math.max(1, Math.ceil((fullHours - dayZeroHour) / hoursPerFrame));
+  const page = Math.min(pageIndex, totalPages - 1);
+  const viewStart = isFullRange ? 0 : dayZeroHour + page * hoursPerFrame;
+  const viewEnd = viewStart + hoursPerFrame;
+
+  // Direction drives which way the page slides in -- set right before the
+  // page actually changes, then read once by the (re-keyed, so remounted)
+  // content below to pick which slide-in animation to play.
+  const [direction, setDirection] = useState<1 | -1>(1);
+  const selectPreset = (hours: number | null) => {
+    setRangeHours(hours);
+    setPageIndex(0);
+  };
+  const goPrev = () => {
+    setDirection(-1);
+    setPageIndex((current) => Math.max(0, current - 1));
+  };
+  const goNext = () => {
+    setDirection(1);
+    setPageIndex((current) => Math.min(totalPages - 1, current + 1));
+  };
 
   const rows = [...new Set(plan.blocks.map((block) => block.m))];
   const labels: Record<string, string> = Object.fromEntries(rows.map((row) => [row, row]));
   const operations = [...new Set(plan.blocks.map((block) => block.operation))].sort();
 
-  // Once a frame spans more than ~2 days, hourly ticks get too cramped to
-  // read, so switch to one tick per day.
+  // Once a page spans more than ~2 days, hourly ticks get too cramped to
+  // read, so switch to one tick per day -- and past a week, even full date
+  // labels ("Wed, 16 Sept") start overlapping each other, so space them
+  // every 2 days instead of thinning gridlines along with them.
   const useDayTicks = hoursPerFrame > TIMELINE_DAY_TICK_THRESHOLD_HOURS;
-  const tickStepHours = useDayTicks ? 24 : 6;
-  const tickCount = Math.max(1, Math.ceil(fullHours / tickStepHours));
-  let ticks = Array.from({ length: tickCount + 1 }, (_, index) => Math.min(fullHours, index * tickStepHours));
+  const tickStepHours = useDayTicks ? (hoursPerFrame > 168 ? 48 : 24) : 3;
+  const tickCount = Math.max(1, Math.ceil(hoursPerFrame / tickStepHours));
+  let ticks = Array.from({ length: tickCount + 1 }, (_, index) => Math.min(viewEnd, viewStart + index * tickStepHours));
   let tickLabels = ticks.map((hour) => (useDayTicks ? timelineDay(hour) : timelineClock(hour)));
-  // The final tick is clamped to fullHours, which can land on the same day
+  // The final tick is clamped to viewEnd, which can land on the same day
   // (or, at fine granularity, the same displayed time) as the tick before it.
   if (tickLabels.length > 1 && tickLabels.at(-1) === tickLabels.at(-2)) {
     ticks = ticks.slice(0, -1);
     tickLabels = tickLabels.slice(0, -1);
   }
-  const gridlinePct = (tickStepHours / fullHours) * 100;
+  // A day-aligned page's last hour-of-day tick is midnight again -- label it
+  // "24:00" so the axis reads as ending the day, not starting a new one.
+  if (!useDayTicks && tickLabels.length > 0) tickLabels[tickLabels.length - 1] = '24:00';
+  // Ticks mark points in time, not equal-width bands, so they're positioned
+  // by real percentage (matching the gridlines and the blocks below exactly)
+  // rather than divided into N even CSS-grid columns, which would bunch
+  // every tick left of where its timestamp actually falls.
+  const tickPct = (hour: number) => ((hour - viewStart) / hoursPerFrame) * 100;
 
   return (
     <div className="yc-timeline" ref={timelineRef}>
       <div className="yc-timeline-toolbar">
-        <div className="yc-timeline-presets">
-          {TIMELINE_PRESETS.map((preset) => <button type="button" key={preset.label} className={`yc-timeline-preset ${(preset.hours === null ? isFullRange : preset.hours === rangeHours) ? 'yc-timeline-preset-active' : ''}`} onClick={() => setRangeHours(preset.hours)}>{preset.label}</button>)}
+        <div className="yc-timeline-controls">
+          <div className="yc-timeline-presets">
+            {TIMELINE_PRESETS.map((preset) => <button type="button" key={preset.label} className={`yc-timeline-preset ${(preset.hours === null ? isFullRange : preset.hours === rangeHours) ? 'yc-timeline-preset-active' : ''}`} onClick={() => selectPreset(preset.hours)}>{preset.label}</button>)}
+          </div>
+          {!isFullRange && <span className="yc-timeline-range-label">{timelineDay(viewStart, true)} - {timelineDay(viewEnd, true)}</span>}
         </div>
       </div>
-      <div className="yc-timeline-scroll"><div className="yc-timeline-content" style={{ width: `${contentWidthPct}%` }}>
-        <div className="yc-timeline-hours" style={{ gridTemplateColumns: `repeat(${ticks.length}, 1fr)` }}>{tickLabels.map((label, index) => <span key={ticks[index]}>{label}</span>)}</div>
-        <div className="yc-timeline-stage" style={{ background: `repeating-linear-gradient(to right, transparent 0, transparent calc(${gridlinePct}% - 1px), rgba(14,26,22,.06) calc(${gridlinePct}% - 1px), rgba(14,26,22,.06) ${gridlinePct}%)` }}>
-          {disrupted && 17.1 <= fullHours && <div className="yc-rain-shade" style={{ left: `${(17.1 / fullHours) * 100}%` }}><b>FRONT 23:18 · 22 MM</b></div>}
-          {rows.map((row) => {
-            const blocks = plan.blocks.filter((block) => block.m === row);
-            return (
-              <div className="yc-lane" key={row}>
-                <span>{labels[row]}</span>
-                <div className="yc-track">
-                  {blocks.map((block, index) => <i className={`yc-block ${operationClass[block.operation] ?? 'yc-op-other'}`} key={`${row}-${index}`} style={{ left: `${(block.s / fullHours) * 100}%`, width: `${((block.e - block.s) / fullHours) * 100}%` }} onMouseEnter={(event) => showDetail(block, event.currentTarget)} onMouseLeave={() => setHoverDetail(null)}>
-                    <b>{block.name}</b> {capitalize(block.crop)}
-                  </i>)}
-                  {!blocks.length && <i className="yc-block yc-idle" style={{ left: 0, width: '100%' }}>No assignment</i>}
+      <div className="yc-timeline-body">
+        {!isFullRange && <button type="button" className="yc-timeline-nav-btn" onClick={goPrev} disabled={page === 0} aria-label="Previous"><ChevronLeft size={18} /></button>}
+        <div className="yc-timeline-viewport"><div key={page} className={`yc-timeline-content ${direction > 0 ? 'yc-timeline-slide-next' : 'yc-timeline-slide-prev'}`}>
+          <div className="yc-timeline-header-row"><span className="yc-timeline-machine-header">Machine</span><div className="yc-timeline-hours">{ticks.map((hour, index) => <span key={hour} className="yc-timeline-tick-label" style={{ left: `${tickPct(hour)}%`, transform: index === 0 ? 'translateX(0)' : index === ticks.length - 1 ? 'translateX(-100%)' : 'translateX(-50%)' }}>{tickLabels[index]}</span>)}</div></div>
+          <div className="yc-timeline-stage">
+            {/* Scoped to exactly the track column's width (past the 80px+8px
+                machine-label gutter every .yc-lane reserves), so a gridline at
+                tickPct(hour)% lands on the identical x as the tick label above
+                it and any block edge at that same hour -- not shifted left by
+                the gutter the way positioning this relative to the full row
+                width would be. */}
+            <div className="yc-timeline-gridlines">{ticks.map((hour) => <i key={hour} className="yc-timeline-gridline" style={{ left: `${tickPct(hour)}%` }} />)}</div>
+            {disrupted && viewStart <= 17.1 && 17.1 <= viewEnd && <div className="yc-rain-shade" style={{ left: `${((17.1 - viewStart) / hoursPerFrame) * 100}%` }}><b>FRONT 23:18 · 22 MM</b></div>}
+            {rows.map((row) => {
+              const blocks = plan.blocks
+                .filter((block) => block.m === row && block.s < viewEnd && block.e > viewStart)
+                .map((block) => ({ ...block, s: Math.max(viewStart, block.s), e: Math.min(viewEnd, block.e) }));
+              return (
+                <div className="yc-lane" key={row}>
+                  <span>{labels[row]}</span>
+                  <div className="yc-track">
+                    {blocks.map((block, index) => <i className={`yc-block ${operationClass[block.operation] ?? 'yc-op-other'}`} key={`${row}-${index}`} style={{ left: `${((block.s - viewStart) / hoursPerFrame) * 100}%`, width: `${((block.e - block.s) / hoursPerFrame) * 100}%` }} onMouseEnter={(event) => showDetail(block, event.currentTarget)} onMouseLeave={() => setHoverDetail(null)}>
+                      <b>{block.name}</b> {capitalize(block.crop)}
+                    </i>)}
+                    {!blocks.length && <i className="yc-block yc-idle" style={{ left: 0, width: '100%' }}>No assignment</i>}
+                  </div>
                 </div>
-              </div>
-            );
-          })}
-        </div>
-        <div className="yc-legend">{operations.map((operation) => <span key={operation}><i className={operationClass[operation] ?? 'yc-op-other'} /> {capitalize(operation)}</span>)}</div>
-      </div></div>
+              );
+            })}
+          </div>
+          <div className="yc-legend">{operations.map((operation) => <span key={operation}><i className={operationClass[operation] ?? 'yc-op-other'} /> {capitalize(operation)}</span>)}</div>
+        </div></div>
+        {!isFullRange && <button type="button" className="yc-timeline-nav-btn" onClick={goNext} disabled={page >= totalPages - 1} aria-label="Next"><ChevronRight size={18} /></button>}
+      </div>
       {hoverDetail && <div className="yc-block-detail" style={{ left: `${hoverDetail.left}px`, top: `${hoverDetail.top}px` }}>
         <strong>{hoverDetail.block.name} · {capitalize(hoverDetail.block.crop)}</strong>
         <span>{capitalize(hoverDetail.block.operation)} ({hoverDetail.block.target}) · {hoverDetail.block.m}</span>
@@ -253,7 +317,7 @@ function DecisionAssistant() {
   return <div className="yc-chat-widget">
     {open && <section className="yc-card yc-chat-popup" aria-label="Decision assistant">
       <header>
-        <div><h3>Decision assistant</h3><span>Evidence-grounded explanations</span></div>
+        <div><h3>Decision assistant</h3></div>
         <Badge tone="info">FarmOpti</Badge>
         <button className="yc-icon-button yc-chat-close" onClick={() => setOpen(false)} aria-label="Close decision assistant"><X size={15} /></button>
       </header>
@@ -262,16 +326,16 @@ function DecisionAssistant() {
         {busy && <p className="yc-chat-bubble yc-chat-assistant yc-chat-pending">Reviewing optimisation evidence...</p>}
       </div>
       <div className="yc-chat-suggestions">
-        <button onClick={() => ask('Why was the selected harvest plan chosen?')}>Why this plan?</button>
-        <button onClick={() => ask('What changed in the current optimisation?')}>What changed?</button>
+        <button onClick={() => ask('Explain a current optimised schedule')}>Explain a current optimised schedule</button>
+        <button onClick={() => ask('I want to make a change in the plan')}>I want to make a change in the plan</button>
       </div>
       <form className="yc-chat-form" onSubmit={(event) => { event.preventDefault(); void ask(); }}>
         <input value={question} onChange={(event) => setQuestion(event.target.value)} placeholder="Ask about a decision or scenario..." aria-label="Ask the decision assistant" />
         <button className="yc-btn yc-btn-dark" disabled={busy || !question.trim()} aria-label="Send question"><Send size={15} /></button>
       </form>
     </section>}
-    <button className="yc-chat-fab" onClick={() => setOpen((current) => !current)} aria-label={open ? 'Close decision assistant' : 'Open decision assistant'} aria-expanded={open}>
-      {open ? <X size={20} /> : <MessageCircle size={20} />}
+    <button className={`yc-chat-fab ${open ? 'yc-chat-fab-open' : ''}`} onClick={() => setOpen((current) => !current)} aria-label={open ? 'Close decision assistant' : 'Open decision assistant'} aria-expanded={open}>
+      {open ? <X size={20} /> : <><MessageCircle size={20} /><span>Ask FarmOpti</span></>}
     </button>
   </div>;
 }
@@ -309,8 +373,8 @@ function OptimizerInputPanel() {
 function CommandView({ plan, evaluated, improvement, onNavigate }: { plan: OptimiserCandidate; evaluated: number; improvement: number; onNavigate: (view: ViewKey) => void }) {
   return <>
     <div className="yc-page-head"><div><h2>Home</h2></div></div>
-    <section className="yc-hero yc-hero-tall"><div className="yc-hero-head"><div><h3>Persisted resource plan</h3></div></div><Timeline plan={plan} disrupted={false} /></section>
-    <div className="yc-grid yc-grid-4"><StatCard label="Scheduled actions" value={String(persistedSummary.num_scheduled_actions)} detail="Selected by the persisted optimizer" meter={100} /><StatCard label="Direct cash effect" value={money(persistedSummary.total_direct_cash_effect_aud)} detail="Sum of optimal_schedule.csv" tone="blue" /><StatCard label="Terminal value" value={money(persistedSummary.total_terminal_value_aud)} detail="Value carried into the objective" tone="green" /><StatCard label="Objective value" value={money(persistedSummary.total_objective_value_aud)} detail={`Status: ${persistedSummary.status}`} meter={100} tone="amber" /></div>
+    <section className="yc-hero yc-hero-tall"><div className="yc-hero-head"><div><h3>Optimised Farming Plan</h3></div></div><Timeline plan={plan} disrupted={false} /></section>
+    <div className="yc-grid yc-grid-4"><StatCard label="Upcoming jobs" value={String(persistedSummary.num_scheduled_actions)}/><StatCard label="Total cash effect" value={money(persistedSummary.total_direct_cash_effect_aud)}/><StatCard label="Future crop value" value={money(persistedSummary.total_terminal_value_aud)}/><StatCard label="Total farm value" value={money(persistedSummary.total_objective_value_aud)}/></div>
   </>;
 }
 
@@ -333,5 +397,5 @@ export default function YallambeeDashboard() {
   const evaluated = persistedSummary.num_scheduled_actions;
   const improvement = 0;
 
-  return <div className="yc-shell"><DecisionAssistant /><aside className="yc-rail"><div className="yc-brand"><div><img className="yc-brand-logo" src="/farmOpti.png" alt="FarmOpti logo" width={22} height={22} /><h1>FarmOpti</h1></div></div><nav className="yc-nav">{navGroups.map((group) => <div key={group.label}><span className="yc-nav-group">{group.label}</span>{group.items.map(({ id, label, icon: Icon, badge, tone }) => <button className={`yc-nav-link ${view === id ? 'yc-nav-active' : ''}`} key={id} onClick={() => setView(id)}><Icon size={16} /><span>{label}</span>{badge && <Badge tone={tone}>{badge}</Badge>}</button>)}</div>)}</nav><div className="yc-rail-foot">Persisted schedule<br /><b>{persistedSummary.num_scheduled_actions}</b> actions selected</div></aside><main className="yc-main"><div className="yc-page">{view === 'command' ? <CommandView plan={plan} evaluated={evaluated} improvement={improvement} onNavigate={setView} /> : <DetailView view={view} disrupted={false} onNavigate={setView} />}</div></main></div>;
+  return <div className="yc-shell"><DecisionAssistant /><aside className="yc-rail"><div className="yc-brand"><div><img className="yc-brand-logo" src="/farmOpti.png" alt="FarmOpti logo" width={22} height={22} /><h1>FarmOpti</h1></div></div><nav className="yc-nav">{navGroups.map((group) => <div key={group.label}><span className="yc-nav-group">{group.label}</span>{group.items.map(({ id, label, icon: Icon, badge, tone }) => <button className={`yc-nav-link ${view === id ? 'yc-nav-active' : ''}`} key={id} onClick={() => setView(id)}><Icon size={16} /><span>{label}</span>{badge && <Badge tone={tone}>{badge}</Badge>}</button>)}</div>)}</nav><div className="yc-rail-user"><span className="yc-rail-avatar"><User size={16} /></span><div><b>Alex Morgan</b><small>Farm Manager</small></div></div></aside><main className="yc-main"><div className="yc-page">{view === 'command' ? <CommandView plan={plan} evaluated={evaluated} improvement={improvement} onNavigate={setView} /> : <DetailView view={view} disrupted={false} onNavigate={setView} />}</div></main></div>;
 }
