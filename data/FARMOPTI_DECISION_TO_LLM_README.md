@@ -96,7 +96,7 @@ For that reason, FarmOpti generates an additional structured decision-evidence l
 Implemented mainly in:
 
 ```text
-system/lib/optimizer/decisionAnalysis/extractDecisions.ts
+lib/optimizer/decisionAnalysis/extractDecisions.ts
 ```
 
 The decision analyser converts optimisation outputs into structured decision records.
@@ -193,7 +193,7 @@ The treatment can modify field state and increase later crop value.
 The selected actions are replayed through:
 
 ```text
-system/lib/optimizer/fieldSimulator.ts
+lib/optimizer/fieldSimulator.ts
 ```
 
 For each action, FarmOpti records:
@@ -316,7 +316,7 @@ This captures action interactions within a field.
 Implemented in:
 
 ```text
-system/lib/optimizer/decisionAnalysis/analyseCounterfactuals.ts
+lib/optimizer/decisionAnalysis/analyseCounterfactuals.ts
 ```
 
 Counterfactual analysis provides stronger evidence than simply reading the selected schedule.
@@ -486,7 +486,7 @@ The underlying evidence remains available even for low-importance decisions.
 Implemented in:
 
 ```text
-system/lib/optimizer/decisionAnalysis/buildDecisionIndex.ts
+lib/optimizer/decisionAnalysis/buildDecisionIndex.ts
 ```
 
 The full `decision_trace.json` is hierarchical and relatively large.
@@ -533,7 +533,7 @@ The detailed numerical evidence remains in `decision_trace.json`.
 Runtime interaction begins in:
 
 ```text
-system/lib/optimizer/chatbot/explanationService.ts
+lib/optimizer/chatbot/explanationService.ts
 ```
 
 Before retrieving evidence or changing the optimisation problem, FarmOpti classifies the request into one of two modes:
@@ -619,7 +619,7 @@ Its only responsibility is deciding which processing path should be used.
 For an explanation request, FarmOpti calls:
 
 ```text
-system/lib/optimizer/chatbot/retrieveDecisions.ts
+lib/optimizer/chatbot/retrieveDecisions.ts
 ```
 
 Example:
@@ -971,7 +971,7 @@ FarmOpti context
 Implemented in:
 
 ```text
-system/lib/optimizer/chatbot/scenario/validator.ts
+lib/optimizer/chatbot/scenario/validator.ts
 ```
 
 The LLM output is never passed directly to the optimiser.
@@ -1014,7 +1014,7 @@ The LLM therefore interprets language, but deterministic Python controls whether
 Implemented in:
 
 ```text
-system/lib/optimizer/chatbot/scenario/runner.ts
+lib/optimizer/chatbot/scenario/runner.ts
 ```
 
 The scenario runner applies the validated change to temporary optimisation inputs.
@@ -1060,7 +1060,7 @@ The mathematical optimiser still makes the new scheduling decision.
 Implemented in:
 
 ```text
-system/lib/optimizer/chatbot/scenario/comparator.ts
+lib/optimizer/chatbot/scenario/comparator.ts
 ```
 
 The scenario solution is compared with the original baseline.
