@@ -1,6 +1,7 @@
 import { CANDIDATE_CONFIG, RULES } from "./config";
 import { ceilToHour, dateOnlyOf, dateOnlyToTimestamp, floorToHour } from "./datetime";
 import { getWeatherWindow } from "./externalVariables";
+import { weatherForSegments } from "./workload";
 import { clip, pyRound } from "./numeric";
 import type {
   ExternalVariables,
@@ -51,8 +52,13 @@ function actionWindowRisk(action: OptionAction, plan: ManagementPlanRow | undefi
 }
 
 function actionWeatherRisk(action: OptionAction, data: ExternalVariables): number {
-  const duration = action.duration_hours ?? (action.end_time - action.start_time) / MS_PER_HOUR;
-  const weather = getWeatherWindow(data, action.start_time, duration);
+  const weather = action.work_segments?.length
+    ? weatherForSegments(data, action.work_segments)
+    : getWeatherWindow(
+        data,
+        action.start_time,
+        action.workload_hours ?? action.duration_hours ?? (action.end_time - action.start_time) / MS_PER_HOUR,
+      );
   if (weather.length === 0) return 0;
 
   const feasibility = RULES[action.operation]?.feasibility ?? {};
@@ -142,7 +148,15 @@ export function computeScheduleMetrics(
       2,
     ),
     peak_labour: peakLabour(schedule),
-    mean_start_time: schedule.length === 0 ? 0 : schedule.reduce((sum, row) => sum + row.start_time, 0) / schedule.length,
+    mean_start_time: (() => {
+      const firstByPlan = new Map<string, number>();
+      for (const row of schedule) {
+        const current = firstByPlan.get(String(row.plan_id));
+        if (current === undefined || row.start_time < current) firstByPlan.set(String(row.plan_id), row.start_time);
+      }
+      const starts = [...firstByPlan.values()];
+      return starts.length === 0 ? 0 : starts.reduce((sum, value) => sum + value, 0) / starts.length;
+    })(),
     risk_score: pyRound(
       selectedMetrics.reduce((sum, value) => sum + value, 0),
       4,

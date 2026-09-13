@@ -74,6 +74,10 @@ export class ScenarioRunner {
       direct_cost_aud: Number(r.direct_cost_aud),
       direct_cash_effect_aud: Number(r.direct_cash_effect_aud),
       state_yield_effect_t_ha: Number(r.state_yield_effect_t_ha),
+      work_hours: Number(r.work_hours ?? (parseTimestamp(r.end_time) - parseTimestamp(r.start_time)) / 3_600_000),
+      workload_hours: Number(r.workload_hours ?? r.work_hours ?? 0),
+      remaining_workload_hours: Number(r.remaining_workload_hours ?? 0),
+      completion_time: parseTimestamp(r.completion_time || r.end_time),
     }));
     const summary = JSON.parse(readDataFile(BASELINE_SUMMARY_PATH)) as OptimizationSummary;
     return { schedule, summary };

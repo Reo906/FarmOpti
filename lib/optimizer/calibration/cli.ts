@@ -1,9 +1,7 @@
 import path from "node:path";
 import { fileURLToPath } from "node:url";
-import { loadConfig } from "../config";
-import { loadHistory, replayResiduals, supportCounts } from "./replayHistory";
-import { saveFarmCalibration, type FitStats } from "./trainModels";
-import type { FarmCalibrationMetadata } from "./types";
+import { calibrateFromHistory } from "./calibrate";
+import type { FitStats } from "./trainModels";
 
 interface Args {
   history: string;
@@ -64,20 +62,14 @@ function printFitReport(fit: Record<string, FitStats>): void {
 
 export function main(argv: string[] = process.argv.slice(2)): void {
   const args = parseArgs(argv);
-
-  const history = loadHistory(args.history);
-  const config = loadConfig(args.config);
-  const datasets = replayResiduals(history, config);
-  const support = supportCounts(history);
-  const metadata: FarmCalibrationMetadata = saveFarmCalibration(
-    args.output,
-    args.farmId,
-    history,
-    datasets,
-    support,
-    args.confidenceK,
-    args.minSamples,
-  );
+  const metadata = calibrateFromHistory({
+    historyPath: args.history,
+    farmId: args.farmId,
+    outputDir: args.output,
+    configPath: args.config,
+    confidenceK: args.confidenceK,
+    minSamples: args.minSamples,
+  });
 
   console.log(`Loaded ${metadata.training_rows} historical events`);
   console.log(`Irrigation samples: ${metadata.samples.irrigation}`);

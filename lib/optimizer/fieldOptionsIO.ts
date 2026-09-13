@@ -9,6 +9,11 @@ function serializeAction(action: OptionAction): Record<string, unknown> {
     ...action,
     start_time: formatIso(action.start_time),
     end_time: formatIso(action.end_time),
+    work_segments: (action.work_segments ?? []).map((segment) => ({
+      ...segment,
+      start_time: formatIso(segment.start_time),
+      end_time: formatIso(segment.end_time),
+    })),
   };
 }
 
@@ -27,6 +32,15 @@ function deserializeAction(raw: any): OptionAction {
     ...raw,
     start_time: parseTimestamp(raw.start_time),
     end_time: parseTimestamp(raw.end_time),
+    workload_hours: Number(raw.workload_hours ?? raw.duration_hours ?? 0),
+    work_segments: Array.isArray(raw.work_segments)
+      ? raw.work_segments.map((segment: any) => ({
+          date: String(segment.date),
+          start_time: parseTimestamp(segment.start_time),
+          end_time: parseTimestamp(segment.end_time),
+          work_hours: Number(segment.work_hours),
+        }))
+      : [],
     eligible_machine_ids: Array.isArray(raw.eligible_machine_ids)
       ? raw.eligible_machine_ids
       : String(raw.eligible_machine_ids ?? "")

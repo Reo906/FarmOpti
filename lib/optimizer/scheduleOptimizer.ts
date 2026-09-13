@@ -1,7 +1,7 @@
 import highsLoader, { type Highs } from "highs";
-import { CANDIDATE_CONFIG, CONFIG } from "./config";
+import { CONFIG } from "./config";
 import { loadExternalVariables } from "./externalVariables";
-import { ceilToHour, dateOnlyOf, floorToHour, combineDateAndTime } from "./datetime";
+import { addDays, dateOnlyOf } from "./datetime";
 import { pyRound } from "./numeric";
 import { EXTERNAL_DIR } from "./paths";
 import { buildOptionMetrics } from "./planMetrics";
@@ -15,6 +15,15 @@ import type {
   OptionAction,
   ScheduleRow,
 } from "./types";
+import {
+  actionDayCapacity,
+  actionDayWindow,
+  configWorkdayBounds,
+  enumerateDates,
+  labourWorkdayBounds,
+  machineCapacityOnDay,
+  remainingAfterSegments,
+} from "./workload";
 
 export { loadFieldOptions } from "./fieldOptionsIO";
 
@@ -32,34 +41,10 @@ interface FlatAction {
   action: OptionAction;
   actionKey: string;
   eligibleMachineIds: string[];
-}
-
-function machinePairIncompatible(fields: Map<string, FieldRow>, a: FlatAction, b: FlatAction): boolean {
-  const startA = a.action.start_time;
-  const endA = a.action.end_time;
-  const startB = b.action.start_time;
-  const endB = b.action.end_time;
-
-  if (startA < endB && startB < endA) return true;
-
-  if (!CONFIG.transport?.enforce_travel_time) return false;
-
-  let earlier: FlatAction, later: FlatAction, gapHours: number;
-  if (endA <= startB) {
-    earlier = a;
-    later = b;
-    gapHours = (startB - endA) / 3_600_000;
-  } else if (endB <= startA) {
-    earlier = b;
-    later = a;
-    gapHours = (startA - endB) / 3_600_000;
-  } else {
-    return true;
-  }
-
-  const speed = Number(CONFIG.transport.machine_speed_kmh);
-  const distance = fieldDistanceKm(fields, earlier.action.field_id, later.action.field_id);
-  return gapHours + 1e-9 < distance / speed;
+  workloadHours: number;
+  earliestDate: string;
+  latestDate: string;
+  dates: string[];
 }
 
 function optionContainsPlan(option: FieldOption, planId: string): boolean {
@@ -194,7 +179,7 @@ export async function optimizeSchedule(
   const objectiveMode: AlternativeObjective = variant.objective ?? "value";
   const labourCapacityFactor = variant.labourCapacityFactor ?? 1;
   const continuousVars = new Set<string>();
-  const labourSlots: { t: number; active: FlatAction[] }[] = [];
+  const labourDays: { date: string; workdayHours: number; actions: FlatAction[] }[] = [];
 
   const optionsByField = new Map<string, FieldOption[]>();
   for (const option of options) {
@@ -208,6 +193,26 @@ export async function optimizeSchedule(
 
   const optionVarKey = (optionId: string) => `opt:${optionId}`;
   const assignVarKey = (actionKey: string, machineId: string) => `assign:${actionKey}:${machineId}`;
+  const workVarKey = (actionKey: string, machineId: string, date: string) => `work:${actionKey}:${machineId}:${date}`;
+  const activeVarKey = (actionKey: string, machineId: string, date: string) => `active:${actionKey}:${machineId}:${date}`;
+  const completeVarKey = (actionKey: string, date: string) => `complete:${actionKey}:${date}`;
+  const planById = new Map(data.management.map((plan) => [String(plan.plan_id), plan]));
+
+  const actionWorkload = (action: OptionAction): number => {
+    const marked = Number(action.workload_hours ?? action.duration_hours ?? 0);
+    if (marked > 0) return marked;
+    return Math.max(0, (action.end_time - action.start_time) / 3_600_000);
+  };
+
+  const dayCapCache = new Map<string, number>();
+  const dayCapacity = (operation: string, date: string, machineIds: string[], notBefore?: number): number => {
+    const key = `${operation}|${date}|${machineIds.join(",")}|${notBefore ?? ""}`;
+    const cached = dayCapCache.get(key);
+    if (cached !== undefined) return cached;
+    const value = actionDayCapacity(data, operation, date, machineIds, notBefore);
+    dayCapCache.set(key, value);
+    return value;
+  };
 
   const zeroForced = new Set<string>();
 
@@ -253,8 +258,22 @@ export async function optimizeSchedule(
         : String(action.eligible_machine_ids ?? "")
             .split(",")
             .filter(Boolean);
+      const plan = planById.get(String(action.plan_id));
+      const earliestDate = dateOnlyOf(action.start_time);
+      const latestDate = plan?.allowed_to ?? dateOnlyOf(action.end_time);
+      const dates = enumerateDates(earliestDate, latestDate);
+      const workloadHours = actionWorkload(action);
 
-      flatActions.push({ option, action, actionKey, eligibleMachineIds: eligible });
+      flatActions.push({
+        option,
+        action,
+        actionKey,
+        eligibleMachineIds: eligible,
+        workloadHours,
+        earliestDate,
+        latestDate,
+        dates,
+      });
 
       const linkConstraint = `link:${actionKey}`;
       constraintBounds.set(linkConstraint, { equal: 0 });
@@ -262,6 +281,31 @@ export async function optimizeSchedule(
 
       for (const machineId of eligible) {
         addCoef(varCoeffs, assignVarKey(actionKey, machineId), linkConstraint, 1);
+      }
+
+      const workTotal = `worktotal:${actionKey}`;
+      constraintBounds.set(workTotal, { equal: 0 });
+      addCoef(varCoeffs, varKey, workTotal, -workloadHours);
+
+      for (const date of dates) {
+        const notBefore = date === earliestDate ? action.start_time : undefined;
+        const dayCap = dayCapacity(action.operation, date, eligible, notBefore);
+        if (dayCap <= 1e-9) continue;
+
+        for (const machineId of eligible) {
+          const machineCap = machineCapacityOnDay(data, machineId, date);
+          const cap = Math.min(dayCap, machineCap);
+          if (cap <= 1e-9) continue;
+
+          const wKey = workVarKey(actionKey, machineId, date);
+          continuousVars.add(wKey);
+          addCoef(varCoeffs, wKey, workTotal, 1);
+
+          const boundKey = `wcap:${actionKey}:${machineId}:${date}`;
+          constraintBounds.set(boundKey, { max: 0 });
+          addCoef(varCoeffs, wKey, boundKey, 1);
+          addCoef(varCoeffs, assignVarKey(actionKey, machineId), boundKey, -cap);
+        }
       }
     });
   }
@@ -275,65 +319,196 @@ export async function optimizeSchedule(
     }
   }
 
-  let conflictIndex = 0;
+  const allDates = [...new Set(flatActions.flatMap((flat) => flat.dates))].sort();
+
   for (const [machineId, machineActions] of actionsByMachine) {
-    for (let i = 0; i < machineActions.length; i++) {
-      for (let j = i + 1; j < machineActions.length; j++) {
-        const a = machineActions[i];
-        const b = machineActions[j];
+    for (const date of allDates) {
+      const contributors: { flat: FlatAction; wKey: string; cap: number }[] = [];
+      for (const flat of machineActions) {
+        if (!flat.dates.includes(date)) continue;
+        const wKey = workVarKey(flat.actionKey, machineId, date);
+        if (!varCoeffs.has(wKey)) continue;
+        const notBefore = date === flat.earliestDate ? flat.action.start_time : undefined;
+        const cap = Math.min(
+          dayCapacity(flat.action.operation, date, flat.eligibleMachineIds, notBefore),
+          machineCapacityOnDay(data, machineId, date),
+        );
+        if (cap <= 1e-9) continue;
+        contributors.push({ flat, wKey, cap });
+      }
+      if (contributors.length === 0) continue;
 
-        if (a.option.option_id === b.option.option_id && a.action.field_id === b.action.field_id) continue;
+      const machineCap = machineCapacityOnDay(data, machineId, date);
+      const capKey = `mcap:${machineId}:${date}`;
+      constraintBounds.set(capKey, { max: machineCap });
+      for (const contributor of contributors) {
+        addCoef(varCoeffs, contributor.wKey, capKey, 1);
+      }
 
-        if (machinePairIncompatible(fields, a, b)) {
-          const conKey = `conflict:${machineId}:${conflictIndex++}`;
-          constraintBounds.set(conKey, { max: 1 });
-          addCoef(varCoeffs, assignVarKey(a.actionKey, machineId), conKey, 1);
-          addCoef(varCoeffs, assignVarKey(b.actionKey, machineId), conKey, 1);
+      if (!CONFIG.transport?.enforce_travel_time) continue;
+
+      const speed = Number(CONFIG.transport.machine_speed_kmh);
+      let travelIndex = 0;
+      for (let i = 0; i < contributors.length; i++) {
+        for (let j = i + 1; j < contributors.length; j++) {
+          const a = contributors[i];
+          const b = contributors[j];
+          if (a.flat.action.field_id === b.flat.action.field_id) continue;
+          if (a.flat.option.option_id === b.flat.option.option_id && a.flat.action.field_id === b.flat.action.field_id) {
+            continue;
+          }
+
+          const travelHours = fieldDistanceKm(fields, a.flat.action.field_id, b.flat.action.field_id) / speed;
+          const uA = activeVarKey(a.flat.actionKey, machineId, date);
+          const uB = activeVarKey(b.flat.actionKey, machineId, date);
+
+          const linkA = `ulink:${a.flat.actionKey}:${machineId}:${date}`;
+          if (!constraintBounds.has(linkA)) {
+            constraintBounds.set(linkA, { max: 0 });
+            addCoef(varCoeffs, a.wKey, linkA, 1);
+            addCoef(varCoeffs, uA, linkA, -a.cap);
+          }
+          const linkB = `ulink:${b.flat.actionKey}:${machineId}:${date}`;
+          if (!constraintBounds.has(linkB)) {
+            constraintBounds.set(linkB, { max: 0 });
+            addCoef(varCoeffs, b.wKey, linkB, 1);
+            addCoef(varCoeffs, uB, linkB, -b.cap);
+          }
+
+          const travelKey = `travel:${machineId}:${date}:${travelIndex++}`;
+          constraintBounds.set(travelKey, { max: machineCap + travelHours });
+          addCoef(varCoeffs, a.wKey, travelKey, 1);
+          addCoef(varCoeffs, b.wKey, travelKey, 1);
+          addCoef(varCoeffs, uA, travelKey, travelHours);
+          addCoef(varCoeffs, uB, travelKey, travelHours);
         }
       }
     }
   }
 
-  if (flatActions.length > 0) {
-    const timeStepMs = Number(CANDIDATE_CONFIG.time_step_hours) * 3_600_000;
-    const horizonStart = floorToHour(Math.min(...flatActions.map((f) => f.action.start_time)));
-    const horizonEnd = ceilToHour(Math.max(...flatActions.map((f) => f.action.end_time)));
-
-    for (let t = horizonStart; t < horizonEnd; t += timeStepMs) {
-      const date = dateOnlyOf(t);
-      const labourRow = data.labour.find((l) => l.date === date);
-      let capacity = 0;
-
-      if (labourRow) {
-        const start = combineDateAndTime(date, labourRow.workday_start);
-        const end = combineDateAndTime(date, labourRow.workday_end);
-        if (start <= t && t < end) capacity = labourRow.available_workers * labourCapacityFactor;
-      }
-
-      const active = flatActions.filter((f) => f.action.start_time <= t && t < f.action.end_time);
-      if (active.length > 0) {
-        labourSlots.push({ t, active });
-        const conKey = `labour:${t}`;
-        constraintBounds.set(conKey, { max: capacity });
-        for (const flat of active) {
-          addCoef(varCoeffs, optionVarKey(flat.option.option_id), conKey, flat.action.workers_required);
+  for (const date of allDates) {
+    const labourRow = data.labour.find((l) => l.date === date);
+    const labourWindow = labourWorkdayBounds(data, date);
+    const configWindow = configWorkdayBounds(date);
+    const window = labourWindow && configWindow
+      ? {
+          start: Math.max(labourWindow.start, configWindow.start),
+          end: Math.min(labourWindow.end, configWindow.end),
         }
+      : null;
+    const workdayHours = window && window.start < window.end ? (window.end - window.start) / 3_600_000 : 0;
+    const workerHours = (labourRow?.available_workers ?? 0) * labourCapacityFactor * workdayHours;
+    const dayActions = flatActions.filter((flat) => flat.dates.includes(date));
+    labourDays.push({ date, workdayHours, actions: dayActions });
+
+    const conKey = `labour:${date}`;
+    constraintBounds.set(conKey, { max: workerHours });
+    for (const flat of dayActions) {
+      for (const machineId of flat.eligibleMachineIds) {
+        const wKey = workVarKey(flat.actionKey, machineId, date);
+        if (!varCoeffs.has(wKey)) continue;
+        addCoef(varCoeffs, wKey, conKey, flat.action.workers_required);
       }
     }
   }
 
   for (const waterRow of data.water) {
-    const activeForDate = flatActions.filter(
-      (f) => dateOnlyOf(f.action.start_time) === waterRow.date && (f.action.water_ml ?? 0) > 0,
-    );
-    if (activeForDate.length === 0) continue;
-
     const conKey = `water:${waterRow.date}`;
     const capacity = Math.min(waterRow.available_water_ml, waterRow.max_delivery_ml_per_day);
-    constraintBounds.set(conKey, { max: capacity });
+    let used = false;
+    for (const flat of flatActions) {
+      const water = flat.action.water_ml ?? 0;
+      if (water <= 0 || !flat.dates.includes(waterRow.date) || flat.workloadHours <= 1e-9) continue;
+      used = true;
+      const rate = water / flat.workloadHours;
+      for (const machineId of flat.eligibleMachineIds) {
+        const wKey = workVarKey(flat.actionKey, machineId, waterRow.date);
+        if (!varCoeffs.has(wKey)) continue;
+        addCoef(varCoeffs, wKey, conKey, rate);
+      }
+    }
+    if (used) constraintBounds.set(conKey, { max: capacity });
+  }
 
-    for (const flat of activeForDate) {
-      addCoef(varCoeffs, optionVarKey(flat.option.option_id), conKey, flat.action.water_ml);
+  const byOption = new Map<string, FlatAction[]>();
+  for (const flat of flatActions) {
+    const list = byOption.get(flat.option.option_id) ?? [];
+    list.push(flat);
+    byOption.set(flat.option.option_id, list);
+  }
+
+  const precedences: { pred: FlatAction; succ: FlatAction; gapHours: number }[] = [];
+  for (const group of byOption.values()) {
+    const ordered = [...group].sort((a, b) => a.action.start_time - b.action.start_time);
+    for (let i = 0; i < ordered.length; i++) {
+      for (let j = i + 1; j < ordered.length; j++) {
+        const pred = ordered[i];
+        const succ = ordered[j];
+        if (pred.action.field_id !== succ.action.field_id) continue;
+        const explicit = String(succ.action.depends_on ?? "") === String(pred.action.plan_id);
+        const gapHours = explicit ? (succ.action.min_gap_hours ?? 0) : 0;
+        precedences.push({ pred, succ, gapHours });
+      }
+    }
+  }
+
+  const predecessors = new Set(precedences.map((pair) => pair.pred));
+  for (const pred of predecessors) {
+    const eps = 1e-3;
+    for (const [index, date] of pred.dates.entries()) {
+      const completeKey = completeVarKey(pred.actionKey, date);
+      const finished = `fin:${pred.actionKey}:${date}`;
+      constraintBounds.set(finished, { max: 0 });
+      addCoef(varCoeffs, completeKey, finished, pred.workloadHours);
+
+      const notLate = `notlate:${pred.actionKey}:${date}`;
+      constraintBounds.set(notLate, { max: pred.workloadHours });
+      addCoef(varCoeffs, optionVarKey(pred.option.option_id), notLate, eps);
+      addCoef(varCoeffs, completeKey, notLate, -eps);
+
+      const linked = `cx:${pred.actionKey}:${date}`;
+      constraintBounds.set(linked, { max: 0 });
+      addCoef(varCoeffs, completeKey, linked, 1);
+      addCoef(varCoeffs, optionVarKey(pred.option.option_id), linked, -1);
+
+      for (const earlier of pred.dates.slice(0, index + 1)) {
+        for (const machineId of pred.eligibleMachineIds) {
+          const wKey = workVarKey(pred.actionKey, machineId, earlier);
+          if (!varCoeffs.has(wKey)) continue;
+          addCoef(varCoeffs, wKey, finished, -1);
+          addCoef(varCoeffs, wKey, notLate, 1);
+        }
+      }
+
+      if (index + 1 < pred.dates.length) {
+        const mono = `mono:${pred.actionKey}:${date}`;
+        constraintBounds.set(mono, { max: 0 });
+        addCoef(varCoeffs, completeKey, mono, 1);
+        addCoef(varCoeffs, completeVarKey(pred.actionKey, pred.dates[index + 1]), mono, -1);
+      }
+    }
+  }
+
+  let precIndex = 0;
+  for (const { pred, succ, gapHours } of precedences) {
+    for (const date of succ.dates) {
+      const predDate = gapHours > 0 ? addDays(date, -1) : date;
+      const completeKey = pred.dates.includes(predDate)
+        ? completeVarKey(pred.actionKey, predDate)
+        : pred.dates.filter((d) => d < predDate).at(-1)
+          ? completeVarKey(pred.actionKey, pred.dates.filter((d) => d < predDate).at(-1)!)
+          : null;
+
+      for (const machineId of succ.eligibleMachineIds) {
+        const wKey = workVarKey(succ.actionKey, machineId, date);
+        if (!varCoeffs.has(wKey)) continue;
+        const notBefore = date === succ.earliestDate ? succ.action.start_time : undefined;
+        const cap = dayCapacity(succ.action.operation, date, succ.eligibleMachineIds, notBefore);
+        const conKey = `prec:${precIndex++}`;
+        constraintBounds.set(conKey, { max: 0 });
+        addCoef(varCoeffs, wKey, conKey, 1);
+        if (completeKey) addCoef(varCoeffs, completeKey, conKey, -cap);
+      }
     }
   }
 
@@ -358,13 +533,18 @@ export async function optimizeSchedule(
   if (objectiveMode === "smoothness") {
     continuousVars.add("peak_labour");
     addCoef(varCoeffs, "peak_labour", objectiveKey, 1);
-    for (const { t, active } of labourSlots) {
-      const peakCon = `peak:${t}`;
+    for (const { date, workdayHours, actions } of labourDays) {
+      if (workdayHours <= 1e-9) continue;
+      const peakCon = `peak:${date}`;
       constraintBounds.set(peakCon, { max: 0 });
-      for (const flat of active) {
-        addCoef(varCoeffs, optionVarKey(flat.option.option_id), peakCon, flat.action.workers_required);
+      for (const flat of actions) {
+        for (const machineId of flat.eligibleMachineIds) {
+          const wKey = workVarKey(flat.actionKey, machineId, date);
+          if (!varCoeffs.has(wKey)) continue;
+          addCoef(varCoeffs, wKey, peakCon, flat.action.workers_required);
+        }
       }
-      addCoef(varCoeffs, "peak_labour", peakCon, -1);
+      addCoef(varCoeffs, "peak_labour", peakCon, -workdayHours);
     }
   } else {
     for (const option of options) {
@@ -400,49 +580,141 @@ export async function optimizeSchedule(
     throw new Error("No feasible whole-farm schedule found");
   }
 
+  const primalOf = (varKey: string): number => {
+    const column = solution.Columns[sanitizeLpName(varKey)];
+    return column?.Primal ?? 0;
+  };
+
   const selectedVars = new Set<string>();
   for (const varKey of varCoeffs.keys()) {
-    const column = solution.Columns[sanitizeLpName(varKey)];
-    if (column && column.Primal > 0.5) selectedVars.add(varKey);
+    if (continuousVars.has(varKey)) continue;
+    if (primalOf(varKey) > 0.5) selectedVars.add(varKey);
   }
 
   const selectedOptionIds = new Set(
     options.filter((o) => selectedVars.has(optionVarKey(o.option_id))).map((o) => o.option_id),
   );
 
-  const rows: ScheduleRow[] = [];
+  const selectedFlats = flatActions.filter((flat) => selectedOptionIds.has(flat.option.option_id));
+  const workByMachineDay = new Map<string, { flat: FlatAction; machineId: string; date: string; hours: number }[]>();
 
-  for (const flat of flatActions) {
-    if (!selectedOptionIds.has(flat.option.option_id)) continue;
-
-    let assignedMachine = "";
-    for (const machineId of flat.eligibleMachineIds) {
-      if (selectedVars.has(assignVarKey(flat.actionKey, machineId))) {
-        assignedMachine = machineId;
-        break;
+  for (const flat of selectedFlats) {
+    let assignedMachine = flat.eligibleMachineIds.find((id) => selectedVars.has(assignVarKey(flat.actionKey, id))) ?? "";
+    for (const date of flat.dates) {
+      for (const machineId of flat.eligibleMachineIds) {
+        const hours = primalOf(workVarKey(flat.actionKey, machineId, date));
+        if (hours <= 1e-4) continue;
+        if (!assignedMachine) assignedMachine = machineId;
+        const key = `${machineId}|${date}`;
+        const list = workByMachineDay.get(key) ?? [];
+        list.push({ flat, machineId, date, hours });
+        workByMachineDay.set(key, list);
       }
     }
+  }
 
-    rows.push({
-      option_id: flat.option.option_id,
-      candidate_id: flat.action.candidate_id,
-      plan_id: flat.action.plan_id,
-      field_id: flat.action.field_id,
-      operation: flat.action.operation,
-      target: flat.action.target,
-      start_time: flat.action.start_time,
-      end_time: flat.action.end_time,
-      machine_id: assignedMachine,
-      workers_required: flat.action.workers_required,
-      water_ml: flat.action.water_ml ?? 0.0,
-      direct_revenue_aud: flat.action.direct_revenue_aud,
-      direct_cost_aud: flat.action.direct_cost_aud,
-      direct_cash_effect_aud: flat.action.direct_cash_effect_aud,
-      state_yield_effect_t_ha: flat.action.state_yield_effect_t_ha,
+  const placed = new Map<string, { start: number; end: number; hours: number; machineId: string; date: string }[]>();
+
+  for (const [key, group] of workByMachineDay) {
+    const [machineId, date] = key.split("|");
+    const window = actionDayWindow(
+      data,
+      date,
+      [machineId],
+    );
+    if (!window) continue;
+
+    const speed = Number(CONFIG.transport?.machine_speed_kmh ?? 20);
+    const ordered = [...group].sort((a, b) => {
+      if (a.flat.action.start_time !== b.flat.action.start_time) return a.flat.action.start_time - b.flat.action.start_time;
+      return a.flat.actionKey.localeCompare(b.flat.actionKey);
+    });
+
+    let cursor = window.start;
+    let previousField: string | null = null;
+    for (const item of ordered) {
+      if (previousField && previousField !== item.flat.action.field_id && CONFIG.transport?.enforce_travel_time) {
+        cursor += (fieldDistanceKm(fields, previousField, item.flat.action.field_id) / speed) * 3_600_000;
+      }
+      if (item.date === item.flat.earliestDate) {
+        cursor = Math.max(cursor, item.flat.action.start_time);
+      }
+      const start = cursor;
+      const end = start + item.hours * 3_600_000;
+      const list = placed.get(item.flat.actionKey) ?? [];
+      list.push({ start, end, hours: item.hours, machineId, date });
+      placed.set(item.flat.actionKey, list);
+      cursor = end;
+      previousField = item.flat.action.field_id;
+    }
+  }
+
+  const rows: ScheduleRow[] = [];
+
+  for (const flat of selectedFlats) {
+    const segments = (placed.get(flat.actionKey) ?? []).sort((a, b) => a.start - b.start);
+    if (segments.length === 0) {
+      rows.push({
+        option_id: flat.option.option_id,
+        candidate_id: flat.action.candidate_id,
+        plan_id: flat.action.plan_id,
+        field_id: flat.action.field_id,
+        operation: flat.action.operation,
+        target: flat.action.target,
+        start_time: flat.action.start_time,
+        end_time: flat.action.end_time,
+        machine_id: flat.eligibleMachineIds.find((id) => selectedVars.has(assignVarKey(flat.actionKey, id))) ?? "",
+        workers_required: flat.action.workers_required,
+        water_ml: flat.action.water_ml ?? 0.0,
+        direct_revenue_aud: flat.action.direct_revenue_aud,
+        direct_cost_aud: flat.action.direct_cost_aud,
+        direct_cash_effect_aud: flat.action.direct_cash_effect_aud,
+        state_yield_effect_t_ha: flat.action.state_yield_effect_t_ha,
+        work_hours: pyRound(flat.workloadHours, 4),
+        workload_hours: pyRound(flat.workloadHours, 4),
+        remaining_workload_hours: 0,
+        completion_time: flat.action.end_time,
+      });
+      continue;
+    }
+
+    const remainings = remainingAfterSegments(flat.workloadHours, segments.map((s) => ({
+      date: s.date,
+      start_time: s.start,
+      end_time: s.end,
+      work_hours: s.hours,
+    })));
+    const completion = segments[segments.length - 1].end;
+    const firstStart = segments[0].start;
+
+    segments.forEach((segment, index) => {
+      const isFirst = index === 0;
+      const water = (flat.action.water_ml ?? 0) * (segment.hours / Math.max(flat.workloadHours, 1e-9));
+      rows.push({
+        option_id: flat.option.option_id,
+        candidate_id: flat.action.candidate_id,
+        plan_id: flat.action.plan_id,
+        field_id: flat.action.field_id,
+        operation: flat.action.operation,
+        target: flat.action.target,
+        start_time: segment.start,
+        end_time: segment.end,
+        machine_id: segment.machineId,
+        workers_required: flat.action.workers_required,
+        water_ml: pyRound(water, 3),
+        direct_revenue_aud: isFirst ? flat.action.direct_revenue_aud : 0,
+        direct_cost_aud: isFirst ? flat.action.direct_cost_aud : 0,
+        direct_cash_effect_aud: isFirst ? flat.action.direct_cash_effect_aud : 0,
+        state_yield_effect_t_ha: isFirst ? flat.action.state_yield_effect_t_ha : 0,
+        work_hours: pyRound(segment.hours, 4),
+        workload_hours: pyRound(flat.workloadHours, 4),
+        remaining_workload_hours: pyRound(remainings[index], 4),
+        completion_time: completion,
+      });
     });
   }
 
-  rows.sort((a, b) => a.start_time - b.start_time);
+  rows.sort((a, b) => a.start_time - b.start_time || a.plan_id.localeCompare(b.plan_id));
 
   const selectedOptionObjects = options.filter((o) => selectedOptionIds.has(o.option_id));
   const selectedOptionSummary = selectedOptionObjects.map((o) => ({
@@ -467,7 +739,7 @@ export async function optimizeSchedule(
       selectedOptionSummary.reduce((s, x) => s + x.objective_value_aud, 0),
       2,
     ),
-    num_scheduled_actions: rows.length,
+    num_scheduled_actions: selectedFlats.length,
     selected_options: selectedOptionSummary,
   };
 

@@ -59,7 +59,7 @@ const optimizeScheduleTool: ToolDefinition<
 > = {
   name: "optimize_schedule",
   description:
-    "Stage 3 of the optimizer pipeline. Solves the whole-farm mixed-integer linear program with the HiGHS solver: choose exactly one field option per field, respecting machine double-booking, travel time between fields, daily labour capacity, and daily water capacity, maximizing total financial value (direct cash effect + terminal crop value). Pass `scenario` with forbid_plan_ids/force_plan_ids/force_candidate_ids to test 'what if this specific action were or weren't selected' without touching the underlying farm data -- this is how counterfactual analysis works. Writes optimal_schedule.csv and optimization_summary.json only when called with no scenario override (the real, unconstrained solve).",
+    "Stage 3 of the optimizer pipeline. Solves the whole-farm mixed-integer linear program with the HiGHS solver: choose exactly one field option per field, assign a machine, and allocate each action's required workload across feasible days under machine, labour, water, weather, travel, and completion-precedence constraints, maximizing total financial value (direct cash effect + terminal crop value). Pass `scenario` with forbid_plan_ids/force_plan_ids/force_candidate_ids to test 'what if this specific action were or weren't selected' without touching the underlying farm data -- this is how counterfactual analysis works. Writes optimal_schedule.csv and optimization_summary.json only when called with no scenario override (the real, unconstrained solve).",
   input_schema: {
     type: "object",
     properties: {

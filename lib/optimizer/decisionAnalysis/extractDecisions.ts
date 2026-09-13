@@ -330,7 +330,7 @@ export function buildResourceRecords(data: ExternalVariables, schedule: Schedule
   }
 
   for (const [machineId, group] of byMachine) {
-    const usedHours = group.reduce((sum, r) => sum + (r.end_time - r.start_time) / 3_600_000, 0);
+    const usedHours = group.reduce((sum, r) => sum + (r.work_hours ?? (r.end_time - r.start_time) / 3_600_000), 0);
 
     const availabilityRows = data.machineAvailability.filter((a) => a.machine_id === machineId && a.available === 1);
     let availableHours = 0.0;

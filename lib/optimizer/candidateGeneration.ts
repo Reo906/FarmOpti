@@ -1,24 +1,30 @@
 import { CANDIDATE_CONFIG, CROP_PARAMETERS, RULES } from "./config";
 import {
   getEconomicValue,
-  getEligibleMachines,
   getField,
   getFieldState,
   getLabourForDay,
   getMachineCostPerHour,
-  getWeatherWindow,
   loadExternalVariables,
 } from "./externalVariables";
 import {
   addDays,
   addHours,
-  combineDateAndTime,
   compareDateOnly,
   formatIso,
 } from "./datetime";
 import { pyRound, clip } from "./numeric";
 import { EXTERNAL_DIR } from "./paths";
 import type { ActionResult, Candidate, ExternalVariables, FieldRow, FieldStateRow, ManagementPlanRow, WeatherRow } from "./types";
+import {
+  actionDayWindow,
+  dailyWaterOk,
+  machinesAvailableInWindow,
+  machinesAvailableOnDay,
+  packWorkload,
+  requiredWorkloadHours,
+  weatherForSegments,
+} from "./workload";
 
 function calculateExecutionCost(
   data: ExternalVariables,
@@ -110,7 +116,6 @@ const evaluateIrrigation: Evaluator = (data, plan, field, state, weather, start,
   const startDate = formatIso(start).slice(0, 10);
   const waterRow = data.water.find((w) => w.date === startDate);
   if (!waterRow) return null;
-  if (waterMl > waterRow.available_water_ml || waterMl > waterRow.max_delivery_ml_per_day) return null;
 
   const waterPrice = getEconomicValue(data, startDate, "water_cost", "irrigation_water");
   const cost = calculateExecutionCost(data, rule, start, duration, machineIds) + waterMl * waterPrice;
@@ -221,10 +226,6 @@ function getEffectiveCropLocal(field: FieldRow): string {
   throw new Error(`Field ${field.field_id} has no current or planned crop`);
 }
 
-function pad2(n: number): string {
-  return String(n).padStart(2, "0");
-}
-
 function candidateIdTimestamp(ts: number): string {
   const iso = formatIso(ts); // YYYY-MM-DDTHH:MM:SS
   const [datePart, timePart] = iso.split("T");
@@ -235,8 +236,6 @@ export function generateCandidates(externalVariablesDir: string = EXTERNAL_DIR):
   const data = loadExternalVariables(externalVariablesDir);
   const candidates: Candidate[] = [];
   const timeStepHours = Number(CANDIDATE_CONFIG.time_step_hours);
-  const configStartHour = Number(CANDIDATE_CONFIG.workday_start_hour);
-  const configEndHour = Number(CANDIDATE_CONFIG.workday_end_hour);
 
   for (const plan of data.management) {
     const operation = plan.operation.toLowerCase();
@@ -244,8 +243,7 @@ export function generateCandidates(externalVariablesDir: string = EXTERNAL_DIR):
 
     const field = getField(data, plan.field_id);
     const rule = RULES[operation];
-    const duration = field.area_ha / Number(rule.work_rate_ha_per_hour);
-
+    const workload = requiredWorkloadHours(field.area_ha, Number(rule.work_rate_ha_per_hour));
     let currentDate = plan.allowed_from;
 
     while (compareDateOnly(currentDate, plan.allowed_to) <= 0) {
@@ -257,25 +255,46 @@ export function generateCandidates(externalVariablesDir: string = EXTERNAL_DIR):
         continue;
       }
 
-      const dayStart = Math.max(
-        combineDateAndTime(currentDate, `${pad2(configStartHour)}:00`),
-        combineDateAndTime(currentDate, labour.workday_start),
-      );
-      const dayEnd = Math.min(
-        combineDateAndTime(currentDate, `${pad2(configEndHour)}:00`),
-        combineDateAndTime(currentDate, labour.workday_end),
-      );
+      const dayMachines = machinesAvailableOnDay(data, rule.machine_type, currentDate);
+      const dayWindow = actionDayWindow(data, currentDate, dayMachines);
+      if (!dayWindow) {
+        currentDate = addDays(currentDate, 1);
+        continue;
+      }
 
-      let start = dayStart;
+      let start = dayWindow.start;
 
-      while (start + duration * 3_600_000 <= dayEnd) {
-        const end = start + duration * 3_600_000;
-        const machineIds = getEligibleMachines(data, rule.machine_type, start, end, currentDate);
+      while (start < dayWindow.end) {
+        const segments = packWorkload(data, operation, rule.machine_type, workload, start, plan.allowed_to);
+        if (!segments || segments.length === 0) {
+          start = addHours(start, timeStepHours);
+          continue;
+        }
 
-        if (machineIds.length > 0) {
-          const weather = getWeatherWindow(data, start, duration);
+        const first = segments[0];
+        const last = segments[segments.length - 1];
+        const firstMachines = machinesAvailableInWindow(
+          data,
+          rule.machine_type,
+          first.start_time,
+          first.end_time,
+          currentDate,
+        );
+        const machineIds = [...new Set([
+          ...firstMachines,
+          ...segments.flatMap((segment) => machinesAvailableOnDay(data, rule.machine_type, segment.date)),
+        ])];
+
+        if (firstMachines.length > 0) {
+          const weather = weatherForSegments(data, segments);
           if (weather.length > 0) {
-            const actionResult = EVALUATORS[operation](data, plan, field, state, weather, start, duration, machineIds);
+            const waterMl = operation === "irrigate"
+              ? field.area_ha * Number(rule.response.water_ml_per_ha)
+              : 0;
+            const waterFeasible = operation !== "irrigate" || dailyWaterOk(data, segments, waterMl, workload);
+            const actionResult = waterFeasible
+              ? EVALUATORS[operation](data, plan, field, state, weather, start, workload, firstMachines)
+              : null;
             if (actionResult !== null) {
               candidates.push({
                 candidate_id: `${plan.plan_id}_${plan.field_id}_${operation}_${candidateIdTimestamp(start)}`,
@@ -286,12 +305,17 @@ export function generateCandidates(externalVariablesDir: string = EXTERNAL_DIR):
                 required: plan.required,
                 depends_on: plan.depends_on,
                 min_gap_hours: plan.min_gap_hours ?? 0.0,
-                start_time: start,
-                end_time: end,
-                duration_hours: pyRound(duration, 2),
+                start_time: first.start_time,
+                end_time: last.end_time,
+                duration_hours: pyRound(workload, 2),
+                workload_hours: pyRound(workload, 4),
                 machine_type: rule.machine_type,
-                eligible_machine_ids: machineIds,
+                eligible_machine_ids: machineIds.length > 0 ? machineIds : firstMachines,
                 workers_required: Number(rule.workers),
+                work_segments: segments.map((segment) => ({
+                  ...segment,
+                  work_hours: pyRound(segment.work_hours, 4),
+                })),
                 ...actionResult,
               });
             }
