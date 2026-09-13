@@ -48,3 +48,7 @@ npm run build
 The schedule generation, constraint enforcement, strategy comparison, and economic calculations run in the application. Farm telemetry, weather, machine health, contractor availability, prices, and delivery data are simulated. The rule interpreter uses a strict deterministic parser so the demo needs no API key.
 
 A production version would require farm-management and OEM integrations, live weather and receival data, calibrated field-level productivity and loss models, a more complete optimisation formulation, uncertainty testing, permissions and audit trails, safety and legal review, offline resilience, and shadow evaluation against real manager decisions.
+
+## Optional voice interface
+
+The live optimiser has a reusable ElevenLabs speech input/output package under **optimizer/src/voice_interface**. See [the voice interface guide](optimizer/VOICE_INTERFACE_README.md) for its architecture, API contract, configuration, browser adapter, and verification steps.

@@ -96,6 +96,10 @@ class ScenarioValidator:
     def _discover_tables(self):
         tables = {}
         for path in sorted(self.external_variables_dir.glob("*.csv")):
+            # macOS creates AppleDouble companion files on some external drives.
+            # They are metadata, not CSV inputs, and must never become DSL targets.
+            if path.name.startswith("._"):
+                continue
             df = pd.read_csv(path)
             tables[path.stem] = {
                 "filename": path.name,
