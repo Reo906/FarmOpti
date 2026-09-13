@@ -92,6 +92,8 @@ function candidate(operation: string, target: string): Candidate {
     start_time: START,
     end_time: START + 3_600_000,
     duration_hours: 1,
+    workload_hours: 1,
+    work_segments: [],
     machine_type: "irrigator",
     eligible_machine_ids: ["M6"],
     workers_required: 1,

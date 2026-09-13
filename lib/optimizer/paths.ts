@@ -23,6 +23,8 @@ export const CONFIG_PATH = path.join(OPTIMIZER_ROOT, "config.yaml");
 export const EXTERNAL_DIR = path.join(OPTIMIZER_ROOT, "external_variables");
 export const OUTPUTS_DIR = path.join(OPTIMIZER_ROOT, "outputs");
 export const FARM_RULES_PATH = path.join(OPTIMIZER_ROOT, "farm_rules.json");
+export const FARM_HISTORY_DIR = path.join(OPTIMIZER_ROOT, "farm_history");
+export const HISTORY_PATH = path.join(FARM_HISTORY_DIR, "history.csv");
 
 export const CANDIDATE_ACTIONS_PATH = path.join(OUTPUTS_DIR, "candidate_actions.csv");
 export const FIELD_OPTIONS_PATH = path.join(OUTPUTS_DIR, "field_options.json");

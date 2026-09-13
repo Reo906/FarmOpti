@@ -228,17 +228,27 @@ candidate_actions.csv
 
 
 
-## 3.1 Action duration
+## 3.1 Required workload
 
-For field area A and operation work rate r:
+An action is a quantity of work, not a one-day event.
 
-D = \frac{A}{r}
+For field area A and effective machine work rate r:
+
+W_a = \frac{A}{r}
 
 where:
 
-- D: operation duration in hours
+- W_a: required workload in machine-hours
 - A: field area in hectares
 - r: work rate in hectares/hour
+
+Daily allocation variables w_{a,t} >= 0 satisfy
+
+\sum_t w_{a,t} = W_a
+
+so an action that needs 20 hours with only 8 productive hours available on a given day spans multiple days. Weather, labour, and machine windows set the feasible daily capacity C_{a,t}; if the action cannot be performed that day, C_{a,t}=0.
+
+The calendar duration is an output of available capacity, not an input such as "this job lasts 3 days".
 
 ---
 
@@ -977,32 +987,33 @@ The solver therefore chooses the combination of field schedules with the highest
 
 
 
-# 18. Machine constraints
+# 18. Machine and workload constraints
 
 Each selected action must use one eligible machine.
 
-For action a and machine m:
+y_{a,m} \in \{0,1\}
+\sum_{m\in M_a} y_{a,m} = x_{o(a)}
 
-y_{a,m}
-\in
-0,1
+Work on day t by machine m is continuous:
 
-with:
+w_{a,m,t} \ge 0
+\sum_m \sum_t w_{a,m,t} = W_a x_{o(a)}
+0 \le w_{a,m,t} \le C_{a,t} y_{a,m}
 
-\sum_{m\in M_a}
-y_{a,m}
+Machine capacity on day t:
 
-x_{o(a)}
+\sum_a w_{a,m,t} \le C_{m,t}
 
-where o(a) is the field option containing action a.
+where C_{m,t} is the productive hours machine m is available that day.
 
-If two actions overlap and need the same machine:
+Two actions may share a machine on the same day if their combined work (and travel time, when enforced) fits in C_{m,t}. Interruptions are allowed: a day with w_{a,t}=0 between two working days is feasible unless an operation-specific rule forbids it.
 
-y_{i,m}
-+
-y_{j,m}
-\le
-1
+An action is complete when cumulative work reaches W_a:
+
+P_{a,t} = (\sum_{\tau \le t} w_{a,\tau}) / W_a
+\text{complete}_{a,t}=1 \iff P_{a,t}=1
+
+Downstream actions that depend on another operation may only receive work after that completion (and after any configured minimum gap).
 
 ---
 
@@ -1044,15 +1055,13 @@ Otherwise the pair of assignments is infeasible.
 
 # 20. Labour constraint
 
-At each time t:
+Daily labour is a capacity on work hours, not a one-day occupancy flag:
 
-\sum_{a:t\in a}
-N_{workers,a}
-x_{o(a)}
+\sum_a N_{workers,a} \sum_m w_{a,m,d}
 \le
-L_t
+L_d H_d
 
-where L_t is the labour capacity available at that time.
+where L_d is the number of workers available on day d and H_d is the length of that day's work window. Sequential jobs on the same crew can therefore share a day if the worker-hours fit.
 
 ---
 
@@ -1060,11 +1069,9 @@ where L_t is the labour capacity available at that time.
 
 # 21. Water constraint
 
-For each day d:
+Irrigation water is allocated in proportion to work performed that day:
 
-\sum_{a\in irrigation(d)}
-Q_{water,a}
-x_{o(a)}
+\sum_a Q_{water,a} \frac{\sum_m w_{a,m,d}}{W_a}
 \le
 W_d^{max}
 
@@ -1084,12 +1091,13 @@ W_d^{delivery}
 
 # 22. Final schedule
 
-The CP-SAT solution determines:
+The HiGHS solution determines:
 
 - which field option is selected for every field;
 - which optional actions are performed;
-- exact action timing;
 - assigned machine;
+- work hours on each day (including interruptions);
+- first work time, last completion time, and remaining workload after each segment;
 - labour usage;
 - irrigation usage.
 
@@ -1150,5 +1158,5 @@ The important distinction is:
 - **candidate generation** decides what timings are individually possible;
 - **field simulation** determines how actions affect later field state;
 - **beam search** explores combinations of required and optional actions within each field;
-- **CP-SAT** selects the globally compatible combination with the highest total financial value.
+- **HiGHS** selects the globally compatible combination with the highest total financial value, allocating each action's workload across feasible days.
 

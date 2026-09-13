@@ -101,6 +101,13 @@ export interface ActionResult {
   candidate_score: number;
 }
 
+export interface WorkSegment {
+  date: string;
+  start_time: number;
+  end_time: number;
+  work_hours: number;
+}
+
 export interface Candidate extends ActionResult {
   candidate_id: string;
   plan_id: string;
@@ -113,9 +120,11 @@ export interface Candidate extends ActionResult {
   start_time: number;
   end_time: number;
   duration_hours: number;
+  workload_hours: number;
   machine_type: string;
   eligible_machine_ids: string[];
   workers_required: number;
+  work_segments: WorkSegment[];
 }
 
 export interface FieldStateSnapshot {
@@ -167,6 +176,10 @@ export interface ScheduleRow {
   direct_cost_aud: number;
   direct_cash_effect_aud: number;
   state_yield_effect_t_ha: number;
+  work_hours: number;
+  workload_hours: number;
+  remaining_workload_hours: number;
+  completion_time: number;
 }
 
 export interface SelectedOptionSummary {
