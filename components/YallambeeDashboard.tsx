@@ -26,7 +26,7 @@ import {
   X,
 } from 'lucide-react';
 import { yallambeeOpsDashboard } from '@/app/yallambee-ops';
-import { dashboardPlanFrom, managementPlanInputs, parseSchedule, persistedDashboardPlan, persistedSchedule, persistedSummary, scheduleAnchorFrom, type ManagementPlanInput, type PersistedOptimizerSummary, type PersistedScheduleRow } from '@/lib/ui/persisted-optimizer-output';
+import { dashboardPlanFrom, managementPlanInputs, parseSchedule, persistedDashboardPlan, persistedHighWindWindows, persistedRainWindows, persistedSchedule, persistedSummary, scheduleAnchorFrom, type ManagementPlanInput, type PersistedOptimizerSummary, type PersistedScheduleRow, type WeatherWindow } from '@/lib/ui/persisted-optimizer-output';
 import type { DashboardView, FarmField, OptimiserCandidate } from '@/app/yallambee-ops';
 
 type ViewKey = DashboardView;
@@ -150,6 +150,33 @@ function timelineDateTime(anchorTime: number, hour: number) {
   return `${timelineDay(anchorTime, hour)}, ${timelineClock(anchorTime, hour)}`;
 }
 
+function midnightHoursFrom(anchorTime: number, totalHours: number) {
+  const dayMs = 86_400_000;
+  let midnight = Math.floor(anchorTime / dayMs) * dayMs;
+  if (midnight <= anchorTime) midnight += dayMs;
+  const hours: number[] = [];
+  const end = anchorTime + totalHours * 3_600_000;
+  while (midnight < end) {
+    hours.push((midnight - anchorTime) / 3_600_000);
+    midnight += dayMs;
+  }
+  return hours;
+}
+
+function weatherBoxes(windows: WeatherWindow[], anchorTime: number, totalHours: number) {
+  return windows
+    .map((window) => ({
+      start: (window.start - anchorTime) / 3_600_000,
+      end: (window.end - anchorTime) / 3_600_000,
+    }))
+    .filter((window) => window.end > 0 && window.start < totalHours)
+    .map((window) => {
+      const start = Math.max(0, window.start);
+      const end = Math.min(totalHours, window.end);
+      return { left: (start / totalHours) * 100, width: ((end - start) / totalHours) * 100 };
+    });
+}
+
 function Timeline({ plan, disrupted }: { plan: OptimiserCandidate; disrupted: boolean }) {
   const { anchorTime } = useOptimizerOutput();
   const fullHours = Math.max(24, ...plan.blocks.map((block) => block.e));
@@ -176,7 +203,9 @@ function Timeline({ plan, disrupted }: { plan: OptimiserCandidate; disrupted: bo
     ticks = ticks.slice(0, -1);
     tickLabels = tickLabels.slice(0, -1);
   }
-  const gridlinePct = (tickStepHours / totalHours) * 100;
+  const midnightHours = midnightHoursFrom(anchorTime, totalHours);
+  const rainBoxes = weatherBoxes(persistedRainWindows, anchorTime, totalHours);
+  const windBoxes = weatherBoxes(persistedHighWindWindows, anchorTime, totalHours);
 
   return (
     <div className="yc-timeline">
@@ -188,8 +217,11 @@ function Timeline({ plan, disrupted }: { plan: OptimiserCandidate; disrupted: bo
       </div>
       <div className="yc-timeline-scroll"><div className="yc-timeline-content">
         <div className="yc-timeline-hours" style={{ gridTemplateColumns: `repeat(${ticks.length}, 1fr)` }}>{tickLabels.map((label, index) => <span key={ticks[index]}>{label}</span>)}</div>
-        <div className="yc-timeline-stage" style={{ background: `repeating-linear-gradient(to right, transparent 0, transparent calc(${gridlinePct}% - 1px), rgba(14,26,22,.06) calc(${gridlinePct}% - 1px), rgba(14,26,22,.06) ${gridlinePct}%)` }}>
+        <div className="yc-timeline-stage">
+          {midnightHours.length > 0 && <div className="yc-day-lines" aria-hidden="true">{midnightHours.map((hour) => <i className="yc-day-line" key={hour} style={{ left: `${(hour / totalHours) * 100}%` }} />)}</div>}
           {disrupted && 17.1 <= totalHours && <div className="yc-rain-shade" style={{ left: `${(17.1 / totalHours) * 100}%` }}><b>FRONT 23:18 · 22 MM</b></div>}
+          {rainBoxes.length > 0 && <div className="yc-weather-layer" aria-hidden="true">{rainBoxes.map((box, index) => <i className="yc-rain-box" key={`rain-${box.left}-${index}`} style={{ left: `${box.left}%`, width: `${box.width}%` }} />)}</div>}
+          {windBoxes.length > 0 && <div className="yc-weather-layer" aria-hidden="true">{windBoxes.map((box, index) => <i className="yc-wind-box" key={`wind-${box.left}-${index}`} style={{ left: `${box.left}%`, width: `${box.width}%` }} />)}</div>}
           {rows.map((row) => {
             const blocks = plan.blocks.filter((block) => block.m === row && block.s < totalHours);
             return (
@@ -203,7 +235,7 @@ function Timeline({ plan, disrupted }: { plan: OptimiserCandidate; disrupted: bo
             );
           })}
         </div>
-        <div className="yc-legend"><span><i className="yc-legend-wheat" /> Wheat</span><span><i className="yc-legend-canola" /> Canola</span><span><i className="yc-legend-lentil" /> Lentils</span><span><i className="yc-legend-haul" /> Haulage</span></div>
+        <div className="yc-legend"><span><i className="yc-legend-wheat" /> Wheat</span><span><i className="yc-legend-canola" /> Canola</span><span><i className="yc-legend-lentil" /> Lentils</span><span><i className="yc-legend-haul" /> Haulage</span><span><i className="yc-legend-rain" /> Rain</span><span><i className="yc-legend-wind" /> High wind</span></div>
       </div></div>
     </div>
   );
@@ -407,7 +439,7 @@ function CommandView({ evaluated, improvement, onNavigate, onOpenUpload, history
 
   return <>
     <div className="yc-page-head"><div><h2>Command</h2><p>Everything that could change today&apos;s plan, in one place. This view reflects the latest {live ? 'trained' : 'persisted'} pipeline result.</p></div><div className="yc-actions"><button className="yc-btn" type="button" onClick={onOpenUpload}><Upload size={15} /> Calibrate farm model</button><button className="yc-btn yc-btn-dark" onClick={() => onNavigate('harvest')}><Tractor size={15} /> Open schedule</button></div></div>
-    <section className="yc-hero"><div className="yc-hero-head"><div><h3>{live ? 'Updated resource plan' : 'Persisted resource plan'}</h3><span>{plan.label} · {schedule.length} actions from the pipeline {live ? 'run' : 'snapshot'}</span></div><div className="yc-hero-legend"><span><i className="yc-legend-wheat" /> Wheat</span><span><i className="yc-legend-canola" /> Other operations</span></div></div><Timeline plan={plan} disrupted={false} /></section>
+    <section className="yc-hero"><div className="yc-hero-head"><div><h3>{live ? 'Updated resource plan' : 'Persisted resource plan'}</h3><span>{plan.label} · {schedule.length} actions from the pipeline {live ? 'run' : 'snapshot'}</span></div><div className="yc-hero-legend"><span><i className="yc-legend-wheat" /> Wheat</span><span><i className="yc-legend-canola" /> Other operations</span><span><i className="yc-legend-rain" /> Rain</span><span><i className="yc-legend-wind" /> High wind</span></div></div><Timeline plan={plan} disrupted={false} /></section>
     <div className="yc-grid yc-grid-4"><StatCard label="Scheduled actions" value={String(summary.num_scheduled_actions)} detail={live ? 'Selected after history retraining' : 'Selected by the persisted optimizer'} meter={100} /><StatCard label="Direct cash effect" value={money(summary.total_direct_cash_effect_aud)} detail="Sum of optimal_schedule.csv" tone="blue" /><StatCard label="Terminal value" value={money(summary.total_terminal_value_aud)} detail="Value carried into the objective" tone="green" /><StatCard label="Objective value" value={money(summary.total_objective_value_aud)} detail={`Status: ${summary.status}`} meter={100} tone="amber" /></div>
     <div className="yc-grid yc-grid-main"><section className="yc-card"><header><h3>Needs a decision</h3><span>{alerts.length} total</span></header><div className="yc-feed">{alerts.map((alert) => <button className="yc-feed-item" key={alert.title} onClick={() => onNavigate(alert.view)}><i className={`yc-severity yc-severity-${alert.tone}`} /><span><b>{alert.title}</b><small>{alert.text}</small></span><time>{alert.when}</time></button>)}</div></section><section className="yc-card"><header><h3>Optimiser result</h3><span>{evaluated.toLocaleString('en-AU')} actions selected</span></header><div className="yc-card-body"><dl className="yc-kv"><dt>Selected strategy</dt><dd>{plan.label}</dd><dt>Route</dt><dd>{plan.haul > 25.5 ? 'Split route' : 'Receival route'}</dd><dt>Modelled cost</dt><dd>{money(Math.abs(plan.net))}</dd><dt>Improvement</dt><dd className={improvement > 0 ? 'yc-up' : ''}>{improvement > 0 ? '+' : ''}{money(improvement)}</dd></dl><p className="yc-result-note">These values come directly from the current optimiser run. Upload history.csv to retrain the simulator and refresh this plan.</p></div></section></div>
     <section className="yc-card yc-scope"><header><h3>Supported system scope</h3><Badge tone="ok">Connected</Badge></header><div className="yc-card-body"><p>The current system can optimise schedules, score economics, apply weather, machine, labour and field-state constraints, and explain recorded decisions.</p><button className="yc-btn" onClick={() => onNavigate('harvest')}>Open supported plan <ArrowRight size={15} /></button></div></section>

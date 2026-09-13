@@ -2,7 +2,7 @@ import { loadFarmCalibration, personalisedUnit, personalisedYieldValue, predictR
 import type { FarmCalibration } from "./calibration";
 import { CROP_PARAMETERS, RULES } from "./config";
 import { getEconomicValue, getField } from "./externalVariables";
-import { dateOnlyOf } from "./datetime";
+import { addDays, dateOnlyOf, dateOnlyToTimestamp } from "./datetime";
 import {
   genericFertiliseYieldEffect,
   genericIrrigateYieldEffect,
@@ -14,6 +14,7 @@ import {
   sprayPressureKey,
 } from "./genericTransitions";
 import { clip, pyRound } from "./numeric";
+import { applyWeatherToField, WEATHER_EFFECTS } from "./weatherEffects";
 import type { Candidate, ExternalVariables, FieldRow, FieldStateSnapshot, ManagementPlanRow, OptionAction } from "./types";
 
 export const TRACKED_STATE = [
@@ -26,6 +27,8 @@ export const TRACKED_STATE = [
   "pest_pressure",
   "disease_pressure",
   "seedbed_readiness",
+  "trafficability",
+  "weather_damage_index",
 ] as const;
 
 type TrackedKey = (typeof TRACKED_STATE)[number];
@@ -58,6 +61,7 @@ export class FieldSimulator {
   newlyPlanted = false;
   harvested = false;
   private currentDate: string | null = null;
+  private currentTime: number | null = null;
   private state: Record<string, number | string> = {};
   private residuals: Record<TrackedKey, number>;
   private decay: Record<string, number>;
@@ -90,38 +94,88 @@ export class FieldSimulator {
     return row;
   }
 
-  advanceTo(timestamp: number): void {
-    const date = dateOnlyOf(timestamp);
+  private baselineValue(date: string, key: TrackedKey): number {
     const baseline = this.baselineFor(date);
+    const raw = Number(baseline[key]);
+    if (Number.isFinite(raw)) return raw;
+    if (key === "trafficability") return 1.0;
+    if (key === "weather_damage_index") return 0.0;
+    throw new Error(`Missing baseline state ${key} for ${this.fieldId} on ${date}`);
+  }
 
-    if (this.currentDate === null) {
-      for (const key of TRACKED_STATE) this.state[key] = Number(baseline[key]);
-      this.state.growth_stage = String(baseline.growth_stage);
-      this.currentDate = date;
-      return;
-    }
+  private initialiseAtStartOfBaseline(): void {
+    const date = this.baseline[0].date;
+    for (const key of TRACKED_STATE) this.state[key] = this.baselineValue(date, key);
+    this.state.growth_stage = String(this.baselineFor(date).growth_stage);
+    this.currentDate = date;
+    this.currentTime = dateOnlyToTimestamp(date);
+  }
 
-    if (date === this.currentDate) {
-      return;
-    }
-
+  private moveBaselineTo(date: string): void {
+    if (this.currentDate === null) throw new Error("FieldSimulator has not been initialised");
     const days = daysBetween(this.currentDate, date);
     if (days < 0) throw new Error("FieldSimulator cannot move backward in time");
 
     for (const key of TRACKED_STATE) {
       const factor = Math.pow(Number(this.decay[key] ?? 1.0), days);
       this.residuals[key] *= factor;
-      this.state[key] = Number(baseline[key]) + this.residuals[key];
+      this.state[key] = this.baselineValue(date, key) + this.residuals[key];
     }
 
-    this.state.growth_stage = this.newlyPlanted ? "planted" : String(baseline.growth_stage);
+    this.state.growth_stage = this.newlyPlanted ? "planted" : String(this.baselineFor(date).growth_stage);
     this.currentDate = date;
   }
 
+  private applyWeatherBetween(start: number, end: number): void {
+    if (end <= start || this.currentDate === null) return;
+    const hourMs = 3_600_000;
+
+    for (const row of this.data.weather) {
+      const rowStart = row.time;
+      const rowEnd = rowStart + hourMs;
+      const overlapStart = Math.max(start, rowStart);
+      const overlapEnd = Math.min(end, rowEnd);
+      if (overlapEnd <= overlapStart) continue;
+
+      const hours = (overlapEnd - overlapStart) / hourMs;
+      const transition = applyWeatherToField({
+        soil_moisture: Number(this.state.soil_moisture ?? 0.0),
+        trafficability: Number(this.state.trafficability ?? 1.0),
+        disease_pressure: Number(this.state.disease_pressure ?? 0.0),
+        weather_damage_index: Number(this.state.weather_damage_index ?? 0.0),
+      }, row, hours);
+
+      this.setState("soil_moisture", transition.soil_moisture);
+      this.setState("trafficability", transition.trafficability);
+      this.setState("disease_pressure", transition.disease_pressure);
+      this.setState(
+        "weather_damage_index",
+        this.currentCrop !== null && !this.harvested ? transition.weather_damage_index : 0.0,
+      );
+    }
+  }
+
+  advanceTo(timestamp: number): void {
+    if (this.currentDate === null || this.currentTime === null) this.initialiseAtStartOfBaseline();
+    if (timestamp < this.currentTime!) throw new Error("FieldSimulator cannot move backward in time");
+
+    while (this.currentTime! < timestamp) {
+      const nextDate = addDays(this.currentDate!, 1);
+      const nextMidnight = dateOnlyToTimestamp(nextDate);
+      const intervalEnd = Math.min(timestamp, nextMidnight);
+
+      this.applyWeatherBetween(this.currentTime!, intervalEnd);
+      this.currentTime = intervalEnd;
+
+      if (this.currentTime === nextMidnight) {
+        this.moveBaselineTo(nextDate);
+      }
+    }
+  }
+
   private setState(key: TrackedKey, value: number): void {
-    const baseline = this.baselineFor(this.currentDate!);
     this.state[key] = value;
-    this.residuals[key] = value - Number(baseline[key]);
+    this.residuals[key] = value - this.baselineValue(this.currentDate!, key);
   }
 
   private potentialYield(): number {
@@ -152,6 +206,7 @@ export class FieldSimulator {
     const operation = candidate.operation.toLowerCase();
     if (this.harvested) return null;
     if (operation !== "plant" && this.currentCrop === null) return null;
+    if (Number(this.state.trafficability ?? 1.0) < WEATHER_EFFECTS.work.min_trafficability_for_work) return null;
 
     const before = {
       soil_moisture: Number(this.state.soil_moisture ?? 0),
@@ -194,7 +249,9 @@ export class FieldSimulator {
   }
 
   private genericYield(): number {
-    return Math.max(0.0, Number(this.state.expected_yield_t_ha ?? 0.0));
+    const undamaged = Math.max(0.0, Number(this.state.expected_yield_t_ha ?? 0.0));
+    const damage = clip(Number(this.state.weather_damage_index ?? 0.0), 0.0, 1.0);
+    return undamaged * (1.0 - damage);
   }
 
   personalisedExpectedYield(): number {
@@ -292,6 +349,7 @@ export class FieldSimulator {
     this.planted = false;
     this.currentCrop = null;
     this.setState("expected_yield_t_ha", 0.0);
+    this.setState("weather_damage_index", 0.0);
 
     return this.result(revenue, cost, 0.0);
   }
@@ -303,8 +361,11 @@ export class FieldSimulator {
     const nextMoisture = genericNextMoisture(moisture, target);
     if (nextMoisture === null) return null;
 
-    let expectedYield = Number(this.state.expected_yield_t_ha);
-    if (expectedYield <= 0) expectedYield = this.potentialYield();
+    let expectedYield = this.genericYield();
+    if (expectedYield <= 0) {
+      const damage = clip(Number(this.state.weather_damage_index ?? 0.0), 0.0, 1.0);
+      expectedYield = this.potentialYield() * (1.0 - damage);
+    }
 
     const yieldEffect = genericIrrigateYieldEffect(
       moisture,
@@ -331,7 +392,7 @@ export class FieldSimulator {
     const nextPressure = genericNextPressure(pressure, Number(response.efficacy));
     if (nextPressure === null) return null;
 
-    const expectedYield = Number(this.state.expected_yield_t_ha);
+    const expectedYield = this.genericYield();
     const yieldEffect = genericSprayYieldEffect(
       pressure,
       expectedYield,
@@ -356,7 +417,7 @@ export class FieldSimulator {
     const nextN = genericNextNitrogen(currentN, targetN, amount, Number(response.response_scale_kg_per_ha));
     if (nextN === null) return null;
 
-    const expectedYield = Number(this.state.expected_yield_t_ha);
+    const expectedYield = this.genericYield();
     const yieldEffect = genericFertiliseYieldEffect(
       currentN,
       targetN,
@@ -402,6 +463,7 @@ export class FieldSimulator {
     this.planted = true;
     this.newlyPlanted = true;
     this.state.growth_stage = "planted";
+    this.setState("weather_damage_index", 0.0);
     this.setState("expected_yield_t_ha", expectedYield);
 
     return this.result(0.0, cost, expectedYield);

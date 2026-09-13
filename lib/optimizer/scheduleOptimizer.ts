@@ -16,7 +16,8 @@ import type {
   ScheduleRow,
 } from "./types";
 import {
-  actionDayCapacity,
+  actionDayClockCapacity,
+  actionDayWeatherEfficiency,
   actionDayWindow,
   configWorkdayBounds,
   enumerateDates,
@@ -204,13 +205,24 @@ export async function optimizeSchedule(
     return Math.max(0, (action.end_time - action.start_time) / 3_600_000);
   };
 
-  const dayCapCache = new Map<string, number>();
-  const dayCapacity = (operation: string, date: string, machineIds: string[], notBefore?: number): number => {
+  const dayClockCapCache = new Map<string, number>();
+  const dayEfficiencyCache = new Map<string, number>();
+
+  const dayClockCapacity = (operation: string, date: string, machineIds: string[], notBefore?: number): number => {
     const key = `${operation}|${date}|${machineIds.join(",")}|${notBefore ?? ""}`;
-    const cached = dayCapCache.get(key);
+    const cached = dayClockCapCache.get(key);
     if (cached !== undefined) return cached;
-    const value = actionDayCapacity(data, operation, date, machineIds, notBefore);
-    dayCapCache.set(key, value);
+    const value = actionDayClockCapacity(data, operation, date, machineIds, notBefore);
+    dayClockCapCache.set(key, value);
+    return value;
+  };
+
+  const dayEfficiency = (operation: string, date: string, machineIds: string[], notBefore?: number): number => {
+    const key = `${operation}|${date}|${machineIds.join(",")}|${notBefore ?? ""}`;
+    const cached = dayEfficiencyCache.get(key);
+    if (cached !== undefined) return cached;
+    const value = actionDayWeatherEfficiency(data, operation, date, machineIds, notBefore);
+    dayEfficiencyCache.set(key, value);
     return value;
   };
 
@@ -289,8 +301,9 @@ export async function optimizeSchedule(
 
       for (const date of dates) {
         const notBefore = date === earliestDate ? action.start_time : undefined;
-        const dayCap = dayCapacity(action.operation, date, eligible, notBefore);
-        if (dayCap <= 1e-9) continue;
+        const dayCap = dayClockCapacity(action.operation, date, eligible, notBefore);
+        const efficiency = dayEfficiency(action.operation, date, eligible, notBefore);
+        if (dayCap <= 1e-9 || efficiency <= 1e-9) continue;
 
         for (const machineId of eligible) {
           const machineCap = machineCapacityOnDay(data, machineId, date);
@@ -299,7 +312,8 @@ export async function optimizeSchedule(
 
           const wKey = workVarKey(actionKey, machineId, date);
           continuousVars.add(wKey);
-          addCoef(varCoeffs, wKey, workTotal, 1);
+          // wKey is actual clock time; only efficiency * clock time completes workload.
+          addCoef(varCoeffs, wKey, workTotal, efficiency);
 
           const boundKey = `wcap:${actionKey}:${machineId}:${date}`;
           constraintBounds.set(boundKey, { max: 0 });
@@ -330,7 +344,7 @@ export async function optimizeSchedule(
         if (!varCoeffs.has(wKey)) continue;
         const notBefore = date === flat.earliestDate ? flat.action.start_time : undefined;
         const cap = Math.min(
-          dayCapacity(flat.action.operation, date, flat.eligibleMachineIds, notBefore),
+          dayClockCapacity(flat.action.operation, date, flat.eligibleMachineIds, notBefore),
           machineCapacityOnDay(data, machineId, date),
         );
         if (cap <= 1e-9) continue;
@@ -420,7 +434,9 @@ export async function optimizeSchedule(
       const water = flat.action.water_ml ?? 0;
       if (water <= 0 || !flat.dates.includes(waterRow.date) || flat.workloadHours <= 1e-9) continue;
       used = true;
-      const rate = water / flat.workloadHours;
+      const notBefore = waterRow.date === flat.earliestDate ? flat.action.start_time : undefined;
+      const efficiency = dayEfficiency(flat.action.operation, waterRow.date, flat.eligibleMachineIds, notBefore);
+      const rate = (water / flat.workloadHours) * efficiency;
       for (const machineId of flat.eligibleMachineIds) {
         const wKey = workVarKey(flat.actionKey, machineId, waterRow.date);
         if (!varCoeffs.has(wKey)) continue;
@@ -475,8 +491,10 @@ export async function optimizeSchedule(
         for (const machineId of pred.eligibleMachineIds) {
           const wKey = workVarKey(pred.actionKey, machineId, earlier);
           if (!varCoeffs.has(wKey)) continue;
-          addCoef(varCoeffs, wKey, finished, -1);
-          addCoef(varCoeffs, wKey, notLate, 1);
+          const notBefore = earlier === pred.earliestDate ? pred.action.start_time : undefined;
+          const efficiency = dayEfficiency(pred.action.operation, earlier, pred.eligibleMachineIds, notBefore);
+          addCoef(varCoeffs, wKey, finished, -efficiency);
+          addCoef(varCoeffs, wKey, notLate, efficiency);
         }
       }
 
@@ -503,7 +521,7 @@ export async function optimizeSchedule(
         const wKey = workVarKey(succ.actionKey, machineId, date);
         if (!varCoeffs.has(wKey)) continue;
         const notBefore = date === succ.earliestDate ? succ.action.start_time : undefined;
-        const cap = dayCapacity(succ.action.operation, date, succ.eligibleMachineIds, notBefore);
+        const cap = dayClockCapacity(succ.action.operation, date, succ.eligibleMachineIds, notBefore);
         const conKey = `prec:${precIndex++}`;
         constraintBounds.set(conKey, { max: 0 });
         addCoef(varCoeffs, wKey, conKey, 1);
@@ -613,7 +631,7 @@ export async function optimizeSchedule(
     }
   }
 
-  const placed = new Map<string, { start: number; end: number; hours: number; machineId: string; date: string }[]>();
+  const placed = new Map<string, { start: number; end: number; hours: number; effectiveHours: number; machineId: string; date: string }[]>();
 
   for (const [key, group] of workByMachineDay) {
     const [machineId, date] = key.split("|");
@@ -641,8 +659,11 @@ export async function optimizeSchedule(
       }
       const start = cursor;
       const end = start + item.hours * 3_600_000;
+      const notBefore = date === item.flat.earliestDate ? item.flat.action.start_time : undefined;
+      const efficiency = dayEfficiency(item.flat.action.operation, date, item.flat.eligibleMachineIds, notBefore);
+      const effectiveHours = item.hours * efficiency;
       const list = placed.get(item.flat.actionKey) ?? [];
-      list.push({ start, end, hours: item.hours, machineId, date });
+      list.push({ start, end, hours: item.hours, effectiveHours, machineId, date });
       placed.set(item.flat.actionKey, list);
       cursor = end;
       previousField = item.flat.action.field_id;
@@ -683,13 +704,14 @@ export async function optimizeSchedule(
       start_time: s.start,
       end_time: s.end,
       work_hours: s.hours,
+      effective_work_hours: s.effectiveHours,
     })));
     const completion = segments[segments.length - 1].end;
     const firstStart = segments[0].start;
 
     segments.forEach((segment, index) => {
       const isFirst = index === 0;
-      const water = (flat.action.water_ml ?? 0) * (segment.hours / Math.max(flat.workloadHours, 1e-9));
+      const water = (flat.action.water_ml ?? 0) * (segment.effectiveHours / Math.max(flat.workloadHours, 1e-9));
       rows.push({
         option_id: flat.option.option_id,
         candidate_id: flat.action.candidate_id,

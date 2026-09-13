@@ -1,4 +1,4 @@
-import { CANDIDATE_CONFIG, CROP_PARAMETERS, RULES } from "./config";
+import { CANDIDATE_CONFIG, CONFIG, CROP_PARAMETERS, RULES } from "./config";
 import {
   getEconomicValue,
   getField,
@@ -15,6 +15,7 @@ import {
 } from "./datetime";
 import { pyRound, clip } from "./numeric";
 import { EXTERNAL_DIR } from "./paths";
+import { FieldSimulator } from "./fieldSimulator";
 import type { ActionResult, Candidate, ExternalVariables, FieldRow, FieldStateRow, ManagementPlanRow, WeatherRow } from "./types";
 import {
   actionDayWindow,
@@ -68,18 +69,13 @@ type Evaluator = (
   machineIds: string[],
 ) => ActionResult | null;
 
-function maxOf(rows: WeatherRow[], key: "rain_mm" | "wind_kmh"): number {
-  return rows.reduce((m, r) => Math.max(m, r[key]), -Infinity);
-}
 
 const evaluateHarvest: Evaluator = (data, _plan, field, state, weather, start, duration, machineIds) => {
   const rule = RULES.harvest;
   const feasibility = rule.feasibility;
 
   if (state.readiness < feasibility.min_readiness) return null;
-  if (weather.length === 0 || maxOf(weather, "rain_mm") > feasibility.max_rain_mm_per_hour || maxOf(weather, "wind_kmh") > feasibility.max_wind_kmh) {
-    return null;
-  }
+  if (weather.length === 0) return null;
 
   const area = field.area_ha;
   const crop = getEffectiveCropLocal(field);
@@ -96,7 +92,7 @@ const evaluateIrrigation: Evaluator = (data, plan, field, state, weather, start,
   const response = rule.response;
 
   if (field.irrigable !== 1) return null;
-  if (weather.length === 0 || maxOf(weather, "rain_mm") > rule.feasibility.max_rain_mm_per_hour) return null;
+  if (weather.length === 0) return null;
 
   const target = plan.amount !== null ? plan.amount : Number(response.default_target_soil_moisture);
   const current = state.soil_moisture;
@@ -125,11 +121,8 @@ const evaluateIrrigation: Evaluator = (data, plan, field, state, weather, start,
 const evaluateSpray: Evaluator = (data, plan, field, state, weather, start, duration, machineIds) => {
   const rule = RULES.spray;
   const response = rule.response;
-  const feasibility = rule.feasibility;
 
-  if (weather.length === 0 || maxOf(weather, "rain_mm") > feasibility.max_rain_mm_per_hour || maxOf(weather, "wind_kmh") > feasibility.max_wind_kmh) {
-    return null;
-  }
+  if (weather.length === 0) return null;
 
   const target = plan.target;
   const targetCfg = response.targets[target];
@@ -152,11 +145,8 @@ const evaluateSpray: Evaluator = (data, plan, field, state, weather, start, dura
 const evaluateFertiliser: Evaluator = (data, plan, field, state, weather, start, duration, machineIds) => {
   const rule = RULES.fertilise;
   const response = rule.response;
-  const feasibility = rule.feasibility;
 
-  if (weather.length === 0 || maxOf(weather, "rain_mm") > feasibility.max_rain_mm_per_hour || maxOf(weather, "wind_kmh") > feasibility.max_wind_kmh) {
-    return null;
-  }
+  if (weather.length === 0) return null;
 
   const currentN = state.nitrogen_index;
   const targetN = Number(response.target_nitrogen_index);
@@ -182,9 +172,7 @@ const evaluatePlanting: Evaluator = (data, plan, field, state, weather, start, d
   const response = rule.response;
   const feasibility = rule.feasibility;
 
-  if (weather.length === 0 || maxOf(weather, "rain_mm") > feasibility.max_rain_mm_per_hour || maxOf(weather, "wind_kmh") > feasibility.max_wind_kmh) {
-    return null;
-  }
+  if (weather.length === 0) return null;
   if (state.seedbed_readiness < feasibility.min_seedbed_readiness || state.soil_temperature_c < feasibility.min_soil_temperature_c) {
     return null;
   }
@@ -244,13 +232,14 @@ export function generateCandidates(externalVariablesDir: string = EXTERNAL_DIR):
     const field = getField(data, plan.field_id);
     const rule = RULES[operation];
     const workload = requiredWorkloadHours(field.area_ha, Number(rule.work_rate_ha_per_hour));
+    const weatherStateSimulator = new FieldSimulator(data, CONFIG, plan.field_id, null);
     let currentDate = plan.allowed_from;
 
     while (compareDateOnly(currentDate, plan.allowed_to) <= 0) {
-      const state = getFieldState(data, plan.field_id, currentDate);
+      const baselineState = getFieldState(data, plan.field_id, currentDate);
       const labour = getLabourForDay(data, currentDate);
 
-      if (!state || !labour || labour.available_workers < Number(rule.workers)) {
+      if (!baselineState || !labour || labour.available_workers < Number(rule.workers)) {
         currentDate = addDays(currentDate, 1);
         continue;
       }
@@ -265,6 +254,8 @@ export function generateCandidates(externalVariablesDir: string = EXTERNAL_DIR):
       let start = dayWindow.start;
 
       while (start < dayWindow.end) {
+        weatherStateSimulator.advanceTo(start);
+        const state = weatherStateSimulator.snapshot() as unknown as FieldStateRow;
         const segments = packWorkload(data, operation, rule.machine_type, workload, start, plan.allowed_to);
         if (!segments || segments.length === 0) {
           start = addHours(start, timeStepHours);
@@ -292,8 +283,9 @@ export function generateCandidates(externalVariablesDir: string = EXTERNAL_DIR):
               ? field.area_ha * Number(rule.response.water_ml_per_ha)
               : 0;
             const waterFeasible = operation !== "irrigate" || dailyWaterOk(data, segments, waterMl, workload);
+            const clockHours = segments.reduce((sum, segment) => sum + segment.work_hours, 0.0);
             const actionResult = waterFeasible
-              ? EVALUATORS[operation](data, plan, field, state, weather, start, workload, firstMachines)
+              ? EVALUATORS[operation](data, plan, field, state, weather, start, clockHours, firstMachines)
               : null;
             if (actionResult !== null) {
               candidates.push({
@@ -307,7 +299,7 @@ export function generateCandidates(externalVariablesDir: string = EXTERNAL_DIR):
                 min_gap_hours: plan.min_gap_hours ?? 0.0,
                 start_time: first.start_time,
                 end_time: last.end_time,
-                duration_hours: pyRound(workload, 2),
+                duration_hours: pyRound(clockHours, 2),
                 workload_hours: pyRound(workload, 4),
                 machine_type: rule.machine_type,
                 eligible_machine_ids: machineIds.length > 0 ? machineIds : firstMachines,

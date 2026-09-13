@@ -105,7 +105,8 @@ export interface WorkSegment {
   date: string;
   start_time: number;
   end_time: number;
-  work_hours: number;
+  work_hours: number; // actual clock hours consuming labour/machine capacity
+  effective_work_hours?: number; // workload progress after weather-efficiency loss
 }
 
 export interface Candidate extends ActionResult {
@@ -142,6 +143,8 @@ export interface FieldStateSnapshot {
   pest_pressure: number;
   disease_pressure: number;
   seedbed_readiness: number;
+  trafficability: number;
+  weather_damage_index: number;
 }
 
 export interface OptionAction extends Candidate {

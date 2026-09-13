@@ -1,6 +1,7 @@
 import summary from '@/data/outputs/optimization_summary.json';
 import scheduleCsv from '@/data/outputs/optimal_schedule.csv?raw';
 import managementPlanCsv from '@/data/external_variables/management_plan.csv?raw';
+import weatherCsv from '@/data/external_variables/weather_hourly.csv?raw';
 import type { OptimiserCandidate } from '@/app/yallambee-ops';
 import type { CropKey } from '@/lib/farm/types';
 
@@ -117,6 +118,49 @@ export const persistedSchedule = parseSchedule(scheduleCsv);
 function parseTimestamp(value: string): number {
   return Date.parse(value.replace(' ', 'T') + 'Z');
 }
+
+export interface WeatherWindow {
+  start: number;
+  end: number;
+}
+
+export const HIGH_WIND_KMH = 13;
+
+function weatherWindowsFrom(csv: string, includeHour: (rainMm: number, windKmh: number) => boolean): WeatherWindow[] {
+  const hours = csv
+    .trim()
+    .split(/\r?\n/)
+    .slice(1)
+    .filter(Boolean)
+    .flatMap((line) => {
+      const values = parseCsvRow(line);
+      const start = parseTimestamp(values[0] ?? '');
+      const wind = Number(values[2]);
+      const rain = Number(values[3]);
+      return Number.isFinite(start) && includeHour(rain, wind) ? [start] : [];
+    })
+    .sort((left, right) => left - right);
+
+  const windows: WeatherWindow[] = [];
+  for (const start of hours) {
+    const end = start + 3_600_000;
+    const last = windows.at(-1);
+    if (last && start <= last.end) last.end = Math.max(last.end, end);
+    else windows.push({ start, end });
+  }
+  return windows;
+}
+
+export function rainWindowsFromWeather(csv: string): WeatherWindow[] {
+  return weatherWindowsFrom(csv, (rainMm) => rainMm > 0);
+}
+
+export function highWindWindowsFromWeather(csv: string, minSpeed = HIGH_WIND_KMH): WeatherWindow[] {
+  return weatherWindowsFrom(csv, (_rainMm, windKmh) => windKmh > minSpeed);
+}
+
+export const persistedRainWindows = rainWindowsFromWeather(weatherCsv);
+export const persistedHighWindWindows = highWindWindowsFromWeather(weatherCsv);
 
 export function scheduleAnchorFrom(rows: PersistedScheduleRow[]): number {
   return rows.length ? Math.min(...rows.map((row) => parseTimestamp(row.start_time))) : Date.now();
