@@ -778,7 +778,7 @@ footer {
 .yc-plan-card-selected:hover { border-color: var(--yc-ink); background: #eef1ea; }
 .yc-plan-card-check { position: absolute; top: 11px; right: 11px; color: var(--yc-ink); }
 .yc-plan-card-name { display: block; padding-right: 22px; color: var(--yc-text); font-size: 12px; font-weight: 700; letter-spacing: .05em; line-height: 1.25; text-transform: uppercase; }
-.yc-plan-card-explain { display: block; margin-top: 4px; color: var(--yc-muted); font-size: 12px; line-height: 1.35; }
+.yc-plan-card-explain { display: block; height: calc(1.35em * 2); margin-top: 4px; overflow: hidden; color: var(--yc-muted); font-size: 12px; line-height: 1.35; }
 .yc-plan-card-value { display: flex; align-items: baseline; justify-content: space-between; gap: 8px; width: 100%; margin-top: 14px; }
 .yc-plan-card-value b { min-width: 0; color: var(--yc-text); font-size: 22px; font-weight: 700; letter-spacing: -.03em; line-height: 1.1; }
 .yc-plan-card-ratio { flex-shrink: 0; color: var(--yc-muted); font-size: 13px; font-weight: 600; }

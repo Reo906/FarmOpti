@@ -298,10 +298,10 @@ export interface ResourcePlanOption {
 }
 
 const RESOURCE_PLAN_PRESENTATION = [
-  { id: 'value', name: 'Max Value', explanation: 'Make me the most money.', benefit: 'value' },
-  { id: 'low_cost', name: 'Low Cost', explanation: 'Spend less, while keeping most of the return.', benefit: 'cost' },
-  { id: 'low_risk', name: 'Low Risk', explanation: 'Give me a safer, more robust plan.', benefit: 'risk' },
-  { id: 'smoother', name: 'Smoother Workload', explanation: 'Make the workload easier to execute.', benefit: 'smooth' },
+  { id: 'value', name: 'Max Value', explanation: 'Maximise whole-farm financial value.', benefit: 'value' },
+  { id: 'low_cost', name: 'Low Cost', explanation: 'Reduce operating costs while preserving most of the value.', benefit: 'cost' },
+  { id: 'low_risk', name: 'Low Risk', explanation: 'Reduce exposure to disruptions or risky operating conditions.', benefit: 'risk' },
+  { id: 'smoother', name: 'Smoother Workload', explanation: 'Spread work more evenly across the schedule.', benefit: 'smooth' },
 ] as const;
 
 function formatScheduleInstant(value: string | number | undefined, fallback = ''): string {

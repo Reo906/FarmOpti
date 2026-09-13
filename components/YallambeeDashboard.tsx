@@ -279,7 +279,7 @@ function ResourcePlanSection({ disrupted, showLegend = false }: { disrupted: boo
                   <b>{money(item.netValueAud)}</b>
                   {item.optimalityPercent && <span className="yc-plan-card-ratio">{item.optimalityPercent}</span>}
                 </div>
-                <span className="yc-plan-card-value-label">Net financial value</span>
+                {/* <span className="yc-plan-card-value-label">Net financial value</span> */}
                 <div className="yc-plan-card-foot">
                   <span className="yc-plan-card-benefit">{item.benefit}</span>
                   {item.diffLabel && <span className="yc-plan-card-diffs">{item.diffLabel}</span>}
