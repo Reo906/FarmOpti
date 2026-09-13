@@ -3,8 +3,10 @@ import scheduleCsv from '@/data/outputs/optimal_schedule.csv?raw';
 import alternativePlansJson from '@/data/outputs/alternative_plans.json';
 import managementPlanCsv from '@/data/external_variables/management_plan.csv?raw';
 import weatherCsv from '@/data/external_variables/weather_hourly.csv?raw';
+import decisionIndexJsonl from '@/data/outputs/decision_index.jsonl?raw';
 import type { OptimiserCandidate } from '@/app/yallambee-ops';
 import type { CropKey } from '@/lib/farm/types';
+import { parseDecisionIndex, whyReasonsForPlan, type PlanReason } from '@/lib/ui/plan-reasons';
 
 export interface PersistedScheduleRow {
   option_id: string;
@@ -288,6 +290,7 @@ export interface ResourcePlanOption {
   benefit: string;
   diffs: ResourcePlanDiffs | null;
   diffLabel: string | null;
+  whyReasons: PlanReason[];
   summary: PersistedOptimizerSummary;
   schedule: PersistedScheduleRow[];
   dashboardPlan: OptimiserCandidate;
@@ -424,6 +427,14 @@ export function resourcePlanOptionsFrom(data: PersistedAlternativePlans): Resour
       benefit: planBenefit(presentation.benefit, baseline, plan),
       diffs,
       diffLabel: diffs ? formatDiffLabel(diffs) : null,
+      whyReasons: whyReasonsForPlan({
+        summary: plan.summary,
+        schedule,
+        index: persistedDecisionIndex,
+        plan,
+        baseline,
+        kind: presentation.benefit,
+      }),
       summary: plan.summary,
       schedule,
       dashboardPlan: dashboardPlanFrom(plan.summary, schedule, {
@@ -437,6 +448,7 @@ export function resourcePlanOptionsFrom(data: PersistedAlternativePlans): Resour
   });
 }
 
+export const persistedDecisionIndex = parseDecisionIndex(decisionIndexJsonl);
 export const persistedAlternativePlans = alternativePlansJson as unknown as PersistedAlternativePlans;
 export const persistedResourcePlans = resourcePlanOptionsFrom(persistedAlternativePlans);
 export const defaultResourcePlanId = persistedResourcePlans[0]?.id ?? 'value';
