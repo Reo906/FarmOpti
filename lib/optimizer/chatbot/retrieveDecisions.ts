@@ -1,4 +1,4 @@
-import fs from "node:fs";
+import { dataFileExists, readDataFile } from "../bundledData";
 import { CONFIG } from "../config";
 import { DECISION_INDEX_PATH, DECISION_TRACE_PATH } from "../paths";
 import type { DecisionIndexRecord } from "../decisionAnalysis/buildDecisionIndex";
@@ -30,7 +30,7 @@ function tokenize(text: unknown): string[] {
 }
 
 function loadJsonl(filePath: string): DecisionIndexRecord[] {
-  const text = fs.readFileSync(filePath, "utf-8");
+  const text = readDataFile(filePath);
   return text
     .split("\n")
     .map((line) => line.trim())
@@ -77,15 +77,15 @@ export class DecisionRetriever {
 
     processPrint("[INIT] Loading decision evidence...");
 
-    if (!fs.existsSync(this.indexPath)) {
+    if (!dataFileExists(this.indexPath)) {
       throw new Error(`Decision index not found: ${this.indexPath}\nRun the optimizer pipeline first.`);
     }
 
     this.records = loadJsonl(this.indexPath);
     processPrint(`[INIT] Loaded ${this.records.length} retrieval records`);
 
-    if (fs.existsSync(this.tracePath)) {
-      this.trace = JSON.parse(fs.readFileSync(this.tracePath, "utf-8"));
+    if (dataFileExists(this.tracePath)) {
+      this.trace = JSON.parse(readDataFile(this.tracePath));
       processPrint(`[INIT] Loaded ${this.trace.actions?.length ?? 0} action decision records`);
     }
 

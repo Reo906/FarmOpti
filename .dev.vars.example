@@ -1,0 +1,11 @@
+# Copy this file to .dev.vars (gitignored) for local development.
+
+# Which LLM provider profile to use (see explanation.llm.providers in
+# data/config.yaml). Defaults to "ollama" if unset. Set to "groq" if you
+# don't have Ollama running locally, or when deploying somewhere (like
+# Render) with no local model server.
+# LLM_PROVIDER=groq
+
+# Needed only when LLM_PROVIDER=groq (or any other API-key-based provider).
+# Get a free key at https://console.groq.com/keys
+# LLM_API_KEY=your-groq-api-key-here

@@ -1,11 +1,12 @@
 import fs from "node:fs";
 import { parse } from "csv-parse/sync";
 import { stringify } from "csv-stringify/sync";
+import { readDataFile } from "./bundledData";
 
 export type RawRow = Record<string, string>;
 
 export function readCsv(filePath: string): RawRow[] {
-  const text = fs.readFileSync(filePath, "utf-8");
+  const text = readDataFile(filePath);
   return parse(text, { columns: true, skip_empty_lines: true }) as RawRow[];
 }
 

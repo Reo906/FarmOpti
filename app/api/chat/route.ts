@@ -1,9 +1,14 @@
-type ExplanationService = import('@/lib/optimizer/chatbot/explanationService').ExplanationService;
+import { ExplanationService } from '@/lib/optimizer/chatbot/explanationService';
+
+// A dynamic import() of a local module here does not resolve in this web
+// runtime (Cloudflare Workers via vinext), so this stays a static import.
+// ExplanationService itself defers loading the LP solver (and its WASM
+// loader) until a scenario is actually requested, so this is still cheap
+// for plain explain-mode questions.
 let service: ExplanationService | undefined;
 
-async function getService() {
-  const { ExplanationService: Service } = await import('@/lib/optimizer/chatbot/explanationService');
-  service ??= new Service();
+function getService() {
+  service ??= new ExplanationService();
   return service;
 }
 
@@ -17,7 +22,7 @@ export async function POST(request: Request) {
       return Response.json({ error: 'Enter a question about the optimisation result.' }, { status: 400 });
     }
 
-    const assistant = await getService();
+    const assistant = getService();
     const result = summary ? { answer: await assistant.explainDefault() } : await assistant.answer(question);
     return Response.json({ answer: result.answer, scenario: result.scenario_result ?? null });
   } catch (error) {
