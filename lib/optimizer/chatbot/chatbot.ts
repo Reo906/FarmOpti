@@ -51,16 +51,28 @@ async function interactiveChat(service: ExplanationService): Promise<void> {
 
       const result = await service.answer(question);
       console.log(`\nFarmOpti: ${result.answer}\n`);
+
+      if (result.needs_confirmation && result.pending_proposal) {
+        const confirmation = (await ask("Apply this change? (yes/no): ")).trim().toLowerCase();
+        if (["yes", "y"].includes(confirmation)) {
+          console.log("\nApplying and re-optimising...");
+          const outcome = await service.confirmConfigUpdate(result.pending_proposal);
+          console.log(`\nFarmOpti: ${outcome.answer}\n`);
+        } else {
+          console.log("\nDiscarded -- no changes made.\n");
+        }
+      }
     }
   } finally {
     rl.close();
   }
 }
 
-function parseArgs(argv: string[]): { question?: string; summary: boolean; showEvidence: boolean } {
+function parseArgs(argv: string[]): { question?: string; summary: boolean; showEvidence: boolean; confirm: boolean } {
   let question: string | undefined;
   let summary = false;
   let showEvidence = false;
+  let confirm = false;
 
   for (let i = 0; i < argv.length; i++) {
     if (argv[i] === "--question") {
@@ -69,10 +81,12 @@ function parseArgs(argv: string[]): { question?: string; summary: boolean; showE
       summary = true;
     } else if (argv[i] === "--show-evidence") {
       showEvidence = true;
+    } else if (argv[i] === "--confirm") {
+      confirm = true;
     }
   }
 
-  return { question, summary, showEvidence };
+  return { question, summary, showEvidence, confirm };
 }
 
 async function main(): Promise<void> {
@@ -89,6 +103,16 @@ async function main(): Promise<void> {
     const result = await service.answer(args.question, args.showEvidence);
     console.log(`\nFarmOpti: ${result.answer}`);
     if (args.showEvidence) printEvidence(result.evidence ?? []);
+
+    if (result.needs_confirmation && result.pending_proposal) {
+      if (args.confirm) {
+        console.log("\nApplying and re-optimising (--confirm passed)...");
+        const outcome = await service.confirmConfigUpdate(result.pending_proposal);
+        console.log(`\nFarmOpti: ${outcome.answer}`);
+      } else {
+        console.log("\n(Not applied. Re-run with --confirm to apply this exact change, or use the interactive chatbot to review it first.)");
+      }
+    }
     return;
   }
 

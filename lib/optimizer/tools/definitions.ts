@@ -6,9 +6,11 @@ import { buildDecisionIndex, saveDecisionIndex } from "../decisionAnalysis/build
 import { generateDecisionTrace, updateImportance, type DecisionTrace } from "../decisionAnalysis/extractDecisions";
 import { generateFieldOptions } from "../fieldOptions";
 import { saveFieldOptions } from "../fieldOptionsIO";
-import { CANDIDATE_ACTIONS_PATH, EXTERNAL_DIR, SCHEDULE_PATH, SUMMARY_PATH } from "../paths";
+import { CANDIDATE_ACTIONS_PATH, DECISION_TRACE_PATH, EXTERNAL_DIR, SCHEDULE_PATH, SUMMARY_PATH } from "../paths";
 import { optimizeSchedule } from "../scheduleOptimizer";
-import { ExplanationService } from "../chatbot/explanationService";
+import { ExplanationService, LLMClient } from "../chatbot/explanationService";
+import { applyConfigChangeProposal } from "../chatbot/configUpdate/applier";
+import { ConfigUpdateParser, type ConfigChangeProposal } from "../chatbot/configUpdate/parser";
 import type { Candidate, FieldOption, OptimizationScenario, OptimizationSummary, ScheduleRow } from "../types";
 import { ToolRegistry } from "./registry";
 import type { ToolDefinition } from "./types";
@@ -172,6 +174,66 @@ const applyScenarioTool: ToolDefinition<{ description: string }, unknown> = {
   },
 };
 
+/**
+ * Re-runs the same 6-stage sequence as pipeline.ts, reusing these tools'
+ * own execute functions directly (not via the registry, to avoid a circular
+ * import between this module and pipeline.ts). Used after a confirmed,
+ * persistent config/machine change so decision_trace.json and
+ * decision_index.jsonl stay consistent with the new inputs, not just the
+ * schedule.
+ */
+async function rerunFullPipeline(): Promise<OptimizationSummary> {
+  const candidates = await generateCandidatesTool.execute({});
+  const options = await generateFieldOptionsTool.execute({});
+  const { schedule, summary } = await optimizeScheduleTool.execute({ options });
+  let trace = await extractDecisionTraceTool.execute({ candidates, options, schedule, summary });
+  trace = await analyseCounterfactualsTool.execute({ trace, options, schedule, summary });
+  fs.writeFileSync(DECISION_TRACE_PATH, JSON.stringify(trace, null, 2));
+  await buildDecisionIndexTool.execute({ trace });
+  return summary;
+}
+
+function readCurrentSummary(): OptimizationSummary | null {
+  if (!fs.existsSync(SUMMARY_PATH)) return null;
+  return JSON.parse(fs.readFileSync(SUMMARY_PATH, "utf-8"));
+}
+
+const proposeConfigUpdateTool: ToolDefinition<{ description: string }, ConfigChangeProposal> = {
+  name: "propose_config_update",
+  description:
+    "Compiles a user's natural-language request to PERSISTENTLY change an optimizer threshold/parameter (config.yaml) or the equipment roster (machines.csv) into a validated, structured proposal -- e.g. 'only spray when wind is below 15 km/h', 'we bought a new harvester, M8, costing $180/hour', 'M3's cost per hour is now 45'. This does NOT write anything yet -- it only parses and validates against the real schema, returning a proposal for the user to review. Always show the proposal to the user and get explicit confirmation before calling confirm_config_update with it. If the request describes a genuinely new kind of rule (not an existing threshold or machine field), the proposal comes back with kind='unsupported' and a reason -- report that to the user rather than forcing it through.",
+  input_schema: {
+    type: "object",
+    properties: {
+      description: { type: "string", description: "The user's request in natural language." },
+    },
+    required: ["description"],
+  },
+  execute: async ({ description }) => {
+    const parser = new ConfigUpdateParser(new LLMClient());
+    return parser.parse(description);
+  },
+};
+
+const confirmConfigUpdateTool: ToolDefinition<{ proposal: ConfigChangeProposal }, { applied: ConfigChangeProposal; before: OptimizationSummary | null; after: OptimizationSummary }> = {
+  name: "confirm_config_update",
+  description:
+    "Persistently applies a proposal previously returned by propose_config_update -- writing the new value into config.yaml (preserving comments/formatting) or adding/updating a row in machines.csv (and generating its machine_availability_daily.csv rows, for new equipment). Only call this AFTER the user has explicitly confirmed the exact proposal shown to them; never call it directly from a description. After writing, re-runs the full optimizer pipeline so optimal_schedule.csv, decision_trace.json, and decision_index.jsonl all reflect the change, and returns the whole-farm objective value before and after.",
+  input_schema: {
+    type: "object",
+    properties: {
+      proposal: { type: "object", description: "The exact, unmodified proposal object returned by propose_config_update." },
+    },
+    required: ["proposal"],
+  },
+  execute: async ({ proposal }) => {
+    const before = readCurrentSummary();
+    applyConfigChangeProposal(proposal);
+    const after = await rerunFullPipeline();
+    return { applied: proposal, before, after };
+  },
+};
+
 export function createDefaultToolRegistry(): ToolRegistry {
   const registry = new ToolRegistry();
   registry.register(generateCandidatesTool);
@@ -181,5 +243,7 @@ export function createDefaultToolRegistry(): ToolRegistry {
   registry.register(analyseCounterfactualsTool);
   registry.register(buildDecisionIndexTool);
   registry.register(applyScenarioTool);
+  registry.register(proposeConfigUpdateTool);
+  registry.register(confirmConfigUpdateTool);
   return registry;
 }

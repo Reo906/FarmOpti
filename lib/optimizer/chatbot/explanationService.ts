@@ -4,6 +4,19 @@ import { ScenarioParser } from "./scenario/parser";
 import { ScenarioRunner } from "./scenario/runner";
 import { ScenarioValidationError } from "./scenario/validator";
 import type { ChatMessage } from "./scenario/parser";
+import { ConfigUpdateParser, ConfigUpdateValidationError, type ConfigChangeProposal } from "./configUpdate/parser";
+import { applyConfigChangeProposal } from "./configUpdate/applier";
+import fs from "node:fs";
+import { generateCandidates } from "../candidateGeneration";
+import { writeCandidateActionsCsv, writeScheduleCsv } from "../csvWriters";
+import { runActionCounterfactuals } from "../decisionAnalysis/analyseCounterfactuals";
+import { buildDecisionIndex, saveDecisionIndex } from "../decisionAnalysis/buildDecisionIndex";
+import { generateDecisionTrace, updateImportance } from "../decisionAnalysis/extractDecisions";
+import { generateFieldOptions } from "../fieldOptions";
+import { saveFieldOptions } from "../fieldOptionsIO";
+import { optimizeSchedule } from "../scheduleOptimizer";
+import { CANDIDATE_ACTIONS_PATH, DECISION_TRACE_PATH, EXTERNAL_DIR, SCHEDULE_PATH, SUMMARY_PATH } from "../paths";
+import type { OptimizationSummary } from "../types";
 
 const LLM_CONFIG = CONFIG.explanation.llm;
 const PROCESS_CONFIG = CONFIG.explanation.process_display ?? {};
@@ -33,34 +46,40 @@ Rules:
 `.trim();
 
 const CLASSIFICATION_PROMPT = `
-Classify the user's FarmOpti request as exactly one of two modes.
+Classify the user's FarmOpti request as exactly one of three modes.
 
 EXPLAIN:
 The user is asking about the existing optimisation result, including its decisions, timing, feasibility, alternatives, values, state changes, resources, or reasoning. Use EXPLAIN when the question can be answered from the existing optimisation and its recorded evidence.
 
 SCENARIO:
-The user explicitly specifies a changed condition, value, requirement, constraint, availability, assumption, timing, or action and wants FarmOpti to evaluate the result under that changed state. A SCENARIO request must contain a concrete modification to the optimisation problem.
+The user wants to see the effect of a hypothetical, ONE-OFF, throwaway change -- "what if", "would it be better if", a single trial condition to compare against the current plan. A scenario never modifies the real farm data; it only tests a possibility.
+
+CONFIG_UPDATE:
+The user is telling FarmOpti about a REAL, LASTING change to the farm itself that should be remembered for every future plan: a new or changed piece of equipment, or a permanent adjustment to an operating threshold/limit/rule of thumb. This is not a hypothetical -- the user is reporting a fact ("we bought...", "M3 now costs...", "only spray when...", "raise/lower the ... limit to ...") that should update the underlying configuration, not just be tested once.
 
 Important distinctions:
 - "Why was F2 sprayed?" -> EXPLAIN
 - "Could F1 have been harvested later?" -> EXPLAIN
-- "Was September 25 considered for F1?" -> EXPLAIN
-- "What other harvest dates were feasible for F1?" -> EXPLAIN
 - "What if F1 is harvested on September 25?" -> SCENARIO
-- "Move F1 harvest to September 25." -> SCENARIO
 - "Would profit be higher if F1 were harvested on September 25?" -> SCENARIO
-- "Add 3 ML of water on September 20." -> SCENARIO
-- "What if wheat price were 450 AUD/t?" -> SCENARIO
-- "Don't spray F2." -> SCENARIO
+- "Add 3 ML of water on September 20." -> SCENARIO (a one-off day, not a lasting change)
+- "Don't spray F2." -> SCENARIO (this run's plan only)
+- "We just bought a new harvester, M8, costing $180/hour." -> CONFIG_UPDATE
+- "M3's cost per hour is now 45." -> CONFIG_UPDATE
+- "Only spray when wind speed is below 15 km/h from now on." -> CONFIG_UPDATE
+- "Raise the beam search width to 120." -> CONFIG_UPDATE
+- "Never harvest above 40 km/h wind." -> CONFIG_UPDATE
 
-Do not classify a request as SCENARIO merely because it contains words such as could, would, possible, alternative, later, earlier, or why not. Those remain EXPLAIN unless the user actually supplies a changed condition to evaluate.
+The key test: would the user still want this true next week, for a completely different plan? If yes -> CONFIG_UPDATE. If it's testing one specific hypothetical -> SCENARIO.
+
+Do not classify a request as SCENARIO or CONFIG_UPDATE merely because it contains words such as could, would, possible, alternative, later, earlier, or why not. Those remain EXPLAIN unless the user actually supplies a changed condition to evaluate.
 
 Return only the structured classification required by the supplied schema.
 `.trim();
 
 const CLASSIFICATION_SCHEMA = {
   type: "object",
-  properties: { mode: { type: "string", enum: ["explain", "scenario"] } },
+  properties: { mode: { type: "string", enum: ["explain", "scenario", "config_update"] } },
   required: ["mode"],
   additionalProperties: false,
 };
@@ -180,6 +199,23 @@ export interface AnswerResult {
   scenario_error?: boolean;
   scenario_result?: unknown;
   evidence?: RetrievedRecord[];
+  config_update_error?: boolean;
+  needs_confirmation?: boolean;
+  pending_proposal?: ConfigChangeProposal;
+}
+
+function describeProposal(proposal: ConfigChangeProposal): string {
+  if (proposal.kind === "config_update") {
+    return `Change ${proposal.path} from ${JSON.stringify(proposal.previous_value)} to ${JSON.stringify(proposal.new_value)}.`;
+  }
+  if (proposal.kind === "machine_change") {
+    const c = proposal.change;
+    if (c.mode === "add") {
+      return `Add a new machine ${c.machine_id} (${c.machine_type}) at $${c.cost_per_hour_aud}/hour, available ${c.available_from}-${c.available_to} every day of the current planning horizon.`;
+    }
+    return `Update machine ${c.machine_id}: type=${c.machine_type}, cost=$${c.cost_per_hour_aud}/hour, current_field=${c.current_field || "(none)"}.`;
+  }
+  return proposal.reason;
 }
 
 export class ExplanationService {
@@ -187,11 +223,13 @@ export class ExplanationService {
   llm: LLMClient;
   private scenarioRunner: ScenarioRunner | null = null;
   private scenarioParser: ScenarioParser | null = null;
+  private configUpdateParser: ConfigUpdateParser;
 
   constructor() {
     processPrint("[INIT] Initialising explanation service...");
     this.retriever = new DecisionRetriever();
     this.llm = new LLMClient();
+    this.configUpdateParser = new ConfigUpdateParser(this.llm);
 
     if (SCENARIO_CONFIG.enabled ?? true) {
       this.scenarioRunner = new ScenarioRunner();
@@ -289,12 +327,10 @@ export class ExplanationService {
     return answer;
   }
 
-  private async classifyRequest(question: string): Promise<"explain" | "scenario"> {
-    if (!this.scenarioParser) return "explain";
-
+  private async classifyRequest(question: string): Promise<"explain" | "scenario" | "config_update"> {
     processPrint("[CLASSIFY] Classifying request...");
     const start = Date.now();
-    let mode: "explain" | "scenario" = "explain";
+    let mode: "explain" | "scenario" | "config_update" = "explain";
 
     try {
       const response = await this.llm.chat(
@@ -304,11 +340,13 @@ export class ExplanationService {
         ],
         { responseSchema: CLASSIFICATION_SCHEMA, maxOutputTokens: 30 },
       );
-      mode = String(JSON.parse(response).mode).toLowerCase() as "explain" | "scenario";
+      mode = String(JSON.parse(response).mode).toLowerCase() as "explain" | "scenario" | "config_update";
     } catch (exc) {
       processPrint(`[CLASSIFY] Invalid classifier response (${exc}) -> EXPLAIN fallback`);
       mode = "explain";
     }
+
+    if (mode === "scenario" && !this.scenarioParser) mode = "explain";
 
     const elapsed = (Date.now() - start) / 1000;
     processPrint(`[CLASSIFY] ${mode.toUpperCase()} (${elapsed.toFixed(2)}s)`);
@@ -389,6 +427,82 @@ Explain what changed and whether the requested scenario improved or reduced the 
     return { answer, needs_reoptimization: false, scenario_result: result };
   }
 
+  private async runConfigUpdate(question: string): Promise<AnswerResult> {
+    processPrint("[CONFIG] Parsing requested configuration change...");
+
+    let proposal: ConfigChangeProposal;
+    try {
+      proposal = await this.configUpdateParser.parse(question);
+    } catch (exc) {
+      if (exc instanceof ConfigUpdateValidationError) {
+        processPrint(`[CONFIG] Invalid proposal: ${exc.message}`);
+        return {
+          answer: `I understood this as a lasting configuration change, but could not translate it into a valid update: ${exc.message}`,
+          needs_reoptimization: false,
+          config_update_error: true,
+        };
+      }
+      throw exc;
+    }
+
+    if (proposal.kind === "unsupported") {
+      processPrint(`[CONFIG] Unsupported: ${proposal.reason}`);
+      return {
+        answer: `This describes a new kind of rule FarmOpti's configuration can't express yet (${proposal.reason}). It isn't an existing threshold or machine field, so I can't apply it as a config update -- this would need new code, not a data change.`,
+        needs_reoptimization: false,
+        config_update_error: true,
+      };
+    }
+
+    processPrint(`[CONFIG] Proposed: ${describeProposal(proposal)}`);
+    return {
+      answer: `I'd make this lasting change: ${describeProposal(proposal)}\n\nThis will persist for every future plan, not just a one-off test. Reply to confirm and I'll apply it and re-run the optimiser, or say no to discard it.`,
+      needs_reoptimization: false,
+      needs_confirmation: true,
+      pending_proposal: proposal,
+    };
+  }
+
+  /** Persistently applies a proposal from runConfigUpdate() and re-runs the full pipeline. */
+  async confirmConfigUpdate(proposal: ConfigChangeProposal): Promise<{ answer: string; before: OptimizationSummary | null; after: OptimizationSummary }> {
+    const before = fs.existsSync(SUMMARY_PATH) ? (JSON.parse(fs.readFileSync(SUMMARY_PATH, "utf-8")) as OptimizationSummary) : null;
+
+    processPrint("[CONFIG] Applying change...");
+    applyConfigChangeProposal(proposal);
+
+    processPrint("[CONFIG] Re-running the full optimizer pipeline...");
+    const candidates = generateCandidates();
+    writeCandidateActionsCsv(CANDIDATE_ACTIONS_PATH, candidates);
+
+    const options = generateFieldOptions();
+    saveFieldOptions(options);
+
+    const { schedule, summary: after } = await optimizeSchedule(options);
+    writeScheduleCsv(SCHEDULE_PATH, schedule);
+    fs.writeFileSync(SUMMARY_PATH, JSON.stringify(after, null, 2));
+
+    let trace = generateDecisionTrace(candidates, options, schedule, after);
+    trace.counterfactuals = await runActionCounterfactuals(trace, options, schedule, after, EXTERNAL_DIR);
+    trace = updateImportance(trace);
+    fs.writeFileSync(DECISION_TRACE_PATH, JSON.stringify(trace, null, 2));
+
+    const index = buildDecisionIndex(trace);
+    saveDecisionIndex(index);
+
+    // The retriever/index were built from the pre-change decision index; reload so
+    // subsequent EXPLAIN questions in this same chat session see the new plan.
+    this.retriever = new DecisionRetriever();
+
+    const delta = before ? after.total_objective_value_aud - before.total_objective_value_aud : null;
+    const deltaText = delta === null ? "" : ` (${delta >= 0 ? "+" : ""}${delta.toFixed(2)} AUD)`;
+
+    return {
+      answer: `Applied: ${describeProposal(proposal)}\n\nRe-optimised whole-farm objective: ${before ? `$${before.total_objective_value_aud.toLocaleString()} -> ` : ""}$${after.total_objective_value_aud.toLocaleString()}${deltaText}.`,
+      before,
+      after,
+    };
+  }
+
   async explainDefault(): Promise<string> {
     processPrint("\n[SUMMARY] Generating important-decision summary");
     const records = this.retriever.getDefaultDecisions();
@@ -412,6 +526,7 @@ ${JSON.stringify(context, null, 2)}
     const mode = await this.classifyRequest(question);
 
     if (mode === "scenario") return this.runScenario(question);
+    if (mode === "config_update") return this.runConfigUpdate(question);
 
     processPrint("[RETRIEVAL] Existing decision -> retrieving optimisation evidence");
     const records = this.retriever.retrieve(question);
