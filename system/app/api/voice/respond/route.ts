@@ -1,5 +1,6 @@
 import type { ExplanationService } from "@/lib/optimizer/chatbot/explanationService";
 import { getConstraintStore } from "@/lib/voice/constraintStore";
+import { demoRespond, isDemoMode } from "@/lib/voice/demoResponder";
 
 let service: ExplanationService | undefined;
 
@@ -71,6 +72,33 @@ export async function POST(request: Request) {
         answer: "Constraint change discarded.",
         mode: "cancel",
         metadata: {},
+      });
+    }
+
+    // Demo mode: canned responses, no LLM or optimizer needed.
+    if (isDemoMode()) {
+      const demo = demoRespond(text);
+      let pendingProposal = null;
+      if (demo.mode === "scenario" && demo.requestedScenario) {
+        pendingProposal = store.propose(sessionId, text, {
+          scenario: demo.requestedScenario,
+          resolvedChanges: [],
+          comparison: demo.comparison ?? {},
+          summary: demo.summary ?? {},
+          schedule: demo.schedule ?? [],
+        });
+      }
+      return Response.json({
+        answer: demo.answer,
+        mode: demo.mode,
+        metadata: {
+          scenarioError: false,
+          objectiveChangeAud: (demo.comparison as any)?.objective_change_aud,
+          actionsAdded: ((demo.comparison as any)?.actions_added ?? []).length,
+          actionsRemoved: ((demo.comparison as any)?.actions_removed ?? []).length,
+          actionsRescheduled: ((demo.comparison as any)?.actions_rescheduled ?? []).length,
+        },
+        pendingProposal,
       });
     }
 

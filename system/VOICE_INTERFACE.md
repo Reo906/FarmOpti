@@ -10,36 +10,41 @@ ElevenLabs handles speech-to-text and text-to-speech only. All decision-making, 
 
 ## How to run it
 
-**Prerequisites:** Node.js 22+, npm, Ollama running locally with `qwen2.5-coder:7b-instruct`.
+### Demo mode (ElevenLabs only — no LLM or Ollama needed)
+
+**Prerequisites:** Node.js 22+, npm, an ElevenLabs API key.
 
 ```bash
-# 1. Install dependencies (if not already done)
 cd system
 npm install
-
-# 2. Create your .env file
 cp .env.example .env
 ```
 
-Open `system/.env` and fill in:
+Open `system/.env` and add your ElevenLabs key:
 
 ```
 ELEVENLABS_API_KEY=your_key_here
-ELEVENLABS_VOICE_ID=JBFqnCBsd6RMkjVDRZzb   # any ElevenLabs voice ID
 ```
 
-Leave `LLM_API_KEY` empty — the chatbot uses Ollama locally.
+`FARMOPTI_DEMO_MODE=true` is already set in the example — that's all you need.
 
 ```bash
-# 3. Start Ollama (separate terminal)
-ollama serve
-ollama pull qwen2.5-coder:7b-instruct   # first time only
-
-# 4. Start the app
 npm run dev
 ```
 
-Open **http://localhost:3000**.
+Open **http://localhost:3000**. The voice mic, transcription, and spoken replies all work. FarmOpti answers are realistic but pre-written (no optimizer run required).
+
+---
+
+### Live mode (full optimizer + LLM)
+
+Set `FARMOPTI_DEMO_MODE=false` in `.env`, then also start Ollama:
+
+```bash
+ollama serve
+ollama pull qwen2.5-coder:7b-instruct   # first time only
+npm run dev
+```
 
 ---
 
