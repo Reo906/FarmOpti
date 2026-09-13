@@ -1,5 +1,8 @@
 import http from "node:http";
 import { ExplanationService } from "./chatbot/explanationService";
+import { RULES } from "./config";
+import { loadExternalVariables } from "./externalVariables";
+import { loadRules } from "./rules/store";
 import type { ConfigChangeProposal } from "./chatbot/configUpdate/parser";
 
 /**
@@ -40,21 +43,32 @@ function sendJson(response: http.ServerResponse, status: number, body: unknown):
 }
 
 const server = http.createServer(async (request, response) => {
-  if (request.method !== "POST" || request.url !== "/confirm-config-update") {
-    sendJson(response, 404, { error: "Not found. POST /confirm-config-update" });
-    return;
-  }
-
   try {
-    const raw = await readBody(request);
-    const { proposal } = JSON.parse(raw) as { proposal?: ConfigChangeProposal };
-    if (!proposal || typeof proposal !== "object") {
-      sendJson(response, 400, { error: "Missing proposal in request body." });
+    if (request.method === "GET" && request.url === "/rules") {
+      const data = loadExternalVariables();
+      sendJson(response, 200, {
+        rules: loadRules(),
+        fields: data.fields.map((f) => f.field_id),
+        machines: data.machines.map((m) => ({ id: m.machine_id, type: m.machine_type })),
+        operations: Object.keys(RULES),
+      });
       return;
     }
 
-    const outcome = await getService().confirmConfigUpdate(proposal);
-    sendJson(response, 200, { answer: outcome.answer, applied: true });
+    if (request.method === "POST" && request.url === "/confirm-config-update") {
+      const raw = await readBody(request);
+      const { proposal } = JSON.parse(raw) as { proposal?: ConfigChangeProposal };
+      if (!proposal || typeof proposal !== "object") {
+        sendJson(response, 400, { error: "Missing proposal in request body." });
+        return;
+      }
+
+      const outcome = await getService().confirmConfigUpdate(proposal);
+      sendJson(response, 200, { answer: outcome.answer, applied: true });
+      return;
+    }
+
+    sendJson(response, 404, { error: "Not found. GET /rules, POST /confirm-config-update" });
   } catch (error) {
     const message = error instanceof Error ? error.message : String(error);
     sendJson(response, 500, { error: `Could not apply that change: ${message}` });
@@ -62,5 +76,5 @@ const server = http.createServer(async (request, response) => {
 });
 
 server.listen(PORT, () => {
-  console.log(`[optimizer:server] Listening on http://localhost:${PORT} (POST /confirm-config-update)`);
+  console.log(`[optimizer:server] Listening on http://localhost:${PORT} (GET /rules, POST /confirm-config-update)`);
 });

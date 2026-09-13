@@ -745,3 +745,32 @@ footer {
 @media (max-width: 900px) { .yc-shell { display: block; } .yc-rail { position: static; height: auto; } .yc-nav { display: grid; grid-template-columns: repeat(2, 1fr); gap: 4px 14px; } .yc-top { overflow-x: auto; padding: 0 16px; } .yc-page { padding: 18px 16px 48px; } }
 @media (max-width: 620px) { .yc-grid-4, .yc-tiles { grid-template-columns: 1fr; } .yc-page-head { align-items: flex-start; flex-direction: column; } .yc-actions { margin-left: 0; } .yc-top-spacer, .yc-top .yc-divider { display: none; } .yc-top { gap: 12px; } .yc-hero-legend { width: 100%; margin-top: 6px; } .yc-timeline-hours { margin-left: 70px; font-size: 9px; } .yc-lane { grid-template-columns: 62px 1fr; }.yc-lane > span { font-size: 10px; }.yc-legend { margin-left: 70px; flex-wrap: wrap; } .yc-footer { display: block; } }
 @media (max-width: 760px) { .yc-input-grid { grid-template-columns: 1fr 1fr; } .yc-input-meta, .yc-input-actions { align-items: flex-start; flex-direction: column; } .yc-input-actions .yc-btn { width: 100%; justify-content: center; } }
+.yc-rules-panel { margin-bottom: 14px; }
+.yc-rules-error { display: flex; align-items: center; gap: 10px; margin: 0 0 12px; padding: 9px 12px; border: 1px solid #e7c4c4; border-radius: 5px; background: #f6e2e2; color: var(--yc-red); font-size: 12.5px; }
+.yc-rules-banner { margin: 0 0 12px; padding: 9px 12px; border-radius: 5px; font-size: 12.5px; white-space: pre-wrap; }
+.yc-rules-banner-ok { border: 1px solid #c6dbcd; background: #e2ede5; color: #2a5a3f; }
+.yc-rules-banner-warn { border: 1px solid #e7c4c4; background: #f6e2e2; color: #8a1f1f; }
+.yc-rules-list { display: flex; flex-direction: column; gap: 0; margin: 0 0 16px; padding: 0; border: 1px solid var(--yc-line-2); border-radius: 5px; list-style: none; }
+.yc-rules-list li { display: flex; align-items: center; justify-content: space-between; gap: 12px; padding: 10px 12px; border-bottom: 1px solid var(--yc-line-2); font-size: 13px; }
+.yc-rules-list li:last-child { border-bottom: 0; }
+.yc-rules-list li div { display: flex; flex-direction: column; gap: 2px; }
+.yc-rules-list li small { color: var(--yc-muted); font-size: 11.5px; }
+.yc-rules-empty { color: var(--yc-faint); font-style: italic; }
+.yc-icon-button { display: inline-flex; flex-shrink: 0; align-items: center; justify-content: center; width: 30px; height: 30px; border: 1px solid var(--yc-line); border-radius: 5px; background: #fff; color: var(--yc-red); }
+.yc-icon-button:hover { border-color: #e7c4c4; background: #f6e2e2; }
+.yc-rules-form { padding-top: 14px; border-top: 1px solid var(--yc-line-2); }
+.yc-rules-form h4 { margin: 0 0 10px; font-size: 13px; }
+.yc-rules-form > label { display: flex; flex-direction: column; gap: 5px; margin-bottom: 10px; color: var(--yc-muted); font-size: 11.5px; font-weight: 600; }
+.yc-rules-form > label input { width: 100%; min-height: 32px; padding: 6px 8px; border: 1px solid var(--yc-line); border-radius: 4px; background: #fcfcfa; color: var(--yc-text); font: inherit; font-size: 12.5px; font-weight: 400; }
+.yc-rules-form-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 10px; margin-bottom: 10px; }
+.yc-rules-form-grid label { display: flex; flex-direction: column; gap: 5px; color: var(--yc-muted); font-size: 11.5px; font-weight: 600; }
+.yc-rules-form-grid input, .yc-rules-form-grid select { width: 100%; min-height: 32px; padding: 6px 8px; border: 1px solid var(--yc-line); border-radius: 4px; background: #fcfcfa; color: var(--yc-text); font: inherit; font-size: 12px; font-weight: 400; }
+.yc-rules-form .yc-check { margin: 4px 0 10px; }
+.yc-modal-overlay { position: fixed; inset: 0; z-index: 60; display: grid; place-items: center; padding: 20px; background: rgba(14, 26, 22, .45); }
+.yc-modal { width: 420px; max-width: 100%; padding: 18px; border-radius: 8px; background: var(--yc-card); color: var(--yc-text); box-shadow: 0 20px 50px rgba(14, 26, 22, .3); }
+.yc-modal header { display: flex; align-items: center; gap: 9px; margin-bottom: 10px; }
+.yc-modal header svg { flex-shrink: 0; color: var(--yc-ochre); }
+.yc-modal header h3 { margin: 0; font-size: 15px; }
+.yc-modal-body { margin: 0 0 16px; color: var(--yc-muted); font-size: 13px; line-height: 1.5; white-space: pre-wrap; }
+.yc-modal-actions { display: flex; justify-content: flex-end; gap: 8px; }
+@media (max-width: 620px) { .yc-rules-form-grid { grid-template-columns: 1fr 1fr; } }

@@ -13,10 +13,12 @@ import {
   Leaf,
   MessageCircle,
   PackageOpen,
+  Plus,
   RotateCcw,
   Send,
   ShieldCheck,
   Tractor,
+  Trash2,
   Truck,
   Users,
   Warehouse,
@@ -331,9 +333,188 @@ function CommandView({ plan, evaluated, improvement, onNavigate }: { plan: Optim
   </>;
 }
 
+interface RuleTrigger {
+  variable: 'rain_mm' | 'wind_kmh' | 'temperature_c';
+  op: 'gt' | 'gte' | 'lt' | 'lte';
+  value: number;
+}
+
+interface FarmRule {
+  id: string;
+  description: string;
+  resource: string;
+  field_id: string;
+  operation: string;
+  trigger: RuleTrigger | null;
+  window_hours: number;
+  created_at: string;
+}
+
+const TRIGGER_OP_LABEL: Record<RuleTrigger['op'], string> = { gt: '>', gte: '≥', lt: '<', lte: '≤' };
+const TRIGGER_VARIABLE_LABEL: Record<RuleTrigger['variable'], string> = { rain_mm: 'rainfall (mm)', wind_kmh: 'wind (km/h)', temperature_c: 'temperature (°C)' };
+
+function describeRuleScope(rule: Pick<FarmRule, 'resource' | 'field_id' | 'operation'>): string {
+  return [
+    rule.resource === 'any' ? 'any machine' : rule.resource,
+    rule.operation === 'any' ? 'any operation' : rule.operation,
+    rule.field_id === 'any' ? 'any field' : rule.field_id,
+  ].join(' · ');
+}
+
+function describeRuleCondition(rule: Pick<FarmRule, 'trigger' | 'window_hours'>): string {
+  if (!rule.trigger) return 'always prohibited';
+  return `prohibited within ${rule.window_hours}h of ${TRIGGER_VARIABLE_LABEL[rule.trigger.variable]} ${TRIGGER_OP_LABEL[rule.trigger.op]} ${rule.trigger.value}`;
+}
+
+function ConfirmModal({ title, body, confirmLabel, busy, onConfirm, onCancel }: { title: string; body: string; confirmLabel: string; busy: boolean; onConfirm: () => void; onCancel: () => void }) {
+  return <div className="yc-modal-overlay" role="dialog" aria-modal="true" aria-label={title}>
+    <div className="yc-modal">
+      <header><AlertTriangle size={18} /><h3>{title}</h3></header>
+      <p className="yc-modal-body">{body}</p>
+      <div className="yc-modal-actions">
+        <button className="yc-btn" onClick={onCancel} disabled={busy}>Cancel</button>
+        <button className="yc-btn yc-btn-dark" onClick={onConfirm} disabled={busy}>{busy ? 'Applying...' : confirmLabel}</button>
+      </div>
+    </div>
+  </div>;
+}
+
+function FarmRulesPanel() {
+  const [rules, setRules] = useState<FarmRule[]>([]);
+  const [fields, setFields] = useState<string[]>([]);
+  const [machines, setMachines] = useState<{ id: string; type: string }[]>([]);
+  const [operations, setOperations] = useState<string[]>([]);
+  const [loading, setLoading] = useState(true);
+  const [loadError, setLoadError] = useState<string | null>(null);
+  const [resultBanner, setResultBanner] = useState<{ tone: 'ok' | 'warn'; text: string } | null>(null);
+
+  const [description, setDescription] = useState('');
+  const [resource, setResource] = useState('any');
+  const [fieldId, setFieldId] = useState('any');
+  const [operation, setOperation] = useState('any');
+  const [conditional, setConditional] = useState(false);
+  const [variable, setVariable] = useState<RuleTrigger['variable']>('rain_mm');
+  const [op, setOp] = useState<RuleTrigger['op']>('gt');
+  const [value, setValue] = useState('15');
+  const [windowHours, setWindowHours] = useState('24');
+
+  const [pending, setPending] = useState<{ kind: 'add' | 'remove'; proposal: unknown; summary: string } | null>(null);
+  const [busy, setBusy] = useState(false);
+
+  const load = async () => {
+    setLoading(true);
+    setLoadError(null);
+    try {
+      const response = await fetch('/api/rules');
+      const body = (await response.json()) as { rules?: FarmRule[]; fields?: string[]; machines?: { id: string; type: string }[]; operations?: string[]; error?: string };
+      if (!response.ok) {
+        setLoadError(body.error ?? 'Could not load farm rules.');
+        return;
+      }
+      setRules(body.rules ?? []);
+      setFields(body.fields ?? []);
+      setMachines(body.machines ?? []);
+      setOperations(body.operations ?? []);
+    } catch {
+      setLoadError("Could not reach the local optimizer helper. Start it with `npm run optimizer:server`.");
+    } finally {
+      setLoading(false);
+    }
+  };
+
+  useEffect(() => { void load(); }, []);
+
+  const startAdd = () => {
+    if (!description.trim()) return;
+    const rule = {
+      description: description.trim(),
+      resource,
+      field_id: fieldId,
+      operation,
+      trigger: conditional ? { variable, op, value: Number(value) } : null,
+      window_hours: conditional ? Number(windowHours) : 0,
+    };
+    const proposal = { kind: 'rule_change', description: rule.description, action: 'add', rule };
+    setPending({ kind: 'add', proposal, summary: `${describeRuleScope(rule)} — ${describeRuleCondition(rule)}` });
+  };
+
+  const startRemove = (rule: FarmRule) => {
+    const proposal = { kind: 'rule_change', description: `Remove rule ${rule.id}`, action: 'remove', rule };
+    setPending({ kind: 'remove', proposal, summary: `${rule.id}: ${rule.description}` });
+  };
+
+  const confirmPending = async () => {
+    if (!pending) return;
+    setBusy(true);
+    setResultBanner(null);
+    try {
+      const response = await fetch('/api/chat', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ proposal: pending.proposal }),
+      });
+      const result = (await response.json()) as { answer?: string; error?: string };
+      if (!response.ok) {
+        setResultBanner({ tone: 'warn', text: result.error ?? 'Could not apply that change.' });
+      } else {
+        setResultBanner({ tone: 'ok', text: result.answer ?? 'Applied.' });
+        setDescription('');
+        await load();
+      }
+    } catch {
+      setResultBanner({ tone: 'warn', text: 'Could not reach the local optimizer helper.' });
+    } finally {
+      setBusy(false);
+      setPending(null);
+    }
+  };
+
+  return <section className="yc-card yc-rules-panel">
+    <header><div><h3>Farm rules</h3><span>Hard scheduling exclusions the optimizer must respect</span></div><Badge tone="info">{rules.length} active</Badge></header>
+    <div className="yc-card-body">
+      {loadError && <p className="yc-rules-error">{loadError} <button className="yc-btn" onClick={() => void load()}>Retry</button></p>}
+      {resultBanner && <p className={`yc-rules-banner yc-rules-banner-${resultBanner.tone}`}>{resultBanner.text}</p>}
+      {loading ? <p>Loading rules...</p> : <ul className="yc-rules-list">
+        {rules.length === 0 && <li className="yc-rules-empty">No rules yet.</li>}
+        {rules.map((rule) => <li key={rule.id}>
+          <div><b>{rule.id}</b> — {rule.description}<small>{describeRuleScope(rule)} · {describeRuleCondition(rule)}</small></div>
+          <button className="yc-icon-button" onClick={() => startRemove(rule)} aria-label={`Remove ${rule.id}`}><Trash2 size={15} /></button>
+        </li>)}
+      </ul>}
+
+      <div className="yc-rules-form">
+        <h4>Add a rule</h4>
+        <label>Description<input value={description} onChange={(event) => setDescription(event.target.value)} placeholder="e.g. Never spray F3 within 24h of heavy rain" /></label>
+        <div className="yc-rules-form-grid">
+          <label>Machine<select value={resource} onChange={(event) => setResource(event.target.value)}><option value="any">Any machine</option>{machines.map((m) => <option key={m.id} value={m.id}>{m.id} ({m.type})</option>)}</select></label>
+          <label>Field<select value={fieldId} onChange={(event) => setFieldId(event.target.value)}><option value="any">Any field</option>{fields.map((f) => <option key={f} value={f}>{f}</option>)}</select></label>
+          <label>Operation<select value={operation} onChange={(event) => setOperation(event.target.value)}><option value="any">Any operation</option>{operations.map((o) => <option key={o} value={o}>{o}</option>)}</select></label>
+        </div>
+        <label className="yc-check"><input type="checkbox" checked={conditional} onChange={(event) => setConditional(event.target.checked)} /> Only when a weather condition holds</label>
+        {conditional && <div className="yc-rules-form-grid">
+          <label>Variable<select value={variable} onChange={(event) => setVariable(event.target.value as RuleTrigger['variable'])}><option value="rain_mm">Rainfall (mm)</option><option value="wind_kmh">Wind (km/h)</option><option value="temperature_c">Temperature (°C)</option></select></label>
+          <label>Comparison<select value={op} onChange={(event) => setOp(event.target.value as RuleTrigger['op'])}><option value="gt">greater than</option><option value="gte">at least</option><option value="lt">less than</option><option value="lte">at most</option></select></label>
+          <label>Value<input type="number" value={value} onChange={(event) => setValue(event.target.value)} /></label>
+          <label>Window (hours)<input type="number" value={windowHours} onChange={(event) => setWindowHours(event.target.value)} /></label>
+        </div>}
+        <button className="yc-btn yc-btn-dark" onClick={startAdd} disabled={!description.trim()}><Plus size={15} /> Propose rule</button>
+      </div>
+    </div>
+
+    {pending && <ConfirmModal
+      title={pending.kind === 'add' ? 'Add this farm rule?' : 'Remove this farm rule?'}
+      body={`${pending.summary}\n\nThis will persist and the optimizer will re-run immediately.`}
+      confirmLabel={pending.kind === 'add' ? 'Yes, add it' : 'Yes, remove it'}
+      busy={busy}
+      onConfirm={() => void confirmPending()}
+      onCancel={() => setPending(null)}
+    />}
+  </section>;
+}
+
 function DetailView({ view, plan, disrupted, onNavigate }: { view: ViewKey; plan: OptimiserCandidate; disrupted: boolean; onNavigate: (view: ViewKey) => void }) {
   const fields = yallambeeOpsDashboard.fields;
-  if (view === 'rules') return <><div className="yc-page-head"><div><h2>Farm rules & optimizer inputs</h2><p>Modify the management-plan inputs used by the existing optimizer pipeline. Changes are prepared in the browser and exported as a replacement CSV.</p></div><div className="yc-actions"><button className="yc-btn yc-btn-dark" onClick={() => onNavigate('command')}><Grid2X2 size={15} /> Back to command</button></div></div><OptimizerInputPanel /><Table title="Current management plan"><thead><tr><th>Plan</th><th>Field</th><th>Operation</th><th>Target</th><th>Window</th><th>Required</th></tr></thead><tbody>{managementPlanInputs.map((input) => <tr key={input.plan_id}><td><b>{input.plan_id}</b></td><td>{input.field_id}</td><td>{input.operation}</td><td>{input.target || '—'}</td><td>{input.allowed_from} to {input.allowed_to}</td><td><Badge tone={input.required ? 'ok' : 'mute'}>{input.required ? 'Required' : 'Optional'}</Badge></td></tr>)}</tbody></Table></>;
+  if (view === 'rules') return <><div className="yc-page-head"><div><h2>Farm rules & optimizer inputs</h2><p>Add or remove hard scheduling rules, and adjust the management-plan inputs used by the optimizer pipeline.</p></div><div className="yc-actions"><button className="yc-btn yc-btn-dark" onClick={() => onNavigate('command')}><Grid2X2 size={15} /> Back to command</button></div></div><FarmRulesPanel /><OptimizerInputPanel /><Table title="Current management plan"><thead><tr><th>Plan</th><th>Field</th><th>Operation</th><th>Target</th><th>Window</th><th>Required</th></tr></thead><tbody>{managementPlanInputs.map((input) => <tr key={input.plan_id}><td><b>{input.plan_id}</b></td><td>{input.field_id}</td><td>{input.operation}</td><td>{input.target || '—'}</td><td>{input.allowed_from} to {input.allowed_to}</td><td><Badge tone={input.required ? 'ok' : 'mute'}>{input.required ? 'Required' : 'Optional'}</Badge></td></tr>)}</tbody></Table></>;
   if (view === 'harvest') return <><div className="yc-page-head"><div><h2>Harvest operations</h2><p>This view mirrors the persisted schedule generated by the optimizer pipeline.</p></div><div className="yc-actions"><button className="yc-btn yc-btn-primary" onClick={() => onNavigate('command')}>Back to command</button></div></div><section className="yc-hero"><div className="yc-hero-head"><div><h3>Persisted resource plan</h3><span>{persistedSchedule.length} scheduled actions · source: optimal_schedule.csv</span></div></div><Timeline plan={plan} disrupted={disrupted} /></section><Table title="Persisted schedule assignments"><thead><tr><th>Field</th><th>Operation</th><th>Target</th><th>Machine</th><th>Start</th><th>End</th><th className="yc-right">Cash effect</th></tr></thead><tbody>{persistedSchedule.map((row) => <tr key={`${row.option_id}-${row.plan_id}`}><td><b>{row.field_id}</b><small>{row.plan_id} · {row.option_id}</small></td><td>{row.operation}</td><td>{row.target}</td><td>{row.machine_id}</td><td>{row.start_time}</td><td>{row.end_time}</td><td className="yc-right">{signedMoney(row.direct_cash_effect_aud)}</td></tr>)}</tbody></Table></>;
   const rows = view === 'fleet' ? yallambeeOpsDashboard.machines.map((machine) => [machine.id, machine.make, machine.oper ?? '—', machine.rate ? `${(machine.rate * (disrupted && machine.id === 'H2' ? 0.7 : 1)).toFixed(1)} ha/h` : '—', machine.health]) : view === 'people' ? yallambeeOpsDashboard.people.map((person) => [person.name, person.role, person.on, `${person.hours14} h`, person.fatigue]) : view === 'markets' ? yallambeeOpsDashboard.contracts.map((contract) => [contract.id, contract.buyer, contract.grade, `${contract.filled}/${contract.tonnes} t`, contract.due]) : yallambeeOpsDashboard.fields.map((field) => [field.name, field.prop, yallambeeOpsDashboard.crops[field.crop].label, `${field.moist}%`, field.ready]);
   const headings = view === 'fleet' ? ['Asset', 'Make', 'Operator', 'Rate', 'Health'] : view === 'people' ? ['Name', 'Role', 'On', '14-day hours', 'Fatigue'] : view === 'markets' ? ['Contract', 'Buyer', 'Grade', 'Filled', 'Due'] : ['Paddock', 'Property', 'Crop', 'Moisture', 'Ready'];

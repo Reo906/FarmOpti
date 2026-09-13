@@ -16,7 +16,10 @@ import { generateFieldOptions } from "../fieldOptions";
 import { saveFieldOptions } from "../fieldOptionsIO";
 import { optimizeSchedule } from "../scheduleOptimizer";
 import { CANDIDATE_ACTIONS_PATH, DECISION_TRACE_PATH, EXTERNAL_DIR, SCHEDULE_PATH, SUMMARY_PATH } from "../paths";
-import type { OptimizationSummary } from "../types";
+import { readCsv } from "../csv";
+import { parseTimestamp } from "../datetime";
+import { compareScenarios } from "./scenario/comparator";
+import type { OptimizationSummary, ScheduleRow } from "../types";
 
 // config.yaml's explanation.llm can hold either one flat provider config, or
 // a set of named provider profiles ("providers") plus which one is "active".
@@ -230,6 +233,10 @@ function describeProposal(proposal: ConfigChangeProposal): string {
       return `Add a new machine ${c.machine_id} (${c.machine_type}) at $${c.cost_per_hour_aud}/hour, available ${c.available_from}-${c.available_to} every day of the current planning horizon.`;
     }
     return `Update machine ${c.machine_id}: type=${c.machine_type}, cost=$${c.cost_per_hour_aud}/hour, current_field=${c.current_field || "(none)"}.`;
+  }
+  if (proposal.kind === "rule_change") {
+    if (proposal.action === "add") return `Add farm rule: ${proposal.rule.description}`;
+    return `Remove farm rule ${proposal.rule.id}: ${proposal.rule.description}`;
   }
   return proposal.reason;
 }
@@ -506,6 +513,25 @@ Explain what changed and whether the requested scenario improved or reduced the 
   /** Persistently applies a proposal from runConfigUpdate() and re-runs the full pipeline. */
   async confirmConfigUpdate(proposal: ConfigChangeProposal): Promise<{ answer: string; before: OptimizationSummary | null; after: OptimizationSummary }> {
     const before = fs.existsSync(SUMMARY_PATH) ? (JSON.parse(fs.readFileSync(SUMMARY_PATH, "utf-8")) as OptimizationSummary) : null;
+    const beforeSchedule: ScheduleRow[] = fs.existsSync(SCHEDULE_PATH)
+      ? readCsv(SCHEDULE_PATH).map((r) => ({
+          option_id: r.option_id,
+          candidate_id: r.candidate_id,
+          plan_id: r.plan_id,
+          field_id: r.field_id,
+          operation: r.operation,
+          target: r.target,
+          start_time: parseTimestamp(r.start_time),
+          end_time: parseTimestamp(r.end_time),
+          machine_id: r.machine_id,
+          workers_required: Number(r.workers_required),
+          water_ml: Number(r.water_ml),
+          direct_revenue_aud: Number(r.direct_revenue_aud),
+          direct_cost_aud: Number(r.direct_cost_aud),
+          direct_cash_effect_aud: Number(r.direct_cash_effect_aud),
+          state_yield_effect_t_ha: Number(r.state_yield_effect_t_ha),
+        }))
+      : [];
 
     processPrint("[CONFIG] Applying change...");
     applyConfigChangeProposal(proposal);
@@ -536,8 +562,23 @@ Explain what changed and whether the requested scenario improved or reduced the 
     const delta = before ? after.total_objective_value_aud - before.total_objective_value_aud : null;
     const deltaText = delta === null ? "" : ` (${delta >= 0 ? "+" : ""}${delta.toFixed(2)} AUD)`;
 
+    let planChangeText = "The plan was not changed.";
+    if (before) {
+      const comparison = compareScenarios(beforeSchedule, before, schedule, after);
+      const { actions_added: added, actions_removed: removed, actions_rescheduled: rescheduled } = comparison;
+      if (added.length + removed.length + rescheduled.length === 0) {
+        planChangeText = "The plan was not changed -- the same schedule is still optimal.";
+      } else {
+        const parts: string[] = [];
+        if (added.length) parts.push(`${added.length} action${added.length === 1 ? "" : "s"} added`);
+        if (removed.length) parts.push(`${removed.length} action${removed.length === 1 ? "" : "s"} removed`);
+        if (rescheduled.length) parts.push(`${rescheduled.length} action${rescheduled.length === 1 ? "" : "s"} rescheduled`);
+        planChangeText = `The plan was changed: ${parts.join(", ")}.`;
+      }
+    }
+
     return {
-      answer: `Applied: ${describeProposal(proposal)}\n\nRe-optimised whole-farm objective: ${before ? `$${before.total_objective_value_aud.toLocaleString()} -> ` : ""}$${after.total_objective_value_aud.toLocaleString()}${deltaText}.`,
+      answer: `Applied: ${describeProposal(proposal)}\n\n${planChangeText}\n\nRe-optimised whole-farm objective: ${before ? `$${before.total_objective_value_aud.toLocaleString()} -> ` : ""}$${after.total_objective_value_aud.toLocaleString()}${deltaText}.`,
       before,
       after,
     };

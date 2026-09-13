@@ -913,9 +913,9 @@
     {
       "option_id": "F2_O001",
       "field_id": "F2",
-      "total_direct_cash_effect_aud": -1579.5,
+      "total_direct_cash_effect_aud": -1569.5,
       "terminal_value_aud": 42379.08,
-      "objective_value_aud": 40799.58,
+      "objective_value_aud": 40809.58,
       "actions": [
         {
           "candidate_id": "P03_F2_spray_20260921_0700",
@@ -931,12 +931,14 @@
           "duration_hours": 3,
           "machine_type": "sprayer",
           "eligible_machine_ids": [
-            "M3"
+            "M3",
+            "M9",
+            "M10"
           ],
           "workers_required": 1,
           "direct_revenue_aud": 0,
-          "direct_cost_aud": 747,
-          "direct_cash_effect_aud": -747,
+          "direct_cost_aud": 737,
+          "direct_cash_effect_aud": -737,
           "state_yield_effect_t_ha": 0.3111,
           "water_ml": 0,
           "candidate_score": 0.311121,
@@ -1018,10 +1020,51 @@
     {
       "option_id": "F2_O002",
       "field_id": "F2",
-      "total_direct_cash_effect_aud": -2412,
+      "total_direct_cash_effect_aud": -2397,
       "terminal_value_aud": 42379.08,
-      "objective_value_aud": 39967.08,
+      "objective_value_aud": 39982.08,
       "actions": [
+        {
+          "candidate_id": "P03_F2_spray_20260917_0700",
+          "plan_id": "P03",
+          "field_id": "F2",
+          "operation": "spray",
+          "target": "pest_control",
+          "required": false,
+          "depends_on": "",
+          "min_gap_hours": 0,
+          "start_time": "2026-09-17T07:00:00",
+          "end_time": "2026-09-17T10:00:00",
+          "duration_hours": 3,
+          "machine_type": "sprayer",
+          "eligible_machine_ids": [
+            "M9",
+            "M10"
+          ],
+          "workers_required": 1,
+          "direct_revenue_aud": 0,
+          "direct_cost_aud": 732,
+          "direct_cash_effect_aud": -732,
+          "state_yield_effect_t_ha": 0.2147,
+          "water_ml": 0,
+          "candidate_score": 0.214704,
+          "state_after": {
+            "crop": "canola",
+            "planted": true,
+            "newly_planted": false,
+            "harvested": false,
+            "growth_stage": "pod_fill",
+            "readiness": 0.624,
+            "soil_moisture": 0.252,
+            "soil_temperature_c": 14.52,
+            "expected_yield_t_ha": 3.473,
+            "nitrogen_index": 0.67,
+            "weed_pressure": 0.1,
+            "pest_pressure": 0.037,
+            "disease_pressure": 0.1,
+            "seedbed_readiness": 0.12
+          }
+        },
         {
           "candidate_id": "P02_F2_irrigate_20260918_0700",
           "plan_id": "P02",
@@ -1042,7 +1085,7 @@
           "direct_revenue_aud": 0,
           "direct_cost_aud": 832.5,
           "direct_cash_effect_aud": -832.5,
-          "state_yield_effect_t_ha": 0.0598,
+          "state_yield_effect_t_ha": 0.0641,
           "water_ml": 4.5,
           "candidate_score": 0.0598,
           "state_after": {
@@ -1054,50 +1097,10 @@
             "readiness": 0.63,
             "soil_moisture": 0.2788,
             "soil_temperature_c": 14.7,
-            "expected_yield_t_ha": 3.3261,
+            "expected_yield_t_ha": 3.5328,
             "nitrogen_index": 0.67,
             "weed_pressure": 0.1,
-            "pest_pressure": 0.355,
-            "disease_pressure": 0.1,
-            "seedbed_readiness": 0.12
-          }
-        },
-        {
-          "candidate_id": "P03_F2_spray_20260921_0700",
-          "plan_id": "P03",
-          "field_id": "F2",
-          "operation": "spray",
-          "target": "pest_control",
-          "required": false,
-          "depends_on": "",
-          "min_gap_hours": 0,
-          "start_time": "2026-09-21T07:00:00",
-          "end_time": "2026-09-21T10:00:00",
-          "duration_hours": 3,
-          "machine_type": "sprayer",
-          "eligible_machine_ids": [
-            "M3"
-          ],
-          "workers_required": 1,
-          "direct_revenue_aud": 0,
-          "direct_cost_aud": 747,
-          "direct_cash_effect_aud": -747,
-          "state_yield_effect_t_ha": 0.3173,
-          "water_ml": 0,
-          "candidate_score": 0.311121,
-          "state_after": {
-            "crop": "canola",
-            "planted": true,
-            "newly_planted": false,
-            "harvested": false,
-            "growth_stage": "pod_fill",
-            "readiness": 0.648,
-            "soil_moisture": 0.2348,
-            "soil_temperature_c": 15.24,
-            "expected_yield_t_ha": 3.6472,
-            "nitrogen_index": 0.67,
-            "weed_pressure": 0.1,
-            "pest_pressure": 0.051,
+            "pest_pressure": 0.1144,
             "disease_pressure": 0.1,
             "seedbed_readiness": 0.12
           }
@@ -1122,7 +1125,7 @@
           "direct_revenue_aud": 0,
           "direct_cost_aud": 832.5,
           "direct_cash_effect_aud": -832.5,
-          "state_yield_effect_t_ha": 0.2687,
+          "state_yield_effect_t_ha": 0.2609,
           "water_ml": 4.5,
           "candidate_score": 0.242885,
           "state_after": {
@@ -1137,7 +1140,7 @@
             "expected_yield_t_ha": 3.755,
             "nitrogen_index": 0.67,
             "weed_pressure": 0.1,
-            "pest_pressure": 0.4535,
+            "pest_pressure": 0.5694,
             "disease_pressure": 0.1,
             "seedbed_readiness": 0.12
           }
@@ -1155,7 +1158,7 @@
         "expected_yield_t_ha": 3.755,
         "nitrogen_index": 0.67,
         "weed_pressure": 0.1,
-        "pest_pressure": 0.4535,
+        "pest_pressure": 0.5694,
         "disease_pressure": 0.1,
         "seedbed_readiness": 0.12
       }
@@ -1163,9 +1166,9 @@
     {
       "option_id": "F2_O003",
       "field_id": "F2",
-      "total_direct_cash_effect_aud": -747,
+      "total_direct_cash_effect_aud": -737,
       "terminal_value_aud": 40417.05,
-      "objective_value_aud": 39670.05,
+      "objective_value_aud": 39680.05,
       "actions": [
         {
           "candidate_id": "P03_F2_spray_20260921_0700",
@@ -1181,12 +1184,14 @@
           "duration_hours": 3,
           "machine_type": "sprayer",
           "eligible_machine_ids": [
-            "M3"
+            "M3",
+            "M9",
+            "M10"
           ],
           "workers_required": 1,
           "direct_revenue_aud": 0,
-          "direct_cost_aud": 747,
-          "direct_cash_effect_aud": -747,
+          "direct_cost_aud": 737,
+          "direct_cash_effect_aud": -737,
           "state_yield_effect_t_ha": 0.3111,
           "water_ml": 0,
           "candidate_score": 0.311121,
@@ -1228,9 +1233,9 @@
     {
       "option_id": "F2_O004",
       "field_id": "F2",
-      "total_direct_cash_effect_aud": -1579.5,
+      "total_direct_cash_effect_aud": -1569.5,
       "terminal_value_aud": 41161.81,
-      "objective_value_aud": 39582.31,
+      "objective_value_aud": 39592.31,
       "actions": [
         {
           "candidate_id": "P02_F2_irrigate_20260918_0700",
@@ -1286,12 +1291,14 @@
           "duration_hours": 3,
           "machine_type": "sprayer",
           "eligible_machine_ids": [
-            "M3"
+            "M3",
+            "M9",
+            "M10"
           ],
           "workers_required": 1,
           "direct_revenue_aud": 0,
-          "direct_cost_aud": 747,
-          "direct_cash_effect_aud": -747,
+          "direct_cost_aud": 737,
+          "direct_cash_effect_aud": -737,
           "state_yield_effect_t_ha": 0.3173,
           "water_ml": 0,
           "candidate_score": 0.311121,
@@ -1592,9 +1599,9 @@
     {
       "option_id": "F2_O009",
       "field_id": "F2",
-      "total_direct_cash_effect_aud": -1579.5,
+      "total_direct_cash_effect_aud": -1569.5,
       "terminal_value_aud": 42379.08,
-      "objective_value_aud": 40799.58,
+      "objective_value_aud": 40809.58,
       "actions": [
         {
           "candidate_id": "P03_F2_spray_20260921_0700",
@@ -1610,12 +1617,14 @@
           "duration_hours": 3,
           "machine_type": "sprayer",
           "eligible_machine_ids": [
-            "M3"
+            "M3",
+            "M9",
+            "M10"
           ],
           "workers_required": 1,
           "direct_revenue_aud": 0,
-          "direct_cost_aud": 747,
-          "direct_cash_effect_aud": -747,
+          "direct_cost_aud": 737,
+          "direct_cash_effect_aud": -737,
           "state_yield_effect_t_ha": 0.3111,
           "water_ml": 0,
           "candidate_score": 0.311121,
@@ -1697,9 +1706,9 @@
     {
       "option_id": "F2_O010",
       "field_id": "F2",
-      "total_direct_cash_effect_aud": -1579.5,
+      "total_direct_cash_effect_aud": -1569.5,
       "terminal_value_aud": 42379.08,
-      "objective_value_aud": 40799.58,
+      "objective_value_aud": 40809.58,
       "actions": [
         {
           "candidate_id": "P03_F2_spray_20260921_0700",
@@ -1715,12 +1724,14 @@
           "duration_hours": 3,
           "machine_type": "sprayer",
           "eligible_machine_ids": [
-            "M3"
+            "M3",
+            "M9",
+            "M10"
           ],
           "workers_required": 1,
           "direct_revenue_aud": 0,
-          "direct_cost_aud": 747,
-          "direct_cash_effect_aud": -747,
+          "direct_cost_aud": 737,
+          "direct_cash_effect_aud": -737,
           "state_yield_effect_t_ha": 0.3111,
           "water_ml": 0,
           "candidate_score": 0.311121,
@@ -1802,9 +1813,9 @@
     {
       "option_id": "F2_O011",
       "field_id": "F2",
-      "total_direct_cash_effect_aud": -1579.5,
+      "total_direct_cash_effect_aud": -1569.5,
       "terminal_value_aud": 42379.08,
-      "objective_value_aud": 40799.58,
+      "objective_value_aud": 40809.58,
       "actions": [
         {
           "candidate_id": "P03_F2_spray_20260921_0700",
@@ -1820,12 +1831,14 @@
           "duration_hours": 3,
           "machine_type": "sprayer",
           "eligible_machine_ids": [
-            "M3"
+            "M3",
+            "M9",
+            "M10"
           ],
           "workers_required": 1,
           "direct_revenue_aud": 0,
-          "direct_cost_aud": 747,
-          "direct_cash_effect_aud": -747,
+          "direct_cost_aud": 737,
+          "direct_cash_effect_aud": -737,
           "state_yield_effect_t_ha": 0.3111,
           "water_ml": 0,
           "candidate_score": 0.311121,
@@ -1907,9 +1920,9 @@
     {
       "option_id": "F2_O012",
       "field_id": "F2",
-      "total_direct_cash_effect_aud": -1579.5,
+      "total_direct_cash_effect_aud": -1569.5,
       "terminal_value_aud": 42379.08,
-      "objective_value_aud": 40799.58,
+      "objective_value_aud": 40809.58,
       "actions": [
         {
           "candidate_id": "P03_F2_spray_20260921_0700",
@@ -1925,12 +1938,14 @@
           "duration_hours": 3,
           "machine_type": "sprayer",
           "eligible_machine_ids": [
-            "M3"
+            "M3",
+            "M9",
+            "M10"
           ],
           "workers_required": 1,
           "direct_revenue_aud": 0,
-          "direct_cost_aud": 747,
-          "direct_cash_effect_aud": -747,
+          "direct_cost_aud": 737,
+          "direct_cash_effect_aud": -737,
           "state_yield_effect_t_ha": 0.3111,
           "water_ml": 0,
           "candidate_score": 0.311121,
@@ -2012,9 +2027,9 @@
     {
       "option_id": "F2_O013",
       "field_id": "F2",
-      "total_direct_cash_effect_aud": -1579.5,
+      "total_direct_cash_effect_aud": -1569.5,
       "terminal_value_aud": 42379.08,
-      "objective_value_aud": 40799.58,
+      "objective_value_aud": 40809.58,
       "actions": [
         {
           "candidate_id": "P03_F2_spray_20260921_0700",
@@ -2030,12 +2045,14 @@
           "duration_hours": 3,
           "machine_type": "sprayer",
           "eligible_machine_ids": [
-            "M3"
+            "M3",
+            "M9",
+            "M10"
           ],
           "workers_required": 1,
           "direct_revenue_aud": 0,
-          "direct_cost_aud": 747,
-          "direct_cash_effect_aud": -747,
+          "direct_cost_aud": 737,
+          "direct_cash_effect_aud": -737,
           "state_yield_effect_t_ha": 0.3111,
           "water_ml": 0,
           "candidate_score": 0.311121,
@@ -2117,9 +2134,9 @@
     {
       "option_id": "F2_O014",
       "field_id": "F2",
-      "total_direct_cash_effect_aud": -1579.5,
+      "total_direct_cash_effect_aud": -1569.5,
       "terminal_value_aud": 42379.08,
-      "objective_value_aud": 40799.58,
+      "objective_value_aud": 40809.58,
       "actions": [
         {
           "candidate_id": "P03_F2_spray_20260921_0700",
@@ -2135,12 +2152,14 @@
           "duration_hours": 3,
           "machine_type": "sprayer",
           "eligible_machine_ids": [
-            "M3"
+            "M3",
+            "M9",
+            "M10"
           ],
           "workers_required": 1,
           "direct_revenue_aud": 0,
-          "direct_cost_aud": 747,
-          "direct_cash_effect_aud": -747,
+          "direct_cost_aud": 737,
+          "direct_cash_effect_aud": -737,
           "state_yield_effect_t_ha": 0.3111,
           "water_ml": 0,
           "candidate_score": 0.311121,
@@ -2222,9 +2241,9 @@
     {
       "option_id": "F2_O015",
       "field_id": "F2",
-      "total_direct_cash_effect_aud": -1579.5,
+      "total_direct_cash_effect_aud": -1569.5,
       "terminal_value_aud": 42379.08,
-      "objective_value_aud": 40799.58,
+      "objective_value_aud": 40809.58,
       "actions": [
         {
           "candidate_id": "P03_F2_spray_20260921_0700",
@@ -2240,12 +2259,14 @@
           "duration_hours": 3,
           "machine_type": "sprayer",
           "eligible_machine_ids": [
-            "M3"
+            "M3",
+            "M9",
+            "M10"
           ],
           "workers_required": 1,
           "direct_revenue_aud": 0,
-          "direct_cost_aud": 747,
-          "direct_cash_effect_aud": -747,
+          "direct_cost_aud": 737,
+          "direct_cash_effect_aud": -737,
           "state_yield_effect_t_ha": 0.3111,
           "water_ml": 0,
           "candidate_score": 0.311121,
@@ -2327,9 +2348,9 @@
     {
       "option_id": "F2_O016",
       "field_id": "F2",
-      "total_direct_cash_effect_aud": -1579.5,
+      "total_direct_cash_effect_aud": -1569.5,
       "terminal_value_aud": 42379.08,
-      "objective_value_aud": 40799.58,
+      "objective_value_aud": 40809.58,
       "actions": [
         {
           "candidate_id": "P03_F2_spray_20260921_0700",
@@ -2345,12 +2366,14 @@
           "duration_hours": 3,
           "machine_type": "sprayer",
           "eligible_machine_ids": [
-            "M3"
+            "M3",
+            "M9",
+            "M10"
           ],
           "workers_required": 1,
           "direct_revenue_aud": 0,
-          "direct_cost_aud": 747,
-          "direct_cash_effect_aud": -747,
+          "direct_cost_aud": 737,
+          "direct_cash_effect_aud": -737,
           "state_yield_effect_t_ha": 0.3111,
           "water_ml": 0,
           "candidate_score": 0.311121,
@@ -2432,9 +2455,9 @@
     {
       "option_id": "F2_O017",
       "field_id": "F2",
-      "total_direct_cash_effect_aud": -1579.5,
+      "total_direct_cash_effect_aud": -1569.5,
       "terminal_value_aud": 42379.08,
-      "objective_value_aud": 40799.58,
+      "objective_value_aud": 40809.58,
       "actions": [
         {
           "candidate_id": "P03_F2_spray_20260920_0800",
@@ -2450,12 +2473,14 @@
           "duration_hours": 3,
           "machine_type": "sprayer",
           "eligible_machine_ids": [
-            "M3"
+            "M3",
+            "M9",
+            "M10"
           ],
           "workers_required": 1,
           "direct_revenue_aud": 0,
-          "direct_cost_aud": 747,
-          "direct_cash_effect_aud": -747,
+          "direct_cost_aud": 737,
+          "direct_cash_effect_aud": -737,
           "state_yield_effect_t_ha": 0.2874,
           "water_ml": 0,
           "candidate_score": 0.287449,
@@ -2537,9 +2562,9 @@
     {
       "option_id": "F2_O018",
       "field_id": "F2",
-      "total_direct_cash_effect_aud": -1579.5,
+      "total_direct_cash_effect_aud": -1569.5,
       "terminal_value_aud": 42379.08,
-      "objective_value_aud": 40799.58,
+      "objective_value_aud": 40809.58,
       "actions": [
         {
           "candidate_id": "P03_F2_spray_20260920_0800",
@@ -2555,12 +2580,14 @@
           "duration_hours": 3,
           "machine_type": "sprayer",
           "eligible_machine_ids": [
-            "M3"
+            "M3",
+            "M9",
+            "M10"
           ],
           "workers_required": 1,
           "direct_revenue_aud": 0,
-          "direct_cost_aud": 747,
-          "direct_cash_effect_aud": -747,
+          "direct_cost_aud": 737,
+          "direct_cash_effect_aud": -737,
           "state_yield_effect_t_ha": 0.2874,
           "water_ml": 0,
           "candidate_score": 0.287449,
@@ -2642,9 +2669,9 @@
     {
       "option_id": "F2_O019",
       "field_id": "F2",
-      "total_direct_cash_effect_aud": -1579.5,
+      "total_direct_cash_effect_aud": -1569.5,
       "terminal_value_aud": 42379.08,
-      "objective_value_aud": 40799.58,
+      "objective_value_aud": 40809.58,
       "actions": [
         {
           "candidate_id": "P03_F2_spray_20260920_0800",
@@ -2660,12 +2687,14 @@
           "duration_hours": 3,
           "machine_type": "sprayer",
           "eligible_machine_ids": [
-            "M3"
+            "M3",
+            "M9",
+            "M10"
           ],
           "workers_required": 1,
           "direct_revenue_aud": 0,
-          "direct_cost_aud": 747,
-          "direct_cash_effect_aud": -747,
+          "direct_cost_aud": 737,
+          "direct_cash_effect_aud": -737,
           "state_yield_effect_t_ha": 0.2874,
           "water_ml": 0,
           "candidate_score": 0.287449,
@@ -2747,9 +2776,9 @@
     {
       "option_id": "F2_O020",
       "field_id": "F2",
-      "total_direct_cash_effect_aud": -1579.5,
+      "total_direct_cash_effect_aud": -1569.5,
       "terminal_value_aud": 42379.08,
-      "objective_value_aud": 40799.58,
+      "objective_value_aud": 40809.58,
       "actions": [
         {
           "candidate_id": "P03_F2_spray_20260920_0900",
@@ -2765,12 +2794,14 @@
           "duration_hours": 3,
           "machine_type": "sprayer",
           "eligible_machine_ids": [
-            "M3"
+            "M3",
+            "M9",
+            "M10"
           ],
           "workers_required": 1,
           "direct_revenue_aud": 0,
-          "direct_cost_aud": 747,
-          "direct_cash_effect_aud": -747,
+          "direct_cost_aud": 737,
+          "direct_cash_effect_aud": -737,
           "state_yield_effect_t_ha": 0.2874,
           "water_ml": 0,
           "candidate_score": 0.287449,
@@ -2852,9 +2883,9 @@
     {
       "option_id": "F2_O021",
       "field_id": "F2",
-      "total_direct_cash_effect_aud": -1579.5,
+      "total_direct_cash_effect_aud": -1569.5,
       "terminal_value_aud": 42379.08,
-      "objective_value_aud": 40799.58,
+      "objective_value_aud": 40809.58,
       "actions": [
         {
           "candidate_id": "P03_F2_spray_20260920_0900",
@@ -2870,12 +2901,14 @@
           "duration_hours": 3,
           "machine_type": "sprayer",
           "eligible_machine_ids": [
-            "M3"
+            "M3",
+            "M9",
+            "M10"
           ],
           "workers_required": 1,
           "direct_revenue_aud": 0,
-          "direct_cost_aud": 747,
-          "direct_cash_effect_aud": -747,
+          "direct_cost_aud": 737,
+          "direct_cash_effect_aud": -737,
           "state_yield_effect_t_ha": 0.2874,
           "water_ml": 0,
           "candidate_score": 0.287449,
@@ -2957,9 +2990,9 @@
     {
       "option_id": "F2_O022",
       "field_id": "F2",
-      "total_direct_cash_effect_aud": -1579.5,
+      "total_direct_cash_effect_aud": -1569.5,
       "terminal_value_aud": 42379.08,
-      "objective_value_aud": 40799.58,
+      "objective_value_aud": 40809.58,
       "actions": [
         {
           "candidate_id": "P03_F2_spray_20260920_0900",
@@ -2975,12 +3008,14 @@
           "duration_hours": 3,
           "machine_type": "sprayer",
           "eligible_machine_ids": [
-            "M3"
+            "M3",
+            "M9",
+            "M10"
           ],
           "workers_required": 1,
           "direct_revenue_aud": 0,
-          "direct_cost_aud": 747,
-          "direct_cash_effect_aud": -747,
+          "direct_cost_aud": 737,
+          "direct_cash_effect_aud": -737,
           "state_yield_effect_t_ha": 0.2874,
           "water_ml": 0,
           "candidate_score": 0.287449,
@@ -3062,9 +3097,9 @@
     {
       "option_id": "F2_O023",
       "field_id": "F2",
-      "total_direct_cash_effect_aud": -1579.5,
+      "total_direct_cash_effect_aud": -1569.5,
       "terminal_value_aud": 42379.08,
-      "objective_value_aud": 40799.58,
+      "objective_value_aud": 40809.58,
       "actions": [
         {
           "candidate_id": "P03_F2_spray_20260920_1000",
@@ -3080,12 +3115,14 @@
           "duration_hours": 3,
           "machine_type": "sprayer",
           "eligible_machine_ids": [
-            "M3"
+            "M3",
+            "M9",
+            "M10"
           ],
           "workers_required": 1,
           "direct_revenue_aud": 0,
-          "direct_cost_aud": 747,
-          "direct_cash_effect_aud": -747,
+          "direct_cost_aud": 737,
+          "direct_cash_effect_aud": -737,
           "state_yield_effect_t_ha": 0.2874,
           "water_ml": 0,
           "candidate_score": 0.287449,
@@ -3167,9 +3204,9 @@
     {
       "option_id": "F2_O024",
       "field_id": "F2",
-      "total_direct_cash_effect_aud": -1579.5,
+      "total_direct_cash_effect_aud": -1569.5,
       "terminal_value_aud": 42379.08,
-      "objective_value_aud": 40799.58,
+      "objective_value_aud": 40809.58,
       "actions": [
         {
           "candidate_id": "P03_F2_spray_20260920_1000",
@@ -3185,12 +3222,14 @@
           "duration_hours": 3,
           "machine_type": "sprayer",
           "eligible_machine_ids": [
-            "M3"
+            "M3",
+            "M9",
+            "M10"
           ],
           "workers_required": 1,
           "direct_revenue_aud": 0,
-          "direct_cost_aud": 747,
-          "direct_cash_effect_aud": -747,
+          "direct_cost_aud": 737,
+          "direct_cash_effect_aud": -737,
           "state_yield_effect_t_ha": 0.2874,
           "water_ml": 0,
           "candidate_score": 0.287449,
@@ -3272,9 +3311,9 @@
     {
       "option_id": "F2_O025",
       "field_id": "F2",
-      "total_direct_cash_effect_aud": -1579.5,
+      "total_direct_cash_effect_aud": -1569.5,
       "terminal_value_aud": 42379.08,
-      "objective_value_aud": 40799.58,
+      "objective_value_aud": 40809.58,
       "actions": [
         {
           "candidate_id": "P03_F2_spray_20260920_1000",
@@ -3290,12 +3329,14 @@
           "duration_hours": 3,
           "machine_type": "sprayer",
           "eligible_machine_ids": [
-            "M3"
+            "M3",
+            "M9",
+            "M10"
           ],
           "workers_required": 1,
           "direct_revenue_aud": 0,
-          "direct_cost_aud": 747,
-          "direct_cash_effect_aud": -747,
+          "direct_cost_aud": 737,
+          "direct_cash_effect_aud": -737,
           "state_yield_effect_t_ha": 0.2874,
           "water_ml": 0,
           "candidate_score": 0.287449,
@@ -3377,9 +3418,9 @@
     {
       "option_id": "F2_O026",
       "field_id": "F2",
-      "total_direct_cash_effect_aud": -1579.5,
+      "total_direct_cash_effect_aud": -1569.5,
       "terminal_value_aud": 42379.08,
-      "objective_value_aud": 40799.58,
+      "objective_value_aud": 40809.58,
       "actions": [
         {
           "candidate_id": "P03_F2_spray_20260919_0800",
@@ -3395,12 +3436,14 @@
           "duration_hours": 3,
           "machine_type": "sprayer",
           "eligible_machine_ids": [
-            "M3"
+            "M3",
+            "M9",
+            "M10"
           ],
           "workers_required": 1,
           "direct_revenue_aud": 0,
-          "direct_cost_aud": 747,
-          "direct_cash_effect_aud": -747,
+          "direct_cost_aud": 737,
+          "direct_cash_effect_aud": -737,
           "state_yield_effect_t_ha": 0.2631,
           "water_ml": 0,
           "candidate_score": 0.263075,
@@ -3482,9 +3525,9 @@
     {
       "option_id": "F2_O027",
       "field_id": "F2",
-      "total_direct_cash_effect_aud": -1579.5,
+      "total_direct_cash_effect_aud": -1569.5,
       "terminal_value_aud": 42379.08,
-      "objective_value_aud": 40799.58,
+      "objective_value_aud": 40809.58,
       "actions": [
         {
           "candidate_id": "P03_F2_spray_20260919_0800",
@@ -3500,12 +3543,14 @@
           "duration_hours": 3,
           "machine_type": "sprayer",
           "eligible_machine_ids": [
-            "M3"
+            "M3",
+            "M9",
+            "M10"
           ],
           "workers_required": 1,
           "direct_revenue_aud": 0,
-          "direct_cost_aud": 747,
-          "direct_cash_effect_aud": -747,
+          "direct_cost_aud": 737,
+          "direct_cash_effect_aud": -737,
           "state_yield_effect_t_ha": 0.2631,
           "water_ml": 0,
           "candidate_score": 0.263075,
@@ -3587,9 +3632,9 @@
     {
       "option_id": "F2_O028",
       "field_id": "F2",
-      "total_direct_cash_effect_aud": -1579.5,
+      "total_direct_cash_effect_aud": -1569.5,
       "terminal_value_aud": 42379.08,
-      "objective_value_aud": 40799.58,
+      "objective_value_aud": 40809.58,
       "actions": [
         {
           "candidate_id": "P03_F2_spray_20260919_0800",
@@ -3605,12 +3650,14 @@
           "duration_hours": 3,
           "machine_type": "sprayer",
           "eligible_machine_ids": [
-            "M3"
+            "M3",
+            "M9",
+            "M10"
           ],
           "workers_required": 1,
           "direct_revenue_aud": 0,
-          "direct_cost_aud": 747,
-          "direct_cash_effect_aud": -747,
+          "direct_cost_aud": 737,
+          "direct_cash_effect_aud": -737,
           "state_yield_effect_t_ha": 0.2631,
           "water_ml": 0,
           "candidate_score": 0.263075,
@@ -3692,9 +3739,9 @@
     {
       "option_id": "F2_O029",
       "field_id": "F2",
-      "total_direct_cash_effect_aud": -1579.5,
+      "total_direct_cash_effect_aud": -1569.5,
       "terminal_value_aud": 42379.08,
-      "objective_value_aud": 40799.58,
+      "objective_value_aud": 40809.58,
       "actions": [
         {
           "candidate_id": "P03_F2_spray_20260918_0700",
@@ -3710,12 +3757,14 @@
           "duration_hours": 3,
           "machine_type": "sprayer",
           "eligible_machine_ids": [
-            "M3"
+            "M3",
+            "M9",
+            "M10"
           ],
           "workers_required": 1,
           "direct_revenue_aud": 0,
-          "direct_cost_aud": 747,
-          "direct_cash_effect_aud": -747,
+          "direct_cost_aud": 737,
+          "direct_cash_effect_aud": -737,
           "state_yield_effect_t_ha": 0.2388,
           "water_ml": 0,
           "candidate_score": 0.238826,
@@ -3797,9 +3846,9 @@
     {
       "option_id": "F2_O030",
       "field_id": "F2",
-      "total_direct_cash_effect_aud": -1579.5,
+      "total_direct_cash_effect_aud": -1569.5,
       "terminal_value_aud": 42379.08,
-      "objective_value_aud": 40799.58,
+      "objective_value_aud": 40809.58,
       "actions": [
         {
           "candidate_id": "P03_F2_spray_20260918_0700",
@@ -3815,12 +3864,14 @@
           "duration_hours": 3,
           "machine_type": "sprayer",
           "eligible_machine_ids": [
-            "M3"
+            "M3",
+            "M9",
+            "M10"
           ],
           "workers_required": 1,
           "direct_revenue_aud": 0,
-          "direct_cost_aud": 747,
-          "direct_cash_effect_aud": -747,
+          "direct_cost_aud": 737,
+          "direct_cash_effect_aud": -737,
           "state_yield_effect_t_ha": 0.2388,
           "water_ml": 0,
           "candidate_score": 0.238826,
@@ -3902,9 +3953,9 @@
     {
       "option_id": "F3_O001",
       "field_id": "F3",
-      "total_direct_cash_effect_aud": -2734.08,
+      "total_direct_cash_effect_aud": -2722.14,
       "terminal_value_aud": 31657.63,
-      "objective_value_aud": 28923.55,
+      "objective_value_aud": 28935.49,
       "actions": [
         {
           "candidate_id": "P05_F3_spray_20260918_0700",
@@ -3920,12 +3971,14 @@
           "duration_hours": 3.58,
           "machine_type": "sprayer",
           "eligible_machine_ids": [
-            "M3"
+            "M3",
+            "M9",
+            "M10"
           ],
           "workers_required": 1,
           "direct_revenue_aud": 0,
-          "direct_cost_aud": 827.75,
-          "direct_cash_effect_aud": -827.75,
+          "direct_cost_aud": 815.81,
+          "direct_cash_effect_aud": -815.81,
           "state_yield_effect_t_ha": 0.4879,
           "water_ml": 0,
           "candidate_score": 0.487856,
@@ -4007,12 +4060,12 @@
     {
       "option_id": "F3_O002",
       "field_id": "F3",
-      "total_direct_cash_effect_aud": -3712.33,
+      "total_direct_cash_effect_aud": -3682.47,
       "terminal_value_aud": 32416.44,
-      "objective_value_aud": 28704.11,
+      "objective_value_aud": 28733.97,
       "actions": [
         {
-          "candidate_id": "P05_F3_spray_20260916_0700",
+          "candidate_id": "P05_F3_spray_20260917_0700",
           "plan_id": "P05",
           "field_id": "F3",
           "operation": "spray",
@@ -4020,34 +4073,35 @@
           "required": true,
           "depends_on": "",
           "min_gap_hours": 0,
-          "start_time": "2026-09-16T07:00:00",
-          "end_time": "2026-09-16T10:35:00",
+          "start_time": "2026-09-17T07:00:00",
+          "end_time": "2026-09-17T10:35:00",
           "duration_hours": 3.58,
           "machine_type": "sprayer",
           "eligible_machine_ids": [
-            "M3"
+            "M9",
+            "M10"
           ],
           "workers_required": 1,
           "direct_revenue_aud": 0,
-          "direct_cost_aud": 827.75,
-          "direct_cash_effect_aud": -827.75,
-          "state_yield_effect_t_ha": 0.4216,
+          "direct_cost_aud": 809.83,
+          "direct_cash_effect_aud": -809.83,
+          "state_yield_effect_t_ha": 0.4547,
           "water_ml": 0,
-          "candidate_score": 0.42158,
+          "candidate_score": 0.454671,
           "state_after": {
             "crop": "barley",
             "planted": true,
             "newly_planted": false,
             "harvested": false,
             "growth_stage": "stem_elongation",
-            "readiness": 0.517,
-            "soil_moisture": 0.27,
-            "soil_temperature_c": 14.21,
-            "expected_yield_t_ha": 4.7803,
-            "nitrogen_index": 0.534,
-            "weed_pressure": 0.0605,
+            "readiness": 0.526,
+            "soil_moisture": 0.25,
+            "soil_temperature_c": 14.38,
+            "expected_yield_t_ha": 4.8321,
+            "nitrogen_index": 0.512,
+            "weed_pressure": 0.064,
             "pest_pressure": 0.08,
-            "disease_pressure": 0.14,
+            "disease_pressure": 0.16,
             "seedbed_readiness": 0.12
           }
         },
@@ -4071,7 +4125,7 @@
           "direct_revenue_aud": 0,
           "direct_cost_aud": 1906.33,
           "direct_cash_effect_aud": -1906.33,
-          "state_yield_effect_t_ha": 0.195,
+          "state_yield_effect_t_ha": 0.1964,
           "water_ml": 0,
           "candidate_score": 0.176946,
           "state_after": {
@@ -4083,9 +4137,9 @@
             "readiness": 0.544,
             "soil_moisture": 0.31,
             "soil_temperature_c": 14.72,
-            "expected_yield_t_ha": 4.9933,
+            "expected_yield_t_ha": 5.0278,
             "nitrogen_index": 0.6855,
-            "weed_pressure": 0.3177,
+            "weed_pressure": 0.2522,
             "pest_pressure": 0.08,
             "disease_pressure": 0.2,
             "seedbed_readiness": 0.12
@@ -4105,13 +4159,15 @@
           "duration_hours": 3.58,
           "machine_type": "sprayer",
           "eligible_machine_ids": [
-            "M3"
+            "M3",
+            "M9",
+            "M10"
           ],
           "workers_required": 1,
           "direct_revenue_aud": 0,
-          "direct_cost_aud": 978.25,
-          "direct_cash_effect_aud": -978.25,
-          "state_yield_effect_t_ha": 0.3426,
+          "direct_cost_aud": 966.31,
+          "direct_cash_effect_aud": -966.31,
+          "state_yield_effect_t_ha": 0.3451,
           "water_ml": 0,
           "candidate_score": 0.298224,
           "state_after": {
@@ -4125,7 +4181,7 @@
             "soil_temperature_c": 15.74,
             "expected_yield_t_ha": 5.2407,
             "nitrogen_index": 0.5286,
-            "weed_pressure": 0.6786,
+            "weed_pressure": 0.6539,
             "pest_pressure": 0.08,
             "disease_pressure": 0.047,
             "seedbed_readiness": 0.12
@@ -4143,7 +4199,7 @@
         "soil_temperature_c": 15.91,
         "expected_yield_t_ha": 5.2535,
         "nitrogen_index": 0.5028,
-        "weed_pressure": 0.7273,
+        "weed_pressure": 0.7063,
         "pest_pressure": 0.08,
         "disease_pressure": 0.0943,
         "seedbed_readiness": 0.12
@@ -4152,9 +4208,9 @@
     {
       "option_id": "F3_O003",
       "field_id": "F3",
-      "total_direct_cash_effect_aud": -2734.08,
+      "total_direct_cash_effect_aud": -2722.14,
       "terminal_value_aud": 31657.63,
-      "objective_value_aud": 28923.55,
+      "objective_value_aud": 28935.49,
       "actions": [
         {
           "candidate_id": "P05_F3_spray_20260918_0700",
@@ -4170,12 +4226,14 @@
           "duration_hours": 3.58,
           "machine_type": "sprayer",
           "eligible_machine_ids": [
-            "M3"
+            "M3",
+            "M9",
+            "M10"
           ],
           "workers_required": 1,
           "direct_revenue_aud": 0,
-          "direct_cost_aud": 827.75,
-          "direct_cash_effect_aud": -827.75,
+          "direct_cost_aud": 815.81,
+          "direct_cash_effect_aud": -815.81,
           "state_yield_effect_t_ha": 0.4879,
           "water_ml": 0,
           "candidate_score": 0.487856,
@@ -4257,9 +4315,9 @@
     {
       "option_id": "F3_O004",
       "field_id": "F3",
-      "total_direct_cash_effect_aud": -2734.08,
+      "total_direct_cash_effect_aud": -2722.14,
       "terminal_value_aud": 31657.63,
-      "objective_value_aud": 28923.55,
+      "objective_value_aud": 28935.49,
       "actions": [
         {
           "candidate_id": "P05_F3_spray_20260918_0700",
@@ -4275,12 +4333,14 @@
           "duration_hours": 3.58,
           "machine_type": "sprayer",
           "eligible_machine_ids": [
-            "M3"
+            "M3",
+            "M9",
+            "M10"
           ],
           "workers_required": 1,
           "direct_revenue_aud": 0,
-          "direct_cost_aud": 827.75,
-          "direct_cash_effect_aud": -827.75,
+          "direct_cost_aud": 815.81,
+          "direct_cash_effect_aud": -815.81,
           "state_yield_effect_t_ha": 0.4879,
           "water_ml": 0,
           "candidate_score": 0.487856,
@@ -4362,9 +4422,9 @@
     {
       "option_id": "F3_O005",
       "field_id": "F3",
-      "total_direct_cash_effect_aud": -2734.08,
+      "total_direct_cash_effect_aud": -2722.14,
       "terminal_value_aud": 31657.63,
-      "objective_value_aud": 28923.55,
+      "objective_value_aud": 28935.49,
       "actions": [
         {
           "candidate_id": "P05_F3_spray_20260918_0800",
@@ -4380,12 +4440,14 @@
           "duration_hours": 3.58,
           "machine_type": "sprayer",
           "eligible_machine_ids": [
-            "M3"
+            "M3",
+            "M9",
+            "M10"
           ],
           "workers_required": 1,
           "direct_revenue_aud": 0,
-          "direct_cost_aud": 827.75,
-          "direct_cash_effect_aud": -827.75,
+          "direct_cost_aud": 815.81,
+          "direct_cash_effect_aud": -815.81,
           "state_yield_effect_t_ha": 0.4879,
           "water_ml": 0,
           "candidate_score": 0.487856,
@@ -4467,9 +4529,9 @@
     {
       "option_id": "F3_O006",
       "field_id": "F3",
-      "total_direct_cash_effect_aud": -2734.08,
+      "total_direct_cash_effect_aud": -2722.14,
       "terminal_value_aud": 31657.63,
-      "objective_value_aud": 28923.55,
+      "objective_value_aud": 28935.49,
       "actions": [
         {
           "candidate_id": "P05_F3_spray_20260918_0800",
@@ -4485,12 +4547,14 @@
           "duration_hours": 3.58,
           "machine_type": "sprayer",
           "eligible_machine_ids": [
-            "M3"
+            "M3",
+            "M9",
+            "M10"
           ],
           "workers_required": 1,
           "direct_revenue_aud": 0,
-          "direct_cost_aud": 827.75,
-          "direct_cash_effect_aud": -827.75,
+          "direct_cost_aud": 815.81,
+          "direct_cash_effect_aud": -815.81,
           "state_yield_effect_t_ha": 0.4879,
           "water_ml": 0,
           "candidate_score": 0.487856,
@@ -4572,9 +4636,9 @@
     {
       "option_id": "F3_O007",
       "field_id": "F3",
-      "total_direct_cash_effect_aud": -2734.08,
+      "total_direct_cash_effect_aud": -2722.14,
       "terminal_value_aud": 31657.63,
-      "objective_value_aud": 28923.55,
+      "objective_value_aud": 28935.49,
       "actions": [
         {
           "candidate_id": "P05_F3_spray_20260918_0800",
@@ -4590,12 +4654,14 @@
           "duration_hours": 3.58,
           "machine_type": "sprayer",
           "eligible_machine_ids": [
-            "M3"
+            "M3",
+            "M9",
+            "M10"
           ],
           "workers_required": 1,
           "direct_revenue_aud": 0,
-          "direct_cost_aud": 827.75,
-          "direct_cash_effect_aud": -827.75,
+          "direct_cost_aud": 815.81,
+          "direct_cash_effect_aud": -815.81,
           "state_yield_effect_t_ha": 0.4879,
           "water_ml": 0,
           "candidate_score": 0.487856,
@@ -4677,9 +4743,9 @@
     {
       "option_id": "F3_O008",
       "field_id": "F3",
-      "total_direct_cash_effect_aud": -2734.08,
+      "total_direct_cash_effect_aud": -2722.14,
       "terminal_value_aud": 31657.63,
-      "objective_value_aud": 28923.55,
+      "objective_value_aud": 28935.49,
       "actions": [
         {
           "candidate_id": "P05_F3_spray_20260918_0900",
@@ -4695,12 +4761,14 @@
           "duration_hours": 3.58,
           "machine_type": "sprayer",
           "eligible_machine_ids": [
-            "M3"
+            "M3",
+            "M9",
+            "M10"
           ],
           "workers_required": 1,
           "direct_revenue_aud": 0,
-          "direct_cost_aud": 827.75,
-          "direct_cash_effect_aud": -827.75,
+          "direct_cost_aud": 815.81,
+          "direct_cash_effect_aud": -815.81,
           "state_yield_effect_t_ha": 0.4879,
           "water_ml": 0,
           "candidate_score": 0.487856,
@@ -4782,9 +4850,9 @@
     {
       "option_id": "F3_O009",
       "field_id": "F3",
-      "total_direct_cash_effect_aud": -2734.08,
+      "total_direct_cash_effect_aud": -2722.14,
       "terminal_value_aud": 31657.63,
-      "objective_value_aud": 28923.55,
+      "objective_value_aud": 28935.49,
       "actions": [
         {
           "candidate_id": "P05_F3_spray_20260918_0900",
@@ -4800,12 +4868,14 @@
           "duration_hours": 3.58,
           "machine_type": "sprayer",
           "eligible_machine_ids": [
-            "M3"
+            "M3",
+            "M9",
+            "M10"
           ],
           "workers_required": 1,
           "direct_revenue_aud": 0,
-          "direct_cost_aud": 827.75,
-          "direct_cash_effect_aud": -827.75,
+          "direct_cost_aud": 815.81,
+          "direct_cash_effect_aud": -815.81,
           "state_yield_effect_t_ha": 0.4879,
           "water_ml": 0,
           "candidate_score": 0.487856,
@@ -4887,9 +4957,9 @@
     {
       "option_id": "F3_O010",
       "field_id": "F3",
-      "total_direct_cash_effect_aud": -2734.08,
+      "total_direct_cash_effect_aud": -2722.14,
       "terminal_value_aud": 31657.63,
-      "objective_value_aud": 28923.55,
+      "objective_value_aud": 28935.49,
       "actions": [
         {
           "candidate_id": "P05_F3_spray_20260918_0900",
@@ -4905,12 +4975,14 @@
           "duration_hours": 3.58,
           "machine_type": "sprayer",
           "eligible_machine_ids": [
-            "M3"
+            "M3",
+            "M9",
+            "M10"
           ],
           "workers_required": 1,
           "direct_revenue_aud": 0,
-          "direct_cost_aud": 827.75,
-          "direct_cash_effect_aud": -827.75,
+          "direct_cost_aud": 815.81,
+          "direct_cash_effect_aud": -815.81,
           "state_yield_effect_t_ha": 0.4879,
           "water_ml": 0,
           "candidate_score": 0.487856,
@@ -4992,9 +5064,9 @@
     {
       "option_id": "F3_O011",
       "field_id": "F3",
-      "total_direct_cash_effect_aud": -2734.08,
+      "total_direct_cash_effect_aud": -2722.14,
       "terminal_value_aud": 31562.28,
-      "objective_value_aud": 28828.2,
+      "objective_value_aud": 28840.14,
       "actions": [
         {
           "candidate_id": "P05_F3_spray_20260918_0700",
@@ -5010,12 +5082,14 @@
           "duration_hours": 3.58,
           "machine_type": "sprayer",
           "eligible_machine_ids": [
-            "M3"
+            "M3",
+            "M9",
+            "M10"
           ],
           "workers_required": 1,
           "direct_revenue_aud": 0,
-          "direct_cost_aud": 827.75,
-          "direct_cash_effect_aud": -827.75,
+          "direct_cost_aud": 815.81,
+          "direct_cash_effect_aud": -815.81,
           "state_yield_effect_t_ha": 0.4879,
           "water_ml": 0,
           "candidate_score": 0.487856,
@@ -5097,9 +5171,9 @@
     {
       "option_id": "F3_O012",
       "field_id": "F3",
-      "total_direct_cash_effect_aud": -2734.08,
+      "total_direct_cash_effect_aud": -2722.14,
       "terminal_value_aud": 31562.28,
-      "objective_value_aud": 28828.2,
+      "objective_value_aud": 28840.14,
       "actions": [
         {
           "candidate_id": "P05_F3_spray_20260918_0700",
@@ -5115,12 +5189,14 @@
           "duration_hours": 3.58,
           "machine_type": "sprayer",
           "eligible_machine_ids": [
-            "M3"
+            "M3",
+            "M9",
+            "M10"
           ],
           "workers_required": 1,
           "direct_revenue_aud": 0,
-          "direct_cost_aud": 827.75,
-          "direct_cash_effect_aud": -827.75,
+          "direct_cost_aud": 815.81,
+          "direct_cash_effect_aud": -815.81,
           "state_yield_effect_t_ha": 0.4879,
           "water_ml": 0,
           "candidate_score": 0.487856,
@@ -5202,9 +5278,9 @@
     {
       "option_id": "F3_O013",
       "field_id": "F3",
-      "total_direct_cash_effect_aud": -2734.08,
+      "total_direct_cash_effect_aud": -2722.14,
       "terminal_value_aud": 31562.28,
-      "objective_value_aud": 28828.2,
+      "objective_value_aud": 28840.14,
       "actions": [
         {
           "candidate_id": "P05_F3_spray_20260918_0700",
@@ -5220,12 +5296,14 @@
           "duration_hours": 3.58,
           "machine_type": "sprayer",
           "eligible_machine_ids": [
-            "M3"
+            "M3",
+            "M9",
+            "M10"
           ],
           "workers_required": 1,
           "direct_revenue_aud": 0,
-          "direct_cost_aud": 827.75,
-          "direct_cash_effect_aud": -827.75,
+          "direct_cost_aud": 815.81,
+          "direct_cash_effect_aud": -815.81,
           "state_yield_effect_t_ha": 0.4879,
           "water_ml": 0,
           "candidate_score": 0.487856,
@@ -5307,9 +5385,9 @@
     {
       "option_id": "F3_O014",
       "field_id": "F3",
-      "total_direct_cash_effect_aud": -2734.08,
+      "total_direct_cash_effect_aud": -2722.14,
       "terminal_value_aud": 31562.28,
-      "objective_value_aud": 28828.2,
+      "objective_value_aud": 28840.14,
       "actions": [
         {
           "candidate_id": "P05_F3_spray_20260918_0800",
@@ -5325,12 +5403,14 @@
           "duration_hours": 3.58,
           "machine_type": "sprayer",
           "eligible_machine_ids": [
-            "M3"
+            "M3",
+            "M9",
+            "M10"
           ],
           "workers_required": 1,
           "direct_revenue_aud": 0,
-          "direct_cost_aud": 827.75,
-          "direct_cash_effect_aud": -827.75,
+          "direct_cost_aud": 815.81,
+          "direct_cash_effect_aud": -815.81,
           "state_yield_effect_t_ha": 0.4879,
           "water_ml": 0,
           "candidate_score": 0.487856,
@@ -5412,9 +5492,9 @@
     {
       "option_id": "F3_O015",
       "field_id": "F3",
-      "total_direct_cash_effect_aud": -2734.08,
+      "total_direct_cash_effect_aud": -2722.14,
       "terminal_value_aud": 31562.28,
-      "objective_value_aud": 28828.2,
+      "objective_value_aud": 28840.14,
       "actions": [
         {
           "candidate_id": "P05_F3_spray_20260918_0800",
@@ -5430,12 +5510,14 @@
           "duration_hours": 3.58,
           "machine_type": "sprayer",
           "eligible_machine_ids": [
-            "M3"
+            "M3",
+            "M9",
+            "M10"
           ],
           "workers_required": 1,
           "direct_revenue_aud": 0,
-          "direct_cost_aud": 827.75,
-          "direct_cash_effect_aud": -827.75,
+          "direct_cost_aud": 815.81,
+          "direct_cash_effect_aud": -815.81,
           "state_yield_effect_t_ha": 0.4879,
           "water_ml": 0,
           "candidate_score": 0.487856,
@@ -5517,9 +5599,9 @@
     {
       "option_id": "F3_O016",
       "field_id": "F3",
-      "total_direct_cash_effect_aud": -2734.08,
+      "total_direct_cash_effect_aud": -2722.14,
       "terminal_value_aud": 31562.28,
-      "objective_value_aud": 28828.2,
+      "objective_value_aud": 28840.14,
       "actions": [
         {
           "candidate_id": "P05_F3_spray_20260918_0800",
@@ -5535,12 +5617,14 @@
           "duration_hours": 3.58,
           "machine_type": "sprayer",
           "eligible_machine_ids": [
-            "M3"
+            "M3",
+            "M9",
+            "M10"
           ],
           "workers_required": 1,
           "direct_revenue_aud": 0,
-          "direct_cost_aud": 827.75,
-          "direct_cash_effect_aud": -827.75,
+          "direct_cost_aud": 815.81,
+          "direct_cash_effect_aud": -815.81,
           "state_yield_effect_t_ha": 0.4879,
           "water_ml": 0,
           "candidate_score": 0.487856,
@@ -5622,9 +5706,9 @@
     {
       "option_id": "F3_O017",
       "field_id": "F3",
-      "total_direct_cash_effect_aud": -2734.08,
+      "total_direct_cash_effect_aud": -2722.14,
       "terminal_value_aud": 31562.28,
-      "objective_value_aud": 28828.2,
+      "objective_value_aud": 28840.14,
       "actions": [
         {
           "candidate_id": "P05_F3_spray_20260918_0900",
@@ -5640,12 +5724,14 @@
           "duration_hours": 3.58,
           "machine_type": "sprayer",
           "eligible_machine_ids": [
-            "M3"
+            "M3",
+            "M9",
+            "M10"
           ],
           "workers_required": 1,
           "direct_revenue_aud": 0,
-          "direct_cost_aud": 827.75,
-          "direct_cash_effect_aud": -827.75,
+          "direct_cost_aud": 815.81,
+          "direct_cash_effect_aud": -815.81,
           "state_yield_effect_t_ha": 0.4879,
           "water_ml": 0,
           "candidate_score": 0.487856,
@@ -5727,9 +5813,9 @@
     {
       "option_id": "F3_O018",
       "field_id": "F3",
-      "total_direct_cash_effect_aud": -2734.08,
+      "total_direct_cash_effect_aud": -2722.14,
       "terminal_value_aud": 31562.28,
-      "objective_value_aud": 28828.2,
+      "objective_value_aud": 28840.14,
       "actions": [
         {
           "candidate_id": "P05_F3_spray_20260918_0900",
@@ -5745,12 +5831,14 @@
           "duration_hours": 3.58,
           "machine_type": "sprayer",
           "eligible_machine_ids": [
-            "M3"
+            "M3",
+            "M9",
+            "M10"
           ],
           "workers_required": 1,
           "direct_revenue_aud": 0,
-          "direct_cost_aud": 827.75,
-          "direct_cash_effect_aud": -827.75,
+          "direct_cost_aud": 815.81,
+          "direct_cash_effect_aud": -815.81,
           "state_yield_effect_t_ha": 0.4879,
           "water_ml": 0,
           "candidate_score": 0.487856,
@@ -5832,9 +5920,9 @@
     {
       "option_id": "F3_O019",
       "field_id": "F3",
-      "total_direct_cash_effect_aud": -2734.08,
+      "total_direct_cash_effect_aud": -2722.14,
       "terminal_value_aud": 31562.28,
-      "objective_value_aud": 28828.2,
+      "objective_value_aud": 28840.14,
       "actions": [
         {
           "candidate_id": "P05_F3_spray_20260918_0900",
@@ -5850,12 +5938,14 @@
           "duration_hours": 3.58,
           "machine_type": "sprayer",
           "eligible_machine_ids": [
-            "M3"
+            "M3",
+            "M9",
+            "M10"
           ],
           "workers_required": 1,
           "direct_revenue_aud": 0,
-          "direct_cost_aud": 827.75,
-          "direct_cash_effect_aud": -827.75,
+          "direct_cost_aud": 815.81,
+          "direct_cash_effect_aud": -815.81,
           "state_yield_effect_t_ha": 0.4879,
           "water_ml": 0,
           "candidate_score": 0.487856,
@@ -5937,9 +6027,9 @@
     {
       "option_id": "F3_O020",
       "field_id": "F3",
-      "total_direct_cash_effect_aud": -2734.08,
+      "total_direct_cash_effect_aud": -2722.14,
       "terminal_value_aud": 31466.93,
-      "objective_value_aud": 28732.85,
+      "objective_value_aud": 28744.79,
       "actions": [
         {
           "candidate_id": "P05_F3_spray_20260918_0700",
@@ -5955,12 +6045,14 @@
           "duration_hours": 3.58,
           "machine_type": "sprayer",
           "eligible_machine_ids": [
-            "M3"
+            "M3",
+            "M9",
+            "M10"
           ],
           "workers_required": 1,
           "direct_revenue_aud": 0,
-          "direct_cost_aud": 827.75,
-          "direct_cash_effect_aud": -827.75,
+          "direct_cost_aud": 815.81,
+          "direct_cash_effect_aud": -815.81,
           "state_yield_effect_t_ha": 0.4879,
           "water_ml": 0,
           "candidate_score": 0.487856,
@@ -6042,9 +6134,9 @@
     {
       "option_id": "F3_O021",
       "field_id": "F3",
-      "total_direct_cash_effect_aud": -2734.08,
+      "total_direct_cash_effect_aud": -2722.14,
       "terminal_value_aud": 31466.93,
-      "objective_value_aud": 28732.85,
+      "objective_value_aud": 28744.79,
       "actions": [
         {
           "candidate_id": "P05_F3_spray_20260918_0700",
@@ -6060,12 +6152,14 @@
           "duration_hours": 3.58,
           "machine_type": "sprayer",
           "eligible_machine_ids": [
-            "M3"
+            "M3",
+            "M9",
+            "M10"
           ],
           "workers_required": 1,
           "direct_revenue_aud": 0,
-          "direct_cost_aud": 827.75,
-          "direct_cash_effect_aud": -827.75,
+          "direct_cost_aud": 815.81,
+          "direct_cash_effect_aud": -815.81,
           "state_yield_effect_t_ha": 0.4879,
           "water_ml": 0,
           "candidate_score": 0.487856,
@@ -6147,9 +6241,9 @@
     {
       "option_id": "F3_O022",
       "field_id": "F3",
-      "total_direct_cash_effect_aud": -2734.08,
+      "total_direct_cash_effect_aud": -2722.14,
       "terminal_value_aud": 31466.93,
-      "objective_value_aud": 28732.85,
+      "objective_value_aud": 28744.79,
       "actions": [
         {
           "candidate_id": "P05_F3_spray_20260918_0700",
@@ -6165,12 +6259,14 @@
           "duration_hours": 3.58,
           "machine_type": "sprayer",
           "eligible_machine_ids": [
-            "M3"
+            "M3",
+            "M9",
+            "M10"
           ],
           "workers_required": 1,
           "direct_revenue_aud": 0,
-          "direct_cost_aud": 827.75,
-          "direct_cash_effect_aud": -827.75,
+          "direct_cost_aud": 815.81,
+          "direct_cash_effect_aud": -815.81,
           "state_yield_effect_t_ha": 0.4879,
           "water_ml": 0,
           "candidate_score": 0.487856,
@@ -6252,9 +6348,9 @@
     {
       "option_id": "F3_O023",
       "field_id": "F3",
-      "total_direct_cash_effect_aud": -2734.08,
+      "total_direct_cash_effect_aud": -2722.14,
       "terminal_value_aud": 31466.93,
-      "objective_value_aud": 28732.85,
+      "objective_value_aud": 28744.79,
       "actions": [
         {
           "candidate_id": "P05_F3_spray_20260918_0800",
@@ -6270,12 +6366,14 @@
           "duration_hours": 3.58,
           "machine_type": "sprayer",
           "eligible_machine_ids": [
-            "M3"
+            "M3",
+            "M9",
+            "M10"
           ],
           "workers_required": 1,
           "direct_revenue_aud": 0,
-          "direct_cost_aud": 827.75,
-          "direct_cash_effect_aud": -827.75,
+          "direct_cost_aud": 815.81,
+          "direct_cash_effect_aud": -815.81,
           "state_yield_effect_t_ha": 0.4879,
           "water_ml": 0,
           "candidate_score": 0.487856,
@@ -6357,9 +6455,9 @@
     {
       "option_id": "F3_O024",
       "field_id": "F3",
-      "total_direct_cash_effect_aud": -2734.08,
+      "total_direct_cash_effect_aud": -2722.14,
       "terminal_value_aud": 31466.93,
-      "objective_value_aud": 28732.85,
+      "objective_value_aud": 28744.79,
       "actions": [
         {
           "candidate_id": "P05_F3_spray_20260918_0800",
@@ -6375,12 +6473,14 @@
           "duration_hours": 3.58,
           "machine_type": "sprayer",
           "eligible_machine_ids": [
-            "M3"
+            "M3",
+            "M9",
+            "M10"
           ],
           "workers_required": 1,
           "direct_revenue_aud": 0,
-          "direct_cost_aud": 827.75,
-          "direct_cash_effect_aud": -827.75,
+          "direct_cost_aud": 815.81,
+          "direct_cash_effect_aud": -815.81,
           "state_yield_effect_t_ha": 0.4879,
           "water_ml": 0,
           "candidate_score": 0.487856,
@@ -6462,9 +6562,9 @@
     {
       "option_id": "F3_O025",
       "field_id": "F3",
-      "total_direct_cash_effect_aud": -2734.08,
+      "total_direct_cash_effect_aud": -2722.14,
       "terminal_value_aud": 31466.93,
-      "objective_value_aud": 28732.85,
+      "objective_value_aud": 28744.79,
       "actions": [
         {
           "candidate_id": "P05_F3_spray_20260918_0800",
@@ -6480,12 +6580,14 @@
           "duration_hours": 3.58,
           "machine_type": "sprayer",
           "eligible_machine_ids": [
-            "M3"
+            "M3",
+            "M9",
+            "M10"
           ],
           "workers_required": 1,
           "direct_revenue_aud": 0,
-          "direct_cost_aud": 827.75,
-          "direct_cash_effect_aud": -827.75,
+          "direct_cost_aud": 815.81,
+          "direct_cash_effect_aud": -815.81,
           "state_yield_effect_t_ha": 0.4879,
           "water_ml": 0,
           "candidate_score": 0.487856,
@@ -6567,9 +6669,9 @@
     {
       "option_id": "F3_O026",
       "field_id": "F3",
-      "total_direct_cash_effect_aud": -2734.08,
+      "total_direct_cash_effect_aud": -2722.14,
       "terminal_value_aud": 31466.93,
-      "objective_value_aud": 28732.85,
+      "objective_value_aud": 28744.79,
       "actions": [
         {
           "candidate_id": "P05_F3_spray_20260918_0900",
@@ -6585,12 +6687,14 @@
           "duration_hours": 3.58,
           "machine_type": "sprayer",
           "eligible_machine_ids": [
-            "M3"
+            "M3",
+            "M9",
+            "M10"
           ],
           "workers_required": 1,
           "direct_revenue_aud": 0,
-          "direct_cost_aud": 827.75,
-          "direct_cash_effect_aud": -827.75,
+          "direct_cost_aud": 815.81,
+          "direct_cash_effect_aud": -815.81,
           "state_yield_effect_t_ha": 0.4879,
           "water_ml": 0,
           "candidate_score": 0.487856,
@@ -6672,9 +6776,9 @@
     {
       "option_id": "F3_O027",
       "field_id": "F3",
-      "total_direct_cash_effect_aud": -2734.08,
+      "total_direct_cash_effect_aud": -2722.14,
       "terminal_value_aud": 31466.93,
-      "objective_value_aud": 28732.85,
+      "objective_value_aud": 28744.79,
       "actions": [
         {
           "candidate_id": "P05_F3_spray_20260918_0900",
@@ -6690,12 +6794,14 @@
           "duration_hours": 3.58,
           "machine_type": "sprayer",
           "eligible_machine_ids": [
-            "M3"
+            "M3",
+            "M9",
+            "M10"
           ],
           "workers_required": 1,
           "direct_revenue_aud": 0,
-          "direct_cost_aud": 827.75,
-          "direct_cash_effect_aud": -827.75,
+          "direct_cost_aud": 815.81,
+          "direct_cash_effect_aud": -815.81,
           "state_yield_effect_t_ha": 0.4879,
           "water_ml": 0,
           "candidate_score": 0.487856,
@@ -6777,9 +6883,9 @@
     {
       "option_id": "F3_O028",
       "field_id": "F3",
-      "total_direct_cash_effect_aud": -2734.08,
+      "total_direct_cash_effect_aud": -2722.14,
       "terminal_value_aud": 31466.93,
-      "objective_value_aud": 28732.85,
+      "objective_value_aud": 28744.79,
       "actions": [
         {
           "candidate_id": "P05_F3_spray_20260918_0900",
@@ -6795,12 +6901,14 @@
           "duration_hours": 3.58,
           "machine_type": "sprayer",
           "eligible_machine_ids": [
-            "M3"
+            "M3",
+            "M9",
+            "M10"
           ],
           "workers_required": 1,
           "direct_revenue_aud": 0,
-          "direct_cost_aud": 827.75,
-          "direct_cash_effect_aud": -827.75,
+          "direct_cost_aud": 815.81,
+          "direct_cash_effect_aud": -815.81,
           "state_yield_effect_t_ha": 0.4879,
           "water_ml": 0,
           "candidate_score": 0.487856,
@@ -6882,12 +6990,12 @@
     {
       "option_id": "F3_O029",
       "field_id": "F3",
-      "total_direct_cash_effect_aud": -3712.33,
+      "total_direct_cash_effect_aud": -3682.47,
       "terminal_value_aud": 32416.44,
-      "objective_value_aud": 28704.11,
+      "objective_value_aud": 28733.97,
       "actions": [
         {
-          "candidate_id": "P05_F3_spray_20260916_0700",
+          "candidate_id": "P05_F3_spray_20260917_0700",
           "plan_id": "P05",
           "field_id": "F3",
           "operation": "spray",
@@ -6895,34 +7003,35 @@
           "required": true,
           "depends_on": "",
           "min_gap_hours": 0,
-          "start_time": "2026-09-16T07:00:00",
-          "end_time": "2026-09-16T10:35:00",
+          "start_time": "2026-09-17T07:00:00",
+          "end_time": "2026-09-17T10:35:00",
           "duration_hours": 3.58,
           "machine_type": "sprayer",
           "eligible_machine_ids": [
-            "M3"
+            "M9",
+            "M10"
           ],
           "workers_required": 1,
           "direct_revenue_aud": 0,
-          "direct_cost_aud": 827.75,
-          "direct_cash_effect_aud": -827.75,
-          "state_yield_effect_t_ha": 0.4216,
+          "direct_cost_aud": 809.83,
+          "direct_cash_effect_aud": -809.83,
+          "state_yield_effect_t_ha": 0.4547,
           "water_ml": 0,
-          "candidate_score": 0.42158,
+          "candidate_score": 0.454671,
           "state_after": {
             "crop": "barley",
             "planted": true,
             "newly_planted": false,
             "harvested": false,
             "growth_stage": "stem_elongation",
-            "readiness": 0.517,
-            "soil_moisture": 0.27,
-            "soil_temperature_c": 14.21,
-            "expected_yield_t_ha": 4.7803,
-            "nitrogen_index": 0.534,
-            "weed_pressure": 0.0605,
+            "readiness": 0.526,
+            "soil_moisture": 0.25,
+            "soil_temperature_c": 14.38,
+            "expected_yield_t_ha": 4.8321,
+            "nitrogen_index": 0.512,
+            "weed_pressure": 0.064,
             "pest_pressure": 0.08,
-            "disease_pressure": 0.14,
+            "disease_pressure": 0.16,
             "seedbed_readiness": 0.12
           }
         },
@@ -6946,7 +7055,7 @@
           "direct_revenue_aud": 0,
           "direct_cost_aud": 1906.33,
           "direct_cash_effect_aud": -1906.33,
-          "state_yield_effect_t_ha": 0.195,
+          "state_yield_effect_t_ha": 0.1964,
           "water_ml": 0,
           "candidate_score": 0.176946,
           "state_after": {
@@ -6958,9 +7067,9 @@
             "readiness": 0.544,
             "soil_moisture": 0.31,
             "soil_temperature_c": 14.72,
-            "expected_yield_t_ha": 4.9933,
+            "expected_yield_t_ha": 5.0278,
             "nitrogen_index": 0.6855,
-            "weed_pressure": 0.3177,
+            "weed_pressure": 0.2522,
             "pest_pressure": 0.08,
             "disease_pressure": 0.2,
             "seedbed_readiness": 0.12
@@ -6980,13 +7089,15 @@
           "duration_hours": 3.58,
           "machine_type": "sprayer",
           "eligible_machine_ids": [
-            "M3"
+            "M3",
+            "M9",
+            "M10"
           ],
           "workers_required": 1,
           "direct_revenue_aud": 0,
-          "direct_cost_aud": 978.25,
-          "direct_cash_effect_aud": -978.25,
-          "state_yield_effect_t_ha": 0.3426,
+          "direct_cost_aud": 966.31,
+          "direct_cash_effect_aud": -966.31,
+          "state_yield_effect_t_ha": 0.3451,
           "water_ml": 0,
           "candidate_score": 0.298224,
           "state_after": {
@@ -7000,7 +7111,7 @@
             "soil_temperature_c": 15.74,
             "expected_yield_t_ha": 5.2407,
             "nitrogen_index": 0.5286,
-            "weed_pressure": 0.6786,
+            "weed_pressure": 0.6539,
             "pest_pressure": 0.08,
             "disease_pressure": 0.047,
             "seedbed_readiness": 0.12
@@ -7018,7 +7129,7 @@
         "soil_temperature_c": 15.91,
         "expected_yield_t_ha": 5.2535,
         "nitrogen_index": 0.5028,
-        "weed_pressure": 0.7273,
+        "weed_pressure": 0.7063,
         "pest_pressure": 0.08,
         "disease_pressure": 0.0943,
         "seedbed_readiness": 0.12
@@ -7027,12 +7138,12 @@
     {
       "option_id": "F3_O030",
       "field_id": "F3",
-      "total_direct_cash_effect_aud": -3712.33,
+      "total_direct_cash_effect_aud": -3682.47,
       "terminal_value_aud": 32416.44,
-      "objective_value_aud": 28704.11,
+      "objective_value_aud": 28733.97,
       "actions": [
         {
-          "candidate_id": "P05_F3_spray_20260916_0700",
+          "candidate_id": "P05_F3_spray_20260917_0700",
           "plan_id": "P05",
           "field_id": "F3",
           "operation": "spray",
@@ -7040,34 +7151,35 @@
           "required": true,
           "depends_on": "",
           "min_gap_hours": 0,
-          "start_time": "2026-09-16T07:00:00",
-          "end_time": "2026-09-16T10:35:00",
+          "start_time": "2026-09-17T07:00:00",
+          "end_time": "2026-09-17T10:35:00",
           "duration_hours": 3.58,
           "machine_type": "sprayer",
           "eligible_machine_ids": [
-            "M3"
+            "M9",
+            "M10"
           ],
           "workers_required": 1,
           "direct_revenue_aud": 0,
-          "direct_cost_aud": 827.75,
-          "direct_cash_effect_aud": -827.75,
-          "state_yield_effect_t_ha": 0.4216,
+          "direct_cost_aud": 809.83,
+          "direct_cash_effect_aud": -809.83,
+          "state_yield_effect_t_ha": 0.4547,
           "water_ml": 0,
-          "candidate_score": 0.42158,
+          "candidate_score": 0.454671,
           "state_after": {
             "crop": "barley",
             "planted": true,
             "newly_planted": false,
             "harvested": false,
             "growth_stage": "stem_elongation",
-            "readiness": 0.517,
-            "soil_moisture": 0.27,
-            "soil_temperature_c": 14.21,
-            "expected_yield_t_ha": 4.7803,
-            "nitrogen_index": 0.534,
-            "weed_pressure": 0.0605,
+            "readiness": 0.526,
+            "soil_moisture": 0.25,
+            "soil_temperature_c": 14.38,
+            "expected_yield_t_ha": 4.8321,
+            "nitrogen_index": 0.512,
+            "weed_pressure": 0.064,
             "pest_pressure": 0.08,
-            "disease_pressure": 0.14,
+            "disease_pressure": 0.16,
             "seedbed_readiness": 0.12
           }
         },
@@ -7091,7 +7203,7 @@
           "direct_revenue_aud": 0,
           "direct_cost_aud": 1906.33,
           "direct_cash_effect_aud": -1906.33,
-          "state_yield_effect_t_ha": 0.195,
+          "state_yield_effect_t_ha": 0.1964,
           "water_ml": 0,
           "candidate_score": 0.176946,
           "state_after": {
@@ -7103,9 +7215,9 @@
             "readiness": 0.544,
             "soil_moisture": 0.31,
             "soil_temperature_c": 14.72,
-            "expected_yield_t_ha": 4.9933,
+            "expected_yield_t_ha": 5.0278,
             "nitrogen_index": 0.6855,
-            "weed_pressure": 0.3177,
+            "weed_pressure": 0.2522,
             "pest_pressure": 0.08,
             "disease_pressure": 0.2,
             "seedbed_readiness": 0.12
@@ -7125,13 +7237,15 @@
           "duration_hours": 3.58,
           "machine_type": "sprayer",
           "eligible_machine_ids": [
-            "M3"
+            "M3",
+            "M9",
+            "M10"
           ],
           "workers_required": 1,
           "direct_revenue_aud": 0,
-          "direct_cost_aud": 978.25,
-          "direct_cash_effect_aud": -978.25,
-          "state_yield_effect_t_ha": 0.3426,
+          "direct_cost_aud": 966.31,
+          "direct_cash_effect_aud": -966.31,
+          "state_yield_effect_t_ha": 0.3451,
           "water_ml": 0,
           "candidate_score": 0.298224,
           "state_after": {
@@ -7145,7 +7259,7 @@
             "soil_temperature_c": 15.74,
             "expected_yield_t_ha": 5.2407,
             "nitrogen_index": 0.5286,
-            "weed_pressure": 0.6786,
+            "weed_pressure": 0.6539,
             "pest_pressure": 0.08,
             "disease_pressure": 0.047,
             "seedbed_readiness": 0.12
@@ -7163,7 +7277,7 @@
         "soil_temperature_c": 15.91,
         "expected_yield_t_ha": 5.2535,
         "nitrogen_index": 0.5028,
-        "weed_pressure": 0.7273,
+        "weed_pressure": 0.7063,
         "pest_pressure": 0.08,
         "disease_pressure": 0.0943,
         "seedbed_readiness": 0.12
@@ -7172,9 +7286,9 @@
     {
       "option_id": "F4_O001",
       "field_id": "F4",
-      "total_direct_cash_effect_aud": -4270.5,
+      "total_direct_cash_effect_aud": -4255.5,
       "terminal_value_aud": 45281.88,
-      "objective_value_aud": 41011.38,
+      "objective_value_aud": 41026.38,
       "actions": [
         {
           "candidate_id": "P07_F4_fertilise_20260919_0800",
@@ -7230,12 +7344,14 @@
           "duration_hours": 4.5,
           "machine_type": "sprayer",
           "eligible_machine_ids": [
-            "M3"
+            "M3",
+            "M9",
+            "M10"
           ],
           "workers_required": 1,
           "direct_revenue_aud": 0,
-          "direct_cost_aud": 1228.5,
-          "direct_cash_effect_aud": -1228.5,
+          "direct_cost_aud": 1213.5,
+          "direct_cash_effect_aud": -1213.5,
           "state_yield_effect_t_ha": 0.3698,
           "water_ml": 0,
           "candidate_score": 0.348322,
@@ -7342,9 +7458,9 @@
     {
       "option_id": "F4_O003",
       "field_id": "F4",
-      "total_direct_cash_effect_aud": -4270.5,
+      "total_direct_cash_effect_aud": -4255.5,
       "terminal_value_aud": 45281.88,
-      "objective_value_aud": 41011.38,
+      "objective_value_aud": 41026.38,
       "actions": [
         {
           "candidate_id": "P07_F4_fertilise_20260919_0800",
@@ -7400,12 +7516,14 @@
           "duration_hours": 4.5,
           "machine_type": "sprayer",
           "eligible_machine_ids": [
-            "M3"
+            "M3",
+            "M9",
+            "M10"
           ],
           "workers_required": 1,
           "direct_revenue_aud": 0,
-          "direct_cost_aud": 1228.5,
-          "direct_cash_effect_aud": -1228.5,
+          "direct_cost_aud": 1213.5,
+          "direct_cash_effect_aud": -1213.5,
           "state_yield_effect_t_ha": 0.3698,
           "water_ml": 0,
           "candidate_score": 0.348322,
@@ -7447,9 +7565,9 @@
     {
       "option_id": "F4_O004",
       "field_id": "F4",
-      "total_direct_cash_effect_aud": -4270.5,
+      "total_direct_cash_effect_aud": -4255.5,
       "terminal_value_aud": 45281.88,
-      "objective_value_aud": 41011.38,
+      "objective_value_aud": 41026.38,
       "actions": [
         {
           "candidate_id": "P07_F4_fertilise_20260919_0800",
@@ -7505,12 +7623,14 @@
           "duration_hours": 4.5,
           "machine_type": "sprayer",
           "eligible_machine_ids": [
-            "M3"
+            "M3",
+            "M9",
+            "M10"
           ],
           "workers_required": 1,
           "direct_revenue_aud": 0,
-          "direct_cost_aud": 1228.5,
-          "direct_cash_effect_aud": -1228.5,
+          "direct_cost_aud": 1213.5,
+          "direct_cash_effect_aud": -1213.5,
           "state_yield_effect_t_ha": 0.3698,
           "water_ml": 0,
           "candidate_score": 0.348322,
@@ -7552,9 +7672,9 @@
     {
       "option_id": "F4_O005",
       "field_id": "F4",
-      "total_direct_cash_effect_aud": -4270.5,
+      "total_direct_cash_effect_aud": -4255.5,
       "terminal_value_aud": 45281.88,
-      "objective_value_aud": 41011.38,
+      "objective_value_aud": 41026.38,
       "actions": [
         {
           "candidate_id": "P07_F4_fertilise_20260919_0800",
@@ -7610,12 +7730,14 @@
           "duration_hours": 4.5,
           "machine_type": "sprayer",
           "eligible_machine_ids": [
-            "M3"
+            "M3",
+            "M9",
+            "M10"
           ],
           "workers_required": 1,
           "direct_revenue_aud": 0,
-          "direct_cost_aud": 1228.5,
-          "direct_cash_effect_aud": -1228.5,
+          "direct_cost_aud": 1213.5,
+          "direct_cash_effect_aud": -1213.5,
           "state_yield_effect_t_ha": 0.3572,
           "water_ml": 0,
           "candidate_score": 0.336447,
@@ -7657,9 +7779,9 @@
     {
       "option_id": "F4_O006",
       "field_id": "F4",
-      "total_direct_cash_effect_aud": -4270.5,
+      "total_direct_cash_effect_aud": -4255.5,
       "terminal_value_aud": 45281.88,
-      "objective_value_aud": 41011.38,
+      "objective_value_aud": 41026.38,
       "actions": [
         {
           "candidate_id": "P07_F4_fertilise_20260919_0800",
@@ -7715,12 +7837,14 @@
           "duration_hours": 4.5,
           "machine_type": "sprayer",
           "eligible_machine_ids": [
-            "M3"
+            "M3",
+            "M9",
+            "M10"
           ],
           "workers_required": 1,
           "direct_revenue_aud": 0,
-          "direct_cost_aud": 1228.5,
-          "direct_cash_effect_aud": -1228.5,
+          "direct_cost_aud": 1213.5,
+          "direct_cash_effect_aud": -1213.5,
           "state_yield_effect_t_ha": 0.3572,
           "water_ml": 0,
           "candidate_score": 0.336447,
@@ -7762,9 +7886,9 @@
     {
       "option_id": "F4_O007",
       "field_id": "F4",
-      "total_direct_cash_effect_aud": -4270.5,
+      "total_direct_cash_effect_aud": -4255.5,
       "terminal_value_aud": 45281.88,
-      "objective_value_aud": 41011.38,
+      "objective_value_aud": 41026.38,
       "actions": [
         {
           "candidate_id": "P07_F4_fertilise_20260919_0800",
@@ -7820,12 +7944,14 @@
           "duration_hours": 4.5,
           "machine_type": "sprayer",
           "eligible_machine_ids": [
-            "M3"
+            "M3",
+            "M9",
+            "M10"
           ],
           "workers_required": 1,
           "direct_revenue_aud": 0,
-          "direct_cost_aud": 1228.5,
-          "direct_cash_effect_aud": -1228.5,
+          "direct_cost_aud": 1213.5,
+          "direct_cash_effect_aud": -1213.5,
           "state_yield_effect_t_ha": 0.3572,
           "water_ml": 0,
           "candidate_score": 0.336447,
@@ -7867,9 +7993,9 @@
     {
       "option_id": "F4_O008",
       "field_id": "F4",
-      "total_direct_cash_effect_aud": -4270.5,
+      "total_direct_cash_effect_aud": -4255.5,
       "terminal_value_aud": 45281.88,
-      "objective_value_aud": 41011.38,
+      "objective_value_aud": 41026.38,
       "actions": [
         {
           "candidate_id": "P07_F4_fertilise_20260919_0800",
@@ -7925,12 +8051,14 @@
           "duration_hours": 4.5,
           "machine_type": "sprayer",
           "eligible_machine_ids": [
-            "M3"
+            "M3",
+            "M9",
+            "M10"
           ],
           "workers_required": 1,
           "direct_revenue_aud": 0,
-          "direct_cost_aud": 1228.5,
-          "direct_cash_effect_aud": -1228.5,
+          "direct_cost_aud": 1213.5,
+          "direct_cash_effect_aud": -1213.5,
           "state_yield_effect_t_ha": 0.3446,
           "water_ml": 0,
           "candidate_score": 0.324572,
@@ -7972,9 +8100,9 @@
     {
       "option_id": "F4_O009",
       "field_id": "F4",
-      "total_direct_cash_effect_aud": -4270.5,
+      "total_direct_cash_effect_aud": -4255.5,
       "terminal_value_aud": 45281.88,
-      "objective_value_aud": 41011.38,
+      "objective_value_aud": 41026.38,
       "actions": [
         {
           "candidate_id": "P07_F4_fertilise_20260919_0800",
@@ -8030,12 +8158,14 @@
           "duration_hours": 4.5,
           "machine_type": "sprayer",
           "eligible_machine_ids": [
-            "M3"
+            "M3",
+            "M9",
+            "M10"
           ],
           "workers_required": 1,
           "direct_revenue_aud": 0,
-          "direct_cost_aud": 1228.5,
-          "direct_cash_effect_aud": -1228.5,
+          "direct_cost_aud": 1213.5,
+          "direct_cash_effect_aud": -1213.5,
           "state_yield_effect_t_ha": 0.3446,
           "water_ml": 0,
           "candidate_score": 0.324572,
@@ -8077,9 +8207,9 @@
     {
       "option_id": "F4_O010",
       "field_id": "F4",
-      "total_direct_cash_effect_aud": -4270.5,
+      "total_direct_cash_effect_aud": -4255.5,
       "terminal_value_aud": 45281.88,
-      "objective_value_aud": 41011.38,
+      "objective_value_aud": 41026.38,
       "actions": [
         {
           "candidate_id": "P07_F4_fertilise_20260919_0800",
@@ -8135,12 +8265,14 @@
           "duration_hours": 4.5,
           "machine_type": "sprayer",
           "eligible_machine_ids": [
-            "M3"
+            "M3",
+            "M9",
+            "M10"
           ],
           "workers_required": 1,
           "direct_revenue_aud": 0,
-          "direct_cost_aud": 1228.5,
-          "direct_cash_effect_aud": -1228.5,
+          "direct_cost_aud": 1213.5,
+          "direct_cash_effect_aud": -1213.5,
           "state_yield_effect_t_ha": 0.3446,
           "water_ml": 0,
           "candidate_score": 0.324572,
@@ -8182,9 +8314,9 @@
     {
       "option_id": "F4_O011",
       "field_id": "F4",
-      "total_direct_cash_effect_aud": -4270.5,
+      "total_direct_cash_effect_aud": -4255.5,
       "terminal_value_aud": 45281.88,
-      "objective_value_aud": 41011.38,
+      "objective_value_aud": 41026.38,
       "actions": [
         {
           "candidate_id": "P07_F4_fertilise_20260919_0900",
@@ -8240,12 +8372,14 @@
           "duration_hours": 4.5,
           "machine_type": "sprayer",
           "eligible_machine_ids": [
-            "M3"
+            "M3",
+            "M9",
+            "M10"
           ],
           "workers_required": 1,
           "direct_revenue_aud": 0,
-          "direct_cost_aud": 1228.5,
-          "direct_cash_effect_aud": -1228.5,
+          "direct_cost_aud": 1213.5,
+          "direct_cash_effect_aud": -1213.5,
           "state_yield_effect_t_ha": 0.3698,
           "water_ml": 0,
           "candidate_score": 0.348322,
@@ -8287,9 +8421,9 @@
     {
       "option_id": "F4_O012",
       "field_id": "F4",
-      "total_direct_cash_effect_aud": -4270.5,
+      "total_direct_cash_effect_aud": -4255.5,
       "terminal_value_aud": 45281.88,
-      "objective_value_aud": 41011.38,
+      "objective_value_aud": 41026.38,
       "actions": [
         {
           "candidate_id": "P07_F4_fertilise_20260919_0900",
@@ -8345,12 +8479,14 @@
           "duration_hours": 4.5,
           "machine_type": "sprayer",
           "eligible_machine_ids": [
-            "M3"
+            "M3",
+            "M9",
+            "M10"
           ],
           "workers_required": 1,
           "direct_revenue_aud": 0,
-          "direct_cost_aud": 1228.5,
-          "direct_cash_effect_aud": -1228.5,
+          "direct_cost_aud": 1213.5,
+          "direct_cash_effect_aud": -1213.5,
           "state_yield_effect_t_ha": 0.3698,
           "water_ml": 0,
           "candidate_score": 0.348322,
@@ -8392,9 +8528,9 @@
     {
       "option_id": "F4_O013",
       "field_id": "F4",
-      "total_direct_cash_effect_aud": -4270.5,
+      "total_direct_cash_effect_aud": -4255.5,
       "terminal_value_aud": 45281.88,
-      "objective_value_aud": 41011.38,
+      "objective_value_aud": 41026.38,
       "actions": [
         {
           "candidate_id": "P07_F4_fertilise_20260919_0900",
@@ -8450,12 +8586,14 @@
           "duration_hours": 4.5,
           "machine_type": "sprayer",
           "eligible_machine_ids": [
-            "M3"
+            "M3",
+            "M9",
+            "M10"
           ],
           "workers_required": 1,
           "direct_revenue_aud": 0,
-          "direct_cost_aud": 1228.5,
-          "direct_cash_effect_aud": -1228.5,
+          "direct_cost_aud": 1213.5,
+          "direct_cash_effect_aud": -1213.5,
           "state_yield_effect_t_ha": 0.3698,
           "water_ml": 0,
           "candidate_score": 0.348322,
@@ -8497,9 +8635,9 @@
     {
       "option_id": "F4_O014",
       "field_id": "F4",
-      "total_direct_cash_effect_aud": -4270.5,
+      "total_direct_cash_effect_aud": -4255.5,
       "terminal_value_aud": 45281.88,
-      "objective_value_aud": 41011.38,
+      "objective_value_aud": 41026.38,
       "actions": [
         {
           "candidate_id": "P07_F4_fertilise_20260919_0900",
@@ -8555,12 +8693,14 @@
           "duration_hours": 4.5,
           "machine_type": "sprayer",
           "eligible_machine_ids": [
-            "M3"
+            "M3",
+            "M9",
+            "M10"
           ],
           "workers_required": 1,
           "direct_revenue_aud": 0,
-          "direct_cost_aud": 1228.5,
-          "direct_cash_effect_aud": -1228.5,
+          "direct_cost_aud": 1213.5,
+          "direct_cash_effect_aud": -1213.5,
           "state_yield_effect_t_ha": 0.3572,
           "water_ml": 0,
           "candidate_score": 0.336447,
@@ -8602,9 +8742,9 @@
     {
       "option_id": "F4_O015",
       "field_id": "F4",
-      "total_direct_cash_effect_aud": -4270.5,
+      "total_direct_cash_effect_aud": -4255.5,
       "terminal_value_aud": 45281.88,
-      "objective_value_aud": 41011.38,
+      "objective_value_aud": 41026.38,
       "actions": [
         {
           "candidate_id": "P07_F4_fertilise_20260919_0900",
@@ -8660,12 +8800,14 @@
           "duration_hours": 4.5,
           "machine_type": "sprayer",
           "eligible_machine_ids": [
-            "M3"
+            "M3",
+            "M9",
+            "M10"
           ],
           "workers_required": 1,
           "direct_revenue_aud": 0,
-          "direct_cost_aud": 1228.5,
-          "direct_cash_effect_aud": -1228.5,
+          "direct_cost_aud": 1213.5,
+          "direct_cash_effect_aud": -1213.5,
           "state_yield_effect_t_ha": 0.3572,
           "water_ml": 0,
           "candidate_score": 0.336447,
@@ -8707,9 +8849,9 @@
     {
       "option_id": "F4_O016",
       "field_id": "F4",
-      "total_direct_cash_effect_aud": -4270.5,
+      "total_direct_cash_effect_aud": -4255.5,
       "terminal_value_aud": 45281.88,
-      "objective_value_aud": 41011.38,
+      "objective_value_aud": 41026.38,
       "actions": [
         {
           "candidate_id": "P07_F4_fertilise_20260919_0900",
@@ -8765,12 +8907,14 @@
           "duration_hours": 4.5,
           "machine_type": "sprayer",
           "eligible_machine_ids": [
-            "M3"
+            "M3",
+            "M9",
+            "M10"
           ],
           "workers_required": 1,
           "direct_revenue_aud": 0,
-          "direct_cost_aud": 1228.5,
-          "direct_cash_effect_aud": -1228.5,
+          "direct_cost_aud": 1213.5,
+          "direct_cash_effect_aud": -1213.5,
           "state_yield_effect_t_ha": 0.3572,
           "water_ml": 0,
           "candidate_score": 0.336447,
@@ -8812,9 +8956,9 @@
     {
       "option_id": "F4_O017",
       "field_id": "F4",
-      "total_direct_cash_effect_aud": -4270.5,
+      "total_direct_cash_effect_aud": -4255.5,
       "terminal_value_aud": 45281.88,
-      "objective_value_aud": 41011.38,
+      "objective_value_aud": 41026.38,
       "actions": [
         {
           "candidate_id": "P07_F4_fertilise_20260919_0900",
@@ -8870,12 +9014,14 @@
           "duration_hours": 4.5,
           "machine_type": "sprayer",
           "eligible_machine_ids": [
-            "M3"
+            "M3",
+            "M9",
+            "M10"
           ],
           "workers_required": 1,
           "direct_revenue_aud": 0,
-          "direct_cost_aud": 1228.5,
-          "direct_cash_effect_aud": -1228.5,
+          "direct_cost_aud": 1213.5,
+          "direct_cash_effect_aud": -1213.5,
           "state_yield_effect_t_ha": 0.3446,
           "water_ml": 0,
           "candidate_score": 0.324572,
@@ -8917,9 +9063,9 @@
     {
       "option_id": "F4_O018",
       "field_id": "F4",
-      "total_direct_cash_effect_aud": -4270.5,
+      "total_direct_cash_effect_aud": -4255.5,
       "terminal_value_aud": 45281.88,
-      "objective_value_aud": 41011.38,
+      "objective_value_aud": 41026.38,
       "actions": [
         {
           "candidate_id": "P07_F4_fertilise_20260919_0900",
@@ -8975,12 +9121,14 @@
           "duration_hours": 4.5,
           "machine_type": "sprayer",
           "eligible_machine_ids": [
-            "M3"
+            "M3",
+            "M9",
+            "M10"
           ],
           "workers_required": 1,
           "direct_revenue_aud": 0,
-          "direct_cost_aud": 1228.5,
-          "direct_cash_effect_aud": -1228.5,
+          "direct_cost_aud": 1213.5,
+          "direct_cash_effect_aud": -1213.5,
           "state_yield_effect_t_ha": 0.3446,
           "water_ml": 0,
           "candidate_score": 0.324572,
@@ -9022,9 +9170,9 @@
     {
       "option_id": "F4_O019",
       "field_id": "F4",
-      "total_direct_cash_effect_aud": -4270.5,
+      "total_direct_cash_effect_aud": -4255.5,
       "terminal_value_aud": 45281.88,
-      "objective_value_aud": 41011.38,
+      "objective_value_aud": 41026.38,
       "actions": [
         {
           "candidate_id": "P07_F4_fertilise_20260919_0900",
@@ -9080,12 +9228,14 @@
           "duration_hours": 4.5,
           "machine_type": "sprayer",
           "eligible_machine_ids": [
-            "M3"
+            "M3",
+            "M9",
+            "M10"
           ],
           "workers_required": 1,
           "direct_revenue_aud": 0,
-          "direct_cost_aud": 1228.5,
-          "direct_cash_effect_aud": -1228.5,
+          "direct_cost_aud": 1213.5,
+          "direct_cash_effect_aud": -1213.5,
           "state_yield_effect_t_ha": 0.3446,
           "water_ml": 0,
           "candidate_score": 0.324572,
@@ -9127,9 +9277,9 @@
     {
       "option_id": "F4_O020",
       "field_id": "F4",
-      "total_direct_cash_effect_aud": -4270.5,
+      "total_direct_cash_effect_aud": -4255.5,
       "terminal_value_aud": 45281.88,
-      "objective_value_aud": 41011.38,
+      "objective_value_aud": 41026.38,
       "actions": [
         {
           "candidate_id": "P07_F4_fertilise_20260919_1000",
@@ -9185,12 +9335,14 @@
           "duration_hours": 4.5,
           "machine_type": "sprayer",
           "eligible_machine_ids": [
-            "M3"
+            "M3",
+            "M9",
+            "M10"
           ],
           "workers_required": 1,
           "direct_revenue_aud": 0,
-          "direct_cost_aud": 1228.5,
-          "direct_cash_effect_aud": -1228.5,
+          "direct_cost_aud": 1213.5,
+          "direct_cash_effect_aud": -1213.5,
           "state_yield_effect_t_ha": 0.3698,
           "water_ml": 0,
           "candidate_score": 0.348322,
@@ -9232,9 +9384,9 @@
     {
       "option_id": "F4_O021",
       "field_id": "F4",
-      "total_direct_cash_effect_aud": -4270.5,
+      "total_direct_cash_effect_aud": -4255.5,
       "terminal_value_aud": 45281.88,
-      "objective_value_aud": 41011.38,
+      "objective_value_aud": 41026.38,
       "actions": [
         {
           "candidate_id": "P07_F4_fertilise_20260919_1000",
@@ -9290,12 +9442,14 @@
           "duration_hours": 4.5,
           "machine_type": "sprayer",
           "eligible_machine_ids": [
-            "M3"
+            "M3",
+            "M9",
+            "M10"
           ],
           "workers_required": 1,
           "direct_revenue_aud": 0,
-          "direct_cost_aud": 1228.5,
-          "direct_cash_effect_aud": -1228.5,
+          "direct_cost_aud": 1213.5,
+          "direct_cash_effect_aud": -1213.5,
           "state_yield_effect_t_ha": 0.3698,
           "water_ml": 0,
           "candidate_score": 0.348322,
@@ -9337,9 +9491,9 @@
     {
       "option_id": "F4_O022",
       "field_id": "F4",
-      "total_direct_cash_effect_aud": -4270.5,
+      "total_direct_cash_effect_aud": -4255.5,
       "terminal_value_aud": 45281.88,
-      "objective_value_aud": 41011.38,
+      "objective_value_aud": 41026.38,
       "actions": [
         {
           "candidate_id": "P07_F4_fertilise_20260919_1000",
@@ -9395,12 +9549,14 @@
           "duration_hours": 4.5,
           "machine_type": "sprayer",
           "eligible_machine_ids": [
-            "M3"
+            "M3",
+            "M9",
+            "M10"
           ],
           "workers_required": 1,
           "direct_revenue_aud": 0,
-          "direct_cost_aud": 1228.5,
-          "direct_cash_effect_aud": -1228.5,
+          "direct_cost_aud": 1213.5,
+          "direct_cash_effect_aud": -1213.5,
           "state_yield_effect_t_ha": 0.3698,
           "water_ml": 0,
           "candidate_score": 0.348322,
@@ -9442,9 +9598,9 @@
     {
       "option_id": "F4_O023",
       "field_id": "F4",
-      "total_direct_cash_effect_aud": -4270.5,
+      "total_direct_cash_effect_aud": -4255.5,
       "terminal_value_aud": 45281.88,
-      "objective_value_aud": 41011.38,
+      "objective_value_aud": 41026.38,
       "actions": [
         {
           "candidate_id": "P07_F4_fertilise_20260919_1000",
@@ -9500,12 +9656,14 @@
           "duration_hours": 4.5,
           "machine_type": "sprayer",
           "eligible_machine_ids": [
-            "M3"
+            "M3",
+            "M9",
+            "M10"
           ],
           "workers_required": 1,
           "direct_revenue_aud": 0,
-          "direct_cost_aud": 1228.5,
-          "direct_cash_effect_aud": -1228.5,
+          "direct_cost_aud": 1213.5,
+          "direct_cash_effect_aud": -1213.5,
           "state_yield_effect_t_ha": 0.3572,
           "water_ml": 0,
           "candidate_score": 0.336447,
@@ -9547,9 +9705,9 @@
     {
       "option_id": "F4_O024",
       "field_id": "F4",
-      "total_direct_cash_effect_aud": -4270.5,
+      "total_direct_cash_effect_aud": -4255.5,
       "terminal_value_aud": 45281.88,
-      "objective_value_aud": 41011.38,
+      "objective_value_aud": 41026.38,
       "actions": [
         {
           "candidate_id": "P07_F4_fertilise_20260919_1000",
@@ -9605,12 +9763,14 @@
           "duration_hours": 4.5,
           "machine_type": "sprayer",
           "eligible_machine_ids": [
-            "M3"
+            "M3",
+            "M9",
+            "M10"
           ],
           "workers_required": 1,
           "direct_revenue_aud": 0,
-          "direct_cost_aud": 1228.5,
-          "direct_cash_effect_aud": -1228.5,
+          "direct_cost_aud": 1213.5,
+          "direct_cash_effect_aud": -1213.5,
           "state_yield_effect_t_ha": 0.3572,
           "water_ml": 0,
           "candidate_score": 0.336447,
@@ -9652,9 +9812,9 @@
     {
       "option_id": "F4_O025",
       "field_id": "F4",
-      "total_direct_cash_effect_aud": -4270.5,
+      "total_direct_cash_effect_aud": -4255.5,
       "terminal_value_aud": 45281.88,
-      "objective_value_aud": 41011.38,
+      "objective_value_aud": 41026.38,
       "actions": [
         {
           "candidate_id": "P07_F4_fertilise_20260919_1000",
@@ -9710,12 +9870,14 @@
           "duration_hours": 4.5,
           "machine_type": "sprayer",
           "eligible_machine_ids": [
-            "M3"
+            "M3",
+            "M9",
+            "M10"
           ],
           "workers_required": 1,
           "direct_revenue_aud": 0,
-          "direct_cost_aud": 1228.5,
-          "direct_cash_effect_aud": -1228.5,
+          "direct_cost_aud": 1213.5,
+          "direct_cash_effect_aud": -1213.5,
           "state_yield_effect_t_ha": 0.3572,
           "water_ml": 0,
           "candidate_score": 0.336447,
@@ -9757,9 +9919,9 @@
     {
       "option_id": "F4_O026",
       "field_id": "F4",
-      "total_direct_cash_effect_aud": -4270.5,
+      "total_direct_cash_effect_aud": -4255.5,
       "terminal_value_aud": 45281.88,
-      "objective_value_aud": 41011.38,
+      "objective_value_aud": 41026.38,
       "actions": [
         {
           "candidate_id": "P07_F4_fertilise_20260919_1000",
@@ -9815,12 +9977,14 @@
           "duration_hours": 4.5,
           "machine_type": "sprayer",
           "eligible_machine_ids": [
-            "M3"
+            "M3",
+            "M9",
+            "M10"
           ],
           "workers_required": 1,
           "direct_revenue_aud": 0,
-          "direct_cost_aud": 1228.5,
-          "direct_cash_effect_aud": -1228.5,
+          "direct_cost_aud": 1213.5,
+          "direct_cash_effect_aud": -1213.5,
           "state_yield_effect_t_ha": 0.3446,
           "water_ml": 0,
           "candidate_score": 0.324572,
@@ -9862,9 +10026,9 @@
     {
       "option_id": "F4_O027",
       "field_id": "F4",
-      "total_direct_cash_effect_aud": -4270.5,
+      "total_direct_cash_effect_aud": -4255.5,
       "terminal_value_aud": 45281.88,
-      "objective_value_aud": 41011.38,
+      "objective_value_aud": 41026.38,
       "actions": [
         {
           "candidate_id": "P07_F4_fertilise_20260919_1000",
@@ -9920,12 +10084,14 @@
           "duration_hours": 4.5,
           "machine_type": "sprayer",
           "eligible_machine_ids": [
-            "M3"
+            "M3",
+            "M9",
+            "M10"
           ],
           "workers_required": 1,
           "direct_revenue_aud": 0,
-          "direct_cost_aud": 1228.5,
-          "direct_cash_effect_aud": -1228.5,
+          "direct_cost_aud": 1213.5,
+          "direct_cash_effect_aud": -1213.5,
           "state_yield_effect_t_ha": 0.3446,
           "water_ml": 0,
           "candidate_score": 0.324572,
@@ -9967,9 +10133,9 @@
     {
       "option_id": "F4_O028",
       "field_id": "F4",
-      "total_direct_cash_effect_aud": -4270.5,
+      "total_direct_cash_effect_aud": -4255.5,
       "terminal_value_aud": 45281.88,
-      "objective_value_aud": 41011.38,
+      "objective_value_aud": 41026.38,
       "actions": [
         {
           "candidate_id": "P07_F4_fertilise_20260919_1000",
@@ -10025,12 +10191,14 @@
           "duration_hours": 4.5,
           "machine_type": "sprayer",
           "eligible_machine_ids": [
-            "M3"
+            "M3",
+            "M9",
+            "M10"
           ],
           "workers_required": 1,
           "direct_revenue_aud": 0,
-          "direct_cost_aud": 1228.5,
-          "direct_cash_effect_aud": -1228.5,
+          "direct_cost_aud": 1213.5,
+          "direct_cash_effect_aud": -1213.5,
           "state_yield_effect_t_ha": 0.3446,
           "water_ml": 0,
           "candidate_score": 0.324572,
@@ -10072,9 +10240,9 @@
     {
       "option_id": "F4_O029",
       "field_id": "F4",
-      "total_direct_cash_effect_aud": -4270.5,
+      "total_direct_cash_effect_aud": -4255.5,
       "terminal_value_aud": 45281.88,
-      "objective_value_aud": 41011.38,
+      "objective_value_aud": 41026.38,
       "actions": [
         {
           "candidate_id": "P07_F4_fertilise_20260918_0700",
@@ -10130,12 +10298,14 @@
           "duration_hours": 4.5,
           "machine_type": "sprayer",
           "eligible_machine_ids": [
-            "M3"
+            "M3",
+            "M9",
+            "M10"
           ],
           "workers_required": 1,
           "direct_revenue_aud": 0,
-          "direct_cost_aud": 1228.5,
-          "direct_cash_effect_aud": -1228.5,
+          "direct_cost_aud": 1213.5,
+          "direct_cash_effect_aud": -1213.5,
           "state_yield_effect_t_ha": 0.3686,
           "water_ml": 0,
           "candidate_score": 0.348322,
@@ -10177,9 +10347,9 @@
     {
       "option_id": "F4_O030",
       "field_id": "F4",
-      "total_direct_cash_effect_aud": -4270.5,
+      "total_direct_cash_effect_aud": -4255.5,
       "terminal_value_aud": 45281.88,
-      "objective_value_aud": 41011.38,
+      "objective_value_aud": 41026.38,
       "actions": [
         {
           "candidate_id": "P07_F4_fertilise_20260918_0700",
@@ -10235,12 +10405,14 @@
           "duration_hours": 4.5,
           "machine_type": "sprayer",
           "eligible_machine_ids": [
-            "M3"
+            "M3",
+            "M9",
+            "M10"
           ],
           "workers_required": 1,
           "direct_revenue_aud": 0,
-          "direct_cost_aud": 1228.5,
-          "direct_cash_effect_aud": -1228.5,
+          "direct_cost_aud": 1213.5,
+          "direct_cash_effect_aud": -1213.5,
           "state_yield_effect_t_ha": 0.3686,
           "water_ml": 0,
           "candidate_score": 0.348322,
@@ -13312,9 +13484,9 @@
     {
       "option_id": "F6_O001",
       "field_id": "F6",
-      "total_direct_cash_effect_aud": -684.75,
+      "total_direct_cash_effect_aud": -675.58,
       "terminal_value_aud": 38655.04,
-      "objective_value_aud": 37970.29,
+      "objective_value_aud": 37979.46,
       "actions": [
         {
           "candidate_id": "P11_F6_spray_20260922_0700",
@@ -13330,12 +13502,14 @@
           "duration_hours": 2.75,
           "machine_type": "sprayer",
           "eligible_machine_ids": [
-            "M3"
+            "M3",
+            "M9",
+            "M10"
           ],
           "workers_required": 1,
           "direct_revenue_aud": 0,
-          "direct_cost_aud": 684.75,
-          "direct_cash_effect_aud": -684.75,
+          "direct_cost_aud": 675.58,
+          "direct_cash_effect_aud": -675.58,
           "state_yield_effect_t_ha": 0.4252,
           "water_ml": 0,
           "candidate_score": 0.425201,
@@ -13377,9 +13551,9 @@
     {
       "option_id": "F6_O002",
       "field_id": "F6",
-      "total_direct_cash_effect_aud": -1447.88,
+      "total_direct_cash_effect_aud": -1438.71,
       "terminal_value_aud": 38779.19,
-      "objective_value_aud": 37331.31,
+      "objective_value_aud": 37340.48,
       "actions": [
         {
           "candidate_id": "P12_F6_irrigate_20260918_0700",
@@ -13435,12 +13609,14 @@
           "duration_hours": 2.75,
           "machine_type": "sprayer",
           "eligible_machine_ids": [
-            "M3"
+            "M3",
+            "M9",
+            "M10"
           ],
           "workers_required": 1,
           "direct_revenue_aud": 0,
-          "direct_cost_aud": 684.75,
-          "direct_cash_effect_aud": -684.75,
+          "direct_cost_aud": 675.58,
+          "direct_cash_effect_aud": -675.58,
           "state_yield_effect_t_ha": 0.3511,
           "water_ml": 0,
           "candidate_score": 0.340232,
@@ -13571,9 +13747,9 @@
     {
       "option_id": "F6_O005",
       "field_id": "F6",
-      "total_direct_cash_effect_aud": -684.75,
+      "total_direct_cash_effect_aud": -675.58,
       "terminal_value_aud": 38655.04,
-      "objective_value_aud": 37970.29,
+      "objective_value_aud": 37979.46,
       "actions": [
         {
           "candidate_id": "P11_F6_spray_20260922_0800",
@@ -13589,12 +13765,14 @@
           "duration_hours": 2.75,
           "machine_type": "sprayer",
           "eligible_machine_ids": [
-            "M3"
+            "M3",
+            "M9",
+            "M10"
           ],
           "workers_required": 1,
           "direct_revenue_aud": 0,
-          "direct_cost_aud": 684.75,
-          "direct_cash_effect_aud": -684.75,
+          "direct_cost_aud": 675.58,
+          "direct_cash_effect_aud": -675.58,
           "state_yield_effect_t_ha": 0.4252,
           "water_ml": 0,
           "candidate_score": 0.425201,
@@ -13636,9 +13814,9 @@
     {
       "option_id": "F6_O006",
       "field_id": "F6",
-      "total_direct_cash_effect_aud": -684.75,
+      "total_direct_cash_effect_aud": -675.58,
       "terminal_value_aud": 38655.04,
-      "objective_value_aud": 37970.29,
+      "objective_value_aud": 37979.46,
       "actions": [
         {
           "candidate_id": "P11_F6_spray_20260922_0900",
@@ -13654,12 +13832,14 @@
           "duration_hours": 2.75,
           "machine_type": "sprayer",
           "eligible_machine_ids": [
-            "M3"
+            "M3",
+            "M9",
+            "M10"
           ],
           "workers_required": 1,
           "direct_revenue_aud": 0,
-          "direct_cost_aud": 684.75,
-          "direct_cash_effect_aud": -684.75,
+          "direct_cost_aud": 675.58,
+          "direct_cash_effect_aud": -675.58,
           "state_yield_effect_t_ha": 0.4252,
           "water_ml": 0,
           "candidate_score": 0.425201,
@@ -13701,9 +13881,9 @@
     {
       "option_id": "F6_O007",
       "field_id": "F6",
-      "total_direct_cash_effect_aud": -684.75,
+      "total_direct_cash_effect_aud": -675.58,
       "terminal_value_aud": 38606.61,
-      "objective_value_aud": 37921.86,
+      "objective_value_aud": 37931.03,
       "actions": [
         {
           "candidate_id": "P11_F6_spray_20260921_0700",
@@ -13719,12 +13899,14 @@
           "duration_hours": 2.75,
           "machine_type": "sprayer",
           "eligible_machine_ids": [
-            "M3"
+            "M3",
+            "M9",
+            "M10"
           ],
           "workers_required": 1,
           "direct_revenue_aud": 0,
-          "direct_cost_aud": 684.75,
-          "direct_cash_effect_aud": -684.75,
+          "direct_cost_aud": 675.58,
+          "direct_cash_effect_aud": -675.58,
           "state_yield_effect_t_ha": 0.3973,
           "water_ml": 0,
           "candidate_score": 0.397319,
@@ -13766,9 +13948,9 @@
     {
       "option_id": "F6_O008",
       "field_id": "F6",
-      "total_direct_cash_effect_aud": -684.75,
+      "total_direct_cash_effect_aud": -675.58,
       "terminal_value_aud": 38310.75,
-      "objective_value_aud": 37626,
+      "objective_value_aud": 37635.17,
       "actions": [
         {
           "candidate_id": "P11_F6_spray_20260920_0800",
@@ -13784,12 +13966,14 @@
           "duration_hours": 2.75,
           "machine_type": "sprayer",
           "eligible_machine_ids": [
-            "M3"
+            "M3",
+            "M9",
+            "M10"
           ],
           "workers_required": 1,
           "direct_revenue_aud": 0,
-          "direct_cost_aud": 684.75,
-          "direct_cash_effect_aud": -684.75,
+          "direct_cost_aud": 675.58,
+          "direct_cash_effect_aud": -675.58,
           "state_yield_effect_t_ha": 0.3687,
           "water_ml": 0,
           "candidate_score": 0.368721,
@@ -13831,9 +14015,9 @@
     {
       "option_id": "F6_O009",
       "field_id": "F6",
-      "total_direct_cash_effect_aud": -684.75,
+      "total_direct_cash_effect_aud": -675.58,
       "terminal_value_aud": 38310.75,
-      "objective_value_aud": 37626,
+      "objective_value_aud": 37635.17,
       "actions": [
         {
           "candidate_id": "P11_F6_spray_20260920_0900",
@@ -13849,12 +14033,14 @@
           "duration_hours": 2.75,
           "machine_type": "sprayer",
           "eligible_machine_ids": [
-            "M3"
+            "M3",
+            "M9",
+            "M10"
           ],
           "workers_required": 1,
           "direct_revenue_aud": 0,
-          "direct_cost_aud": 684.75,
-          "direct_cash_effect_aud": -684.75,
+          "direct_cost_aud": 675.58,
+          "direct_cash_effect_aud": -675.58,
           "state_yield_effect_t_ha": 0.3687,
           "water_ml": 0,
           "candidate_score": 0.368721,
@@ -13896,9 +14082,9 @@
     {
       "option_id": "F6_O010",
       "field_id": "F6",
-      "total_direct_cash_effect_aud": -684.75,
+      "total_direct_cash_effect_aud": -675.58,
       "terminal_value_aud": 38310.75,
-      "objective_value_aud": 37626,
+      "objective_value_aud": 37635.17,
       "actions": [
         {
           "candidate_id": "P11_F6_spray_20260920_1000",
@@ -13914,12 +14100,14 @@
           "duration_hours": 2.75,
           "machine_type": "sprayer",
           "eligible_machine_ids": [
-            "M3"
+            "M3",
+            "M9",
+            "M10"
           ],
           "workers_required": 1,
           "direct_revenue_aud": 0,
-          "direct_cost_aud": 684.75,
-          "direct_cash_effect_aud": -684.75,
+          "direct_cost_aud": 675.58,
+          "direct_cash_effect_aud": -675.58,
           "state_yield_effect_t_ha": 0.3687,
           "water_ml": 0,
           "candidate_score": 0.368721,
@@ -13961,9 +14149,9 @@
     {
       "option_id": "F6_O011",
       "field_id": "F6",
-      "total_direct_cash_effect_aud": -1447.88,
+      "total_direct_cash_effect_aud": -1438.71,
       "terminal_value_aud": 38779.19,
-      "objective_value_aud": 37331.31,
+      "objective_value_aud": 37340.48,
       "actions": [
         {
           "candidate_id": "P12_F6_irrigate_20260918_0800",
@@ -14019,12 +14207,14 @@
           "duration_hours": 2.75,
           "machine_type": "sprayer",
           "eligible_machine_ids": [
-            "M3"
+            "M3",
+            "M9",
+            "M10"
           ],
           "workers_required": 1,
           "direct_revenue_aud": 0,
-          "direct_cost_aud": 684.75,
-          "direct_cash_effect_aud": -684.75,
+          "direct_cost_aud": 675.58,
+          "direct_cash_effect_aud": -675.58,
           "state_yield_effect_t_ha": 0.3511,
           "water_ml": 0,
           "candidate_score": 0.340232,
@@ -14066,9 +14256,9 @@
     {
       "option_id": "F6_O012",
       "field_id": "F6",
-      "total_direct_cash_effect_aud": -1447.88,
+      "total_direct_cash_effect_aud": -1438.71,
       "terminal_value_aud": 38779.19,
-      "objective_value_aud": 37331.31,
+      "objective_value_aud": 37340.48,
       "actions": [
         {
           "candidate_id": "P12_F6_irrigate_20260918_0900",
@@ -14124,12 +14314,14 @@
           "duration_hours": 2.75,
           "machine_type": "sprayer",
           "eligible_machine_ids": [
-            "M3"
+            "M3",
+            "M9",
+            "M10"
           ],
           "workers_required": 1,
           "direct_revenue_aud": 0,
-          "direct_cost_aud": 684.75,
-          "direct_cash_effect_aud": -684.75,
+          "direct_cost_aud": 675.58,
+          "direct_cash_effect_aud": -675.58,
           "state_yield_effect_t_ha": 0.3511,
           "water_ml": 0,
           "candidate_score": 0.340232,
@@ -14171,9 +14363,9 @@
     {
       "option_id": "F6_O013",
       "field_id": "F6",
-      "total_direct_cash_effect_aud": -684.75,
+      "total_direct_cash_effect_aud": -675.58,
       "terminal_value_aud": 38016.02,
-      "objective_value_aud": 37331.27,
+      "objective_value_aud": 37340.44,
       "actions": [
         {
           "candidate_id": "P11_F6_spray_20260919_0800",
@@ -14189,12 +14381,14 @@
           "duration_hours": 2.75,
           "machine_type": "sprayer",
           "eligible_machine_ids": [
-            "M3"
+            "M3",
+            "M9",
+            "M10"
           ],
           "workers_required": 1,
           "direct_revenue_aud": 0,
-          "direct_cost_aud": 684.75,
-          "direct_cash_effect_aud": -684.75,
+          "direct_cost_aud": 675.58,
+          "direct_cash_effect_aud": -675.58,
           "state_yield_effect_t_ha": 0.3402,
           "water_ml": 0,
           "candidate_score": 0.340232,
@@ -14236,9 +14430,9 @@
     {
       "option_id": "F6_O014",
       "field_id": "F6",
-      "total_direct_cash_effect_aud": -1447.88,
+      "total_direct_cash_effect_aud": -1438.71,
       "terminal_value_aud": 38717.12,
-      "objective_value_aud": 37269.24,
+      "objective_value_aud": 37278.41,
       "actions": [
         {
           "candidate_id": "P12_F6_irrigate_20260918_0700",
@@ -14294,12 +14488,14 @@
           "duration_hours": 2.75,
           "machine_type": "sprayer",
           "eligible_machine_ids": [
-            "M3"
+            "M3",
+            "M9",
+            "M10"
           ],
           "workers_required": 1,
           "direct_revenue_aud": 0,
-          "direct_cost_aud": 684.75,
-          "direct_cash_effect_aud": -684.75,
+          "direct_cost_aud": 675.58,
+          "direct_cash_effect_aud": -675.58,
           "state_yield_effect_t_ha": 0.3805,
           "water_ml": 0,
           "candidate_score": 0.368721,
@@ -14341,9 +14537,9 @@
     {
       "option_id": "F6_O015",
       "field_id": "F6",
-      "total_direct_cash_effect_aud": -1447.88,
+      "total_direct_cash_effect_aud": -1438.71,
       "terminal_value_aud": 38717.12,
-      "objective_value_aud": 37269.24,
+      "objective_value_aud": 37278.41,
       "actions": [
         {
           "candidate_id": "P12_F6_irrigate_20260918_0700",
@@ -14399,12 +14595,14 @@
           "duration_hours": 2.75,
           "machine_type": "sprayer",
           "eligible_machine_ids": [
-            "M3"
+            "M3",
+            "M9",
+            "M10"
           ],
           "workers_required": 1,
           "direct_revenue_aud": 0,
-          "direct_cost_aud": 684.75,
-          "direct_cash_effect_aud": -684.75,
+          "direct_cost_aud": 675.58,
+          "direct_cash_effect_aud": -675.58,
           "state_yield_effect_t_ha": 0.3805,
           "water_ml": 0,
           "candidate_score": 0.368721,
@@ -14446,9 +14644,9 @@
     {
       "option_id": "F6_O016",
       "field_id": "F6",
-      "total_direct_cash_effect_aud": -1447.88,
+      "total_direct_cash_effect_aud": -1438.71,
       "terminal_value_aud": 38717.12,
-      "objective_value_aud": 37269.24,
+      "objective_value_aud": 37278.41,
       "actions": [
         {
           "candidate_id": "P12_F6_irrigate_20260918_0700",
@@ -14504,12 +14702,14 @@
           "duration_hours": 2.75,
           "machine_type": "sprayer",
           "eligible_machine_ids": [
-            "M3"
+            "M3",
+            "M9",
+            "M10"
           ],
           "workers_required": 1,
           "direct_revenue_aud": 0,
-          "direct_cost_aud": 684.75,
-          "direct_cash_effect_aud": -684.75,
+          "direct_cost_aud": 675.58,
+          "direct_cash_effect_aud": -675.58,
           "state_yield_effect_t_ha": 0.3805,
           "water_ml": 0,
           "candidate_score": 0.368721,
@@ -14551,9 +14751,9 @@
     {
       "option_id": "F6_O017",
       "field_id": "F6",
-      "total_direct_cash_effect_aud": -1447.88,
+      "total_direct_cash_effect_aud": -1438.71,
       "terminal_value_aud": 38717.12,
-      "objective_value_aud": 37269.24,
+      "objective_value_aud": 37278.41,
       "actions": [
         {
           "candidate_id": "P12_F6_irrigate_20260918_0800",
@@ -14609,12 +14809,14 @@
           "duration_hours": 2.75,
           "machine_type": "sprayer",
           "eligible_machine_ids": [
-            "M3"
+            "M3",
+            "M9",
+            "M10"
           ],
           "workers_required": 1,
           "direct_revenue_aud": 0,
-          "direct_cost_aud": 684.75,
-          "direct_cash_effect_aud": -684.75,
+          "direct_cost_aud": 675.58,
+          "direct_cash_effect_aud": -675.58,
           "state_yield_effect_t_ha": 0.3805,
           "water_ml": 0,
           "candidate_score": 0.368721,
@@ -14656,9 +14858,9 @@
     {
       "option_id": "F6_O018",
       "field_id": "F6",
-      "total_direct_cash_effect_aud": -1447.88,
+      "total_direct_cash_effect_aud": -1438.71,
       "terminal_value_aud": 38717.12,
-      "objective_value_aud": 37269.24,
+      "objective_value_aud": 37278.41,
       "actions": [
         {
           "candidate_id": "P12_F6_irrigate_20260918_0800",
@@ -14714,12 +14916,14 @@
           "duration_hours": 2.75,
           "machine_type": "sprayer",
           "eligible_machine_ids": [
-            "M3"
+            "M3",
+            "M9",
+            "M10"
           ],
           "workers_required": 1,
           "direct_revenue_aud": 0,
-          "direct_cost_aud": 684.75,
-          "direct_cash_effect_aud": -684.75,
+          "direct_cost_aud": 675.58,
+          "direct_cash_effect_aud": -675.58,
           "state_yield_effect_t_ha": 0.3805,
           "water_ml": 0,
           "candidate_score": 0.368721,
@@ -14761,9 +14965,9 @@
     {
       "option_id": "F6_O019",
       "field_id": "F6",
-      "total_direct_cash_effect_aud": -1447.88,
+      "total_direct_cash_effect_aud": -1438.71,
       "terminal_value_aud": 38717.12,
-      "objective_value_aud": 37269.24,
+      "objective_value_aud": 37278.41,
       "actions": [
         {
           "candidate_id": "P12_F6_irrigate_20260918_0800",
@@ -14819,12 +15023,14 @@
           "duration_hours": 2.75,
           "machine_type": "sprayer",
           "eligible_machine_ids": [
-            "M3"
+            "M3",
+            "M9",
+            "M10"
           ],
           "workers_required": 1,
           "direct_revenue_aud": 0,
-          "direct_cost_aud": 684.75,
-          "direct_cash_effect_aud": -684.75,
+          "direct_cost_aud": 675.58,
+          "direct_cash_effect_aud": -675.58,
           "state_yield_effect_t_ha": 0.3805,
           "water_ml": 0,
           "candidate_score": 0.368721,
@@ -14866,9 +15072,9 @@
     {
       "option_id": "F6_O020",
       "field_id": "F6",
-      "total_direct_cash_effect_aud": -1447.88,
+      "total_direct_cash_effect_aud": -1438.71,
       "terminal_value_aud": 38717.12,
-      "objective_value_aud": 37269.24,
+      "objective_value_aud": 37278.41,
       "actions": [
         {
           "candidate_id": "P12_F6_irrigate_20260918_0900",
@@ -14924,12 +15130,14 @@
           "duration_hours": 2.75,
           "machine_type": "sprayer",
           "eligible_machine_ids": [
-            "M3"
+            "M3",
+            "M9",
+            "M10"
           ],
           "workers_required": 1,
           "direct_revenue_aud": 0,
-          "direct_cost_aud": 684.75,
-          "direct_cash_effect_aud": -684.75,
+          "direct_cost_aud": 675.58,
+          "direct_cash_effect_aud": -675.58,
           "state_yield_effect_t_ha": 0.3805,
           "water_ml": 0,
           "candidate_score": 0.368721,
@@ -14971,9 +15179,9 @@
     {
       "option_id": "F6_O021",
       "field_id": "F6",
-      "total_direct_cash_effect_aud": -1447.88,
+      "total_direct_cash_effect_aud": -1438.71,
       "terminal_value_aud": 38717.12,
-      "objective_value_aud": 37269.24,
+      "objective_value_aud": 37278.41,
       "actions": [
         {
           "candidate_id": "P12_F6_irrigate_20260918_0900",
@@ -15029,12 +15237,14 @@
           "duration_hours": 2.75,
           "machine_type": "sprayer",
           "eligible_machine_ids": [
-            "M3"
+            "M3",
+            "M9",
+            "M10"
           ],
           "workers_required": 1,
           "direct_revenue_aud": 0,
-          "direct_cost_aud": 684.75,
-          "direct_cash_effect_aud": -684.75,
+          "direct_cost_aud": 675.58,
+          "direct_cash_effect_aud": -675.58,
           "state_yield_effect_t_ha": 0.3805,
           "water_ml": 0,
           "candidate_score": 0.368721,
@@ -15076,9 +15286,9 @@
     {
       "option_id": "F6_O022",
       "field_id": "F6",
-      "total_direct_cash_effect_aud": -1447.88,
+      "total_direct_cash_effect_aud": -1438.71,
       "terminal_value_aud": 38717.12,
-      "objective_value_aud": 37269.24,
+      "objective_value_aud": 37278.41,
       "actions": [
         {
           "candidate_id": "P12_F6_irrigate_20260918_0900",
@@ -15134,12 +15344,14 @@
           "duration_hours": 2.75,
           "machine_type": "sprayer",
           "eligible_machine_ids": [
-            "M3"
+            "M3",
+            "M9",
+            "M10"
           ],
           "workers_required": 1,
           "direct_revenue_aud": 0,
-          "direct_cost_aud": 684.75,
-          "direct_cash_effect_aud": -684.75,
+          "direct_cost_aud": 675.58,
+          "direct_cash_effect_aud": -675.58,
           "state_yield_effect_t_ha": 0.3805,
           "water_ml": 0,
           "candidate_score": 0.368721,
@@ -15181,9 +15393,9 @@
     {
       "option_id": "F6_O023",
       "field_id": "F6",
-      "total_direct_cash_effect_aud": -1447.88,
+      "total_direct_cash_effect_aud": -1438.71,
       "terminal_value_aud": 38709.41,
-      "objective_value_aud": 37261.53,
+      "objective_value_aud": 37270.7,
       "actions": [
         {
           "candidate_id": "P12_F6_irrigate_20260917_0700",
@@ -15239,12 +15451,14 @@
           "duration_hours": 2.75,
           "machine_type": "sprayer",
           "eligible_machine_ids": [
-            "M3"
+            "M3",
+            "M9",
+            "M10"
           ],
           "workers_required": 1,
           "direct_revenue_aud": 0,
-          "direct_cost_aud": 684.75,
-          "direct_cash_effect_aud": -684.75,
+          "direct_cost_aud": 675.58,
+          "direct_cash_effect_aud": -675.58,
           "state_yield_effect_t_ha": 0.3728,
           "water_ml": 0,
           "candidate_score": 0.368721,
@@ -15286,9 +15500,9 @@
     {
       "option_id": "F6_O024",
       "field_id": "F6",
-      "total_direct_cash_effect_aud": -1447.88,
+      "total_direct_cash_effect_aud": -1438.71,
       "terminal_value_aud": 38709.41,
-      "objective_value_aud": 37261.53,
+      "objective_value_aud": 37270.7,
       "actions": [
         {
           "candidate_id": "P12_F6_irrigate_20260917_0700",
@@ -15344,12 +15558,14 @@
           "duration_hours": 2.75,
           "machine_type": "sprayer",
           "eligible_machine_ids": [
-            "M3"
+            "M3",
+            "M9",
+            "M10"
           ],
           "workers_required": 1,
           "direct_revenue_aud": 0,
-          "direct_cost_aud": 684.75,
-          "direct_cash_effect_aud": -684.75,
+          "direct_cost_aud": 675.58,
+          "direct_cash_effect_aud": -675.58,
           "state_yield_effect_t_ha": 0.3728,
           "water_ml": 0,
           "candidate_score": 0.368721,
@@ -15391,9 +15607,9 @@
     {
       "option_id": "F6_O025",
       "field_id": "F6",
-      "total_direct_cash_effect_aud": -1447.88,
+      "total_direct_cash_effect_aud": -1438.71,
       "terminal_value_aud": 38709.41,
-      "objective_value_aud": 37261.53,
+      "objective_value_aud": 37270.7,
       "actions": [
         {
           "candidate_id": "P12_F6_irrigate_20260917_0700",
@@ -15449,12 +15665,14 @@
           "duration_hours": 2.75,
           "machine_type": "sprayer",
           "eligible_machine_ids": [
-            "M3"
+            "M3",
+            "M9",
+            "M10"
           ],
           "workers_required": 1,
           "direct_revenue_aud": 0,
-          "direct_cost_aud": 684.75,
-          "direct_cash_effect_aud": -684.75,
+          "direct_cost_aud": 675.58,
+          "direct_cash_effect_aud": -675.58,
           "state_yield_effect_t_ha": 0.3728,
           "water_ml": 0,
           "candidate_score": 0.368721,
@@ -15496,9 +15714,9 @@
     {
       "option_id": "F6_O026",
       "field_id": "F6",
-      "total_direct_cash_effect_aud": -1447.88,
+      "total_direct_cash_effect_aud": -1438.71,
       "terminal_value_aud": 38709.41,
-      "objective_value_aud": 37261.53,
+      "objective_value_aud": 37270.7,
       "actions": [
         {
           "candidate_id": "P12_F6_irrigate_20260917_0800",
@@ -15554,12 +15772,14 @@
           "duration_hours": 2.75,
           "machine_type": "sprayer",
           "eligible_machine_ids": [
-            "M3"
+            "M3",
+            "M9",
+            "M10"
           ],
           "workers_required": 1,
           "direct_revenue_aud": 0,
-          "direct_cost_aud": 684.75,
-          "direct_cash_effect_aud": -684.75,
+          "direct_cost_aud": 675.58,
+          "direct_cash_effect_aud": -675.58,
           "state_yield_effect_t_ha": 0.3728,
           "water_ml": 0,
           "candidate_score": 0.368721,
@@ -15601,9 +15821,9 @@
     {
       "option_id": "F6_O027",
       "field_id": "F6",
-      "total_direct_cash_effect_aud": -1447.88,
+      "total_direct_cash_effect_aud": -1438.71,
       "terminal_value_aud": 38709.41,
-      "objective_value_aud": 37261.53,
+      "objective_value_aud": 37270.7,
       "actions": [
         {
           "candidate_id": "P12_F6_irrigate_20260917_0800",
@@ -15659,12 +15879,14 @@
           "duration_hours": 2.75,
           "machine_type": "sprayer",
           "eligible_machine_ids": [
-            "M3"
+            "M3",
+            "M9",
+            "M10"
           ],
           "workers_required": 1,
           "direct_revenue_aud": 0,
-          "direct_cost_aud": 684.75,
-          "direct_cash_effect_aud": -684.75,
+          "direct_cost_aud": 675.58,
+          "direct_cash_effect_aud": -675.58,
           "state_yield_effect_t_ha": 0.3728,
           "water_ml": 0,
           "candidate_score": 0.368721,
@@ -15706,9 +15928,9 @@
     {
       "option_id": "F6_O028",
       "field_id": "F6",
-      "total_direct_cash_effect_aud": -1447.88,
+      "total_direct_cash_effect_aud": -1438.71,
       "terminal_value_aud": 38709.41,
-      "objective_value_aud": 37261.53,
+      "objective_value_aud": 37270.7,
       "actions": [
         {
           "candidate_id": "P12_F6_irrigate_20260917_0800",
@@ -15764,12 +15986,14 @@
           "duration_hours": 2.75,
           "machine_type": "sprayer",
           "eligible_machine_ids": [
-            "M3"
+            "M3",
+            "M9",
+            "M10"
           ],
           "workers_required": 1,
           "direct_revenue_aud": 0,
-          "direct_cost_aud": 684.75,
-          "direct_cash_effect_aud": -684.75,
+          "direct_cost_aud": 675.58,
+          "direct_cash_effect_aud": -675.58,
           "state_yield_effect_t_ha": 0.3728,
           "water_ml": 0,
           "candidate_score": 0.368721,
@@ -15811,9 +16035,9 @@
     {
       "option_id": "F6_O029",
       "field_id": "F6",
-      "total_direct_cash_effect_aud": -1447.88,
+      "total_direct_cash_effect_aud": -1438.71,
       "terminal_value_aud": 38709.41,
-      "objective_value_aud": 37261.53,
+      "objective_value_aud": 37270.7,
       "actions": [
         {
           "candidate_id": "P12_F6_irrigate_20260917_0900",
@@ -15869,12 +16093,14 @@
           "duration_hours": 2.75,
           "machine_type": "sprayer",
           "eligible_machine_ids": [
-            "M3"
+            "M3",
+            "M9",
+            "M10"
           ],
           "workers_required": 1,
           "direct_revenue_aud": 0,
-          "direct_cost_aud": 684.75,
-          "direct_cash_effect_aud": -684.75,
+          "direct_cost_aud": 675.58,
+          "direct_cash_effect_aud": -675.58,
           "state_yield_effect_t_ha": 0.3728,
           "water_ml": 0,
           "candidate_score": 0.368721,
@@ -15916,9 +16142,9 @@
     {
       "option_id": "F6_O030",
       "field_id": "F6",
-      "total_direct_cash_effect_aud": -1447.88,
+      "total_direct_cash_effect_aud": -1438.71,
       "terminal_value_aud": 38709.41,
-      "objective_value_aud": 37261.53,
+      "objective_value_aud": 37270.7,
       "actions": [
         {
           "candidate_id": "P12_F6_irrigate_20260917_0900",
@@ -15974,12 +16200,14 @@
           "duration_hours": 2.75,
           "machine_type": "sprayer",
           "eligible_machine_ids": [
-            "M3"
+            "M3",
+            "M9",
+            "M10"
           ],
           "workers_required": 1,
           "direct_revenue_aud": 0,
-          "direct_cost_aud": 684.75,
-          "direct_cash_effect_aud": -684.75,
+          "direct_cost_aud": 675.58,
+          "direct_cash_effect_aud": -675.58,
           "state_yield_effect_t_ha": 0.3728,
           "water_ml": 0,
           "candidate_score": 0.368721,
@@ -16021,9 +16249,9 @@
     {
       "option_id": "F7_O001",
       "field_id": "F7",
-      "total_direct_cash_effect_aud": 28725.82,
+      "total_direct_cash_effect_aud": 28736.93,
       "terminal_value_aud": 0,
-      "objective_value_aud": 28725.82,
+      "objective_value_aud": 28736.93,
       "actions": [
         {
           "candidate_id": "P13_F7_spray_20260918_0700",
@@ -16039,12 +16267,14 @@
           "duration_hours": 3.33,
           "machine_type": "sprayer",
           "eligible_machine_ids": [
-            "M3"
+            "M3",
+            "M9",
+            "M10"
           ],
           "workers_required": 1,
           "direct_revenue_aud": 0,
-          "direct_cost_aud": 910,
-          "direct_cash_effect_aud": -910,
+          "direct_cost_aud": 898.89,
+          "direct_cash_effect_aud": -898.89,
           "state_yield_effect_t_ha": 0.3115,
           "water_ml": 0,
           "candidate_score": 0.311513,
@@ -16191,9 +16421,9 @@
     {
       "option_id": "F7_O003",
       "field_id": "F7",
-      "total_direct_cash_effect_aud": 28725.82,
+      "total_direct_cash_effect_aud": 28736.93,
       "terminal_value_aud": 0,
-      "objective_value_aud": 28725.82,
+      "objective_value_aud": 28736.93,
       "actions": [
         {
           "candidate_id": "P13_F7_spray_20260918_0700",
@@ -16209,12 +16439,14 @@
           "duration_hours": 3.33,
           "machine_type": "sprayer",
           "eligible_machine_ids": [
-            "M3"
+            "M3",
+            "M9",
+            "M10"
           ],
           "workers_required": 1,
           "direct_revenue_aud": 0,
-          "direct_cost_aud": 910,
-          "direct_cash_effect_aud": -910,
+          "direct_cost_aud": 898.89,
+          "direct_cash_effect_aud": -898.89,
           "state_yield_effect_t_ha": 0.3115,
           "water_ml": 0,
           "candidate_score": 0.311513,
@@ -16296,9 +16528,9 @@
     {
       "option_id": "F7_O004",
       "field_id": "F7",
-      "total_direct_cash_effect_aud": 28725.82,
+      "total_direct_cash_effect_aud": 28736.93,
       "terminal_value_aud": 0,
-      "objective_value_aud": 28725.82,
+      "objective_value_aud": 28736.93,
       "actions": [
         {
           "candidate_id": "P13_F7_spray_20260918_0700",
@@ -16314,12 +16546,14 @@
           "duration_hours": 3.33,
           "machine_type": "sprayer",
           "eligible_machine_ids": [
-            "M3"
+            "M3",
+            "M9",
+            "M10"
           ],
           "workers_required": 1,
           "direct_revenue_aud": 0,
-          "direct_cost_aud": 910,
-          "direct_cash_effect_aud": -910,
+          "direct_cost_aud": 898.89,
+          "direct_cash_effect_aud": -898.89,
           "state_yield_effect_t_ha": 0.3115,
           "water_ml": 0,
           "candidate_score": 0.311513,
@@ -16401,9 +16635,9 @@
     {
       "option_id": "F7_O005",
       "field_id": "F7",
-      "total_direct_cash_effect_aud": 28725.82,
+      "total_direct_cash_effect_aud": 28736.93,
       "terminal_value_aud": 0,
-      "objective_value_aud": 28725.82,
+      "objective_value_aud": 28736.93,
       "actions": [
         {
           "candidate_id": "P13_F7_spray_20260918_0800",
@@ -16419,12 +16653,14 @@
           "duration_hours": 3.33,
           "machine_type": "sprayer",
           "eligible_machine_ids": [
-            "M3"
+            "M3",
+            "M9",
+            "M10"
           ],
           "workers_required": 1,
           "direct_revenue_aud": 0,
-          "direct_cost_aud": 910,
-          "direct_cash_effect_aud": -910,
+          "direct_cost_aud": 898.89,
+          "direct_cash_effect_aud": -898.89,
           "state_yield_effect_t_ha": 0.3115,
           "water_ml": 0,
           "candidate_score": 0.311513,
@@ -16506,9 +16742,9 @@
     {
       "option_id": "F7_O006",
       "field_id": "F7",
-      "total_direct_cash_effect_aud": 28725.82,
+      "total_direct_cash_effect_aud": 28736.93,
       "terminal_value_aud": 0,
-      "objective_value_aud": 28725.82,
+      "objective_value_aud": 28736.93,
       "actions": [
         {
           "candidate_id": "P13_F7_spray_20260918_0800",
@@ -16524,12 +16760,14 @@
           "duration_hours": 3.33,
           "machine_type": "sprayer",
           "eligible_machine_ids": [
-            "M3"
+            "M3",
+            "M9",
+            "M10"
           ],
           "workers_required": 1,
           "direct_revenue_aud": 0,
-          "direct_cost_aud": 910,
-          "direct_cash_effect_aud": -910,
+          "direct_cost_aud": 898.89,
+          "direct_cash_effect_aud": -898.89,
           "state_yield_effect_t_ha": 0.3115,
           "water_ml": 0,
           "candidate_score": 0.311513,
@@ -16611,9 +16849,9 @@
     {
       "option_id": "F7_O007",
       "field_id": "F7",
-      "total_direct_cash_effect_aud": 28725.82,
+      "total_direct_cash_effect_aud": 28736.93,
       "terminal_value_aud": 0,
-      "objective_value_aud": 28725.82,
+      "objective_value_aud": 28736.93,
       "actions": [
         {
           "candidate_id": "P13_F7_spray_20260918_0800",
@@ -16629,12 +16867,14 @@
           "duration_hours": 3.33,
           "machine_type": "sprayer",
           "eligible_machine_ids": [
-            "M3"
+            "M3",
+            "M9",
+            "M10"
           ],
           "workers_required": 1,
           "direct_revenue_aud": 0,
-          "direct_cost_aud": 910,
-          "direct_cash_effect_aud": -910,
+          "direct_cost_aud": 898.89,
+          "direct_cash_effect_aud": -898.89,
           "state_yield_effect_t_ha": 0.3115,
           "water_ml": 0,
           "candidate_score": 0.311513,
@@ -16716,9 +16956,9 @@
     {
       "option_id": "F7_O008",
       "field_id": "F7",
-      "total_direct_cash_effect_aud": 28725.82,
+      "total_direct_cash_effect_aud": 28736.93,
       "terminal_value_aud": 0,
-      "objective_value_aud": 28725.82,
+      "objective_value_aud": 28736.93,
       "actions": [
         {
           "candidate_id": "P13_F7_spray_20260918_0900",
@@ -16734,12 +16974,14 @@
           "duration_hours": 3.33,
           "machine_type": "sprayer",
           "eligible_machine_ids": [
-            "M3"
+            "M3",
+            "M9",
+            "M10"
           ],
           "workers_required": 1,
           "direct_revenue_aud": 0,
-          "direct_cost_aud": 910,
-          "direct_cash_effect_aud": -910,
+          "direct_cost_aud": 898.89,
+          "direct_cash_effect_aud": -898.89,
           "state_yield_effect_t_ha": 0.3115,
           "water_ml": 0,
           "candidate_score": 0.311513,
@@ -16821,9 +17063,9 @@
     {
       "option_id": "F7_O009",
       "field_id": "F7",
-      "total_direct_cash_effect_aud": 28725.82,
+      "total_direct_cash_effect_aud": 28736.93,
       "terminal_value_aud": 0,
-      "objective_value_aud": 28725.82,
+      "objective_value_aud": 28736.93,
       "actions": [
         {
           "candidate_id": "P13_F7_spray_20260918_0900",
@@ -16839,12 +17081,14 @@
           "duration_hours": 3.33,
           "machine_type": "sprayer",
           "eligible_machine_ids": [
-            "M3"
+            "M3",
+            "M9",
+            "M10"
           ],
           "workers_required": 1,
           "direct_revenue_aud": 0,
-          "direct_cost_aud": 910,
-          "direct_cash_effect_aud": -910,
+          "direct_cost_aud": 898.89,
+          "direct_cash_effect_aud": -898.89,
           "state_yield_effect_t_ha": 0.3115,
           "water_ml": 0,
           "candidate_score": 0.311513,
@@ -16926,9 +17170,9 @@
     {
       "option_id": "F7_O010",
       "field_id": "F7",
-      "total_direct_cash_effect_aud": 28725.82,
+      "total_direct_cash_effect_aud": 28736.93,
       "terminal_value_aud": 0,
-      "objective_value_aud": 28725.82,
+      "objective_value_aud": 28736.93,
       "actions": [
         {
           "candidate_id": "P13_F7_spray_20260918_0900",
@@ -16944,12 +17188,14 @@
           "duration_hours": 3.33,
           "machine_type": "sprayer",
           "eligible_machine_ids": [
-            "M3"
+            "M3",
+            "M9",
+            "M10"
           ],
           "workers_required": 1,
           "direct_revenue_aud": 0,
-          "direct_cost_aud": 910,
-          "direct_cash_effect_aud": -910,
+          "direct_cost_aud": 898.89,
+          "direct_cash_effect_aud": -898.89,
           "state_yield_effect_t_ha": 0.3115,
           "water_ml": 0,
           "candidate_score": 0.311513,
@@ -17031,9 +17277,9 @@
     {
       "option_id": "F7_O011",
       "field_id": "F7",
-      "total_direct_cash_effect_aud": 28716.67,
+      "total_direct_cash_effect_aud": 28727.78,
       "terminal_value_aud": 0,
-      "objective_value_aud": 28716.67,
+      "objective_value_aud": 28727.78,
       "actions": [
         {
           "candidate_id": "P13_F7_spray_20260918_0700",
@@ -17049,12 +17295,14 @@
           "duration_hours": 3.33,
           "machine_type": "sprayer",
           "eligible_machine_ids": [
-            "M3"
+            "M3",
+            "M9",
+            "M10"
           ],
           "workers_required": 1,
           "direct_revenue_aud": 0,
-          "direct_cost_aud": 910,
-          "direct_cash_effect_aud": -910,
+          "direct_cost_aud": 898.89,
+          "direct_cash_effect_aud": -898.89,
           "state_yield_effect_t_ha": 0.3115,
           "water_ml": 0,
           "candidate_score": 0.311513,
@@ -17136,9 +17384,9 @@
     {
       "option_id": "F7_O012",
       "field_id": "F7",
-      "total_direct_cash_effect_aud": 28716.67,
+      "total_direct_cash_effect_aud": 28727.78,
       "terminal_value_aud": 0,
-      "objective_value_aud": 28716.67,
+      "objective_value_aud": 28727.78,
       "actions": [
         {
           "candidate_id": "P13_F7_spray_20260918_0700",
@@ -17154,12 +17402,14 @@
           "duration_hours": 3.33,
           "machine_type": "sprayer",
           "eligible_machine_ids": [
-            "M3"
+            "M3",
+            "M9",
+            "M10"
           ],
           "workers_required": 1,
           "direct_revenue_aud": 0,
-          "direct_cost_aud": 910,
-          "direct_cash_effect_aud": -910,
+          "direct_cost_aud": 898.89,
+          "direct_cash_effect_aud": -898.89,
           "state_yield_effect_t_ha": 0.3115,
           "water_ml": 0,
           "candidate_score": 0.311513,
@@ -17241,9 +17491,9 @@
     {
       "option_id": "F7_O013",
       "field_id": "F7",
-      "total_direct_cash_effect_aud": 28716.67,
+      "total_direct_cash_effect_aud": 28727.78,
       "terminal_value_aud": 0,
-      "objective_value_aud": 28716.67,
+      "objective_value_aud": 28727.78,
       "actions": [
         {
           "candidate_id": "P13_F7_spray_20260918_0700",
@@ -17259,12 +17509,14 @@
           "duration_hours": 3.33,
           "machine_type": "sprayer",
           "eligible_machine_ids": [
-            "M3"
+            "M3",
+            "M9",
+            "M10"
           ],
           "workers_required": 1,
           "direct_revenue_aud": 0,
-          "direct_cost_aud": 910,
-          "direct_cash_effect_aud": -910,
+          "direct_cost_aud": 898.89,
+          "direct_cash_effect_aud": -898.89,
           "state_yield_effect_t_ha": 0.3115,
           "water_ml": 0,
           "candidate_score": 0.311513,
@@ -17346,9 +17598,9 @@
     {
       "option_id": "F7_O014",
       "field_id": "F7",
-      "total_direct_cash_effect_aud": 28716.67,
+      "total_direct_cash_effect_aud": 28727.78,
       "terminal_value_aud": 0,
-      "objective_value_aud": 28716.67,
+      "objective_value_aud": 28727.78,
       "actions": [
         {
           "candidate_id": "P13_F7_spray_20260918_0800",
@@ -17364,12 +17616,14 @@
           "duration_hours": 3.33,
           "machine_type": "sprayer",
           "eligible_machine_ids": [
-            "M3"
+            "M3",
+            "M9",
+            "M10"
           ],
           "workers_required": 1,
           "direct_revenue_aud": 0,
-          "direct_cost_aud": 910,
-          "direct_cash_effect_aud": -910,
+          "direct_cost_aud": 898.89,
+          "direct_cash_effect_aud": -898.89,
           "state_yield_effect_t_ha": 0.3115,
           "water_ml": 0,
           "candidate_score": 0.311513,
@@ -17451,9 +17705,9 @@
     {
       "option_id": "F7_O015",
       "field_id": "F7",
-      "total_direct_cash_effect_aud": 28716.67,
+      "total_direct_cash_effect_aud": 28727.78,
       "terminal_value_aud": 0,
-      "objective_value_aud": 28716.67,
+      "objective_value_aud": 28727.78,
       "actions": [
         {
           "candidate_id": "P13_F7_spray_20260918_0800",
@@ -17469,12 +17723,14 @@
           "duration_hours": 3.33,
           "machine_type": "sprayer",
           "eligible_machine_ids": [
-            "M3"
+            "M3",
+            "M9",
+            "M10"
           ],
           "workers_required": 1,
           "direct_revenue_aud": 0,
-          "direct_cost_aud": 910,
-          "direct_cash_effect_aud": -910,
+          "direct_cost_aud": 898.89,
+          "direct_cash_effect_aud": -898.89,
           "state_yield_effect_t_ha": 0.3115,
           "water_ml": 0,
           "candidate_score": 0.311513,
@@ -17556,9 +17812,9 @@
     {
       "option_id": "F7_O016",
       "field_id": "F7",
-      "total_direct_cash_effect_aud": 28716.67,
+      "total_direct_cash_effect_aud": 28727.78,
       "terminal_value_aud": 0,
-      "objective_value_aud": 28716.67,
+      "objective_value_aud": 28727.78,
       "actions": [
         {
           "candidate_id": "P13_F7_spray_20260918_0800",
@@ -17574,12 +17830,14 @@
           "duration_hours": 3.33,
           "machine_type": "sprayer",
           "eligible_machine_ids": [
-            "M3"
+            "M3",
+            "M9",
+            "M10"
           ],
           "workers_required": 1,
           "direct_revenue_aud": 0,
-          "direct_cost_aud": 910,
-          "direct_cash_effect_aud": -910,
+          "direct_cost_aud": 898.89,
+          "direct_cash_effect_aud": -898.89,
           "state_yield_effect_t_ha": 0.3115,
           "water_ml": 0,
           "candidate_score": 0.311513,
@@ -17661,9 +17919,9 @@
     {
       "option_id": "F7_O017",
       "field_id": "F7",
-      "total_direct_cash_effect_aud": 28716.67,
+      "total_direct_cash_effect_aud": 28727.78,
       "terminal_value_aud": 0,
-      "objective_value_aud": 28716.67,
+      "objective_value_aud": 28727.78,
       "actions": [
         {
           "candidate_id": "P13_F7_spray_20260918_0900",
@@ -17679,12 +17937,14 @@
           "duration_hours": 3.33,
           "machine_type": "sprayer",
           "eligible_machine_ids": [
-            "M3"
+            "M3",
+            "M9",
+            "M10"
           ],
           "workers_required": 1,
           "direct_revenue_aud": 0,
-          "direct_cost_aud": 910,
-          "direct_cash_effect_aud": -910,
+          "direct_cost_aud": 898.89,
+          "direct_cash_effect_aud": -898.89,
           "state_yield_effect_t_ha": 0.3115,
           "water_ml": 0,
           "candidate_score": 0.311513,
@@ -17766,9 +18026,9 @@
     {
       "option_id": "F7_O018",
       "field_id": "F7",
-      "total_direct_cash_effect_aud": 28716.67,
+      "total_direct_cash_effect_aud": 28727.78,
       "terminal_value_aud": 0,
-      "objective_value_aud": 28716.67,
+      "objective_value_aud": 28727.78,
       "actions": [
         {
           "candidate_id": "P13_F7_spray_20260918_0900",
@@ -17784,12 +18044,14 @@
           "duration_hours": 3.33,
           "machine_type": "sprayer",
           "eligible_machine_ids": [
-            "M3"
+            "M3",
+            "M9",
+            "M10"
           ],
           "workers_required": 1,
           "direct_revenue_aud": 0,
-          "direct_cost_aud": 910,
-          "direct_cash_effect_aud": -910,
+          "direct_cost_aud": 898.89,
+          "direct_cash_effect_aud": -898.89,
           "state_yield_effect_t_ha": 0.3115,
           "water_ml": 0,
           "candidate_score": 0.311513,
@@ -17871,9 +18133,9 @@
     {
       "option_id": "F7_O019",
       "field_id": "F7",
-      "total_direct_cash_effect_aud": 28716.67,
+      "total_direct_cash_effect_aud": 28727.78,
       "terminal_value_aud": 0,
-      "objective_value_aud": 28716.67,
+      "objective_value_aud": 28727.78,
       "actions": [
         {
           "candidate_id": "P13_F7_spray_20260918_0900",
@@ -17889,12 +18151,14 @@
           "duration_hours": 3.33,
           "machine_type": "sprayer",
           "eligible_machine_ids": [
-            "M3"
+            "M3",
+            "M9",
+            "M10"
           ],
           "workers_required": 1,
           "direct_revenue_aud": 0,
-          "direct_cost_aud": 910,
-          "direct_cash_effect_aud": -910,
+          "direct_cost_aud": 898.89,
+          "direct_cash_effect_aud": -898.89,
           "state_yield_effect_t_ha": 0.3115,
           "water_ml": 0,
           "candidate_score": 0.311513,
@@ -17976,12 +18240,12 @@
     {
       "option_id": "F7_O020",
       "field_id": "F7",
-      "total_direct_cash_effect_aud": 28446.9,
+      "total_direct_cash_effect_aud": 28587.42,
       "terminal_value_aud": 0,
-      "objective_value_aud": 28446.9,
+      "objective_value_aud": 28587.42,
       "actions": [
         {
-          "candidate_id": "P13_F7_spray_20260918_0700",
+          "candidate_id": "P13_F7_spray_20260917_0700",
           "plan_id": "P13",
           "field_id": "F7",
           "operation": "spray",
@@ -17989,39 +18253,40 @@
           "required": false,
           "depends_on": "",
           "min_gap_hours": 0,
-          "start_time": "2026-09-18T07:00:00",
-          "end_time": "2026-09-18T10:20:00",
+          "start_time": "2026-09-17T07:00:00",
+          "end_time": "2026-09-17T10:20:00",
           "duration_hours": 3.33,
           "machine_type": "sprayer",
           "eligible_machine_ids": [
-            "M3"
+            "M9",
+            "M10"
           ],
           "workers_required": 1,
           "direct_revenue_aud": 0,
-          "direct_cost_aud": 910,
-          "direct_cash_effect_aud": -910,
-          "state_yield_effect_t_ha": 0.3115,
+          "direct_cost_aud": 893.33,
+          "direct_cash_effect_aud": -893.33,
+          "state_yield_effect_t_ha": 0.2867,
           "water_ml": 0,
-          "candidate_score": 0.311513,
+          "candidate_score": 0.28674,
           "state_after": {
             "crop": "wheat",
             "planted": true,
             "newly_planted": false,
             "harvested": false,
             "growth_stage": "maturing",
-            "readiness": 0.84,
-            "soil_moisture": 0.2,
-            "soil_temperature_c": 14.4,
-            "expected_yield_t_ha": 4.8999,
+            "readiness": 0.822,
+            "soil_moisture": 0.22,
+            "soil_temperature_c": 14.24,
+            "expected_yield_t_ha": 4.8631,
             "nitrogen_index": 0.65,
             "weed_pressure": 0.09,
             "pest_pressure": 0.08,
-            "disease_pressure": 0.0452,
+            "disease_pressure": 0.0427,
             "seedbed_readiness": 0.1
           }
         },
         {
-          "candidate_id": "P14_F7_harvest_20260926_0800",
+          "candidate_id": "P14_F7_harvest_20260924_0700",
           "plan_id": "P14",
           "field_id": "F7",
           "operation": "harvest",
@@ -18029,34 +18294,34 @@
           "required": true,
           "depends_on": "",
           "min_gap_hours": 0,
-          "start_time": "2026-09-26T08:00:00",
-          "end_time": "2026-09-26T12:00:00",
+          "start_time": "2026-09-24T07:00:00",
+          "end_time": "2026-09-24T11:00:00",
           "duration_hours": 4,
           "machine_type": "harvester",
           "eligible_machine_ids": [
             "M1"
           ],
           "workers_required": 2,
-          "direct_revenue_aud": 30356.9,
+          "direct_revenue_aud": 30480.75,
           "direct_cost_aud": 1000,
-          "direct_cash_effect_aud": 29356.9,
+          "direct_cash_effect_aud": 29480.75,
           "state_yield_effect_t_ha": 0,
           "water_ml": 0,
-          "candidate_score": 25338.320025,
+          "candidate_score": 25630.040026,
           "state_after": {
             "crop": "",
             "planted": false,
             "newly_planted": false,
             "harvested": true,
             "growth_stage": "mature",
-            "readiness": 0.984,
-            "soil_moisture": 0.18,
-            "soil_temperature_c": 15.68,
+            "readiness": 0.948,
+            "soil_moisture": 0.212,
+            "soil_temperature_c": 15.36,
             "expected_yield_t_ha": 0,
             "nitrogen_index": 0.65,
             "weed_pressure": 0.09,
             "pest_pressure": 0.08,
-            "disease_pressure": 0.4045,
+            "disease_pressure": 0.3519,
             "seedbed_readiness": 0.1
           }
         }
@@ -18074,19 +18339,19 @@
         "nitrogen_index": 0.65,
         "weed_pressure": 0.09,
         "pest_pressure": 0.08,
-        "disease_pressure": 0.4045,
+        "disease_pressure": 0.4253,
         "seedbed_readiness": 0.1
       }
     },
     {
       "option_id": "F7_O021",
       "field_id": "F7",
-      "total_direct_cash_effect_aud": 28446.9,
+      "total_direct_cash_effect_aud": 28587.42,
       "terminal_value_aud": 0,
-      "objective_value_aud": 28446.9,
+      "objective_value_aud": 28587.42,
       "actions": [
         {
-          "candidate_id": "P13_F7_spray_20260918_0700",
+          "candidate_id": "P13_F7_spray_20260917_0700",
           "plan_id": "P13",
           "field_id": "F7",
           "operation": "spray",
@@ -18094,39 +18359,40 @@
           "required": false,
           "depends_on": "",
           "min_gap_hours": 0,
-          "start_time": "2026-09-18T07:00:00",
-          "end_time": "2026-09-18T10:20:00",
+          "start_time": "2026-09-17T07:00:00",
+          "end_time": "2026-09-17T10:20:00",
           "duration_hours": 3.33,
           "machine_type": "sprayer",
           "eligible_machine_ids": [
-            "M3"
+            "M9",
+            "M10"
           ],
           "workers_required": 1,
           "direct_revenue_aud": 0,
-          "direct_cost_aud": 910,
-          "direct_cash_effect_aud": -910,
-          "state_yield_effect_t_ha": 0.3115,
+          "direct_cost_aud": 893.33,
+          "direct_cash_effect_aud": -893.33,
+          "state_yield_effect_t_ha": 0.2867,
           "water_ml": 0,
-          "candidate_score": 0.311513,
+          "candidate_score": 0.28674,
           "state_after": {
             "crop": "wheat",
             "planted": true,
             "newly_planted": false,
             "harvested": false,
             "growth_stage": "maturing",
-            "readiness": 0.84,
-            "soil_moisture": 0.2,
-            "soil_temperature_c": 14.4,
-            "expected_yield_t_ha": 4.8999,
+            "readiness": 0.822,
+            "soil_moisture": 0.22,
+            "soil_temperature_c": 14.24,
+            "expected_yield_t_ha": 4.8631,
             "nitrogen_index": 0.65,
             "weed_pressure": 0.09,
             "pest_pressure": 0.08,
-            "disease_pressure": 0.0452,
+            "disease_pressure": 0.0427,
             "seedbed_readiness": 0.1
           }
         },
         {
-          "candidate_id": "P14_F7_harvest_20260926_0900",
+          "candidate_id": "P14_F7_harvest_20260924_0800",
           "plan_id": "P14",
           "field_id": "F7",
           "operation": "harvest",
@@ -18134,34 +18400,34 @@
           "required": true,
           "depends_on": "",
           "min_gap_hours": 0,
-          "start_time": "2026-09-26T09:00:00",
-          "end_time": "2026-09-26T13:00:00",
+          "start_time": "2026-09-24T08:00:00",
+          "end_time": "2026-09-24T12:00:00",
           "duration_hours": 4,
           "machine_type": "harvester",
           "eligible_machine_ids": [
             "M1"
           ],
           "workers_required": 2,
-          "direct_revenue_aud": 30356.9,
+          "direct_revenue_aud": 30480.75,
           "direct_cost_aud": 1000,
-          "direct_cash_effect_aud": 29356.9,
+          "direct_cash_effect_aud": 29480.75,
           "state_yield_effect_t_ha": 0,
           "water_ml": 0,
-          "candidate_score": 25338.320025,
+          "candidate_score": 25630.040026,
           "state_after": {
             "crop": "",
             "planted": false,
             "newly_planted": false,
             "harvested": true,
             "growth_stage": "mature",
-            "readiness": 0.984,
-            "soil_moisture": 0.18,
-            "soil_temperature_c": 15.68,
+            "readiness": 0.948,
+            "soil_moisture": 0.212,
+            "soil_temperature_c": 15.36,
             "expected_yield_t_ha": 0,
             "nitrogen_index": 0.65,
             "weed_pressure": 0.09,
             "pest_pressure": 0.08,
-            "disease_pressure": 0.4045,
+            "disease_pressure": 0.3519,
             "seedbed_readiness": 0.1
           }
         }
@@ -18179,16 +18445,440 @@
         "nitrogen_index": 0.65,
         "weed_pressure": 0.09,
         "pest_pressure": 0.08,
-        "disease_pressure": 0.4045,
+        "disease_pressure": 0.4253,
         "seedbed_readiness": 0.1
       }
     },
     {
       "option_id": "F7_O022",
       "field_id": "F7",
-      "total_direct_cash_effect_aud": 28446.9,
+      "total_direct_cash_effect_aud": 28587.42,
       "terminal_value_aud": 0,
-      "objective_value_aud": 28446.9,
+      "objective_value_aud": 28587.42,
+      "actions": [
+        {
+          "candidate_id": "P13_F7_spray_20260917_0700",
+          "plan_id": "P13",
+          "field_id": "F7",
+          "operation": "spray",
+          "target": "disease_control",
+          "required": false,
+          "depends_on": "",
+          "min_gap_hours": 0,
+          "start_time": "2026-09-17T07:00:00",
+          "end_time": "2026-09-17T10:20:00",
+          "duration_hours": 3.33,
+          "machine_type": "sprayer",
+          "eligible_machine_ids": [
+            "M9",
+            "M10"
+          ],
+          "workers_required": 1,
+          "direct_revenue_aud": 0,
+          "direct_cost_aud": 893.33,
+          "direct_cash_effect_aud": -893.33,
+          "state_yield_effect_t_ha": 0.2867,
+          "water_ml": 0,
+          "candidate_score": 0.28674,
+          "state_after": {
+            "crop": "wheat",
+            "planted": true,
+            "newly_planted": false,
+            "harvested": false,
+            "growth_stage": "maturing",
+            "readiness": 0.822,
+            "soil_moisture": 0.22,
+            "soil_temperature_c": 14.24,
+            "expected_yield_t_ha": 4.8631,
+            "nitrogen_index": 0.65,
+            "weed_pressure": 0.09,
+            "pest_pressure": 0.08,
+            "disease_pressure": 0.0427,
+            "seedbed_readiness": 0.1
+          }
+        },
+        {
+          "candidate_id": "P14_F7_harvest_20260924_0900",
+          "plan_id": "P14",
+          "field_id": "F7",
+          "operation": "harvest",
+          "target": "wheat",
+          "required": true,
+          "depends_on": "",
+          "min_gap_hours": 0,
+          "start_time": "2026-09-24T09:00:00",
+          "end_time": "2026-09-24T13:00:00",
+          "duration_hours": 4,
+          "machine_type": "harvester",
+          "eligible_machine_ids": [
+            "M1"
+          ],
+          "workers_required": 2,
+          "direct_revenue_aud": 30480.75,
+          "direct_cost_aud": 1000,
+          "direct_cash_effect_aud": 29480.75,
+          "state_yield_effect_t_ha": 0,
+          "water_ml": 0,
+          "candidate_score": 25630.040026,
+          "state_after": {
+            "crop": "",
+            "planted": false,
+            "newly_planted": false,
+            "harvested": true,
+            "growth_stage": "mature",
+            "readiness": 0.948,
+            "soil_moisture": 0.212,
+            "soil_temperature_c": 15.36,
+            "expected_yield_t_ha": 0,
+            "nitrogen_index": 0.65,
+            "weed_pressure": 0.09,
+            "pest_pressure": 0.08,
+            "disease_pressure": 0.3519,
+            "seedbed_readiness": 0.1
+          }
+        }
+      ],
+      "final_state": {
+        "crop": "",
+        "planted": false,
+        "newly_planted": false,
+        "harvested": true,
+        "growth_stage": "mature",
+        "readiness": 0.984,
+        "soil_moisture": 0.18,
+        "soil_temperature_c": 15.68,
+        "expected_yield_t_ha": 0,
+        "nitrogen_index": 0.65,
+        "weed_pressure": 0.09,
+        "pest_pressure": 0.08,
+        "disease_pressure": 0.4253,
+        "seedbed_readiness": 0.1
+      }
+    },
+    {
+      "option_id": "F7_O023",
+      "field_id": "F7",
+      "total_direct_cash_effect_aud": 28579.25,
+      "terminal_value_aud": 0,
+      "objective_value_aud": 28579.25,
+      "actions": [
+        {
+          "candidate_id": "P13_F7_spray_20260917_0700",
+          "plan_id": "P13",
+          "field_id": "F7",
+          "operation": "spray",
+          "target": "disease_control",
+          "required": false,
+          "depends_on": "",
+          "min_gap_hours": 0,
+          "start_time": "2026-09-17T07:00:00",
+          "end_time": "2026-09-17T10:20:00",
+          "duration_hours": 3.33,
+          "machine_type": "sprayer",
+          "eligible_machine_ids": [
+            "M9",
+            "M10"
+          ],
+          "workers_required": 1,
+          "direct_revenue_aud": 0,
+          "direct_cost_aud": 893.33,
+          "direct_cash_effect_aud": -893.33,
+          "state_yield_effect_t_ha": 0.2867,
+          "water_ml": 0,
+          "candidate_score": 0.28674,
+          "state_after": {
+            "crop": "wheat",
+            "planted": true,
+            "newly_planted": false,
+            "harvested": false,
+            "growth_stage": "maturing",
+            "readiness": 0.822,
+            "soil_moisture": 0.22,
+            "soil_temperature_c": 14.24,
+            "expected_yield_t_ha": 4.8631,
+            "nitrogen_index": 0.65,
+            "weed_pressure": 0.09,
+            "pest_pressure": 0.08,
+            "disease_pressure": 0.0427,
+            "seedbed_readiness": 0.1
+          }
+        },
+        {
+          "candidate_id": "P14_F7_harvest_20260923_0700",
+          "plan_id": "P14",
+          "field_id": "F7",
+          "operation": "harvest",
+          "target": "wheat",
+          "required": true,
+          "depends_on": "",
+          "min_gap_hours": 0,
+          "start_time": "2026-09-23T07:00:00",
+          "end_time": "2026-09-23T11:00:00",
+          "duration_hours": 4,
+          "machine_type": "harvester",
+          "eligible_machine_ids": [
+            "M1"
+          ],
+          "workers_required": 2,
+          "direct_revenue_aud": 30472.58,
+          "direct_cost_aud": 1000,
+          "direct_cash_effect_aud": 29472.58,
+          "state_yield_effect_t_ha": 0,
+          "water_ml": 0,
+          "candidate_score": 25646.480026,
+          "state_after": {
+            "crop": "",
+            "planted": false,
+            "newly_planted": false,
+            "harvested": true,
+            "growth_stage": "mature",
+            "readiness": 0.93,
+            "soil_moisture": 0.18,
+            "soil_temperature_c": 15.2,
+            "expected_yield_t_ha": 0,
+            "nitrogen_index": 0.65,
+            "weed_pressure": 0.09,
+            "pest_pressure": 0.08,
+            "disease_pressure": 0.3132,
+            "seedbed_readiness": 0.1
+          }
+        }
+      ],
+      "final_state": {
+        "crop": "",
+        "planted": false,
+        "newly_planted": false,
+        "harvested": true,
+        "growth_stage": "mature",
+        "readiness": 0.984,
+        "soil_moisture": 0.18,
+        "soil_temperature_c": 15.68,
+        "expected_yield_t_ha": 0,
+        "nitrogen_index": 0.65,
+        "weed_pressure": 0.09,
+        "pest_pressure": 0.08,
+        "disease_pressure": 0.4253,
+        "seedbed_readiness": 0.1
+      }
+    },
+    {
+      "option_id": "F7_O024",
+      "field_id": "F7",
+      "total_direct_cash_effect_aud": 28579.25,
+      "terminal_value_aud": 0,
+      "objective_value_aud": 28579.25,
+      "actions": [
+        {
+          "candidate_id": "P13_F7_spray_20260917_0700",
+          "plan_id": "P13",
+          "field_id": "F7",
+          "operation": "spray",
+          "target": "disease_control",
+          "required": false,
+          "depends_on": "",
+          "min_gap_hours": 0,
+          "start_time": "2026-09-17T07:00:00",
+          "end_time": "2026-09-17T10:20:00",
+          "duration_hours": 3.33,
+          "machine_type": "sprayer",
+          "eligible_machine_ids": [
+            "M9",
+            "M10"
+          ],
+          "workers_required": 1,
+          "direct_revenue_aud": 0,
+          "direct_cost_aud": 893.33,
+          "direct_cash_effect_aud": -893.33,
+          "state_yield_effect_t_ha": 0.2867,
+          "water_ml": 0,
+          "candidate_score": 0.28674,
+          "state_after": {
+            "crop": "wheat",
+            "planted": true,
+            "newly_planted": false,
+            "harvested": false,
+            "growth_stage": "maturing",
+            "readiness": 0.822,
+            "soil_moisture": 0.22,
+            "soil_temperature_c": 14.24,
+            "expected_yield_t_ha": 4.8631,
+            "nitrogen_index": 0.65,
+            "weed_pressure": 0.09,
+            "pest_pressure": 0.08,
+            "disease_pressure": 0.0427,
+            "seedbed_readiness": 0.1
+          }
+        },
+        {
+          "candidate_id": "P14_F7_harvest_20260923_0800",
+          "plan_id": "P14",
+          "field_id": "F7",
+          "operation": "harvest",
+          "target": "wheat",
+          "required": true,
+          "depends_on": "",
+          "min_gap_hours": 0,
+          "start_time": "2026-09-23T08:00:00",
+          "end_time": "2026-09-23T12:00:00",
+          "duration_hours": 4,
+          "machine_type": "harvester",
+          "eligible_machine_ids": [
+            "M1"
+          ],
+          "workers_required": 2,
+          "direct_revenue_aud": 30472.58,
+          "direct_cost_aud": 1000,
+          "direct_cash_effect_aud": 29472.58,
+          "state_yield_effect_t_ha": 0,
+          "water_ml": 0,
+          "candidate_score": 25646.480026,
+          "state_after": {
+            "crop": "",
+            "planted": false,
+            "newly_planted": false,
+            "harvested": true,
+            "growth_stage": "mature",
+            "readiness": 0.93,
+            "soil_moisture": 0.18,
+            "soil_temperature_c": 15.2,
+            "expected_yield_t_ha": 0,
+            "nitrogen_index": 0.65,
+            "weed_pressure": 0.09,
+            "pest_pressure": 0.08,
+            "disease_pressure": 0.3132,
+            "seedbed_readiness": 0.1
+          }
+        }
+      ],
+      "final_state": {
+        "crop": "",
+        "planted": false,
+        "newly_planted": false,
+        "harvested": true,
+        "growth_stage": "mature",
+        "readiness": 0.984,
+        "soil_moisture": 0.18,
+        "soil_temperature_c": 15.68,
+        "expected_yield_t_ha": 0,
+        "nitrogen_index": 0.65,
+        "weed_pressure": 0.09,
+        "pest_pressure": 0.08,
+        "disease_pressure": 0.4253,
+        "seedbed_readiness": 0.1
+      }
+    },
+    {
+      "option_id": "F7_O025",
+      "field_id": "F7",
+      "total_direct_cash_effect_aud": 28579.25,
+      "terminal_value_aud": 0,
+      "objective_value_aud": 28579.25,
+      "actions": [
+        {
+          "candidate_id": "P13_F7_spray_20260917_0700",
+          "plan_id": "P13",
+          "field_id": "F7",
+          "operation": "spray",
+          "target": "disease_control",
+          "required": false,
+          "depends_on": "",
+          "min_gap_hours": 0,
+          "start_time": "2026-09-17T07:00:00",
+          "end_time": "2026-09-17T10:20:00",
+          "duration_hours": 3.33,
+          "machine_type": "sprayer",
+          "eligible_machine_ids": [
+            "M9",
+            "M10"
+          ],
+          "workers_required": 1,
+          "direct_revenue_aud": 0,
+          "direct_cost_aud": 893.33,
+          "direct_cash_effect_aud": -893.33,
+          "state_yield_effect_t_ha": 0.2867,
+          "water_ml": 0,
+          "candidate_score": 0.28674,
+          "state_after": {
+            "crop": "wheat",
+            "planted": true,
+            "newly_planted": false,
+            "harvested": false,
+            "growth_stage": "maturing",
+            "readiness": 0.822,
+            "soil_moisture": 0.22,
+            "soil_temperature_c": 14.24,
+            "expected_yield_t_ha": 4.8631,
+            "nitrogen_index": 0.65,
+            "weed_pressure": 0.09,
+            "pest_pressure": 0.08,
+            "disease_pressure": 0.0427,
+            "seedbed_readiness": 0.1
+          }
+        },
+        {
+          "candidate_id": "P14_F7_harvest_20260923_0900",
+          "plan_id": "P14",
+          "field_id": "F7",
+          "operation": "harvest",
+          "target": "wheat",
+          "required": true,
+          "depends_on": "",
+          "min_gap_hours": 0,
+          "start_time": "2026-09-23T09:00:00",
+          "end_time": "2026-09-23T13:00:00",
+          "duration_hours": 4,
+          "machine_type": "harvester",
+          "eligible_machine_ids": [
+            "M1"
+          ],
+          "workers_required": 2,
+          "direct_revenue_aud": 30472.58,
+          "direct_cost_aud": 1000,
+          "direct_cash_effect_aud": 29472.58,
+          "state_yield_effect_t_ha": 0,
+          "water_ml": 0,
+          "candidate_score": 25646.480026,
+          "state_after": {
+            "crop": "",
+            "planted": false,
+            "newly_planted": false,
+            "harvested": true,
+            "growth_stage": "mature",
+            "readiness": 0.93,
+            "soil_moisture": 0.18,
+            "soil_temperature_c": 15.2,
+            "expected_yield_t_ha": 0,
+            "nitrogen_index": 0.65,
+            "weed_pressure": 0.09,
+            "pest_pressure": 0.08,
+            "disease_pressure": 0.3132,
+            "seedbed_readiness": 0.1
+          }
+        }
+      ],
+      "final_state": {
+        "crop": "",
+        "planted": false,
+        "newly_planted": false,
+        "harvested": true,
+        "growth_stage": "mature",
+        "readiness": 0.984,
+        "soil_moisture": 0.18,
+        "soil_temperature_c": 15.68,
+        "expected_yield_t_ha": 0,
+        "nitrogen_index": 0.65,
+        "weed_pressure": 0.09,
+        "pest_pressure": 0.08,
+        "disease_pressure": 0.4253,
+        "seedbed_readiness": 0.1
+      }
+    },
+    {
+      "option_id": "F7_O026",
+      "field_id": "F7",
+      "total_direct_cash_effect_aud": 28458.01,
+      "terminal_value_aud": 0,
+      "objective_value_aud": 28458.01,
       "actions": [
         {
           "candidate_id": "P13_F7_spray_20260918_0700",
@@ -18204,432 +18894,14 @@
           "duration_hours": 3.33,
           "machine_type": "sprayer",
           "eligible_machine_ids": [
-            "M3"
+            "M3",
+            "M9",
+            "M10"
           ],
           "workers_required": 1,
           "direct_revenue_aud": 0,
-          "direct_cost_aud": 910,
-          "direct_cash_effect_aud": -910,
-          "state_yield_effect_t_ha": 0.3115,
-          "water_ml": 0,
-          "candidate_score": 0.311513,
-          "state_after": {
-            "crop": "wheat",
-            "planted": true,
-            "newly_planted": false,
-            "harvested": false,
-            "growth_stage": "maturing",
-            "readiness": 0.84,
-            "soil_moisture": 0.2,
-            "soil_temperature_c": 14.4,
-            "expected_yield_t_ha": 4.8999,
-            "nitrogen_index": 0.65,
-            "weed_pressure": 0.09,
-            "pest_pressure": 0.08,
-            "disease_pressure": 0.0452,
-            "seedbed_readiness": 0.1
-          }
-        },
-        {
-          "candidate_id": "P14_F7_harvest_20260926_1000",
-          "plan_id": "P14",
-          "field_id": "F7",
-          "operation": "harvest",
-          "target": "wheat",
-          "required": true,
-          "depends_on": "",
-          "min_gap_hours": 0,
-          "start_time": "2026-09-26T10:00:00",
-          "end_time": "2026-09-26T14:00:00",
-          "duration_hours": 4,
-          "machine_type": "harvester",
-          "eligible_machine_ids": [
-            "M1"
-          ],
-          "workers_required": 2,
-          "direct_revenue_aud": 30356.9,
-          "direct_cost_aud": 1000,
-          "direct_cash_effect_aud": 29356.9,
-          "state_yield_effect_t_ha": 0,
-          "water_ml": 0,
-          "candidate_score": 25338.320025,
-          "state_after": {
-            "crop": "",
-            "planted": false,
-            "newly_planted": false,
-            "harvested": true,
-            "growth_stage": "mature",
-            "readiness": 0.984,
-            "soil_moisture": 0.18,
-            "soil_temperature_c": 15.68,
-            "expected_yield_t_ha": 0,
-            "nitrogen_index": 0.65,
-            "weed_pressure": 0.09,
-            "pest_pressure": 0.08,
-            "disease_pressure": 0.4045,
-            "seedbed_readiness": 0.1
-          }
-        }
-      ],
-      "final_state": {
-        "crop": "",
-        "planted": false,
-        "newly_planted": false,
-        "harvested": true,
-        "growth_stage": "mature",
-        "readiness": 0.984,
-        "soil_moisture": 0.18,
-        "soil_temperature_c": 15.68,
-        "expected_yield_t_ha": 0,
-        "nitrogen_index": 0.65,
-        "weed_pressure": 0.09,
-        "pest_pressure": 0.08,
-        "disease_pressure": 0.4045,
-        "seedbed_readiness": 0.1
-      }
-    },
-    {
-      "option_id": "F7_O023",
-      "field_id": "F7",
-      "total_direct_cash_effect_aud": 28446.9,
-      "terminal_value_aud": 0,
-      "objective_value_aud": 28446.9,
-      "actions": [
-        {
-          "candidate_id": "P13_F7_spray_20260918_0800",
-          "plan_id": "P13",
-          "field_id": "F7",
-          "operation": "spray",
-          "target": "disease_control",
-          "required": false,
-          "depends_on": "",
-          "min_gap_hours": 0,
-          "start_time": "2026-09-18T08:00:00",
-          "end_time": "2026-09-18T11:20:00",
-          "duration_hours": 3.33,
-          "machine_type": "sprayer",
-          "eligible_machine_ids": [
-            "M3"
-          ],
-          "workers_required": 1,
-          "direct_revenue_aud": 0,
-          "direct_cost_aud": 910,
-          "direct_cash_effect_aud": -910,
-          "state_yield_effect_t_ha": 0.3115,
-          "water_ml": 0,
-          "candidate_score": 0.311513,
-          "state_after": {
-            "crop": "wheat",
-            "planted": true,
-            "newly_planted": false,
-            "harvested": false,
-            "growth_stage": "maturing",
-            "readiness": 0.84,
-            "soil_moisture": 0.2,
-            "soil_temperature_c": 14.4,
-            "expected_yield_t_ha": 4.8999,
-            "nitrogen_index": 0.65,
-            "weed_pressure": 0.09,
-            "pest_pressure": 0.08,
-            "disease_pressure": 0.0452,
-            "seedbed_readiness": 0.1
-          }
-        },
-        {
-          "candidate_id": "P14_F7_harvest_20260926_0800",
-          "plan_id": "P14",
-          "field_id": "F7",
-          "operation": "harvest",
-          "target": "wheat",
-          "required": true,
-          "depends_on": "",
-          "min_gap_hours": 0,
-          "start_time": "2026-09-26T08:00:00",
-          "end_time": "2026-09-26T12:00:00",
-          "duration_hours": 4,
-          "machine_type": "harvester",
-          "eligible_machine_ids": [
-            "M1"
-          ],
-          "workers_required": 2,
-          "direct_revenue_aud": 30356.9,
-          "direct_cost_aud": 1000,
-          "direct_cash_effect_aud": 29356.9,
-          "state_yield_effect_t_ha": 0,
-          "water_ml": 0,
-          "candidate_score": 25338.320025,
-          "state_after": {
-            "crop": "",
-            "planted": false,
-            "newly_planted": false,
-            "harvested": true,
-            "growth_stage": "mature",
-            "readiness": 0.984,
-            "soil_moisture": 0.18,
-            "soil_temperature_c": 15.68,
-            "expected_yield_t_ha": 0,
-            "nitrogen_index": 0.65,
-            "weed_pressure": 0.09,
-            "pest_pressure": 0.08,
-            "disease_pressure": 0.4045,
-            "seedbed_readiness": 0.1
-          }
-        }
-      ],
-      "final_state": {
-        "crop": "",
-        "planted": false,
-        "newly_planted": false,
-        "harvested": true,
-        "growth_stage": "mature",
-        "readiness": 0.984,
-        "soil_moisture": 0.18,
-        "soil_temperature_c": 15.68,
-        "expected_yield_t_ha": 0,
-        "nitrogen_index": 0.65,
-        "weed_pressure": 0.09,
-        "pest_pressure": 0.08,
-        "disease_pressure": 0.4045,
-        "seedbed_readiness": 0.1
-      }
-    },
-    {
-      "option_id": "F7_O024",
-      "field_id": "F7",
-      "total_direct_cash_effect_aud": 28446.9,
-      "terminal_value_aud": 0,
-      "objective_value_aud": 28446.9,
-      "actions": [
-        {
-          "candidate_id": "P13_F7_spray_20260918_0800",
-          "plan_id": "P13",
-          "field_id": "F7",
-          "operation": "spray",
-          "target": "disease_control",
-          "required": false,
-          "depends_on": "",
-          "min_gap_hours": 0,
-          "start_time": "2026-09-18T08:00:00",
-          "end_time": "2026-09-18T11:20:00",
-          "duration_hours": 3.33,
-          "machine_type": "sprayer",
-          "eligible_machine_ids": [
-            "M3"
-          ],
-          "workers_required": 1,
-          "direct_revenue_aud": 0,
-          "direct_cost_aud": 910,
-          "direct_cash_effect_aud": -910,
-          "state_yield_effect_t_ha": 0.3115,
-          "water_ml": 0,
-          "candidate_score": 0.311513,
-          "state_after": {
-            "crop": "wheat",
-            "planted": true,
-            "newly_planted": false,
-            "harvested": false,
-            "growth_stage": "maturing",
-            "readiness": 0.84,
-            "soil_moisture": 0.2,
-            "soil_temperature_c": 14.4,
-            "expected_yield_t_ha": 4.8999,
-            "nitrogen_index": 0.65,
-            "weed_pressure": 0.09,
-            "pest_pressure": 0.08,
-            "disease_pressure": 0.0452,
-            "seedbed_readiness": 0.1
-          }
-        },
-        {
-          "candidate_id": "P14_F7_harvest_20260926_0900",
-          "plan_id": "P14",
-          "field_id": "F7",
-          "operation": "harvest",
-          "target": "wheat",
-          "required": true,
-          "depends_on": "",
-          "min_gap_hours": 0,
-          "start_time": "2026-09-26T09:00:00",
-          "end_time": "2026-09-26T13:00:00",
-          "duration_hours": 4,
-          "machine_type": "harvester",
-          "eligible_machine_ids": [
-            "M1"
-          ],
-          "workers_required": 2,
-          "direct_revenue_aud": 30356.9,
-          "direct_cost_aud": 1000,
-          "direct_cash_effect_aud": 29356.9,
-          "state_yield_effect_t_ha": 0,
-          "water_ml": 0,
-          "candidate_score": 25338.320025,
-          "state_after": {
-            "crop": "",
-            "planted": false,
-            "newly_planted": false,
-            "harvested": true,
-            "growth_stage": "mature",
-            "readiness": 0.984,
-            "soil_moisture": 0.18,
-            "soil_temperature_c": 15.68,
-            "expected_yield_t_ha": 0,
-            "nitrogen_index": 0.65,
-            "weed_pressure": 0.09,
-            "pest_pressure": 0.08,
-            "disease_pressure": 0.4045,
-            "seedbed_readiness": 0.1
-          }
-        }
-      ],
-      "final_state": {
-        "crop": "",
-        "planted": false,
-        "newly_planted": false,
-        "harvested": true,
-        "growth_stage": "mature",
-        "readiness": 0.984,
-        "soil_moisture": 0.18,
-        "soil_temperature_c": 15.68,
-        "expected_yield_t_ha": 0,
-        "nitrogen_index": 0.65,
-        "weed_pressure": 0.09,
-        "pest_pressure": 0.08,
-        "disease_pressure": 0.4045,
-        "seedbed_readiness": 0.1
-      }
-    },
-    {
-      "option_id": "F7_O025",
-      "field_id": "F7",
-      "total_direct_cash_effect_aud": 28446.9,
-      "terminal_value_aud": 0,
-      "objective_value_aud": 28446.9,
-      "actions": [
-        {
-          "candidate_id": "P13_F7_spray_20260918_0800",
-          "plan_id": "P13",
-          "field_id": "F7",
-          "operation": "spray",
-          "target": "disease_control",
-          "required": false,
-          "depends_on": "",
-          "min_gap_hours": 0,
-          "start_time": "2026-09-18T08:00:00",
-          "end_time": "2026-09-18T11:20:00",
-          "duration_hours": 3.33,
-          "machine_type": "sprayer",
-          "eligible_machine_ids": [
-            "M3"
-          ],
-          "workers_required": 1,
-          "direct_revenue_aud": 0,
-          "direct_cost_aud": 910,
-          "direct_cash_effect_aud": -910,
-          "state_yield_effect_t_ha": 0.3115,
-          "water_ml": 0,
-          "candidate_score": 0.311513,
-          "state_after": {
-            "crop": "wheat",
-            "planted": true,
-            "newly_planted": false,
-            "harvested": false,
-            "growth_stage": "maturing",
-            "readiness": 0.84,
-            "soil_moisture": 0.2,
-            "soil_temperature_c": 14.4,
-            "expected_yield_t_ha": 4.8999,
-            "nitrogen_index": 0.65,
-            "weed_pressure": 0.09,
-            "pest_pressure": 0.08,
-            "disease_pressure": 0.0452,
-            "seedbed_readiness": 0.1
-          }
-        },
-        {
-          "candidate_id": "P14_F7_harvest_20260926_1000",
-          "plan_id": "P14",
-          "field_id": "F7",
-          "operation": "harvest",
-          "target": "wheat",
-          "required": true,
-          "depends_on": "",
-          "min_gap_hours": 0,
-          "start_time": "2026-09-26T10:00:00",
-          "end_time": "2026-09-26T14:00:00",
-          "duration_hours": 4,
-          "machine_type": "harvester",
-          "eligible_machine_ids": [
-            "M1"
-          ],
-          "workers_required": 2,
-          "direct_revenue_aud": 30356.9,
-          "direct_cost_aud": 1000,
-          "direct_cash_effect_aud": 29356.9,
-          "state_yield_effect_t_ha": 0,
-          "water_ml": 0,
-          "candidate_score": 25338.320025,
-          "state_after": {
-            "crop": "",
-            "planted": false,
-            "newly_planted": false,
-            "harvested": true,
-            "growth_stage": "mature",
-            "readiness": 0.984,
-            "soil_moisture": 0.18,
-            "soil_temperature_c": 15.68,
-            "expected_yield_t_ha": 0,
-            "nitrogen_index": 0.65,
-            "weed_pressure": 0.09,
-            "pest_pressure": 0.08,
-            "disease_pressure": 0.4045,
-            "seedbed_readiness": 0.1
-          }
-        }
-      ],
-      "final_state": {
-        "crop": "",
-        "planted": false,
-        "newly_planted": false,
-        "harvested": true,
-        "growth_stage": "mature",
-        "readiness": 0.984,
-        "soil_moisture": 0.18,
-        "soil_temperature_c": 15.68,
-        "expected_yield_t_ha": 0,
-        "nitrogen_index": 0.65,
-        "weed_pressure": 0.09,
-        "pest_pressure": 0.08,
-        "disease_pressure": 0.4045,
-        "seedbed_readiness": 0.1
-      }
-    },
-    {
-      "option_id": "F7_O026",
-      "field_id": "F7",
-      "total_direct_cash_effect_aud": 28446.9,
-      "terminal_value_aud": 0,
-      "objective_value_aud": 28446.9,
-      "actions": [
-        {
-          "candidate_id": "P13_F7_spray_20260918_0900",
-          "plan_id": "P13",
-          "field_id": "F7",
-          "operation": "spray",
-          "target": "disease_control",
-          "required": false,
-          "depends_on": "",
-          "min_gap_hours": 0,
-          "start_time": "2026-09-18T09:00:00",
-          "end_time": "2026-09-18T12:20:00",
-          "duration_hours": 3.33,
-          "machine_type": "sprayer",
-          "eligible_machine_ids": [
-            "M3"
-          ],
-          "workers_required": 1,
-          "direct_revenue_aud": 0,
-          "direct_cost_aud": 910,
-          "direct_cash_effect_aud": -910,
+          "direct_cost_aud": 898.89,
+          "direct_cash_effect_aud": -898.89,
           "state_yield_effect_t_ha": 0.3115,
           "water_ml": 0,
           "candidate_score": 0.311513,
@@ -18711,12 +18983,12 @@
     {
       "option_id": "F7_O027",
       "field_id": "F7",
-      "total_direct_cash_effect_aud": 28446.9,
+      "total_direct_cash_effect_aud": 28458.01,
       "terminal_value_aud": 0,
-      "objective_value_aud": 28446.9,
+      "objective_value_aud": 28458.01,
       "actions": [
         {
-          "candidate_id": "P13_F7_spray_20260918_0900",
+          "candidate_id": "P13_F7_spray_20260918_0700",
           "plan_id": "P13",
           "field_id": "F7",
           "operation": "spray",
@@ -18724,17 +18996,19 @@
           "required": false,
           "depends_on": "",
           "min_gap_hours": 0,
-          "start_time": "2026-09-18T09:00:00",
-          "end_time": "2026-09-18T12:20:00",
+          "start_time": "2026-09-18T07:00:00",
+          "end_time": "2026-09-18T10:20:00",
           "duration_hours": 3.33,
           "machine_type": "sprayer",
           "eligible_machine_ids": [
-            "M3"
+            "M3",
+            "M9",
+            "M10"
           ],
           "workers_required": 1,
           "direct_revenue_aud": 0,
-          "direct_cost_aud": 910,
-          "direct_cash_effect_aud": -910,
+          "direct_cost_aud": 898.89,
+          "direct_cash_effect_aud": -898.89,
           "state_yield_effect_t_ha": 0.3115,
           "water_ml": 0,
           "candidate_score": 0.311513,
@@ -18816,12 +19090,12 @@
     {
       "option_id": "F7_O028",
       "field_id": "F7",
-      "total_direct_cash_effect_aud": 28446.9,
+      "total_direct_cash_effect_aud": 28458.01,
       "terminal_value_aud": 0,
-      "objective_value_aud": 28446.9,
+      "objective_value_aud": 28458.01,
       "actions": [
         {
-          "candidate_id": "P13_F7_spray_20260918_0900",
+          "candidate_id": "P13_F7_spray_20260918_0700",
           "plan_id": "P13",
           "field_id": "F7",
           "operation": "spray",
@@ -18829,17 +19103,19 @@
           "required": false,
           "depends_on": "",
           "min_gap_hours": 0,
-          "start_time": "2026-09-18T09:00:00",
-          "end_time": "2026-09-18T12:20:00",
+          "start_time": "2026-09-18T07:00:00",
+          "end_time": "2026-09-18T10:20:00",
           "duration_hours": 3.33,
           "machine_type": "sprayer",
           "eligible_machine_ids": [
-            "M3"
+            "M3",
+            "M9",
+            "M10"
           ],
           "workers_required": 1,
           "direct_revenue_aud": 0,
-          "direct_cost_aud": 910,
-          "direct_cash_effect_aud": -910,
+          "direct_cost_aud": 898.89,
+          "direct_cash_effect_aud": -898.89,
           "state_yield_effect_t_ha": 0.3115,
           "water_ml": 0,
           "candidate_score": 0.311513,
@@ -18921,12 +19197,12 @@
     {
       "option_id": "F7_O029",
       "field_id": "F7",
-      "total_direct_cash_effect_aud": 28440.75,
+      "total_direct_cash_effect_aud": 28458.01,
       "terminal_value_aud": 0,
-      "objective_value_aud": 28440.75,
+      "objective_value_aud": 28458.01,
       "actions": [
         {
-          "candidate_id": "P13_F7_spray_20260918_0700",
+          "candidate_id": "P13_F7_spray_20260918_0800",
           "plan_id": "P13",
           "field_id": "F7",
           "operation": "spray",
@@ -18934,17 +19210,19 @@
           "required": false,
           "depends_on": "",
           "min_gap_hours": 0,
-          "start_time": "2026-09-18T07:00:00",
-          "end_time": "2026-09-18T10:20:00",
+          "start_time": "2026-09-18T08:00:00",
+          "end_time": "2026-09-18T11:20:00",
           "duration_hours": 3.33,
           "machine_type": "sprayer",
           "eligible_machine_ids": [
-            "M3"
+            "M3",
+            "M9",
+            "M10"
           ],
           "workers_required": 1,
           "direct_revenue_aud": 0,
-          "direct_cost_aud": 910,
-          "direct_cash_effect_aud": -910,
+          "direct_cost_aud": 898.89,
+          "direct_cash_effect_aud": -898.89,
           "state_yield_effect_t_ha": 0.3115,
           "water_ml": 0,
           "candidate_score": 0.311513,
@@ -18966,7 +19244,7 @@
           }
         },
         {
-          "candidate_id": "P14_F7_harvest_20260925_0700",
+          "candidate_id": "P14_F7_harvest_20260926_0800",
           "plan_id": "P14",
           "field_id": "F7",
           "operation": "harvest",
@@ -18974,34 +19252,34 @@
           "required": true,
           "depends_on": "",
           "min_gap_hours": 0,
-          "start_time": "2026-09-25T07:00:00",
-          "end_time": "2026-09-25T11:00:00",
+          "start_time": "2026-09-26T08:00:00",
+          "end_time": "2026-09-26T12:00:00",
           "duration_hours": 4,
           "machine_type": "harvester",
           "eligible_machine_ids": [
             "M1"
           ],
           "workers_required": 2,
-          "direct_revenue_aud": 30350.75,
+          "direct_revenue_aud": 30356.9,
           "direct_cost_aud": 1000,
-          "direct_cash_effect_aud": 29350.75,
+          "direct_cash_effect_aud": 29356.9,
           "state_yield_effect_t_ha": 0,
           "water_ml": 0,
-          "candidate_score": 25357.760025,
+          "candidate_score": 25338.320025,
           "state_after": {
             "crop": "",
             "planted": false,
             "newly_planted": false,
             "harvested": true,
             "growth_stage": "mature",
-            "readiness": 0.966,
-            "soil_moisture": 0.196,
-            "soil_temperature_c": 15.52,
+            "readiness": 0.984,
+            "soil_moisture": 0.18,
+            "soil_temperature_c": 15.68,
             "expected_yield_t_ha": 0,
             "nitrogen_index": 0.65,
             "weed_pressure": 0.09,
             "pest_pressure": 0.08,
-            "disease_pressure": 0.3662,
+            "disease_pressure": 0.4045,
             "seedbed_readiness": 0.1
           }
         }
@@ -19026,12 +19304,12 @@
     {
       "option_id": "F7_O030",
       "field_id": "F7",
-      "total_direct_cash_effect_aud": 28440.75,
+      "total_direct_cash_effect_aud": 28458.01,
       "terminal_value_aud": 0,
-      "objective_value_aud": 28440.75,
+      "objective_value_aud": 28458.01,
       "actions": [
         {
-          "candidate_id": "P13_F7_spray_20260918_0700",
+          "candidate_id": "P13_F7_spray_20260918_0800",
           "plan_id": "P13",
           "field_id": "F7",
           "operation": "spray",
@@ -19039,17 +19317,19 @@
           "required": false,
           "depends_on": "",
           "min_gap_hours": 0,
-          "start_time": "2026-09-18T07:00:00",
-          "end_time": "2026-09-18T10:20:00",
+          "start_time": "2026-09-18T08:00:00",
+          "end_time": "2026-09-18T11:20:00",
           "duration_hours": 3.33,
           "machine_type": "sprayer",
           "eligible_machine_ids": [
-            "M3"
+            "M3",
+            "M9",
+            "M10"
           ],
           "workers_required": 1,
           "direct_revenue_aud": 0,
-          "direct_cost_aud": 910,
-          "direct_cash_effect_aud": -910,
+          "direct_cost_aud": 898.89,
+          "direct_cash_effect_aud": -898.89,
           "state_yield_effect_t_ha": 0.3115,
           "water_ml": 0,
           "candidate_score": 0.311513,
@@ -19071,7 +19351,7 @@
           }
         },
         {
-          "candidate_id": "P14_F7_harvest_20260925_0800",
+          "candidate_id": "P14_F7_harvest_20260926_0900",
           "plan_id": "P14",
           "field_id": "F7",
           "operation": "harvest",
@@ -19079,34 +19359,34 @@
           "required": true,
           "depends_on": "",
           "min_gap_hours": 0,
-          "start_time": "2026-09-25T08:00:00",
-          "end_time": "2026-09-25T12:00:00",
+          "start_time": "2026-09-26T09:00:00",
+          "end_time": "2026-09-26T13:00:00",
           "duration_hours": 4,
           "machine_type": "harvester",
           "eligible_machine_ids": [
             "M1"
           ],
           "workers_required": 2,
-          "direct_revenue_aud": 30350.75,
+          "direct_revenue_aud": 30356.9,
           "direct_cost_aud": 1000,
-          "direct_cash_effect_aud": 29350.75,
+          "direct_cash_effect_aud": 29356.9,
           "state_yield_effect_t_ha": 0,
           "water_ml": 0,
-          "candidate_score": 25357.760025,
+          "candidate_score": 25338.320025,
           "state_after": {
             "crop": "",
             "planted": false,
             "newly_planted": false,
             "harvested": true,
             "growth_stage": "mature",
-            "readiness": 0.966,
-            "soil_moisture": 0.196,
-            "soil_temperature_c": 15.52,
+            "readiness": 0.984,
+            "soil_moisture": 0.18,
+            "soil_temperature_c": 15.68,
             "expected_yield_t_ha": 0,
             "nitrogen_index": 0.65,
             "weed_pressure": 0.09,
             "pest_pressure": 0.08,
-            "disease_pressure": 0.3662,
+            "disease_pressure": 0.4045,
             "seedbed_readiness": 0.1
           }
         }
