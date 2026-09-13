@@ -617,12 +617,14 @@ footer {
   --yc-green: #3e7c59;
   --yc-blue: #2b6683;
   --yc-red: #a32424;
+  --yc-brand: #278f42;
 }
 
 .yc-shell { min-height: 100vh; display: grid; grid-template-columns: 228px minmax(0, 1fr); background: var(--yc-canvas); color: var(--yc-text); font-family: Archivo, Arial, sans-serif; font-size: 14px; line-height: 1.45; font-variant-numeric: tabular-nums; }
 .yc-rail { position: sticky; top: 0; height: 100vh; overflow: auto; display: flex; flex-direction: column; background: var(--yc-ink); color: #d9e2dc; }
 .yc-brand { padding: 18px 18px 16px; border-bottom: 1px solid #2f4239; }
-.yc-brand > div { display: flex; align-items: center; gap: 9px; color: #c8991f; }
+.yc-brand > div { display: flex; align-items: center; gap: 9px; color: var(--yc-brand); }
+.yc-brand-logo { display: block; flex-shrink: 0; }
 .yc-brand h1 { margin: 0; color: #fff; font-size: 15px; letter-spacing: -.02em; }
 .yc-brand p { margin: 5px 0 0 30px; color: #7e9187; font-size: 11.5px; line-height: 1.35; }
 .yc-nav { flex: 1; padding: 10px; }
@@ -631,7 +633,7 @@ footer {
 .yc-nav-link { display: grid; grid-template-columns: 18px 1fr auto; gap: 9px; align-items: center; width: 100%; margin-bottom: 1px; padding: 7px 8px; border: 0; border-radius: 5px; background: transparent; color: #c4d1ca; text-align: left; font: inherit; font-size: 13px; }
 .yc-nav-link:hover, .yc-nav-active { background: var(--yc-ink-3); color: #fff; }
 .yc-nav-link svg { color: #7e9187; }
-.yc-nav-active svg { color: #c8991f; }
+.yc-nav-active svg { color: var(--yc-brand); }
 .yc-rail-foot { padding: 12px 16px 16px; border-top: 1px solid #2f4239; color: #7e9187; font-size: 11.5px; }
 .yc-rail-foot b { color: #c4d1ca; font-weight: 500; }
 .yc-main { min-width: 0; }
@@ -657,12 +659,18 @@ footer {
 .yc-alert strong, .yc-alert span { display: block; }
 .yc-alert span { margin-top: 3px; color: #6b3a3a; font-size: 13px; }
 .yc-hero { min-width: 0; margin-bottom: 14px; padding: 16px 18px 14px; border: 1px solid var(--yc-line); border-radius: 6px; background: var(--yc-card); color: var(--yc-text); }
+/* Command view no longer competes with "Needs a decision" / "Supported
+   system scope" for vertical space, so give the schedule itself more room
+   per row instead of just leaving the freed space blank. */
+.yc-hero-tall { padding-bottom: 20px; }
+.yc-hero-tall .yc-lane { height: 50px; margin-bottom: 8px; }
+.yc-hero-tall .yc-track, .yc-hero-tall .yc-block { height: 44px; }
+.yc-hero-tall .yc-block { font-size: 12px; }
 .yc-hero-head { display: flex; align-items: baseline; justify-content: space-between; gap: 14px; flex-wrap: wrap; margin-bottom: 14px; }
 .yc-hero-head h3 { margin: 0; color: var(--yc-text); font-size: 15px; }
 .yc-hero-head span { color: var(--yc-muted); font-size: 12.5px; }
 .yc-hero-legend, .yc-legend { display: flex; gap: 13px; align-items: center; color: var(--yc-muted); font-size: 11.5px; }
 .yc-hero-legend i, .yc-legend i { display: inline-block; width: 9px; height: 9px; margin-right: 5px; border-radius: 2px; vertical-align: -1px; }
-.yc-legend-wheat { background: #d8b65c; }.yc-legend-canola { background: #e9c64a; }.yc-legend-lentil { background: #b2896b; }.yc-legend-haul { background: #5d8fa8; }
 .yc-timeline { position: relative; min-width: 0; max-width: 100%; padding-top: 18px; }
 .yc-timeline-toolbar { display: flex; align-items: center; justify-content: space-between; gap: 10px 20px; flex-wrap: wrap; margin-bottom: 12px; color: var(--yc-muted); font-size: 11.5px; }
 .yc-timeline-presets { display: flex; gap: 4px; }
@@ -675,11 +683,29 @@ footer {
 .yc-timeline-hours { display: grid; grid-template-columns: repeat(9, 1fr); margin-left: 88px; color: var(--yc-muted); font-size: 10.5px; }
 .yc-timeline-hours span { overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
 .yc-timeline-stage { position: relative; min-width: 0; padding: 9px 0 4px; border-top: 1px solid var(--yc-line-2); background: repeating-linear-gradient(to right, transparent 0, transparent calc(12.5% - 1px), rgba(14,26,22,.06) calc(12.5% - 1px), rgba(14,26,22,.06) 12.5%); }
-.yc-lane { display: grid; grid-template-columns: 80px minmax(0, 1fr); gap: 8px; height: 30px; min-width: 0; margin-bottom: 5px; align-items: center; }
+.yc-lane { display: grid; grid-template-columns: 80px minmax(0, 1fr); gap: 8px; height: 38px; min-width: 0; margin-bottom: 6px; align-items: center; }
 .yc-lane > span { position: sticky; left: 0; z-index: 3; padding-right: 6px; background: var(--yc-card); color: var(--yc-muted); font-size: 11.5px; font-weight: 600; }
-.yc-track { position: relative; height: 26px; min-width: 0; overflow: hidden; border-radius: 3px; background: rgba(14, 26, 22, .035); }
-.yc-block { position: absolute; top: 0; display: flex; align-items: center; height: 26px; min-width: 16px; overflow: hidden; padding: 0 6px; border-radius: 3px; color: var(--yc-ink); font-size: 11px; font-style: normal; font-weight: 600; white-space: nowrap; }
-.yc-block.yc-crop-wheat { background: #d8b65c; }.yc-block.yc-crop-barley { background: #c7ce86; }.yc-block.yc-crop-canola { background: #e9c64a; }.yc-block.yc-crop-lentil { background: #b2896b; }.yc-block.yc-crop-beans { background: #8fb59b; }.yc-block.yc-haul { background: #5d8fa8; color: #fff; }.yc-block.yc-idle { background: rgba(14,26,22,.06); color: var(--yc-muted); font-weight: 500; }
+.yc-track { position: relative; height: 34px; min-width: 0; overflow: visible; border-radius: 4px; background: rgba(14, 26, 22, .035); }
+.yc-block { position: absolute; top: 0; display: flex; align-items: center; gap: 5px; height: 34px; min-width: 16px; overflow: hidden; padding: 0 7px; border-radius: 4px; color: var(--yc-ink); font-size: 11px; font-style: normal; font-weight: 500; white-space: nowrap; transition: transform .12s ease, box-shadow .12s ease; }
+.yc-block:hover { z-index: 10; transform: scale(1.08); box-shadow: 0 8px 20px rgba(14, 26, 22, .3); }
+/* Rendered as a sibling of .yc-timeline-scroll (positioned in JS from the
+   hovered block's on-screen rect), not a child of the block itself --
+   .yc-timeline-scroll needs overflow-y hidden for its horizontal scrollbar,
+   which would otherwise clip this for every row except near the top. */
+.yc-block-detail { position: absolute; z-index: 20; display: flex; flex-direction: column; gap: 3px; min-width: 190px; padding: 9px 11px; border-radius: 6px; background: var(--yc-ink); color: #fff; font-size: 11px; font-weight: 500; line-height: 1.4; white-space: normal; box-shadow: 0 12px 28px rgba(14, 26, 22, .3); pointer-events: none; }
+.yc-block-detail strong { font-size: 12px; }
+.yc-block-detail span { color: #c4d1ca; font-weight: 400; }
+.yc-block b { font-weight: 700; }
+/* Blocks are coloured by operation (what's being done), not crop -- the
+   same field goes through several operations across the schedule, and
+   operation is what a machine/labour conflict actually hinges on. */
+.yc-op-harvest { background: #d8b65c; }
+.yc-op-plant { background: #8fb59b; }
+.yc-op-spray { background: #d98c8c; }
+.yc-op-fertilise { background: #b2896b; }
+.yc-op-irrigate { background: #6fa8c9; }
+.yc-op-other { background: #c7ce86; }
+.yc-block.yc-idle { background: rgba(14,26,22,.06); color: var(--yc-muted); font-weight: 500; }
 .yc-rain-shade { position: absolute; top: 0; right: 0; bottom: 0; z-index: 3; border-left: 2px solid #e06e6e; background: repeating-linear-gradient(115deg, rgba(163,36,36,.12) 0 6px, transparent 6px 12px); pointer-events: none; }
 .yc-rain-shade b { position: absolute; top: -16px; left: 7px; width: 130px; color: var(--yc-red); font-size: 10px; font-weight: 500; white-space: nowrap; }
 .yc-legend { position: sticky; left: 0; z-index: 2; width: fit-content; margin: 12px 0 0 88px; padding-right: 8px; background: var(--yc-card); }

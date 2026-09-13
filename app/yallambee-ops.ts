@@ -167,7 +167,12 @@ export interface HarvestBlock {
   m: string;
   f: string;
   name: string;
-  crop: CropKey;
+  crop: string;
+  operation: string;
+  target: string;
+  planId: string;
+  cashEffect: number;
+  workers: number;
   s: number;
   e: number;
   ha: number;
