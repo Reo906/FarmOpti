@@ -11,14 +11,14 @@ The predefined demo follows four steps:
 
 ## Architecture
 
-The app is a React/TypeScript site in **farmopti**. Its main layers are:
+The app is a React/TypeScript site in **app**. Its main layers are:
 
-- **lib/farm/data.ts** — synthetic farm state and operating assumptions
-- **lib/farm/optimizer.ts** — deterministic schedule simulation and exhaustive candidate search
-- **lib/farm/economics.ts** — consistent economic scoring
-- **lib/farm/parser.ts** — validated, offline natural-language constraint fallback
-- **lib/farm/explanation.ts** — explanations derived from the selected plan
-- **components/FarmControl.tsx** — interactive control-centre experience
+- **app/lib/farm/data.ts** — synthetic farm state and operating assumptions
+- **app/lib/farm/optimizer.ts** — deterministic schedule simulation and exhaustive candidate search
+- **app/lib/farm/economics.ts** — consistent economic scoring
+- **app/lib/farm/parser.ts** — validated, offline natural-language constraint fallback
+- **app/lib/farm/explanation.ts** — explanations derived from the selected plan
+- **app/components/FarmControl.tsx** — interactive control-centre experience
 
 The search enumerates all 720 field orders for four permitted fleet strategies and two truck-routing modes. Each candidate runs through the same 48-hour simulation, applying crop readiness, forecast downtime, labour changeovers, machine throughput, destination eligibility and capacity, delivery timing, field-change overhead, and confirmed manager constraints. The lowest modelled total cost is labelled **best evaluated**.
 
@@ -31,7 +31,7 @@ All farm names, field data, yields, prices, throughput, losses, costs, weather, 
 Requires Node.js 22.13 or later.
 
 ~~~bash
-cd farmopti
+cd app
 npm install
 npm run dev
 ~~~

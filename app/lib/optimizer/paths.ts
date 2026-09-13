@@ -1,7 +1,7 @@
 import path from "node:path";
 import { fileURLToPath } from "node:url";
 
-// This file lives at farmopti/first_demo/lib/optimizer/paths.ts.
+// This file lives at app/lib/optimizer/paths.ts.
 // The data root (config.yaml, external_variables/, outputs/) stays at
 // FarmOpti/optimizer/ -- the same place the Python pipeline used -- so
 // nothing else in the repo that points at those paths needs to change.

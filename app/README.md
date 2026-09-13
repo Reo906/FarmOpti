@@ -118,7 +118,7 @@ All financial outputs are computed from these inputs — they are not hardcoded.
 **Prerequisites:** Node.js 22+, npm.
 
 ```bash
-cd farmopti
+cd app
 npm install
 npm run dev
 ```

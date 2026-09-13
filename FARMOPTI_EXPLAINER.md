@@ -327,7 +327,7 @@ inputs every time. They are not hardcoded.
 ## The file map
 
 ```
-farmopti/
+app/
 ├── lib/farm/
 │   ├── types.ts         All data types: Field, Scenario, Plan, Rule, Economics, etc.
 │   ├── data.ts          The farm: 6 fields, machines, trucks, contractor, scenarios
@@ -337,9 +337,11 @@ farmopti/
 │   └── explanation.ts   Plain-English rationale from a completed plan
 ├── components/
 │   └── FarmControl.tsx  All UI: 4 demo phases, timeline, comparison, knowledge panel
-└── app/
-    ├── page.tsx         Entry point
-    └── globals.css      All styling
+├── app/
+│   ├── page.tsx         Entry point
+│   └── globals.css      All styling
+└── lib/optimizer/
+    └── paths.ts         Optimiser and Python pipeline paths
 ```
 
 ---
@@ -347,7 +349,7 @@ farmopti/
 ## Run it
 
 ```bash
-cd farmopti
+cd app
 npm install
 npm run dev
 # open http://localhost:3000

@@ -1,7 +1,0 @@
-machine_id,machine_type,cost_per_hour_aud,current_field
-M1,harvester,180.0,F1
-M2,tractor,90.0,F3
-M3,sprayer,70.0,F3
-M4,fertiliser_spreader,65.0,F4
-M5,seeder,80.0,F5
-M6,irrigator,55.0,F2
