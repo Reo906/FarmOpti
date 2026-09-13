@@ -1,6 +1,6 @@
 'use client';
 
-import { useEffect, useRef, useState } from 'react';
+import { Fragment, useEffect, useRef, useState } from 'react';
 import {
   AlertTriangle,
   ArrowRight,
@@ -173,10 +173,17 @@ function Timeline({ plan, disrupted }: { plan: OptimiserCandidate; disrupted: bo
   );
 }
 
+interface ChatMessage {
+  role: 'assistant' | 'user';
+  text: string;
+  proposal?: unknown;
+  proposalStatus?: 'pending' | 'applied' | 'discarded';
+}
+
 function DecisionAssistant() {
   const [open, setOpen] = useState(false);
   const [question, setQuestion] = useState('');
-  const [messages, setMessages] = useState<{ role: 'assistant' | 'user'; text: string }[]>([
+  const [messages, setMessages] = useState<ChatMessage[]>([
     { role: 'assistant', text: 'Ask why a schedule decision was made, what evidence supports it, or test a concrete scenario.' },
   ]);
   const [busy, setBusy] = useState(false);
@@ -198,10 +205,49 @@ function DecisionAssistant() {
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({ question: text }),
       });
-      const result = (await response.json()) as { answer?: string; error?: string };
-      setMessages((current) => [...current, { role: 'assistant', text: response.ok ? result.answer ?? 'No answer returned.' : result.error ?? 'The assistant could not answer that.' }]);
+      const result = (await response.json()) as { answer?: string; error?: string; needsConfirmation?: boolean; proposal?: unknown };
+      if (!response.ok) {
+        setMessages((current) => [...current, { role: 'assistant', text: result.error ?? 'The assistant could not answer that.' }]);
+      } else {
+        setMessages((current) => [
+          ...current,
+          {
+            role: 'assistant',
+            text: result.answer ?? 'No answer returned.',
+            proposal: result.needsConfirmation ? result.proposal : undefined,
+            proposalStatus: result.needsConfirmation ? 'pending' : undefined,
+          },
+        ]);
+      }
     } catch {
       setMessages((current) => [...current, { role: 'assistant', text: 'The decision assistant could not be reached. Check that the optimizer evidence outputs exist and the configured model is available.' }]);
+    } finally {
+      setBusy(false);
+    }
+  };
+
+  const respondToProposal = async (index: number, approve: boolean) => {
+    const message = messages[index];
+    if (!message?.proposal || busy) return;
+
+    if (!approve) {
+      setMessages((current) => current.map((m, i) => (i === index ? { ...m, proposalStatus: 'discarded' } : m)));
+      setMessages((current) => [...current, { role: 'assistant', text: 'Discarded -- no changes made.' }]);
+      return;
+    }
+
+    setMessages((current) => current.map((m, i) => (i === index ? { ...m, proposalStatus: 'applied' } : m)));
+    setBusy(true);
+    try {
+      const response = await fetch('/api/chat', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ proposal: message.proposal }),
+      });
+      const result = (await response.json()) as { answer?: string; error?: string };
+      setMessages((current) => [...current, { role: 'assistant', text: response.ok ? result.answer ?? 'Applied.' : result.error ?? 'Could not apply that change.' }]);
+    } catch {
+      setMessages((current) => [...current, { role: 'assistant', text: 'Could not reach the optimizer to apply that change.' }]);
     } finally {
       setBusy(false);
     }
@@ -215,7 +261,13 @@ function DecisionAssistant() {
         <button className="yc-icon-button yc-chat-close" onClick={() => setOpen(false)} aria-label="Close decision assistant"><X size={15} /></button>
       </header>
       <div className="yc-chat-log" ref={logRef}>
-        {messages.map((message, index) => <p className={`yc-chat-bubble yc-chat-${message.role}`} key={`${message.role}-${index}`}>{message.text}</p>)}
+        {messages.map((message, index) => <Fragment key={`${message.role}-${index}`}>
+          <p className={`yc-chat-bubble yc-chat-${message.role}`}>{message.text}</p>
+          {message.proposalStatus === 'pending' && <div className="yc-chat-confirm">
+            <button className="yc-btn yc-btn-dark" onClick={() => respondToProposal(index, true)} disabled={busy}>Yes, apply it</button>
+            <button className="yc-btn" onClick={() => respondToProposal(index, false)} disabled={busy}>No</button>
+          </div>}
+        </Fragment>)}
         {busy && <p className="yc-chat-bubble yc-chat-assistant yc-chat-pending">Reviewing optimisation evidence...</p>}
       </div>
       <div className="yc-chat-suggestions">

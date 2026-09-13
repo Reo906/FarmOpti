@@ -731,6 +731,9 @@ footer {
 .yc-chat-assistant { align-self: flex-start; border-bottom-left-radius: 2px; background: var(--yc-line-2); color: var(--yc-text); }
 .yc-chat-user { align-self: flex-end; border-bottom-right-radius: 2px; background: var(--yc-ink); color: #fff; }
 .yc-chat-pending { color: var(--yc-muted); font-style: italic; }
+.yc-chat-confirm { display: flex; gap: 8px; align-self: flex-start; }
+.yc-chat-confirm button { padding: 5px 12px; font-size: 12px; }
+.yc-chat-confirm button:disabled { opacity: 0.5; }
 .yc-chat-suggestions { display: flex; flex-wrap: wrap; gap: 6px; padding: 0 15px 10px; }
 .yc-chat-suggestions button { padding: 5px 10px; border: 1px solid var(--yc-line); border-radius: 20px; background: #fff; color: var(--yc-muted); font: inherit; font-size: 11.5px; }
 .yc-chat-suggestions button:hover { border-color: #b9beb2; color: var(--yc-text); }
