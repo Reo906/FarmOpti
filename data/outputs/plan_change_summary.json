@@ -1,17 +1,20 @@
 {
-  "generated_at": "2026-09-13T16:25:24.374Z",
-  "narrative": "The plan was not changed -- the same schedule is still optimal.",
-  "change_bullets": [],
+  "generated_at": "2026-09-13T16:27:54.370Z",
+  "narrative": "Two actions were added to improve the whole-farm objective value by $81,490, resulting in a slight decrease in direct cash effect.",
+  "change_bullets": [
+    "Added the spray on F3 for 2026-09-19, 08:00.",
+    "Added the fertilise on F3 for 2026-09-23, 07:00."
+  ],
   "positive_bullets": [
-    "The existing plan already satisfied the new conditions -- nothing had to change."
+    "Whole-farm objective value rose by $81,490 to $819,810.93.",
+    "Direct cash effect decreased by $17,692 to $199,318.11."
   ],
   "steps": [
-    "Generated 365 candidate actions",
-    "Built 117 field options to choose between",
-    "Solved to optimal (8 actions, objective $738,320.76)",
-    "Extracted evidence for 15 scheduling decisions",
-    "Analysed 9 counterfactuals",
-    "Indexed 63 retrievable facts for the chatbot"
+    "Regenerated 429 candidate actions",
+    "Rebuilt 147 field options",
+    "Re-solved to optimal (10 actions, objective $819,810.93)",
+    "Refreshed evidence for 15 scheduling decisions",
+    "Rebuilt the chatbot's retrieval index (74 facts)"
   ],
-  "source": "template"
+  "source": "llm"
 }
