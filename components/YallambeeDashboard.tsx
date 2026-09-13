@@ -633,7 +633,6 @@ function CommandView({ onNavigate, onOpenUpload, historyStatus }: { onNavigate: 
     <ResourcePlanSection disrupted={false} showLegend />
     <WhyThisPlanPanel />
     <div className="yc-grid yc-grid-4"><StatCard label="Scheduled actions" value={String(summary.num_scheduled_actions)} detail={live ? 'Selected after history retraining' : 'Selected by the persisted optimizer'} meter={100} /><StatCard label="Direct cash effect" value={money(summary.total_direct_cash_effect_aud)} detail="Sum of optimal_schedule.csv" tone="blue" /><StatCard label="Terminal value" value={money(summary.total_terminal_value_aud)} detail="Value carried into the objective" tone="green" /><StatCard label="Objective value" value={money(summary.total_objective_value_aud)} detail={`Status: ${summary.status}`} meter={100} tone="amber" /></div>
-    <div className="yc-result-source"><CheckCircle2 size={15} /> {historyStatus || (live ? 'Displaying the schedule produced after the latest history.csv upload.' : 'Displaying the latest persisted pipeline result. Upload history.csv to retrain and refresh this snapshot.')}</div>
   </>;
 }
 
