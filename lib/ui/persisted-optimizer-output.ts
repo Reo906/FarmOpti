@@ -106,6 +106,21 @@ function parseSchedule(csv: string): PersistedScheduleRow[] {
 export const persistedSummary = summary as PersistedOptimizerSummary;
 export const persistedSchedule = parseSchedule(scheduleCsv);
 
+function parseTimestamp(value: string): number {
+  return Date.parse(value.replace(' ', 'T') + 'Z');
+}
+
+// The true start/end of the persisted schedule, taken across every row (not
+// just the first/last line of the CSV, which need not be time-sorted) so the
+// timeline can show the schedule's real date range instead of an arbitrary
+// fixed window.
+export const scheduleAnchorTime = persistedSchedule.length
+  ? Math.min(...persistedSchedule.map((row) => parseTimestamp(row.start_time)))
+  : Date.now();
+export const scheduleEndTime = persistedSchedule.length
+  ? Math.max(...persistedSchedule.map((row) => parseTimestamp(row.end_time)))
+  : scheduleAnchorTime;
+
 export const managementPlanInputs: ManagementPlanInput[] = managementPlanCsv
   .trim()
   .split(/\r?\n/)
@@ -129,10 +144,9 @@ export const managementPlanInputs: ManagementPlanInput[] = managementPlanCsv
   });
 
 export function persistedDashboardPlan(): OptimiserCandidate {
-  const firstStart = Date.parse(persistedSchedule[0]?.start_time.replace(' ', 'T') + 'Z');
   const blocks = persistedSchedule.map((row) => {
-    const start = (Date.parse(row.start_time.replace(' ', 'T') + 'Z') - firstStart) / 3_600_000;
-    const end = (Date.parse(row.end_time.replace(' ', 'T') + 'Z') - firstStart) / 3_600_000;
+    const start = (parseTimestamp(row.start_time) - scheduleAnchorTime) / 3_600_000;
+    const end = (parseTimestamp(row.end_time) - scheduleAnchorTime) / 3_600_000;
     const operationCrop: CropKey = row.operation === 'harvest' ? 'wheat' : row.operation === 'plant' ? 'barley' : 'canola';
     return {
       m: row.machine_id,
