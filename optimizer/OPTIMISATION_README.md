@@ -2,11 +2,17 @@
 
 This README documents only the **optimisation pipeline** used by FarmOpti: how external farm variables and the farmer management plan are converted into a financially optimised schedule.
 
-Run all stages:
+Run all stages (from `farmopti/first_demo`):
 
 ```bash
-pip install -r requirements.txt
-python src/pipeline/run_pipeline.py
+npm install
+npm run optimizer:pipeline
+```
+
+Ask the decision chatbot (requires a local Ollama server for natural-language explanations):
+
+```bash
+npm run optimizer:chatbot
 ```
 
 ---
@@ -195,7 +201,7 @@ min_gap_hours
 Implemented in:
 
 ```text
-optimizer/src/optimization/generate_candidates.py
+farmopti/first_demo/lib/optimizer/candidateGeneration.ts
 ```
 
 Candidate generation creates all individually feasible action timings.
@@ -441,7 +447,7 @@ Planting creates a crop state but does not immediately create revenue.
 Implemented in:
 
 ```text
-optimizer/src/optimization/simulate_field.py
+farmopti/first_demo/lib/optimizer/fieldSimulator.ts
 ```
 
 The simulator evaluates a sequence of selected actions in chronological order.
@@ -700,7 +706,7 @@ This allows the system to use the external baseline forecast while still carryin
 Implemented in:
 
 ```text
-optimizer/src/optimization/generate_field_options.py
+farmopti/first_demo/lib/optimizer/fieldOptions.ts
 ```
 
 A **field option** is one complete valid schedule for one field.
@@ -916,7 +922,7 @@ but still be selected if the state improvement increases harvest or terminal cro
 Implemented in:
 
 ```text
-optimizer/src/optimization/optimize_schedule.py
+farmopti/first_demo/lib/optimizer/scheduleOptimizer.ts
 ```
 
 The global optimiser uses **Google OR-Tools CP-SAT**.
