@@ -22,7 +22,6 @@ import {
   Trash2,
   Truck,
   Upload,
-  User,
   Users,
   Wrench,
   X,
@@ -959,5 +958,5 @@ export default function YallambeeDashboard() {
     setView('command');
   };
 
-  return <OptimizerOutputContext.Provider value={outputValue}><div className="yc-shell"><HistoryUploadDialog open={uploadOpen} onClose={() => setUploadOpen(false)} onApplied={applyHistoryRun} /><DecisionAssistant /><aside className="yc-rail"><div className="yc-brand"><div><img className="yc-brand-logo" src="/farmOpti.png" alt="FarmOpti logo" width={22} height={22} /><h1>FarmOpti</h1></div></div><nav className="yc-nav">{navGroups.map((group) => <div key={group.label}><span className="yc-nav-group">{group.label}</span>{group.items.map(({ id, label, icon: Icon, badge, tone }) => <button className={`yc-nav-link ${view === id ? 'yc-nav-active' : ''}`} key={id} onClick={() => setView(id)}><Icon size={16} /><span>{label}</span>{badge && <Badge tone={tone}>{badge}</Badge>}</button>)}</div>)}</nav><div className="yc-rail-user"><span className="yc-rail-avatar"><User size={16} /></span><div><b>Alex Morgan</b><small>Farm Manager</small></div></div></aside><main className="yc-main"><div className="yc-page">{view === 'command' ? <CommandView evaluated={evaluated} improvement={improvement} onNavigate={setView} onOpenUpload={() => setUploadOpen(true)} historyStatus={historyStatus} /> : <DetailView view={view} disrupted={false} onNavigate={setView} onOutputChange={setOutput} />}</div></main></div></OptimizerOutputContext.Provider>;
+  return <OptimizerOutputContext.Provider value={outputValue}><div className="yc-shell"><HistoryUploadDialog open={uploadOpen} onClose={() => setUploadOpen(false)} onApplied={applyHistoryRun} /><DecisionAssistant /><aside className="yc-rail"><div className="yc-brand"><div><img className="yc-brand-logo" src="/farmOpti.png" alt="FarmOpti logo" width={22} height={22} /><h1>FarmOpti</h1></div></div><nav className="yc-nav">{navGroups.map((group) => <div key={group.label}><span className="yc-nav-group">{group.label}</span>{group.items.map(({ id, label, icon: Icon, badge, tone }) => <button className={`yc-nav-link ${view === id ? 'yc-nav-active' : ''}`} key={id} onClick={() => setView(id)}><Icon size={16} /><span>{label}</span>{badge && <Badge tone={tone}>{badge}</Badge>}</button>)}</div>)}</nav></aside><main className="yc-main"><div className="yc-page">{view === 'command' ? <CommandView evaluated={evaluated} improvement={improvement} onNavigate={setView} onOpenUpload={() => setUploadOpen(true)} historyStatus={historyStatus} /> : <DetailView view={view} disrupted={false} onNavigate={setView} onOutputChange={setOutput} />}</div></main></div></OptimizerOutputContext.Provider>;
 }
