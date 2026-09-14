@@ -1,6 +1,7 @@
 import { CANDIDATE_CONFIG, RULES } from "./config";
 import { addDays, combineDateAndTime, compareDateOnly, dateOnlyOf } from "./datetime";
 import { getLabourForDay } from "./externalVariables";
+import { totalWorkEfficiency, weatherWorkEfficiency } from "./weatherEffects";
 import type { ExternalVariables, MachineAvailabilityRow, WeatherRow, WorkSegment } from "./types";
 
 const MS_PER_HOUR = 3_600_000;
@@ -60,34 +61,51 @@ function weatherByHour(data: ExternalVariables): Map<number, WeatherRow> {
   return map;
 }
 
-export function operationHourFeasible(operation: string, weather: WeatherRow | undefined): boolean {
+/** Backwards-compatible hard-feasibility helper: zero efficiency means impossible. */
+export function operationHourFeasible(_operation: string, weather: WeatherRow | undefined): boolean {
   if (!weather) return false;
-  const feasibility = RULES[operation]?.feasibility ?? {};
-  const maxRain = feasibility.max_rain_mm_per_hour;
-  const maxWind = feasibility.max_wind_kmh;
-  if (maxRain !== undefined && weather.rain_mm > Number(maxRain)) return false;
-  if (maxWind !== undefined && weather.wind_kmh > Number(maxWind)) return false;
-  return true;
+  return weatherWorkEfficiency(weather) > 1e-9;
 }
 
+/**
+ * Effective workload-hours available inside a clock-time window.
+ * Example: 4 clock hours at average efficiency 0.5 => 2 effective workload-hours.
+ */
 export function feasibleHoursInWindow(
   data: ExternalVariables,
-  operation: string,
+  _operation: string,
   window: { start: number; end: number },
   weatherMap?: Map<number, WeatherRow>,
 ): number {
   const byHour = weatherMap ?? weatherByHour(data);
-  let hours = 0;
+  let effectiveHours = 0;
   const startHour = Math.floor(window.start / MS_PER_HOUR) * MS_PER_HOUR;
+
   for (let t = startHour; t < window.end; t += MS_PER_HOUR) {
     const hourEnd = t + MS_PER_HOUR;
     const overlapStart = Math.max(t, window.start);
     const overlapEnd = Math.min(hourEnd, window.end);
     if (overlapEnd <= overlapStart) continue;
-    if (!operationHourFeasible(operation, byHour.get(t))) continue;
-    hours += (overlapEnd - overlapStart) / MS_PER_HOUR;
+
+    const row = byHour.get(t);
+    if (!row) continue;
+
+    const clockHours = (overlapEnd - overlapStart) / MS_PER_HOUR;
+    effectiveHours += clockHours * totalWorkEfficiency(data.weather, row);
   }
-  return hours;
+
+  return effectiveHours;
+}
+
+export function averageWorkEfficiencyInWindow(
+  data: ExternalVariables,
+  operation: string,
+  window: { start: number; end: number },
+  weatherMap?: Map<number, WeatherRow>,
+): number {
+  const clockHours = Math.max(0, (window.end - window.start) / MS_PER_HOUR);
+  if (clockHours <= 1e-9) return 0;
+  return feasibleHoursInWindow(data, operation, window, weatherMap) / clockHours;
 }
 
 export function weatherForWindow(data: ExternalVariables, start: number, durationHours: number): WeatherRow[] {
@@ -149,6 +167,39 @@ export function actionDayWindow(
   return window;
 }
 
+/** Actual machine/labour clock-time capacity for the day. */
+export function actionDayClockCapacity(
+  data: ExternalVariables,
+  operation: string,
+  date: string,
+  machineIds: string[],
+  notBefore?: number,
+): number {
+  const labour = getLabourForDay(data, date);
+  const workers = Number(RULES[operation]?.workers ?? 0);
+  if (!labour || labour.available_workers < workers) return 0;
+
+  const window = actionDayWindow(data, date, machineIds, notBefore);
+  if (!window) return 0;
+
+  const efficiency = averageWorkEfficiencyInWindow(data, operation, window);
+  if (efficiency <= 1e-9) return 0;
+  return Math.max(0, (window.end - window.start) / MS_PER_HOUR);
+}
+
+export function actionDayWeatherEfficiency(
+  data: ExternalVariables,
+  operation: string,
+  date: string,
+  machineIds: string[],
+  notBefore?: number,
+): number {
+  const window = actionDayWindow(data, date, machineIds, notBefore);
+  if (!window) return 0;
+  return averageWorkEfficiencyInWindow(data, operation, window);
+}
+
+/** Effective workload-hours that can be completed that day. */
 export function actionDayCapacity(
   data: ExternalVariables,
   operation: string,
@@ -214,10 +265,10 @@ export function packWorkload(
 
   const weatherMap = weatherByHour(data);
   const segments: WorkSegment[] = [];
-  let remaining = workloadHours;
+  let remainingEffective = workloadHours;
   let currentDate = dateOnlyOf(start);
 
-  while (remaining > 1e-9 && compareDateOnly(currentDate, latestDate) <= 0) {
+  while (remainingEffective > 1e-9 && compareDateOnly(currentDate, latestDate) <= 0) {
     const machineIds = machinesAvailableOnDay(data, machineType, currentDate);
     if (machineIds.length === 0) {
       currentDate = addDays(currentDate, 1);
@@ -226,23 +277,32 @@ export function packWorkload(
 
     const notBefore = currentDate === dateOnlyOf(start) ? start : undefined;
     const window = actionDayWindow(data, currentDate, machineIds, notBefore);
-    const capacity = actionDayCapacity(data, operation, currentDate, machineIds, notBefore, weatherMap);
-    const work = Math.min(remaining, capacity);
+    if (!window) {
+      currentDate = addDays(currentDate, 1);
+      continue;
+    }
 
-    if (window && work > 1e-9) {
+    const clockCapacity = Math.max(0, (window.end - window.start) / MS_PER_HOUR);
+    const effectiveCapacity = feasibleHoursInWindow(data, operation, window, weatherMap);
+    const efficiency = clockCapacity > 1e-9 ? effectiveCapacity / clockCapacity : 0;
+
+    if (efficiency > 1e-9 && effectiveCapacity > 1e-9) {
+      const effectiveWork = Math.min(remainingEffective, effectiveCapacity);
+      const clockWork = effectiveWork / efficiency;
       segments.push({
         date: currentDate,
         start_time: window.start,
-        end_time: window.start + work * MS_PER_HOUR,
-        work_hours: work,
+        end_time: window.start + clockWork * MS_PER_HOUR,
+        work_hours: clockWork,
+        effective_work_hours: effectiveWork,
       });
-      remaining -= work;
+      remainingEffective -= effectiveWork;
     }
 
     currentDate = addDays(currentDate, 1);
   }
 
-  if (remaining > 1e-6) return null;
+  if (remainingEffective > 1e-6) return null;
   return segments;
 }
 
@@ -254,7 +314,8 @@ export function dailyWaterOk(
 ): boolean {
   if (totalWaterMl <= 0 || workloadHours <= 0) return true;
   for (const segment of segments) {
-    const portion = totalWaterMl * (segment.work_hours / workloadHours);
+    const effective = Number(segment.effective_work_hours ?? segment.work_hours);
+    const portion = totalWaterMl * (effective / workloadHours);
     const waterRow = data.water.find((w) => w.date === segment.date);
     if (!waterRow) return false;
     if (portion > waterRow.available_water_ml + 1e-9 || portion > waterRow.max_delivery_ml_per_day + 1e-9) {
@@ -267,7 +328,7 @@ export function dailyWaterOk(
 export function remainingAfterSegments(workloadHours: number, segments: WorkSegment[]): number[] {
   let remaining = workloadHours;
   return segments.map((segment) => {
-    remaining = Math.max(0, remaining - segment.work_hours);
+    remaining = Math.max(0, remaining - Number(segment.effective_work_hours ?? segment.work_hours));
     return remaining;
   });
 }

@@ -25,7 +25,11 @@ test("packing can split a workload across more than one day", () => {
   const segments = packWorkload(data, "harvest", "harvester", 20, start, "2026-09-20");
   assert.ok(segments);
   assert.ok(segments.length >= 2);
-  const total = segments.reduce((sum, segment) => sum + segment.work_hours, 0);
+  // work_hours is raw clock time, which weather can extend beyond the
+  // requested workload (bad weather makes progress slower, so it takes more
+  // clock hours to finish); effective_work_hours is the weather-adjusted
+  // progress made, which is what should sum to the requested workload.
+  const total = segments.reduce((sum, segment) => sum + (segment.effective_work_hours ?? segment.work_hours), 0);
   assert.ok(Math.abs(total - 20) < 1e-6);
   assert.equal(new Set(segments.map((segment) => segment.date)).size, segments.filter((s) => s.work_hours > 0).length);
 });

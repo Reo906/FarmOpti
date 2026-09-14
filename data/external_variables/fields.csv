@@ -1,8 +1,8 @@
 field_id,area_ha,current_crop,planned_crop,irrigable,x_km,y_km
-F1,120.0,wheat,,0,0.0,0.0
+F1,100.0,wheat,,0,0.0,0.0
 F2,90.0,canola,,1,1.2,0.8
-F3,60.75,barley,,0,2.7,1.0
-F4,50.0,wheat,,0,2.0,2.5
-F5,76.0,none,maize,1,4.1,1.8
+F3,100.75,barley,,0,2.7,1.0
+F4,80.0,wheat,,0,2.0,2.5
+F5,106.0,none,maize,1,4.1,1.8
 F6,82.5,canola,,1,3.4,3.0
-F7,40.0,wheat,,0,0.8,3.2
+F7,80.0,wheat,,0,0.8,3.2

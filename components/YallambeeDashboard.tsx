@@ -28,7 +28,8 @@ import {
   X,
 } from 'lucide-react';
 import { yallambeeOpsDashboard } from '@/app/yallambee-ops';
-import { dashboardPlanFrom, managementPlanInputs, parseSchedule, persistedDashboardPlan, persistedPlanChangeSummary, persistedSchedule, persistedSummary, scheduleAnchorFrom, type ManagementPlanInput, type PersistedOptimizerSummary, type PersistedScheduleRow, type PlanChangeSummary } from '@/lib/ui/persisted-optimizer-output';
+import { dashboardPlanFrom, defaultResourcePlanId, managementPlanInputs, parseSchedule, persistedDashboardPlan, persistedDecisionIndex, persistedHighWindWindows, persistedPlanChangeSummary, persistedRainWindows, persistedResourcePlans, persistedSchedule, persistedSummary, scheduleAnchorFrom, type ManagementPlanInput, type PersistedOptimizerSummary, type PersistedScheduleRow, type PlanChangeSummary, type ResourcePlanOption, type WeatherWindow } from '@/lib/ui/persisted-optimizer-output';
+import { whyReasonsForPlan } from '@/lib/ui/plan-reasons';
 import type { DashboardView, FarmField, HarvestBlock, OptimiserCandidate } from '@/app/yallambee-ops';
 
 type ViewKey = DashboardView;
@@ -88,6 +89,9 @@ type OptimizerOutput = {
   anchorTime: number;
   live: boolean;
   changeSummary: PlanChangeSummary;
+  resourcePlans: ResourcePlanOption[];
+  selectedPlanId: string;
+  selectResourcePlan: (id: string) => void;
 };
 
 const initialOutput: OptimizerOutput = {
@@ -97,6 +101,9 @@ const initialOutput: OptimizerOutput = {
   anchorTime: scheduleAnchorFrom(persistedSchedule),
   live: false,
   changeSummary: persistedPlanChangeSummary,
+  resourcePlans: persistedResourcePlans,
+  selectedPlanId: defaultResourcePlanId,
+  selectResourcePlan: () => undefined,
 };
 
 const OptimizerOutputContext = createContext<OptimizerOutput>(initialOutput);
@@ -182,8 +189,23 @@ function calendarDayZeroHour(anchorTime: number): number {
   return (midnight - anchorTime) / 3_600_000;
 }
 
-function Timeline({ plan, disrupted }: { plan: OptimiserCandidate; disrupted: boolean }) {
-  const { anchorTime } = useOptimizerOutput();
+function weatherBoxes(windows: WeatherWindow[], anchorTime: number, totalHours: number) {
+  return windows
+    .map((window) => ({
+      start: (window.start - anchorTime) / 3_600_000,
+      end: (window.end - anchorTime) / 3_600_000,
+    }))
+    .filter((window) => window.end > 0 && window.start < totalHours)
+    .map((window) => {
+      const start = Math.max(0, window.start);
+      const end = Math.min(totalHours, window.end);
+      return { left: (start / totalHours) * 100, width: ((end - start) / totalHours) * 100 };
+    });
+}
+
+function Timeline({ plan, disrupted, anchorTime: anchorOverride }: { plan: OptimiserCandidate; disrupted: boolean; anchorTime?: number }) {
+  const { anchorTime: contextAnchor } = useOptimizerOutput();
+  const anchorTime = anchorOverride ?? contextAnchor;
   const fullHours = Math.max(24, ...plan.blocks.map((block) => block.e));
   const dayZeroHour = calendarDayZeroHour(anchorTime);
   const [rangeHours, setRangeHours] = useState<number | null>(null);
@@ -265,6 +287,12 @@ function Timeline({ plan, disrupted }: { plan: OptimiserCandidate; disrupted: bo
   // rather than divided into N even CSS-grid columns, which would bunch
   // every tick left of where its timestamp actually falls.
   const tickPct = (hour: number) => ((hour - viewStart) / hoursPerFrame) * 100;
+  // Weather windows are absolute timestamps; weatherBoxes() positions them
+  // relative to a given anchor over a given span, so shifting the anchor by
+  // viewStart re-expresses them relative to the current page instead of the
+  // whole schedule, matching how blocks are positioned below.
+  const rainBoxes = weatherBoxes(persistedRainWindows, anchorTime + viewStart * 3_600_000, hoursPerFrame);
+  const windBoxes = weatherBoxes(persistedHighWindWindows, anchorTime + viewStart * 3_600_000, hoursPerFrame);
 
   return (
     <div className="yc-timeline" ref={timelineRef}>
@@ -288,6 +316,8 @@ function Timeline({ plan, disrupted }: { plan: OptimiserCandidate; disrupted: bo
                 the gutter the way positioning this relative to the full row
                 width would be. */}
             <div className="yc-timeline-gridlines">{ticks.map((hour) => <i key={hour} className="yc-timeline-gridline" style={{ left: `${tickPct(hour)}%` }} />)}</div>
+            {rainBoxes.length > 0 && <div className="yc-weather-layer" aria-hidden="true">{rainBoxes.map((box, index) => <i className="yc-rain-box" key={`rain-${box.left}-${index}`} style={{ left: `${box.left}%`, width: `${box.width}%` }} />)}</div>}
+            {windBoxes.length > 0 && <div className="yc-weather-layer" aria-hidden="true">{windBoxes.map((box, index) => <i className="yc-wind-box" key={`wind-${box.left}-${index}`} style={{ left: `${box.left}%`, width: `${box.width}%` }} />)}</div>}
             {disrupted && viewStart <= 17.1 && 17.1 <= viewEnd && <div className="yc-rain-shade" style={{ left: `${((17.1 - viewStart) / hoursPerFrame) * 100}%` }}><b>FRONT 23:18 · 22 MM</b></div>}
             {rows.map((row) => {
               const blocks = plan.blocks
@@ -306,7 +336,7 @@ function Timeline({ plan, disrupted }: { plan: OptimiserCandidate; disrupted: bo
               );
             })}
           </div>
-          <div className="yc-legend">{operations.map((operation) => <span key={operation}><i className={operationClass[operation] ?? 'yc-op-other'} /> {capitalize(operation)}</span>)}</div>
+          <div className="yc-legend">{operations.map((operation) => <span key={operation}><i className={operationClass[operation] ?? 'yc-op-other'} /> {capitalize(operation)}</span>)}<span><i className="yc-legend-rain" /> Rain</span><span><i className="yc-legend-wind" /> High wind</span></div>
         </div></div>
         {!isFullRange && <button type="button" className="yc-timeline-nav-btn" onClick={goNext} disabled={page >= totalPages - 1} aria-label="Next"><ChevronRight size={18} /></button>}
       </div>
@@ -318,6 +348,79 @@ function Timeline({ plan, disrupted }: { plan: OptimiserCandidate; disrupted: bo
         <span>{hoverDetail.block.planId}</span>
       </div>}
     </div>
+  );
+}
+
+function ResourcePlanSection({ disrupted, showLegend = false }: { disrupted: boolean; showLegend?: boolean }) {
+  const { live, resourcePlans, selectedPlanId, selectResourcePlan, plan, schedule, summary, anchorTime } = useOptimizerOutput();
+  const selected = resourcePlans.find((item) => item.id === selectedPlanId) ?? resourcePlans[0];
+  const displayPlan = selected?.dashboardPlan ?? plan;
+  const displaySchedule = selected?.schedule ?? schedule;
+  const displaySummary = selected?.summary ?? summary;
+  const displayAnchor = selected?.anchorTime ?? anchorTime;
+
+  return (
+    <section className="yc-hero">
+      <div className="yc-hero-head">
+        <div>
+          <h3>{live ? 'Resource plan' : 'Resource plan'}</h3>
+          <span>{selected ? `${selected.name} · ${displaySummary.num_scheduled_actions} actions / ${displaySchedule.length} work segments` : `${displayPlan.label} · ${displaySchedule.length} actions from the pipeline ${live ? 'run' : 'snapshot'}`}</span>
+        </div>
+        {showLegend && <div className="yc-hero-legend"><span><i className="yc-legend-wheat" /> Wheat</span><span><i className="yc-legend-canola" /> Other operations</span><span><i className="yc-legend-rain" /> Rain</span><span><i className="yc-legend-wind" /> High wind</span></div>}
+      </div>
+      {resourcePlans.length > 0 && (
+        <div className="yc-plan-cards" role="radiogroup" aria-label="Resource plan options">
+          {resourcePlans.map((item) => {
+            const isSelected = item.id === (selected?.id ?? selectedPlanId);
+            return (
+              <button type="button" role="radio" aria-checked={isSelected} key={item.id} className={`yc-plan-card${isSelected ? ' yc-plan-card-selected' : ''}`} onClick={() => selectResourcePlan(item.id)}>
+                {isSelected && <CheckCircle2 className="yc-plan-card-check" size={15} aria-hidden="true" />}
+                <strong className="yc-plan-card-name">{item.name}</strong>
+                <span className="yc-plan-card-explain">{item.explanation}</span>
+                <div className="yc-plan-card-value">
+                  <b>{money(item.netValueAud)}</b>
+                  {item.optimalityPercent && <span className="yc-plan-card-ratio">{item.optimalityPercent}</span>}
+                </div>
+                {/* <span className="yc-plan-card-value-label">Net financial value</span> */}
+                <div className="yc-plan-card-foot">
+                  <span className="yc-plan-card-benefit">{item.benefit}</span>
+                  {item.diffLabel && <span className="yc-plan-card-diffs">{item.diffLabel}</span>}
+                </div>
+              </button>
+            );
+          })}
+        </div>
+      )}
+      <Timeline plan={displayPlan} disrupted={disrupted} anchorTime={displayAnchor} />
+    </section>
+  );
+}
+
+function PlanRationalePanel() {
+  const { resourcePlans, selectedPlanId, schedule, summary } = useOptimizerOutput();
+  const selected = resourcePlans.find((item) => item.id === selectedPlanId) ?? resourcePlans[0];
+  const whyReasons = selected?.whyReasons ?? whyReasonsForPlan({
+    summary: selected?.summary ?? summary,
+    schedule: selected?.schedule ?? schedule,
+    index: persistedDecisionIndex,
+  });
+  if (whyReasons.length === 0) return null;
+
+  return (
+    <section className="yc-card" aria-label="Plan rationale">
+      <header>
+        <h3>Plan rationale</h3>
+        <span>Evidence behind the selected resource plan</span>
+      </header>
+      <div className="yc-feed">
+        {whyReasons.map((reason) => (
+          <div className="yc-feed-item yc-feed-reason" key={reason.id}>
+            <i className={`yc-severity yc-severity-${reason.tone}`} />
+            <span>{reason.text}</span>
+          </div>
+        ))}
+      </div>
+    </section>
   );
 }
 
@@ -512,6 +615,9 @@ function HistoryUploadDialog({ open, onClose, onApplied }: { open: boolean; onCl
         anchorTime: scheduleAnchorFrom(schedule),
         live: true,
         changeSummary: result.changeSummary ?? initialOutput.changeSummary,
+        resourcePlans: persistedResourcePlans,
+        selectedPlanId: defaultResourcePlanId,
+        selectResourcePlan: () => undefined,
       }, result.calibration);
     } catch (caught) {
       setError(caught instanceof Error ? caught.message : 'Training and optimisation failed.');
@@ -564,10 +670,11 @@ function HistoryUploadDialog({ open, onClose, onApplied }: { open: boolean; onCl
 }
 
 function CommandView({ evaluated, improvement, onNavigate, onOpenUpload, historyStatus }: { evaluated: number; improvement: number; onNavigate: (view: ViewKey) => void; onOpenUpload: () => void; historyStatus?: string }) {
-  const { plan, summary, live, changeSummary } = useOptimizerOutput();
+  const { summary, live, changeSummary } = useOptimizerOutput();
   return <>
     <div className="yc-page-head"><div><h2>Home</h2></div><div className="yc-actions"><button className="yc-btn" type="button" onClick={onOpenUpload}><Upload size={15} /> Calibrate farm model</button></div></div>
-    <section className="yc-hero yc-hero-tall"><div className="yc-hero-head"><div><h3>Optimised Farming Plan</h3></div></div><Timeline plan={plan} disrupted={false} /></section>
+    <ResourcePlanSection disrupted={false} showLegend />
+    <PlanRationalePanel />
     <div className="yc-grid yc-grid-4"><StatCard label="Upcoming jobs" value={String(summary.num_scheduled_actions)} detail={live ? 'Selected after history retraining' : 'Selected by the persisted optimizer'} /><StatCard label="Total cash effect" value={money(summary.total_direct_cash_effect_aud)} /><StatCard label="Future crop value" value={money(summary.total_terminal_value_aud)} /><StatCard label="Total farm value" value={money(summary.total_objective_value_aud)} detail={`Status: ${summary.status}`} /></div>
     <div className="yc-result-source"><CheckCircle2 size={15} /> {historyStatus || (live ? 'Displaying the schedule produced after the latest history.csv upload.' : 'Displaying the latest persisted pipeline result. Upload history.csv to retrain and refresh this snapshot.')}</div>
     <div className="yc-grid yc-grid-2">
@@ -637,6 +744,10 @@ function FarmRulesPanel({ onOutputChange }: { onOutputChange: (next: OptimizerOu
   const [loading, setLoading] = useState(true);
   const [loadError, setLoadError] = useState<string | null>(null);
   const [resultBanner, setResultBanner] = useState<{ tone: 'ok' | 'warn'; text: string } | null>(null);
+  // Rule changes don't regenerate resourcePlans (alternative_plans.json isn't
+  // refetched here), so the fast/live output below just carries the current
+  // selection through unchanged rather than resetting it.
+  const { resourcePlans, selectedPlanId, selectResourcePlan } = useOptimizerOutput();
 
   const [description, setDescription] = useState('');
   const [resource, setResource] = useState('any');
@@ -749,6 +860,9 @@ function FarmRulesPanel({ onOutputChange }: { onOutputChange: (next: OptimizerOu
             anchorTime: scheduleAnchorFrom(schedule),
             live: true,
             changeSummary: result.changeSummary ?? initialOutput.changeSummary,
+            resourcePlans,
+            selectedPlanId,
+            selectResourcePlan,
           };
           onOutputChange(fastOutput);
           pollForNarratedSummary(fastOutput, generation);
@@ -806,29 +920,40 @@ function FarmRulesPanel({ onOutputChange }: { onOutputChange: (next: OptimizerOu
 }
 
 function DetailView({ view, disrupted, onNavigate, onOutputChange }: { view: ViewKey; disrupted: boolean; onNavigate: (view: ViewKey) => void; onOutputChange: (next: OptimizerOutput) => void }) {
-  const { summary, schedule, live } = useOptimizerOutput();
+  const { summary, schedule, live, resourcePlans, selectedPlanId } = useOptimizerOutput();
+  const selectedResourcePlan = resourcePlans.find((item) => item.id === selectedPlanId) ?? resourcePlans[0];
+  const harvestSchedule = selectedResourcePlan?.schedule ?? schedule;
+  const harvestSummary = selectedResourcePlan?.summary ?? summary;
   if (view === 'rules') return <><div className="yc-page-head"><div><h2>Farm rules & optimizer inputs</h2><p>Add or remove hard scheduling rules, or edit management-plan inputs for a later pipeline run.</p></div><div className="yc-actions"><button className="yc-btn yc-btn-dark" onClick={() => onNavigate('command')}><Home size={15} /> Back to command</button></div></div><FarmRulesPanel onOutputChange={onOutputChange} /><OptimizerInputPanel /><Table title="Current management plan"><thead><tr><th>Plan</th><th>Field</th><th>Operation</th><th>Target</th><th>Window</th><th>Required</th></tr></thead><tbody>{managementPlanInputs.map((input) => <tr key={input.plan_id}><td><b>{input.plan_id}</b></td><td>{input.field_id}</td><td>{input.operation}</td><td>{input.target || '—'}</td><td>{input.allowed_from} to {input.allowed_to}</td><td><Badge tone={input.required ? 'ok' : 'mute'}>{input.required ? 'Required' : 'Optional'}</Badge></td></tr>)}</tbody></Table></>;
-  if (view === 'harvest') return <><div className="yc-page-head"><div><h2>Harvest operations</h2><p>This view mirrors the {live ? 'latest trained' : 'persisted'} schedule generated by the optimizer pipeline.</p><span className="yc-detail">{summary.num_scheduled_actions} actions / {schedule.length} work segments · source: optimal_schedule.csv</span></div><div className="yc-actions"><button className="yc-btn yc-btn-primary" onClick={() => onNavigate('command')}>Back to command</button></div></div><Table title={live ? 'Updated schedule assignments' : 'Persisted schedule assignments'}><thead><tr><th>Field</th><th>Operation</th><th>Target</th><th>Machine</th><th>Work hours</th><th>Remaining</th><th>Start</th><th>End</th><th>Complete</th><th className="yc-right">Cash effect</th></tr></thead><tbody>{schedule.map((row) => <tr key={`${row.option_id}-${row.plan_id}-${row.start_time}`}><td><b>{row.field_id}</b><small>{row.plan_id} · {row.option_id}</small></td><td>{row.operation}</td><td>{row.target}</td><td>{row.machine_id}</td><td>{row.work_hours ?? '—'}</td><td>{row.remaining_workload_hours ?? '—'}</td><td>{row.start_time}</td><td>{row.end_time}</td><td>{row.completion_time ?? row.end_time}</td><td className="yc-right">{signedMoney(row.direct_cash_effect_aud)}</td></tr>)}</tbody></Table></>;
+  if (view === 'harvest') return <><div className="yc-page-head"><div><h2>Harvest operations</h2><p>This view mirrors the {live ? 'latest trained' : 'persisted'} schedule generated by the optimizer pipeline.</p><span className="yc-detail">{harvestSummary.num_scheduled_actions} actions / {harvestSchedule.length} work segments · source: optimal_schedule.csv</span></div><div className="yc-actions"><button className="yc-btn yc-btn-primary" onClick={() => onNavigate('command')}>Back to command</button></div></div><Table title={live ? 'Updated schedule assignments' : 'Persisted schedule assignments'}><thead><tr><th>Field</th><th>Operation</th><th>Target</th><th>Machine</th><th>Work hours</th><th>Remaining</th><th>Start</th><th>End</th><th>Complete</th><th className="yc-right">Cash effect</th></tr></thead><tbody>{harvestSchedule.map((row) => <tr key={`${row.option_id}-${row.plan_id}-${row.start_time}`}><td><b>{row.field_id}</b><small>{row.plan_id} · {row.option_id}</small></td><td>{row.operation}</td><td>{row.target}</td><td>{row.machine_id}</td><td>{row.work_hours ?? '—'}</td><td>{row.remaining_workload_hours ?? '—'}</td><td>{row.start_time}</td><td>{row.end_time}</td><td>{row.completion_time ?? row.end_time}</td><td className="yc-right">{signedMoney(row.direct_cash_effect_aud)}</td></tr>)}</tbody></Table></>;
   const rows = view === 'fleet' ? yallambeeOpsDashboard.machines.map((machine) => [machine.id, machine.make, machine.oper ?? '—', machine.rate ? `${(machine.rate * (disrupted && machine.id === 'H2' ? 0.7 : 1)).toFixed(1)} ha/h` : '—', machine.health]) : view === 'people' ? yallambeeOpsDashboard.people.map((person) => [person.name, person.role, person.on, `${person.hours14} h`, person.fatigue]) : view === 'markets' ? yallambeeOpsDashboard.contracts.map((contract) => [contract.id, contract.buyer, contract.grade, `${contract.filled}/${contract.tonnes} t`, contract.due]) : yallambeeOpsDashboard.fields.map((field) => [field.name, field.prop, yallambeeOpsDashboard.crops[field.crop].label, `${field.moist}%`, field.ready]);
   const headings = view === 'fleet' ? ['Asset', 'Make', 'Operator', 'Rate', 'Health'] : view === 'people' ? ['Name', 'Role', 'On', '14-day hours', 'Fatigue'] : view === 'markets' ? ['Contract', 'Buyer', 'Grade', 'Filled', 'Due'] : ['Paddock', 'Property', 'Crop', 'Moisture', 'Ready'];
   return <><div className="yc-page-head"><div><h2>{titleByView[view]}</h2><p>Operational information connected to the same constraints used by the harvest plan.</p></div><div className="yc-actions"><button className="yc-btn yc-btn-dark" onClick={() => onNavigate('harvest')}><Tractor size={15} /> See harvest impact</button></div></div><div className="yc-grid yc-grid-4"><StatCard label="Records" value={String(rows.length)} detail="Current synthetic operating dataset" /><StatCard label="Status" value={disrupted ? 'Changed' : 'Nominal'} detail={disrupted ? 'Reoptimisation required' : 'Tracking to plan'} tone={disrupted ? 'red' : 'green'} /><StatCard label="Coverage" value="100%" detail="Validated for this demo" meter={100} /><StatCard label="Updated" value="06:12" detail="Thu 4 Dec · harvest day 19" /></div><Table title="{titleByView[view]}"><thead><tr>{headings.map((heading) => <th key={heading}>{heading}</th>)}</tr></thead><tbody>{rows.map((row, index) => <tr key={`${row[0]}-${index}`}>{row.map((cell, cellIndex) => <td key={`${cell}-${cellIndex}`}><b>{cellIndex === 0 ? cell : undefined}</b>{cellIndex !== 0 ? cell : undefined}</td>)}</tr>)}</tbody></Table></>;
 }
 
 function Table({ title, children }: { title: string; children: React.ReactNode }) {
-  return <section className="yc-card yc-table-card"><header><h3>{title}</h3><span>Live synthetic data</span></header><div className="yc-table-wrap"><table>{children}</table></div></section>;
+  return <section className="yc-card yc-table-card"><header><h3>{title}</h3>
+  {/* <span>Live synthetic data</span> */}
+  </header><div className="yc-table-wrap"><table>{children}</table></div></section>;
 }
 
 export default function YallambeeDashboard() {
   const [view, setView] = useState<ViewKey>('command');
   const [output, setOutput] = useState<OptimizerOutput>(initialOutput);
+  const [selectedPlanId, setSelectedPlanId] = useState(defaultResourcePlanId);
   const [historyStatus, setHistoryStatus] = useState('');
   const [uploadOpen, setUploadOpen] = useState(false);
   const evaluated = output.summary.num_scheduled_actions;
   const improvement = 0;
-  const outputValue = useMemo(() => output, [output]);
+  const outputValue = useMemo<OptimizerOutput>(() => ({
+    ...output,
+    selectedPlanId,
+    selectResourcePlan: setSelectedPlanId,
+  }), [output, selectedPlanId]);
 
   const applyHistoryRun = (next: OptimizerOutput, calibration: CalibrationSummary) => {
     setOutput(next);
+    setSelectedPlanId(defaultResourcePlanId);
     setHistoryStatus(`Trained ${calibration.training_rows} events (${calibration.trained_models.join(', ') || 'no models'}). Optimiser selected ${next.summary.num_scheduled_actions} actions.`);
     setUploadOpen(false);
     setView('command');

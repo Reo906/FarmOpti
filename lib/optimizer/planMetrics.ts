@@ -1,8 +1,9 @@
-import { CANDIDATE_CONFIG, RULES } from "./config";
+import { CANDIDATE_CONFIG } from "./config";
 import { ceilToHour, dateOnlyOf, dateOnlyToTimestamp, floorToHour } from "./datetime";
 import { getWeatherWindow } from "./externalVariables";
 import { weatherForSegments } from "./workload";
 import { clip, pyRound } from "./numeric";
+import { totalWorkEfficiency } from "./weatherEffects";
 import type {
   ExternalVariables,
   FieldOption,
@@ -57,18 +58,13 @@ function actionWeatherRisk(action: OptionAction, data: ExternalVariables): numbe
     : getWeatherWindow(
         data,
         action.start_time,
-        action.workload_hours ?? action.duration_hours ?? (action.end_time - action.start_time) / MS_PER_HOUR,
+        action.duration_hours ?? action.workload_hours ?? (action.end_time - action.start_time) / MS_PER_HOUR,
       );
   if (weather.length === 0) return 0;
 
-  const feasibility = RULES[action.operation]?.feasibility ?? {};
-  const maxRain = Number(feasibility.max_rain_mm_per_hour ?? 5);
-  const maxWind = Number(feasibility.max_wind_kmh ?? 40);
-  const rain = Math.max(...weather.map((row) => row.rain_mm));
-  const wind = Math.max(...weather.map((row) => row.wind_kmh));
-  const rainRisk = maxRain > 0 ? clip(rain / maxRain, 0, 1) : 0;
-  const windRisk = maxWind > 0 ? clip(wind / maxWind, 0, 1) : 0;
-  return Math.max(rainRisk, windRisk);
+  // Risk is the worst loss of work efficiency across the action weather window.
+  const minEfficiency = Math.min(...weather.map((row) => totalWorkEfficiency(data.weather, row)));
+  return clip(1.0 - minEfficiency, 0.0, 1.0);
 }
 
 function residualPressureRisk(option: FieldOption): number {

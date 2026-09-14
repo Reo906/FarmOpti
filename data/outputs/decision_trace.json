@@ -1,60 +1,60 @@
 {
-  "generated_at": "2026-09-13T16:27:33.007Z",
+  "generated_at": "2026-09-14T00:07:12.649Z",
   "summary": {
     "status": "optimal",
-    "total_direct_cash_effect_aud": 199318.11,
-    "total_terminal_value_aud": 620492.82,
-    "total_objective_value_aud": 819810.93,
+    "total_direct_cash_effect_aud": 205834.67,
+    "total_terminal_value_aud": 717829.41,
+    "total_objective_value_aud": 923664.08,
     "num_scheduled_actions": 10,
     "selected_options": [
       {
-        "option_id": "F1_O003",
+        "option_id": "F1_O001",
         "field_id": "F1",
-        "direct_cash_effect_aud": 177095.34,
+        "direct_cash_effect_aud": 146395.7,
         "terminal_value_aud": 0,
-        "objective_value_aud": 177095.34
+        "objective_value_aud": 146395.7
       },
       {
         "option_id": "F2_O001",
         "field_id": "F2",
-        "direct_cash_effect_aud": -3685,
-        "terminal_value_aud": 198005.67,
-        "objective_value_aud": 194320.67
+        "direct_cash_effect_aud": -4370.3,
+        "terminal_value_aud": 199373.99,
+        "objective_value_aud": 195003.69
       },
       {
-        "option_id": "F3_O010",
+        "option_id": "F3_O001",
         "field_id": "F3",
-        "direct_cash_effect_aud": -7691.63,
-        "terminal_value_aud": 89181.8,
-        "objective_value_aud": 81490.17
+        "direct_cash_effect_aud": -12906.4,
+        "terminal_value_aud": 146892.1,
+        "objective_value_aud": 133985.7
       },
       {
-        "option_id": "F4_O023",
+        "option_id": "F4_O001",
         "field_id": "F4",
-        "direct_cash_effect_aud": -7880.55,
-        "terminal_value_aud": 83855.33,
-        "objective_value_aud": 75974.78
+        "direct_cash_effect_aud": -13320.19,
+        "terminal_value_aud": 133236.63,
+        "objective_value_aud": 119916.44
       },
       {
-        "option_id": "F5_O002",
+        "option_id": "F5_O001",
         "field_id": "F5",
-        "direct_cash_effect_aud": -12616,
-        "terminal_value_aud": 57896.25,
-        "objective_value_aud": 45280.25
+        "direct_cash_effect_aud": -17760.04,
+        "terminal_value_aud": 45293.64,
+        "objective_value_aud": 27533.6
       },
       {
-        "option_id": "F6_O004",
+        "option_id": "F6_O003",
         "field_id": "F6",
-        "direct_cash_effect_aud": -3377.92,
-        "terminal_value_aud": 191553.77,
-        "objective_value_aud": 188175.85
+        "direct_cash_effect_aud": -3510.08,
+        "terminal_value_aud": 193033.05,
+        "objective_value_aud": 189522.97
       },
       {
-        "option_id": "F7_O003",
+        "option_id": "F7_O001",
         "field_id": "F7",
-        "direct_cash_effect_aud": 57473.87,
+        "direct_cash_effect_aud": 111305.98,
         "terminal_value_aud": 0,
-        "objective_value_aud": 57473.87
+        "objective_value_aud": 111305.98
       }
     ]
   },
@@ -71,53 +71,53 @@
       "depends_on": "",
       "min_gap_hours": 0,
       "timing": {
-        "feasible_candidate_count": 26,
+        "feasible_candidate_count": 31,
         "earliest_feasible_time": "2026-09-16T07:00:00",
-        "latest_feasible_time": "2026-09-20T10:00:00",
-        "selected_time": "2026-09-19T10:00:00",
-        "selected_candidate_id": "P01_F1_harvest_20260919_1000",
+        "latest_feasible_time": "2026-09-20T11:00:00",
+        "selected_time": "2026-09-19T14:00:00",
+        "selected_candidate_id": "P01_F1_harvest_20260919_1400",
         "alternative_times": [
+          {
+            "candidate_id": "P01_F1_harvest_20260919_1300",
+            "start_time": "2026-09-19T13:00:00",
+            "direct_cash_effect_aud": 134672.25
+          },
+          {
+            "candidate_id": "P01_F1_harvest_20260919_1200",
+            "start_time": "2026-09-19T12:00:00",
+            "direct_cash_effect_aud": 134552.25
+          },
+          {
+            "candidate_id": "P01_F1_harvest_20260919_1100",
+            "start_time": "2026-09-19T11:00:00",
+            "direct_cash_effect_aud": 134442.25
+          },
+          {
+            "candidate_id": "P01_F1_harvest_20260919_1000",
+            "start_time": "2026-09-19T10:00:00",
+            "direct_cash_effect_aud": 134367.25
+          },
           {
             "candidate_id": "P01_F1_harvest_20260919_0900",
             "start_time": "2026-09-19T09:00:00",
-            "direct_cash_effect_aud": 163183.2
-          },
-          {
-            "candidate_id": "P01_F1_harvest_20260919_0800",
-            "start_time": "2026-09-19T08:00:00",
-            "direct_cash_effect_aud": 163183.2
-          },
-          {
-            "candidate_id": "P01_F1_harvest_20260920_0800",
-            "start_time": "2026-09-20T08:00:00",
-            "direct_cash_effect_aud": 162105.6
-          },
-          {
-            "candidate_id": "P01_F1_harvest_20260920_0900",
-            "start_time": "2026-09-20T09:00:00",
-            "direct_cash_effect_aud": 162105.6
-          },
-          {
-            "candidate_id": "P01_F1_harvest_20260920_1000",
-            "start_time": "2026-09-20T10:00:00",
-            "direct_cash_effect_aud": 162105.6
+            "direct_cash_effect_aud": 134292.25
           }
         ]
       },
       "financial": {
-        "direct_revenue_aud": 183095.34,
-        "direct_cost_aud": 6000,
-        "direct_cash_effect_aud": 177095.34,
+        "direct_revenue_aud": 152579.45,
+        "direct_cost_aud": 6183.75,
+        "direct_cash_effect_aud": 146395.7,
         "state_yield_effect_t_ha": 0
       },
       "state_transition": {
         "plan_id": "P01",
-        "candidate_id": "P01_F1_harvest_20260919_1000",
+        "candidate_id": "P01_F1_harvest_20260919_1400",
         "field_id": "F1",
         "operation": "harvest",
         "target": "wheat",
-        "start_time": "2026-09-19T10:00:00",
-        "end_time": "2026-09-22T14:00:00",
+        "start_time": "2026-09-19T14:00:00",
+        "end_time": "2026-09-22T14:44:06",
         "state_before": {
           "crop": "wheat",
           "planted": true,
@@ -125,14 +125,16 @@
           "harvested": false,
           "growth_stage": "mature",
           "readiness": 0.968,
-          "soil_moisture": 0.254,
+          "soil_moisture": 0.3031,
           "soil_temperature_c": 14.4,
           "expected_yield_t_ha": 4.8592,
           "nitrogen_index": 0.66,
           "weed_pressure": 0.08,
           "pest_pressure": 0.06,
-          "disease_pressure": 0.09,
-          "seedbed_readiness": 0.1
+          "disease_pressure": 0.0957,
+          "seedbed_readiness": 0.1,
+          "trafficability": 0.925,
+          "weather_damage_index": 0
         },
         "state_after": {
           "crop": "",
@@ -141,14 +143,16 @@
           "harvested": true,
           "growth_stage": "mature",
           "readiness": 0.968,
-          "soil_moisture": 0.254,
+          "soil_moisture": 0.3031,
           "soil_temperature_c": 14.4,
           "expected_yield_t_ha": 0,
           "nitrogen_index": 0.66,
           "weed_pressure": 0.08,
           "pest_pressure": 0.06,
-          "disease_pressure": 0.09,
-          "seedbed_readiness": 0.1
+          "disease_pressure": 0.0957,
+          "seedbed_readiness": 0.1,
+          "trafficability": 0.925,
+          "weather_damage_index": 0
         },
         "state_changes": {
           "crop": {
@@ -169,9 +173,9 @@
             "after": false
           }
         },
-        "direct_revenue_aud": 183095.34,
-        "direct_cost_aud": 6000,
-        "direct_cash_effect_aud": 177095.34,
+        "direct_revenue_aud": 152579.45,
+        "direct_cost_aud": 6183.75,
+        "direct_cash_effect_aud": 146395.7,
         "state_yield_effect_t_ha": 0
       },
       "counterfactual": null,
@@ -207,8 +211,8 @@
         "baseline_selected": false,
         "scenario": "FORCE_SKIPPED_ACTION",
         "feasible": true,
-        "baseline_objective_aud": 819810.93,
-        "counterfactual_objective_aud": 819810.93,
+        "baseline_objective_aud": 923664.08,
+        "counterfactual_objective_aud": 923664.08,
         "objective_change_aud": 0,
         "affected_decisions": []
       },
@@ -226,68 +230,70 @@
       "depends_on": "",
       "min_gap_hours": 0,
       "timing": {
-        "feasible_candidate_count": 30,
-        "earliest_feasible_time": "2026-09-15T09:00:00",
-        "latest_feasible_time": "2026-09-18T14:00:00",
-        "selected_time": "2026-09-18T07:00:00",
-        "selected_candidate_id": "P03_F2_spray_20260918_0700",
+        "feasible_candidate_count": 42,
+        "earliest_feasible_time": "2026-09-15T07:00:00",
+        "latest_feasible_time": "2026-09-19T09:00:00",
+        "selected_time": "2026-09-19T09:00:00",
+        "selected_candidate_id": "P03_F2_spray_20260919_0900",
         "alternative_times": [
           {
-            "candidate_id": "P03_F2_spray_20260918_0800",
-            "start_time": "2026-09-18T08:00:00",
-            "direct_cash_effect_aud": -3685
+            "candidate_id": "P03_F2_spray_20260919_0800",
+            "start_time": "2026-09-19T08:00:00",
+            "direct_cash_effect_aud": -4389.93
           },
           {
-            "candidate_id": "P03_F2_spray_20260918_0900",
-            "start_time": "2026-09-18T09:00:00",
-            "direct_cash_effect_aud": -3685
+            "candidate_id": "P03_F2_spray_20260918_1600",
+            "start_time": "2026-09-18T16:00:00",
+            "direct_cash_effect_aud": -4393.83
           },
           {
-            "candidate_id": "P03_F2_spray_20260918_1000",
-            "start_time": "2026-09-18T10:00:00",
-            "direct_cash_effect_aud": -3685
+            "candidate_id": "P03_F2_spray_20260918_1500",
+            "start_time": "2026-09-18T15:00:00",
+            "direct_cash_effect_aud": -4393.93
           },
           {
-            "candidate_id": "P03_F2_spray_20260918_1100",
-            "start_time": "2026-09-18T11:00:00",
-            "direct_cash_effect_aud": -3685
+            "candidate_id": "P03_F2_spray_20260918_1400",
+            "start_time": "2026-09-18T14:00:00",
+            "direct_cash_effect_aud": -4378.4
           },
           {
-            "candidate_id": "P03_F2_spray_20260918_1200",
-            "start_time": "2026-09-18T12:00:00",
-            "direct_cash_effect_aud": -3685
+            "candidate_id": "P03_F2_spray_20260918_1300",
+            "start_time": "2026-09-18T13:00:00",
+            "direct_cash_effect_aud": -4362.88
           }
         ]
       },
       "financial": {
         "direct_revenue_aud": 0,
-        "direct_cost_aud": 3685,
-        "direct_cash_effect_aud": -3685,
-        "state_yield_effect_t_ha": 0.2388
+        "direct_cost_aud": 4370.3,
+        "direct_cash_effect_aud": -4370.3,
+        "state_yield_effect_t_ha": 0.2631
       },
       "state_transition": {
         "plan_id": "P03",
-        "candidate_id": "P03_F2_spray_20260918_0700",
+        "candidate_id": "P03_F2_spray_20260919_0900",
         "field_id": "F2",
         "operation": "spray",
         "target": "pest_control",
-        "start_time": "2026-09-18T07:00:00",
-        "end_time": "2026-09-20T10:00:00",
+        "start_time": "2026-09-19T09:00:00",
+        "end_time": "2026-09-21T16:44:26",
         "state_before": {
           "crop": "canola",
           "planted": true,
           "newly_planted": false,
           "harvested": false,
           "growth_stage": "pod_fill",
-          "readiness": 0.63,
-          "soil_moisture": 0.225,
-          "soil_temperature_c": 14.7,
-          "expected_yield_t_ha": 3.2663,
+          "readiness": 0.636,
+          "soil_moisture": 0.2811,
+          "soil_temperature_c": 14.88,
+          "expected_yield_t_ha": 3.2743,
           "nitrogen_index": 0.67,
           "weed_pressure": 0.1,
-          "pest_pressure": 0.355,
-          "disease_pressure": 0.1,
-          "seedbed_readiness": 0.12
+          "pest_pressure": 0.39,
+          "disease_pressure": 0.0667,
+          "seedbed_readiness": 0.12,
+          "trafficability": 1,
+          "weather_damage_index": 0
         },
         "state_after": {
           "crop": "canola",
@@ -295,32 +301,34 @@
           "newly_planted": false,
           "harvested": false,
           "growth_stage": "pod_fill",
-          "readiness": 0.63,
-          "soil_moisture": 0.225,
-          "soil_temperature_c": 14.7,
-          "expected_yield_t_ha": 3.5052,
+          "readiness": 0.636,
+          "soil_moisture": 0.2811,
+          "soil_temperature_c": 14.88,
+          "expected_yield_t_ha": 3.5251,
           "nitrogen_index": 0.67,
           "weed_pressure": 0.1,
-          "pest_pressure": 0.0405,
-          "disease_pressure": 0.1,
-          "seedbed_readiness": 0.12
+          "pest_pressure": 0.044,
+          "disease_pressure": 0.0667,
+          "seedbed_readiness": 0.12,
+          "trafficability": 1,
+          "weather_damage_index": 0
         },
         "state_changes": {
           "expected_yield_t_ha": {
-            "before": 3.2663,
-            "after": 3.5052,
-            "change": 0.2389
+            "before": 3.2743,
+            "after": 3.5251,
+            "change": 0.2508
           },
           "pest_pressure": {
-            "before": 0.355,
-            "after": 0.0405,
-            "change": -0.3145
+            "before": 0.39,
+            "after": 0.044,
+            "change": -0.346
           }
         },
         "direct_revenue_aud": 0,
-        "direct_cost_aud": 3685,
-        "direct_cash_effect_aud": -3685,
-        "state_yield_effect_t_ha": 0.2388
+        "direct_cost_aud": 4370.3,
+        "direct_cash_effect_aud": -4370.3,
+        "state_yield_effect_t_ha": 0.2631
       },
       "counterfactual": {
         "decision_id": "P03:counterfactual",
@@ -331,67 +339,19 @@
         "baseline_selected": true,
         "scenario": "FORBID_SELECTED_ACTION",
         "feasible": true,
-        "baseline_objective_aud": 819810.93,
-        "counterfactual_objective_aud": 810712.44,
-        "objective_change_aud": -9098.49,
+        "baseline_objective_aud": 923664.08,
+        "counterfactual_objective_aud": 913882.57,
+        "objective_change_aud": -9781.51,
         "affected_decisions": [
           {
             "plan_id": "P03",
             "change": "removed",
-            "old_candidate_id": "P03_F2_spray_20260918_0700",
+            "old_candidate_id": "P03_F2_spray_20260919_0900",
             "old_start_time": "2026-09-21T07:00:00"
-          },
-          {
-            "plan_id": "P05",
-            "change": "rescheduled",
-            "old_candidate_id": "P05_F3_spray_20260918_0900",
-            "new_candidate_id": "P05_F3_spray_20260918_0700",
-            "old_start_time": "2026-09-19T08:00:00",
-            "new_start_time": "2026-09-19T08:00:00"
-          },
-          {
-            "plan_id": "P07",
-            "change": "rescheduled",
-            "old_candidate_id": "P07_F4_fertilise_20260919_1000",
-            "new_candidate_id": "P07_F4_fertilise_20260918_0700",
-            "old_start_time": "2026-09-21T07:00:00",
-            "new_start_time": "2026-09-18T07:00:00"
-          },
-          {
-            "plan_id": "P08",
-            "change": "rescheduled",
-            "old_candidate_id": "P08_F4_spray_20260923_0900",
-            "new_candidate_id": "P08_F4_spray_20260924_0700",
-            "old_start_time": "2026-09-24T07:00:00",
-            "new_start_time": "2026-09-24T07:00:00"
-          },
-          {
-            "plan_id": "P11",
-            "change": "rescheduled",
-            "old_candidate_id": "P11_F6_spray_20260920_1000",
-            "new_candidate_id": "P11_F6_spray_20260920_0800",
-            "old_start_time": "2026-09-22T07:00:00",
-            "new_start_time": "2026-09-22T07:00:00"
-          },
-          {
-            "plan_id": "P13",
-            "change": "rescheduled",
-            "old_candidate_id": "P13_F7_spray_20260918_0700",
-            "new_candidate_id": "P13_F7_spray_20260918_0900",
-            "old_start_time": "2026-09-18T07:00:00",
-            "new_start_time": "2026-09-18T09:00:00"
-          },
-          {
-            "plan_id": "P14",
-            "change": "rescheduled",
-            "old_candidate_id": "P14_F7_harvest_20260924_0800",
-            "new_candidate_id": "P14_F7_harvest_20260924_0700",
-            "old_start_time": "2026-09-26T08:00:00",
-            "new_start_time": "2026-09-24T07:00:00"
           }
         ]
       },
-      "importance": 0.3669
+      "importance": 0.3591
     },
     {
       "decision_id": "P04:action",
@@ -423,8 +383,8 @@
         "baseline_selected": false,
         "scenario": "FORCE_SKIPPED_ACTION",
         "feasible": true,
-        "baseline_objective_aud": 819810.93,
-        "counterfactual_objective_aud": 819810.93,
+        "baseline_objective_aud": 923664.08,
+        "counterfactual_objective_aud": 923664.08,
         "objective_change_aud": 0,
         "affected_decisions": []
       },
@@ -442,68 +402,70 @@
       "depends_on": "",
       "min_gap_hours": 0,
       "timing": {
-        "feasible_candidate_count": 25,
-        "earliest_feasible_time": "2026-09-15T09:00:00",
-        "latest_feasible_time": "2026-09-18T09:00:00",
-        "selected_time": "2026-09-18T09:00:00",
-        "selected_candidate_id": "P05_F3_spray_20260918_0900",
+        "feasible_candidate_count": 37,
+        "earliest_feasible_time": "2026-09-14T07:00:00",
+        "latest_feasible_time": "2026-09-17T13:00:00",
+        "selected_time": "2026-09-17T07:00:00",
+        "selected_candidate_id": "P05_F3_spray_20260917_0700",
         "alternative_times": [
           {
-            "candidate_id": "P05_F3_spray_20260918_0800",
-            "start_time": "2026-09-18T08:00:00",
-            "direct_cash_effect_aud": -2305.13
-          },
-          {
-            "candidate_id": "P05_F3_spray_20260918_0700",
-            "start_time": "2026-09-18T07:00:00",
-            "direct_cash_effect_aud": -2305.13
-          },
-          {
-            "candidate_id": "P05_F3_spray_20260917_1000",
-            "start_time": "2026-09-17T10:00:00",
-            "direct_cash_effect_aud": -2288.25
+            "candidate_id": "P05_F3_spray_20260917_0800",
+            "start_time": "2026-09-17T08:00:00",
+            "direct_cash_effect_aud": -3909.14
           },
           {
             "candidate_id": "P05_F3_spray_20260917_0900",
             "start_time": "2026-09-17T09:00:00",
-            "direct_cash_effect_aud": -2288.25
+            "direct_cash_effect_aud": -3912.23
           },
           {
-            "candidate_id": "P05_F3_spray_20260917_0800",
-            "start_time": "2026-09-17T08:00:00",
-            "direct_cash_effect_aud": -2288.25
+            "candidate_id": "P05_F3_spray_20260917_1000",
+            "start_time": "2026-09-17T10:00:00",
+            "direct_cash_effect_aud": -3977.23
+          },
+          {
+            "candidate_id": "P05_F3_spray_20260917_1100",
+            "start_time": "2026-09-17T11:00:00",
+            "direct_cash_effect_aud": -4037.29
+          },
+          {
+            "candidate_id": "P05_F3_spray_20260917_1200",
+            "start_time": "2026-09-17T12:00:00",
+            "direct_cash_effect_aud": -4091.38
           }
         ]
       },
       "financial": {
         "direct_revenue_aud": 0,
-        "direct_cost_aud": 2305.13,
-        "direct_cash_effect_aud": -2305.13,
-        "state_yield_effect_t_ha": 0.4879
+        "direct_cost_aud": 3906.06,
+        "direct_cash_effect_aud": -3906.06,
+        "state_yield_effect_t_ha": 0.4547
       },
       "state_transition": {
         "plan_id": "P05",
-        "candidate_id": "P05_F3_spray_20260918_0900",
+        "candidate_id": "P05_F3_spray_20260917_0700",
         "field_id": "F3",
         "operation": "spray",
         "target": "weed_control",
-        "start_time": "2026-09-18T09:00:00",
-        "end_time": "2026-09-19T10:07:30",
+        "start_time": "2026-09-17T07:00:00",
+        "end_time": "2026-09-18T14:54:11",
         "state_before": {
           "crop": "barley",
           "planted": true,
           "newly_planted": false,
           "harvested": false,
           "growth_stage": "stem_elongation",
-          "readiness": 0.535,
-          "soil_moisture": 0.23,
-          "soil_temperature_c": 14.55,
-          "expected_yield_t_ha": 4.3835,
-          "nitrogen_index": 0.49,
-          "weed_pressure": 0.525,
+          "readiness": 0.526,
+          "soil_moisture": 0.1771,
+          "soil_temperature_c": 14.38,
+          "expected_yield_t_ha": 4.3775,
+          "nitrogen_index": 0.512,
+          "weed_pressure": 0.49,
           "pest_pressure": 0.08,
-          "disease_pressure": 0.18,
-          "seedbed_readiness": 0.12
+          "disease_pressure": 0.0156,
+          "seedbed_readiness": 0.12,
+          "trafficability": 1,
+          "weather_damage_index": 0
         },
         "state_after": {
           "crop": "barley",
@@ -511,35 +473,37 @@
           "newly_planted": false,
           "harvested": false,
           "growth_stage": "stem_elongation",
-          "readiness": 0.535,
-          "soil_moisture": 0.23,
-          "soil_temperature_c": 14.55,
-          "expected_yield_t_ha": 4.8713,
-          "nitrogen_index": 0.49,
-          "weed_pressure": 0.0675,
+          "readiness": 0.526,
+          "soil_moisture": 0.1771,
+          "soil_temperature_c": 14.38,
+          "expected_yield_t_ha": 4.8321,
+          "nitrogen_index": 0.512,
+          "weed_pressure": 0.064,
           "pest_pressure": 0.08,
-          "disease_pressure": 0.18,
-          "seedbed_readiness": 0.12
+          "disease_pressure": 0.0156,
+          "seedbed_readiness": 0.12,
+          "trafficability": 1,
+          "weather_damage_index": 0
         },
         "state_changes": {
           "expected_yield_t_ha": {
-            "before": 4.3835,
-            "after": 4.8713,
-            "change": 0.4878
+            "before": 4.3775,
+            "after": 4.8321,
+            "change": 0.4546
           },
           "weed_pressure": {
-            "before": 0.525,
-            "after": 0.0675,
-            "change": -0.4575
+            "before": 0.49,
+            "after": 0.064,
+            "change": -0.426
           }
         },
         "direct_revenue_aud": 0,
-        "direct_cost_aud": 2305.13,
-        "direct_cash_effect_aud": -2305.13,
-        "state_yield_effect_t_ha": 0.4879
+        "direct_cost_aud": 3906.06,
+        "direct_cash_effect_aud": -3906.06,
+        "state_yield_effect_t_ha": 0.4547
       },
       "counterfactual": null,
-      "importance": 0.1781
+      "importance": 0.1923
     },
     {
       "decision_id": "P06:action",
@@ -553,53 +517,53 @@
       "depends_on": "P05",
       "min_gap_hours": 24,
       "timing": {
-        "feasible_candidate_count": 57,
+        "feasible_candidate_count": 50,
         "earliest_feasible_time": "2026-09-16T07:00:00",
-        "latest_feasible_time": "2026-09-22T16:00:00",
-        "selected_time": "2026-09-22T09:00:00",
-        "selected_candidate_id": "P06_F3_fertilise_20260922_0900",
+        "latest_feasible_time": "2026-09-22T09:00:00",
+        "selected_time": "2026-09-22T07:00:00",
+        "selected_candidate_id": "P06_F3_fertilise_20260922_0700",
         "alternative_times": [
           {
             "candidate_id": "P06_F3_fertilise_20260922_0800",
             "start_time": "2026-09-22T08:00:00",
-            "direct_cash_effect_aud": -5386.5
+            "direct_cash_effect_aud": -9010.23
           },
           {
-            "candidate_id": "P06_F3_fertilise_20260922_1000",
-            "start_time": "2026-09-22T10:00:00",
-            "direct_cash_effect_aud": -5386.5
+            "candidate_id": "P06_F3_fertilise_20260922_0900",
+            "start_time": "2026-09-22T09:00:00",
+            "direct_cash_effect_aud": -9020.12
           },
           {
-            "candidate_id": "P06_F3_fertilise_20260922_0700",
-            "start_time": "2026-09-22T07:00:00",
-            "direct_cash_effect_aud": -5386.5
+            "candidate_id": "P06_F3_fertilise_20260921_1600",
+            "start_time": "2026-09-21T16:00:00",
+            "direct_cash_effect_aud": -9009.95
           },
           {
-            "candidate_id": "P06_F3_fertilise_20260922_1100",
-            "start_time": "2026-09-22T11:00:00",
-            "direct_cash_effect_aud": -5386.5
+            "candidate_id": "P06_F3_fertilise_20260921_1500",
+            "start_time": "2026-09-21T15:00:00",
+            "direct_cash_effect_aud": -9021.49
           },
           {
-            "candidate_id": "P06_F3_fertilise_20260922_1200",
-            "start_time": "2026-09-22T12:00:00",
-            "direct_cash_effect_aud": -5386.5
+            "candidate_id": "P06_F3_fertilise_20260921_1400",
+            "start_time": "2026-09-21T14:00:00",
+            "direct_cash_effect_aud": -9033.58
           }
         ]
       },
       "financial": {
         "direct_revenue_aud": 0,
-        "direct_cost_aud": 5386.5,
-        "direct_cash_effect_aud": -5386.5,
-        "state_yield_effect_t_ha": 0.2444
+        "direct_cost_aud": 9000.34,
+        "direct_cash_effect_aud": -9000.34,
+        "state_yield_effect_t_ha": 0.2427
       },
       "state_transition": {
         "plan_id": "P06",
-        "candidate_id": "P06_F3_fertilise_20260922_0900",
+        "candidate_id": "P06_F3_fertilise_20260922_0700",
         "field_id": "F3",
         "operation": "fertilise",
         "target": "nitrogen",
-        "start_time": "2026-09-22T09:00:00",
-        "end_time": "2026-09-23T09:07:30",
+        "start_time": "2026-09-22T07:00:00",
+        "end_time": "2026-09-23T14:27:48",
         "state_before": {
           "crop": "barley",
           "planted": true,
@@ -607,14 +571,16 @@
           "harvested": false,
           "growth_stage": "stem_elongation",
           "readiness": 0.571,
-          "soil_moisture": 0.214,
+          "soil_moisture": 0.1729,
           "soil_temperature_c": 15.23,
-          "expected_yield_t_ha": 4.887,
+          "expected_yield_t_ha": 4.8538,
           "nitrogen_index": 0.402,
-          "weed_pressure": 0.4262,
+          "weed_pressure": 0.476,
           "pest_pressure": 0.08,
-          "disease_pressure": 0.26,
-          "seedbed_readiness": 0.12
+          "disease_pressure": 0.1157,
+          "seedbed_readiness": 0.12,
+          "trafficability": 1,
+          "weather_damage_index": 0
         },
         "state_after": {
           "crop": "barley",
@@ -623,20 +589,22 @@
           "harvested": false,
           "growth_stage": "stem_elongation",
           "readiness": 0.571,
-          "soil_moisture": 0.214,
+          "soil_moisture": 0.1729,
           "soil_temperature_c": 15.23,
-          "expected_yield_t_ha": 5.115,
+          "expected_yield_t_ha": 5.0801,
           "nitrogen_index": 0.6612,
-          "weed_pressure": 0.4262,
+          "weed_pressure": 0.476,
           "pest_pressure": 0.08,
-          "disease_pressure": 0.26,
-          "seedbed_readiness": 0.12
+          "disease_pressure": 0.1157,
+          "seedbed_readiness": 0.12,
+          "trafficability": 1,
+          "weather_damage_index": 0
         },
         "state_changes": {
           "expected_yield_t_ha": {
-            "before": 4.887,
-            "after": 5.115,
-            "change": 0.228
+            "before": 4.8538,
+            "after": 5.0801,
+            "change": 0.2263
           },
           "nitrogen_index": {
             "before": 0.402,
@@ -645,12 +613,12 @@
           }
         },
         "direct_revenue_aud": 0,
-        "direct_cost_aud": 5386.5,
-        "direct_cash_effect_aud": -5386.5,
-        "state_yield_effect_t_ha": 0.2444
+        "direct_cost_aud": 9000.34,
+        "direct_cash_effect_aud": -9000.34,
+        "state_yield_effect_t_ha": 0.2427
       },
       "counterfactual": null,
-      "importance": 0.2157
+      "importance": 0.2474
     },
     {
       "decision_id": "P07:action",
@@ -664,68 +632,70 @@
       "depends_on": "",
       "min_gap_hours": 0,
       "timing": {
-        "feasible_candidate_count": 59,
+        "feasible_candidate_count": 50,
         "earliest_feasible_time": "2026-09-14T07:00:00",
-        "latest_feasible_time": "2026-09-21T08:00:00",
-        "selected_time": "2026-09-21T07:00:00",
-        "selected_candidate_id": "P07_F4_fertilise_20260919_1000",
+        "latest_feasible_time": "2026-09-18T16:00:00",
+        "selected_time": "2026-09-18T07:00:00",
+        "selected_candidate_id": "P07_F4_fertilise_20260918_0700",
         "alternative_times": [
           {
-            "candidate_id": "P07_F4_fertilise_20260921_0700",
-            "start_time": "2026-09-21T07:00:00",
-            "direct_cash_effect_aud": -5633.33
+            "candidate_id": "P07_F4_fertilise_20260918_0800",
+            "start_time": "2026-09-18T08:00:00",
+            "direct_cash_effect_aud": -9341.38
           },
           {
-            "candidate_id": "P07_F4_fertilise_20260921_0800",
-            "start_time": "2026-09-21T08:00:00",
-            "direct_cash_effect_aud": -5633.33
+            "candidate_id": "P07_F4_fertilise_20260918_0900",
+            "start_time": "2026-09-18T09:00:00",
+            "direct_cash_effect_aud": -9356.66
           },
           {
-            "candidate_id": "P07_F4_fertilise_20260919_1400",
-            "start_time": "2026-09-19T14:00:00",
-            "direct_cash_effect_aud": -5633.33
+            "candidate_id": "P07_F4_fertilise_20260918_1000",
+            "start_time": "2026-09-18T10:00:00",
+            "direct_cash_effect_aud": -9371.93
           },
           {
-            "candidate_id": "P07_F4_fertilise_20260919_1300",
-            "start_time": "2026-09-19T13:00:00",
-            "direct_cash_effect_aud": -5633.33
+            "candidate_id": "P07_F4_fertilise_20260918_1100",
+            "start_time": "2026-09-18T11:00:00",
+            "direct_cash_effect_aud": -9387.2
           },
           {
-            "candidate_id": "P07_F4_fertilise_20260919_1200",
-            "start_time": "2026-09-19T12:00:00",
-            "direct_cash_effect_aud": -5633.33
+            "candidate_id": "P07_F4_fertilise_20260918_1200",
+            "start_time": "2026-09-18T12:00:00",
+            "direct_cash_effect_aud": -9402.48
           }
         ]
       },
       "financial": {
         "direct_revenue_aud": 0,
-        "direct_cost_aud": 5633.33,
-        "direct_cash_effect_aud": -5633.33,
-        "state_yield_effect_t_ha": 0.2713
+        "direct_cost_aud": 9300.18,
+        "direct_cash_effect_aud": -9300.18,
+        "state_yield_effect_t_ha": 0.2555
       },
       "state_transition": {
         "plan_id": "P07",
-        "candidate_id": "P07_F4_fertilise_20260919_1000",
+        "candidate_id": "P07_F4_fertilise_20260918_0700",
         "field_id": "F4",
         "operation": "fertilise",
         "target": "nitrogen",
-        "start_time": "2026-09-19T10:00:00",
-        "end_time": "2026-09-21T10:20:00",
+        "start_time": "2026-09-18T07:00:00",
+        "end_time": "2026-09-19T14:12:06",
         "state_before": {
           "crop": "wheat",
           "planted": true,
           "newly_planted": false,
           "harvested": false,
           "growth_stage": "flag_leaf",
-          "readiness": 0.608,
-          "soil_moisture": 0.33,
-          "soil_temperature_c": 14.86,
-          "expected_yield_t_ha": 4.7308,
-          "nitrogen_index": 0.4,
+          "readiness": 0.6,
+          "soil_moisture": 0.1485,
+          "soil_temperature_c": 14.7,
+          "expected_yield_t_ha": 4.7248,
+          "nitrogen_index": 0.42,
           "weed_pressure": 0.1,
           "pest_pressure": 0.08,
-          "disease_pressure": 0.292,
-          "seedbed_readiness": 0.1
+          "disease_pressure": 0.0058,
+          "seedbed_readiness": 0.1,
+          "trafficability": 1,
+          "weather_damage_index": 0
         },
         "state_after": {
           "crop": "wheat",
@@ -733,35 +703,37 @@
           "newly_planted": false,
           "harvested": false,
           "growth_stage": "flag_leaf",
-          "readiness": 0.608,
-          "soil_moisture": 0.33,
-          "soil_temperature_c": 14.86,
-          "expected_yield_t_ha": 4.9857,
-          "nitrogen_index": 0.6754,
+          "readiness": 0.6,
+          "soil_moisture": 0.1485,
+          "soil_temperature_c": 14.7,
+          "expected_yield_t_ha": 4.9638,
+          "nitrogen_index": 0.6807,
           "weed_pressure": 0.1,
           "pest_pressure": 0.08,
-          "disease_pressure": 0.292,
-          "seedbed_readiness": 0.1
+          "disease_pressure": 0.0058,
+          "seedbed_readiness": 0.1,
+          "trafficability": 1,
+          "weather_damage_index": 0
         },
         "state_changes": {
           "expected_yield_t_ha": {
-            "before": 4.7308,
-            "after": 4.9857,
-            "change": 0.2549
+            "before": 4.7248,
+            "after": 4.9638,
+            "change": 0.239
           },
           "nitrogen_index": {
-            "before": 0.4,
-            "after": 0.6754,
-            "change": 0.2754
+            "before": 0.42,
+            "after": 0.6807,
+            "change": 0.2607
           }
         },
         "direct_revenue_aud": 0,
-        "direct_cost_aud": 5633.33,
-        "direct_cash_effect_aud": -5633.33,
-        "state_yield_effect_t_ha": 0.2713
+        "direct_cost_aud": 9300.18,
+        "direct_cash_effect_aud": -9300.18,
+        "state_yield_effect_t_ha": 0.2555
       },
       "counterfactual": null,
-      "importance": 0.2187
+      "importance": 0.2507
     },
     {
       "decision_id": "P08:action",
@@ -775,68 +747,70 @@
       "depends_on": "",
       "min_gap_hours": 0,
       "timing": {
-        "feasible_candidate_count": 48,
+        "feasible_candidate_count": 43,
         "earliest_feasible_time": "2026-09-17T07:00:00",
-        "latest_feasible_time": "2026-09-24T08:00:00",
-        "selected_time": "2026-09-23T09:00:00",
-        "selected_candidate_id": "P08_F4_spray_20260923_0900",
+        "latest_feasible_time": "2026-09-23T11:00:00",
+        "selected_time": "2026-09-23T07:00:00",
+        "selected_candidate_id": "P08_F4_spray_20260920_0800",
         "alternative_times": [
+          {
+            "candidate_id": "P08_F4_spray_20260923_0700",
+            "start_time": "2026-09-23T07:00:00",
+            "direct_cash_effect_aud": -3763.01
+          },
           {
             "candidate_id": "P08_F4_spray_20260923_0800",
             "start_time": "2026-09-23T08:00:00",
-            "direct_cash_effect_aud": -2247.22
+            "direct_cash_effect_aud": -3770.18
+          },
+          {
+            "candidate_id": "P08_F4_spray_20260923_0900",
+            "start_time": "2026-09-23T09:00:00",
+            "direct_cash_effect_aud": -3777.36
           },
           {
             "candidate_id": "P08_F4_spray_20260923_1000",
             "start_time": "2026-09-23T10:00:00",
-            "direct_cash_effect_aud": -2247.22
-          },
-          {
-            "candidate_id": "P08_F4_spray_20260923_0700",
-            "start_time": "2026-09-23T07:00:00",
-            "direct_cash_effect_aud": -2247.22
+            "direct_cash_effect_aud": -3784.54
           },
           {
             "candidate_id": "P08_F4_spray_20260923_1100",
             "start_time": "2026-09-23T11:00:00",
-            "direct_cash_effect_aud": -2247.22
-          },
-          {
-            "candidate_id": "P08_F4_spray_20260923_1200",
-            "start_time": "2026-09-23T12:00:00",
-            "direct_cash_effect_aud": -2247.22
+            "direct_cash_effect_aud": -3791.71
           }
         ]
       },
       "financial": {
         "direct_revenue_aud": 0,
-        "direct_cost_aud": 2247.22,
-        "direct_cash_effect_aud": -2247.22,
-        "state_yield_effect_t_ha": 0.3572
+        "direct_cost_aud": 4020.01,
+        "direct_cash_effect_aud": -4020.01,
+        "state_yield_effect_t_ha": 0.3094
       },
       "state_transition": {
         "plan_id": "P08",
-        "candidate_id": "P08_F4_spray_20260923_0900",
+        "candidate_id": "P08_F4_spray_20260920_0800",
         "field_id": "F4",
         "operation": "spray",
         "target": "disease_control",
-        "start_time": "2026-09-23T09:00:00",
-        "end_time": "2026-09-24T07:20:00",
+        "start_time": "2026-09-20T08:00:00",
+        "end_time": "2026-09-22T08:30:30",
         "state_before": {
           "crop": "wheat",
           "planted": true,
           "newly_planted": false,
           "harvested": false,
           "growth_stage": "flag_leaf",
-          "readiness": 0.64,
-          "soil_moisture": 0.23,
-          "soil_temperature_c": 15.5,
-          "expected_yield_t_ha": 4.9977,
-          "nitrogen_index": 0.574,
+          "readiness": 0.616,
+          "soil_moisture": 0.4092,
+          "soil_temperature_c": 15.02,
+          "expected_yield_t_ha": 4.9758,
+          "nitrogen_index": 0.6304,
           "weed_pressure": 0.1,
           "pest_pressure": 0.08,
-          "disease_pressure": 0.34,
-          "seedbed_readiness": 0.1
+          "disease_pressure": 0.2959,
+          "seedbed_readiness": 0.1,
+          "trafficability": 1,
+          "weather_damage_index": 0
         },
         "state_after": {
           "crop": "wheat",
@@ -844,32 +818,34 @@
           "newly_planted": false,
           "harvested": false,
           "growth_stage": "flag_leaf",
-          "readiness": 0.64,
-          "soil_moisture": 0.23,
-          "soil_temperature_c": 15.5,
-          "expected_yield_t_ha": 5.3284,
-          "nitrogen_index": 0.574,
+          "readiness": 0.616,
+          "soil_moisture": 0.4092,
+          "soil_temperature_c": 15.02,
+          "expected_yield_t_ha": 5.2853,
+          "nitrogen_index": 0.6304,
           "weed_pressure": 0.1,
           "pest_pressure": 0.08,
-          "disease_pressure": 0.0485,
-          "seedbed_readiness": 0.1
+          "disease_pressure": 0.0441,
+          "seedbed_readiness": 0.1,
+          "trafficability": 1,
+          "weather_damage_index": 0
         },
         "state_changes": {
           "disease_pressure": {
-            "before": 0.34,
-            "after": 0.0485,
-            "change": -0.2915
+            "before": 0.2959,
+            "after": 0.0441,
+            "change": -0.2518
           },
           "expected_yield_t_ha": {
-            "before": 4.9977,
-            "after": 5.3284,
-            "change": 0.3307
+            "before": 4.9758,
+            "after": 5.2853,
+            "change": 0.3095
           }
         },
         "direct_revenue_aud": 0,
-        "direct_cost_aud": 2247.22,
-        "direct_cash_effect_aud": -2247.22,
-        "state_yield_effect_t_ha": 0.3572
+        "direct_cost_aud": 4020.01,
+        "direct_cash_effect_aud": -4020.01,
+        "state_yield_effect_t_ha": 0.3094
       },
       "counterfactual": {
         "decision_id": "P08:counterfactual",
@@ -880,59 +856,19 @@
         "baseline_selected": true,
         "scenario": "FORBID_SELECTED_ACTION",
         "feasible": true,
-        "baseline_objective_aud": 819810.93,
-        "counterfactual_objective_aud": 817166.46,
-        "objective_change_aud": -2644.47,
+        "baseline_objective_aud": 923664.08,
+        "counterfactual_objective_aud": 919910.78,
+        "objective_change_aud": -3753.3,
         "affected_decisions": [
-          {
-            "plan_id": "P01",
-            "change": "rescheduled",
-            "old_candidate_id": "P01_F1_harvest_20260919_1000",
-            "new_candidate_id": "P01_F1_harvest_20260919_0800",
-            "old_start_time": "2026-09-22T07:00:00",
-            "new_start_time": "2026-09-22T07:00:00"
-          },
-          {
-            "plan_id": "P05",
-            "change": "rescheduled",
-            "old_candidate_id": "P05_F3_spray_20260918_0900",
-            "new_candidate_id": "P05_F3_spray_20260918_0700",
-            "old_start_time": "2026-09-19T08:00:00",
-            "new_start_time": "2026-09-19T08:00:00"
-          },
-          {
-            "plan_id": "P07",
-            "change": "rescheduled",
-            "old_candidate_id": "P07_F4_fertilise_20260919_1000",
-            "new_candidate_id": "P07_F4_fertilise_20260921_0700",
-            "old_start_time": "2026-09-21T07:00:00",
-            "new_start_time": "2026-09-21T07:00:00"
-          },
           {
             "plan_id": "P08",
             "change": "removed",
-            "old_candidate_id": "P08_F4_spray_20260923_0900",
+            "old_candidate_id": "P08_F4_spray_20260920_0800",
             "old_start_time": "2026-09-24T07:00:00"
-          },
-          {
-            "plan_id": "P11",
-            "change": "rescheduled",
-            "old_candidate_id": "P11_F6_spray_20260920_1000",
-            "new_candidate_id": "P11_F6_spray_20260920_0800",
-            "old_start_time": "2026-09-22T07:00:00",
-            "new_start_time": "2026-09-22T07:00:00"
-          },
-          {
-            "plan_id": "P14",
-            "change": "rescheduled",
-            "old_candidate_id": "P14_F7_harvest_20260924_0800",
-            "new_candidate_id": "P14_F7_harvest_20260924_0900",
-            "old_start_time": "2026-09-26T08:00:00",
-            "new_start_time": "2026-09-24T09:00:00"
           }
         ]
       },
-      "importance": 0.1919
+      "importance": 0.2248
     },
     {
       "decision_id": "P09:action",
@@ -946,53 +882,53 @@
       "depends_on": "",
       "min_gap_hours": 0,
       "timing": {
-        "feasible_candidate_count": 34,
+        "feasible_candidate_count": 26,
         "earliest_feasible_time": "2026-09-16T07:00:00",
-        "latest_feasible_time": "2026-09-20T08:00:00",
-        "selected_time": "2026-09-18T07:00:00",
-        "selected_candidate_id": "P09_F5_plant_20260917_0800",
+        "latest_feasible_time": "2026-09-18T12:00:00",
+        "selected_time": "2026-09-16T07:00:00",
+        "selected_candidate_id": "P09_F5_plant_20260916_0700",
         "alternative_times": [
           {
-            "candidate_id": "P09_F5_plant_20260918_0700",
-            "start_time": "2026-09-18T07:00:00",
-            "direct_cash_effect_aud": -12616
+            "candidate_id": "P09_F5_plant_20260916_0800",
+            "start_time": "2026-09-16T08:00:00",
+            "direct_cash_effect_aud": -17749.21
           },
           {
-            "candidate_id": "P09_F5_plant_20260918_0800",
-            "start_time": "2026-09-18T08:00:00",
-            "direct_cash_effect_aud": -12616
+            "candidate_id": "P09_F5_plant_20260916_0900",
+            "start_time": "2026-09-16T09:00:00",
+            "direct_cash_effect_aud": -17746.1
           },
           {
-            "candidate_id": "P09_F5_plant_20260918_0900",
-            "start_time": "2026-09-18T09:00:00",
-            "direct_cash_effect_aud": -12616
+            "candidate_id": "P09_F5_plant_20260916_1000",
+            "start_time": "2026-09-16T10:00:00",
+            "direct_cash_effect_aud": -17750.73
           },
           {
-            "candidate_id": "P09_F5_plant_20260918_1000",
-            "start_time": "2026-09-18T10:00:00",
-            "direct_cash_effect_aud": -12616
+            "candidate_id": "P09_F5_plant_20260916_1100",
+            "start_time": "2026-09-16T11:00:00",
+            "direct_cash_effect_aud": -17755.35
           },
           {
-            "candidate_id": "P09_F5_plant_20260918_1100",
-            "start_time": "2026-09-18T11:00:00",
-            "direct_cash_effect_aud": -12616
+            "candidate_id": "P09_F5_plant_20260916_1200",
+            "start_time": "2026-09-16T12:00:00",
+            "direct_cash_effect_aud": -17759.98
           }
         ]
       },
       "financial": {
         "direct_revenue_aud": 0,
-        "direct_cost_aud": 12616,
-        "direct_cash_effect_aud": -12616,
-        "state_yield_effect_t_ha": 5.8404
+        "direct_cost_aud": 17760.04,
+        "direct_cash_effect_aud": -17760.04,
+        "state_yield_effect_t_ha": 4.8537
       },
       "state_transition": {
         "plan_id": "P09",
-        "candidate_id": "P09_F5_plant_20260917_0800",
+        "candidate_id": "P09_F5_plant_20260916_0700",
         "field_id": "F5",
         "operation": "plant",
         "target": "maize",
-        "start_time": "2026-09-17T08:00:00",
-        "end_time": "2026-09-18T13:12:00",
+        "start_time": "2026-09-16T07:00:00",
+        "end_time": "2026-09-18T09:17:37",
         "state_before": {
           "crop": "",
           "planted": false,
@@ -1000,14 +936,16 @@
           "harvested": false,
           "growth_stage": "fallow",
           "readiness": 0,
-          "soil_moisture": 0.233,
-          "soil_temperature_c": 15.7,
+          "soil_moisture": 0.2222,
+          "soil_temperature_c": 15.4,
           "expected_yield_t_ha": 0,
           "nitrogen_index": 0.6,
           "weed_pressure": 0.14,
           "pest_pressure": 0.08,
-          "disease_pressure": 0.06,
-          "seedbed_readiness": 0.72
+          "disease_pressure": 0.0063,
+          "seedbed_readiness": 0.69,
+          "trafficability": 1,
+          "weather_damage_index": 0
         },
         "state_after": {
           "crop": "maize",
@@ -1016,14 +954,16 @@
           "harvested": false,
           "growth_stage": "planted",
           "readiness": 0,
-          "soil_moisture": 0.233,
-          "soil_temperature_c": 15.7,
-          "expected_yield_t_ha": 5.787,
+          "soil_moisture": 0.2222,
+          "soil_temperature_c": 15.4,
+          "expected_yield_t_ha": 4.8003,
           "nitrogen_index": 0.6,
           "weed_pressure": 0.14,
           "pest_pressure": 0.08,
-          "disease_pressure": 0.06,
-          "seedbed_readiness": 0.72
+          "disease_pressure": 0.0063,
+          "seedbed_readiness": 0.69,
+          "trafficability": 1,
+          "weather_damage_index": 0
         },
         "state_changes": {
           "crop": {
@@ -1032,8 +972,8 @@
           },
           "expected_yield_t_ha": {
             "before": 0,
-            "after": 5.787,
-            "change": 5.787
+            "after": 4.8003,
+            "change": 4.8003
           },
           "growth_stage": {
             "before": "fallow",
@@ -1049,12 +989,12 @@
           }
         },
         "direct_revenue_aud": 0,
-        "direct_cost_aud": 12616,
-        "direct_cash_effect_aud": -12616,
-        "state_yield_effect_t_ha": 5.8404
+        "direct_cost_aud": 17760.04,
+        "direct_cash_effect_aud": -17760.04,
+        "state_yield_effect_t_ha": 4.8537
       },
       "counterfactual": null,
-      "importance": 0.3039
+      "importance": 0.3423
     },
     {
       "decision_id": "P10:action",
@@ -1086,8 +1026,8 @@
         "baseline_selected": false,
         "scenario": "FORCE_SKIPPED_ACTION",
         "feasible": true,
-        "baseline_objective_aud": 819810.93,
-        "counterfactual_objective_aud": 819810.93,
+        "baseline_objective_aud": 923664.08,
+        "counterfactual_objective_aud": 923664.08,
         "objective_change_aud": 0,
         "affected_decisions": []
       },
@@ -1105,68 +1045,70 @@
       "depends_on": "",
       "min_gap_hours": 0,
       "timing": {
-        "feasible_candidate_count": 41,
-        "earliest_feasible_time": "2026-09-15T09:00:00",
-        "latest_feasible_time": "2026-09-20T13:00:00",
-        "selected_time": "2026-09-20T10:00:00",
-        "selected_candidate_id": "P11_F6_spray_20260920_1000",
+        "feasible_candidate_count": 59,
+        "earliest_feasible_time": "2026-09-15T07:00:00",
+        "latest_feasible_time": "2026-09-21T12:00:00",
+        "selected_time": "2026-09-21T08:00:00",
+        "selected_candidate_id": "P11_F6_spray_20260921_0800",
         "alternative_times": [
           {
-            "candidate_id": "P11_F6_spray_20260920_0900",
-            "start_time": "2026-09-20T09:00:00",
-            "direct_cash_effect_aud": -3377.92
+            "candidate_id": "P11_F6_spray_20260921_0700",
+            "start_time": "2026-09-21T07:00:00",
+            "direct_cash_effect_aud": -3512.63
           },
           {
-            "candidate_id": "P11_F6_spray_20260920_1100",
-            "start_time": "2026-09-20T11:00:00",
-            "direct_cash_effect_aud": -3377.92
+            "candidate_id": "P11_F6_spray_20260921_0900",
+            "start_time": "2026-09-21T09:00:00",
+            "direct_cash_effect_aud": -3507.54
           },
           {
-            "candidate_id": "P11_F6_spray_20260920_0800",
-            "start_time": "2026-09-20T08:00:00",
-            "direct_cash_effect_aud": -3377.92
+            "candidate_id": "P11_F6_spray_20260921_1000",
+            "start_time": "2026-09-21T10:00:00",
+            "direct_cash_effect_aud": -3500.43
           },
           {
-            "candidate_id": "P11_F6_spray_20260920_1200",
-            "start_time": "2026-09-20T12:00:00",
-            "direct_cash_effect_aud": -3377.92
+            "candidate_id": "P11_F6_spray_20260921_1100",
+            "start_time": "2026-09-21T11:00:00",
+            "direct_cash_effect_aud": -3488.99
           },
           {
-            "candidate_id": "P11_F6_spray_20260920_1300",
-            "start_time": "2026-09-20T13:00:00",
-            "direct_cash_effect_aud": -3377.92
+            "candidate_id": "P11_F6_spray_20260921_1200",
+            "start_time": "2026-09-21T12:00:00",
+            "direct_cash_effect_aud": -3473.99
           }
         ]
       },
       "financial": {
         "direct_revenue_aud": 0,
-        "direct_cost_aud": 3377.92,
-        "direct_cash_effect_aud": -3377.92,
-        "state_yield_effect_t_ha": 0.3687
+        "direct_cost_aud": 3510.08,
+        "direct_cash_effect_aud": -3510.08,
+        "state_yield_effect_t_ha": 0.3973
       },
       "state_transition": {
         "plan_id": "P11",
-        "candidate_id": "P11_F6_spray_20260920_1000",
+        "candidate_id": "P11_F6_spray_20260921_0800",
         "field_id": "F6",
         "operation": "spray",
         "target": "pest_control",
-        "start_time": "2026-09-20T10:00:00",
-        "end_time": "2026-09-22T13:45:00",
+        "start_time": "2026-09-21T08:00:00",
+        "end_time": "2026-09-22T13:03:00",
         "state_before": {
           "crop": "canola",
           "planted": true,
           "newly_planted": false,
           "harvested": false,
           "growth_stage": "flowering",
-          "readiness": 0.599,
-          "soil_moisture": 0.246,
-          "soil_temperature_c": 15.26,
-          "expected_yield_t_ha": 3.3395,
+          "readiness": 0.606,
+          "soil_moisture": 0.2251,
+          "soil_temperature_c": 15.44,
+          "expected_yield_t_ha": 3.3455,
           "nitrogen_index": 0.64,
           "weed_pressure": 0.12,
-          "pest_pressure": 0.53,
-          "disease_pressure": 0.184,
-          "seedbed_readiness": 0.1
+          "pest_pressure": 0.57,
+          "disease_pressure": 0.1215,
+          "seedbed_readiness": 0.1,
+          "trafficability": 1,
+          "weather_damage_index": 0
         },
         "state_after": {
           "crop": "canola",
@@ -1174,32 +1116,34 @@
           "newly_planted": false,
           "harvested": false,
           "growth_stage": "flowering",
-          "readiness": 0.599,
-          "soil_moisture": 0.246,
-          "soil_temperature_c": 15.26,
-          "expected_yield_t_ha": 3.6971,
+          "readiness": 0.606,
+          "soil_moisture": 0.2251,
+          "soil_temperature_c": 15.44,
+          "expected_yield_t_ha": 3.7317,
           "nitrogen_index": 0.64,
           "weed_pressure": 0.12,
-          "pest_pressure": 0.0661,
-          "disease_pressure": 0.184,
-          "seedbed_readiness": 0.1
+          "pest_pressure": 0.0701,
+          "disease_pressure": 0.1215,
+          "seedbed_readiness": 0.1,
+          "trafficability": 1,
+          "weather_damage_index": 0
         },
         "state_changes": {
           "expected_yield_t_ha": {
-            "before": 3.3395,
-            "after": 3.6971,
-            "change": 0.3576
+            "before": 3.3455,
+            "after": 3.7317,
+            "change": 0.3862
           },
           "pest_pressure": {
-            "before": 0.53,
-            "after": 0.0661,
-            "change": -0.4639
+            "before": 0.57,
+            "after": 0.0701,
+            "change": -0.4999
           }
         },
         "direct_revenue_aud": 0,
-        "direct_cost_aud": 3377.92,
-        "direct_cash_effect_aud": -3377.92,
-        "state_yield_effect_t_ha": 0.3687
+        "direct_cost_aud": 3510.08,
+        "direct_cash_effect_aud": -3510.08,
+        "state_yield_effect_t_ha": 0.3973
       },
       "counterfactual": {
         "decision_id": "P11:counterfactual",
@@ -1210,59 +1154,19 @@
         "baseline_selected": true,
         "scenario": "FORBID_SELECTED_ACTION",
         "feasible": true,
-        "baseline_objective_aud": 819810.93,
-        "counterfactual_objective_aud": 804690.5,
-        "objective_change_aud": -15120.43,
+        "baseline_objective_aud": 923664.08,
+        "counterfactual_objective_aud": 907196.53,
+        "objective_change_aud": -16467.55,
         "affected_decisions": [
-          {
-            "plan_id": "P05",
-            "change": "rescheduled",
-            "old_candidate_id": "P05_F3_spray_20260918_0900",
-            "new_candidate_id": "P05_F3_spray_20260918_0800",
-            "old_start_time": "2026-09-19T08:00:00",
-            "new_start_time": "2026-09-19T08:00:00"
-          },
-          {
-            "plan_id": "P07",
-            "change": "rescheduled",
-            "old_candidate_id": "P07_F4_fertilise_20260919_1000",
-            "new_candidate_id": "P07_F4_fertilise_20260919_0800",
-            "old_start_time": "2026-09-21T07:00:00",
-            "new_start_time": "2026-09-21T07:00:00"
-          },
-          {
-            "plan_id": "P08",
-            "change": "rescheduled",
-            "old_candidate_id": "P08_F4_spray_20260923_0900",
-            "new_candidate_id": "P08_F4_spray_20260924_0800",
-            "old_start_time": "2026-09-24T07:00:00",
-            "new_start_time": "2026-09-24T08:00:00"
-          },
-          {
-            "plan_id": "P09",
-            "change": "rescheduled",
-            "old_candidate_id": "P09_F5_plant_20260917_0800",
-            "new_candidate_id": "P09_F5_plant_20260917_0700",
-            "old_start_time": "2026-09-20T08:00:00",
-            "new_start_time": "2026-09-20T08:00:00"
-          },
           {
             "plan_id": "P11",
             "change": "removed",
-            "old_candidate_id": "P11_F6_spray_20260920_1000",
+            "old_candidate_id": "P11_F6_spray_20260921_0800",
             "old_start_time": "2026-09-22T07:00:00"
-          },
-          {
-            "plan_id": "P14",
-            "change": "rescheduled",
-            "old_candidate_id": "P14_F7_harvest_20260924_0800",
-            "new_candidate_id": "P14_F7_harvest_20260924_0700",
-            "old_start_time": "2026-09-26T08:00:00",
-            "new_start_time": "2026-09-24T07:00:00"
           }
         ]
       },
-      "importance": 0.5101
+      "importance": 0.4946
     },
     {
       "decision_id": "P12:action",
@@ -1294,8 +1198,8 @@
         "baseline_selected": false,
         "scenario": "FORCE_SKIPPED_ACTION",
         "feasible": true,
-        "baseline_objective_aud": 819810.93,
-        "counterfactual_objective_aud": 819810.93,
+        "baseline_objective_aud": 923664.08,
+        "counterfactual_objective_aud": 923664.08,
         "objective_change_aud": 0,
         "affected_decisions": []
       },
@@ -1313,68 +1217,70 @@
       "depends_on": "",
       "min_gap_hours": 0,
       "timing": {
-        "feasible_candidate_count": 30,
+        "feasible_candidate_count": 36,
         "earliest_feasible_time": "2026-09-14T07:00:00",
-        "latest_feasible_time": "2026-09-18T10:00:00",
-        "selected_time": "2026-09-18T07:00:00",
-        "selected_candidate_id": "P13_F7_spray_20260918_0700",
+        "latest_feasible_time": "2026-09-17T12:00:00",
+        "selected_time": "2026-09-16T07:00:00",
+        "selected_candidate_id": "P13_F7_spray_20260915_0900",
         "alternative_times": [
           {
-            "candidate_id": "P13_F7_spray_20260918_0800",
-            "start_time": "2026-09-18T08:00:00",
-            "direct_cash_effect_aud": -1797.78
+            "candidate_id": "P13_F7_spray_20260916_0700",
+            "start_time": "2026-09-16T07:00:00",
+            "direct_cash_effect_aud": -3644.76
           },
           {
-            "candidate_id": "P13_F7_spray_20260918_0900",
-            "start_time": "2026-09-18T09:00:00",
-            "direct_cash_effect_aud": -1797.78
+            "candidate_id": "P13_F7_spray_20260916_0800",
+            "start_time": "2026-09-16T08:00:00",
+            "direct_cash_effect_aud": -3643.37
           },
           {
-            "candidate_id": "P13_F7_spray_20260918_1000",
-            "start_time": "2026-09-18T10:00:00",
-            "direct_cash_effect_aud": -1797.78
+            "candidate_id": "P13_F7_spray_20260916_0900",
+            "start_time": "2026-09-16T09:00:00",
+            "direct_cash_effect_aud": -3647.55
           },
           {
-            "candidate_id": "P13_F7_spray_20260917_1000",
-            "start_time": "2026-09-17T10:00:00",
-            "direct_cash_effect_aud": -1786.67
+            "candidate_id": "P13_F7_spray_20260916_1000",
+            "start_time": "2026-09-16T10:00:00",
+            "direct_cash_effect_aud": -3657.3
           },
           {
-            "candidate_id": "P13_F7_spray_20260917_0900",
-            "start_time": "2026-09-17T09:00:00",
-            "direct_cash_effect_aud": -1786.67
+            "candidate_id": "P13_F7_spray_20260916_1100",
+            "start_time": "2026-09-16T11:00:00",
+            "direct_cash_effect_aud": -3667.05
           }
         ]
       },
       "financial": {
         "direct_revenue_aud": 0,
-        "direct_cost_aud": 1797.78,
-        "direct_cash_effect_aud": -1797.78,
-        "state_yield_effect_t_ha": 0.3115
+        "direct_cost_aud": 3830.89,
+        "direct_cash_effect_aud": -3830.89,
+        "state_yield_effect_t_ha": 0.1904
       },
       "state_transition": {
         "plan_id": "P13",
-        "candidate_id": "P13_F7_spray_20260918_0700",
+        "candidate_id": "P13_F7_spray_20260915_0900",
         "field_id": "F7",
         "operation": "spray",
         "target": "disease_control",
-        "start_time": "2026-09-18T07:00:00",
-        "end_time": "2026-09-18T13:40:00",
+        "start_time": "2026-09-15T09:00:00",
+        "end_time": "2026-09-16T14:38:52",
         "state_before": {
           "crop": "wheat",
           "planted": true,
           "newly_planted": false,
           "harvested": false,
           "growth_stage": "maturing",
-          "readiness": 0.84,
-          "soil_moisture": 0.2,
-          "soil_temperature_c": 14.4,
-          "expected_yield_t_ha": 4.5884,
+          "readiness": 0.786,
+          "soil_moisture": 0.293,
+          "soil_temperature_c": 13.92,
+          "expected_yield_t_ha": 4.5524,
           "nitrogen_index": 0.65,
           "weed_pressure": 0.09,
           "pest_pressure": 0.08,
-          "disease_pressure": 0.325,
-          "seedbed_readiness": 0.1
+          "disease_pressure": 0.2004,
+          "seedbed_readiness": 0.1,
+          "trafficability": 0.9,
+          "weather_damage_index": 0
         },
         "state_after": {
           "crop": "wheat",
@@ -1382,32 +1288,34 @@
           "newly_planted": false,
           "harvested": false,
           "growth_stage": "maturing",
-          "readiness": 0.84,
-          "soil_moisture": 0.2,
-          "soil_temperature_c": 14.4,
-          "expected_yield_t_ha": 4.8999,
+          "readiness": 0.786,
+          "soil_moisture": 0.293,
+          "soil_temperature_c": 13.92,
+          "expected_yield_t_ha": 4.7428,
           "nitrogen_index": 0.65,
           "weed_pressure": 0.09,
           "pest_pressure": 0.08,
-          "disease_pressure": 0.0452,
-          "seedbed_readiness": 0.1
+          "disease_pressure": 0.0256,
+          "seedbed_readiness": 0.1,
+          "trafficability": 0.9,
+          "weather_damage_index": 0
         },
         "state_changes": {
           "disease_pressure": {
-            "before": 0.325,
-            "after": 0.0452,
-            "change": -0.2798
+            "before": 0.2004,
+            "after": 0.0256,
+            "change": -0.1748
           },
           "expected_yield_t_ha": {
-            "before": 4.5884,
-            "after": 4.8999,
-            "change": 0.3115
+            "before": 4.5524,
+            "after": 4.7428,
+            "change": 0.1904
           }
         },
         "direct_revenue_aud": 0,
-        "direct_cost_aud": 1797.78,
-        "direct_cash_effect_aud": -1797.78,
-        "state_yield_effect_t_ha": 0.3115
+        "direct_cost_aud": 3830.89,
+        "direct_cash_effect_aud": -3830.89,
+        "state_yield_effect_t_ha": 0.1904
       },
       "counterfactual": {
         "decision_id": "P13:counterfactual",
@@ -1418,67 +1326,19 @@
         "baseline_selected": true,
         "scenario": "FORBID_SELECTED_ACTION",
         "feasible": true,
-        "baseline_objective_aud": 819810.93,
-        "counterfactual_objective_aud": 817715.18,
-        "objective_change_aud": -2095.75,
+        "baseline_objective_aud": 923664.08,
+        "counterfactual_objective_aud": 922726.32,
+        "objective_change_aud": -937.76,
         "affected_decisions": [
-          {
-            "plan_id": "P01",
-            "change": "rescheduled",
-            "old_candidate_id": "P01_F1_harvest_20260919_1000",
-            "new_candidate_id": "P01_F1_harvest_20260919_0900",
-            "old_start_time": "2026-09-22T07:00:00",
-            "new_start_time": "2026-09-22T07:00:00"
-          },
-          {
-            "plan_id": "P06",
-            "change": "rescheduled",
-            "old_candidate_id": "P06_F3_fertilise_20260922_0900",
-            "new_candidate_id": "P06_F3_fertilise_20260922_0700",
-            "old_start_time": "2026-09-23T07:00:00",
-            "new_start_time": "2026-09-23T07:00:00"
-          },
-          {
-            "plan_id": "P07",
-            "change": "rescheduled",
-            "old_candidate_id": "P07_F4_fertilise_20260919_1000",
-            "new_candidate_id": "P07_F4_fertilise_20260918_0700",
-            "old_start_time": "2026-09-21T07:00:00",
-            "new_start_time": "2026-09-18T07:00:00"
-          },
-          {
-            "plan_id": "P08",
-            "change": "rescheduled",
-            "old_candidate_id": "P08_F4_spray_20260923_0900",
-            "new_candidate_id": "P08_F4_spray_20260924_0800",
-            "old_start_time": "2026-09-24T07:00:00",
-            "new_start_time": "2026-09-24T08:00:00"
-          },
-          {
-            "plan_id": "P09",
-            "change": "rescheduled",
-            "old_candidate_id": "P09_F5_plant_20260917_0800",
-            "new_candidate_id": "P09_F5_plant_20260917_0900",
-            "old_start_time": "2026-09-20T08:00:00",
-            "new_start_time": "2026-09-19T08:00:00"
-          },
           {
             "plan_id": "P13",
             "change": "removed",
-            "old_candidate_id": "P13_F7_spray_20260918_0700",
+            "old_candidate_id": "P13_F7_spray_20260915_0900",
             "old_start_time": "2026-09-18T07:00:00"
-          },
-          {
-            "plan_id": "P14",
-            "change": "rescheduled",
-            "old_candidate_id": "P14_F7_harvest_20260924_0800",
-            "new_candidate_id": "P14_F7_harvest_20260923_0700",
-            "old_start_time": "2026-09-26T08:00:00",
-            "new_start_time": "2026-09-23T07:00:00"
           }
         ]
       },
-      "importance": 0.1731
+      "importance": 0.1618
     },
     {
       "decision_id": "P14:action",
@@ -1492,53 +1352,53 @@
       "depends_on": "",
       "min_gap_hours": 0,
       "timing": {
-        "feasible_candidate_count": 40,
+        "feasible_candidate_count": 30,
         "earliest_feasible_time": "2026-09-22T07:00:00",
-        "latest_feasible_time": "2026-09-25T16:00:00",
-        "selected_time": "2026-09-25T07:00:00",
-        "selected_candidate_id": "P14_F7_harvest_20260924_0800",
+        "latest_feasible_time": "2026-09-24T16:00:00",
+        "selected_time": "2026-09-24T16:00:00",
+        "selected_candidate_id": "P14_F7_harvest_20260924_1600",
         "alternative_times": [
           {
-            "candidate_id": "P14_F7_harvest_20260925_0700",
-            "start_time": "2026-09-25T07:00:00",
-            "direct_cash_effect_aud": 50715.52
+            "candidate_id": "P14_F7_harvest_20260924_1500",
+            "start_time": "2026-09-24T15:00:00",
+            "direct_cash_effect_aud": 102130.54
           },
           {
-            "candidate_id": "P14_F7_harvest_20260925_0800",
-            "start_time": "2026-09-25T08:00:00",
-            "direct_cash_effect_aud": 50715.52
+            "candidate_id": "P14_F7_harvest_20260924_1400",
+            "start_time": "2026-09-24T14:00:00",
+            "direct_cash_effect_aud": 102115.71
           },
           {
-            "candidate_id": "P14_F7_harvest_20260925_0900",
-            "start_time": "2026-09-25T09:00:00",
-            "direct_cash_effect_aud": 50715.52
+            "candidate_id": "P14_F7_harvest_20260924_1300",
+            "start_time": "2026-09-24T13:00:00",
+            "direct_cash_effect_aud": 102100.89
           },
           {
-            "candidate_id": "P14_F7_harvest_20260925_1000",
-            "start_time": "2026-09-25T10:00:00",
-            "direct_cash_effect_aud": 50715.52
+            "candidate_id": "P14_F7_harvest_20260924_1200",
+            "start_time": "2026-09-24T12:00:00",
+            "direct_cash_effect_aud": 102086.07
           },
           {
-            "candidate_id": "P14_F7_harvest_20260925_1100",
-            "start_time": "2026-09-25T11:00:00",
-            "direct_cash_effect_aud": 50715.52
+            "candidate_id": "P14_F7_harvest_20260924_1100",
+            "start_time": "2026-09-24T11:00:00",
+            "direct_cash_effect_aud": 102071.25
           }
         ]
       },
       "financial": {
-        "direct_revenue_aud": 61271.65,
-        "direct_cost_aud": 2000,
-        "direct_cash_effect_aud": 59271.65,
+        "direct_revenue_aud": 119511.67,
+        "direct_cost_aud": 4374.8,
+        "direct_cash_effect_aud": 115136.87,
         "state_yield_effect_t_ha": 0
       },
       "state_transition": {
         "plan_id": "P14",
-        "candidate_id": "P14_F7_harvest_20260924_0800",
+        "candidate_id": "P14_F7_harvest_20260924_1600",
         "field_id": "F7",
         "operation": "harvest",
         "target": "wheat",
-        "start_time": "2026-09-24T08:00:00",
-        "end_time": "2026-09-24T16:00:00",
+        "start_time": "2026-09-24T16:00:00",
+        "end_time": "2026-09-26T14:29:57",
         "state_before": {
           "crop": "wheat",
           "planted": true,
@@ -1546,14 +1406,16 @@
           "harvested": false,
           "growth_stage": "mature",
           "readiness": 0.948,
-          "soil_moisture": 0.212,
+          "soil_moisture": 0.1844,
           "soil_temperature_c": 15.36,
-          "expected_yield_t_ha": 4.8939,
+          "expected_yield_t_ha": 4.7728,
           "nitrogen_index": 0.65,
           "weed_pressure": 0.09,
           "pest_pressure": 0.08,
-          "disease_pressure": 0.3263,
-          "seedbed_readiness": 0.1
+          "disease_pressure": 0.2287,
+          "seedbed_readiness": 0.1,
+          "trafficability": 1,
+          "weather_damage_index": 0
         },
         "state_after": {
           "crop": "",
@@ -1562,14 +1424,16 @@
           "harvested": true,
           "growth_stage": "mature",
           "readiness": 0.948,
-          "soil_moisture": 0.212,
+          "soil_moisture": 0.1844,
           "soil_temperature_c": 15.36,
           "expected_yield_t_ha": 0,
           "nitrogen_index": 0.65,
           "weed_pressure": 0.09,
           "pest_pressure": 0.08,
-          "disease_pressure": 0.3263,
-          "seedbed_readiness": 0.1
+          "disease_pressure": 0.2287,
+          "seedbed_readiness": 0.1,
+          "trafficability": 1,
+          "weather_damage_index": 0
         },
         "state_changes": {
           "crop": {
@@ -1577,9 +1441,9 @@
             "after": ""
           },
           "expected_yield_t_ha": {
-            "before": 4.8939,
+            "before": 4.7728,
             "after": 0,
-            "change": -4.8939
+            "change": -4.7728
           },
           "harvested": {
             "before": false,
@@ -1590,9 +1454,9 @@
             "after": false
           }
         },
-        "direct_revenue_aud": 61271.65,
-        "direct_cost_aud": 2000,
-        "direct_cash_effect_aud": 59271.65,
+        "direct_revenue_aud": 119511.67,
+        "direct_cost_aud": 4374.8,
+        "direct_cash_effect_aud": 115136.87,
         "state_yield_effect_t_ha": 0
       },
       "counterfactual": null,
@@ -1610,9 +1474,9 @@
       "depends_on": "P06",
       "min_gap_hours": 24,
       "timing": {
-        "feasible_candidate_count": 39,
+        "feasible_candidate_count": 38,
         "earliest_feasible_time": "2026-09-20T08:00:00",
-        "latest_feasible_time": "2026-09-24T16:00:00",
+        "latest_feasible_time": "2026-09-24T08:00:00",
         "selected_time": null,
         "selected_candidate_id": null,
         "alternative_times": []
@@ -1628,83 +1492,35 @@
         "baseline_selected": false,
         "scenario": "FORCE_SKIPPED_ACTION",
         "feasible": true,
-        "baseline_objective_aud": 819810.93,
-        "counterfactual_objective_aud": 819494.04,
-        "objective_change_aud": -316.89,
+        "baseline_objective_aud": 923664.08,
+        "counterfactual_objective_aud": 923197.71,
+        "objective_change_aud": -466.37,
         "affected_decisions": [
-          {
-            "plan_id": "P01",
-            "change": "rescheduled",
-            "old_candidate_id": "P01_F1_harvest_20260919_1000",
-            "new_candidate_id": "P01_F1_harvest_20260919_0800",
-            "old_start_time": "2026-09-22T07:00:00",
-            "new_start_time": "2026-09-22T07:00:00"
-          },
-          {
-            "plan_id": "P03",
-            "change": "rescheduled",
-            "old_candidate_id": "P03_F2_spray_20260918_0700",
-            "new_candidate_id": "P03_F2_spray_20260918_0900",
-            "old_start_time": "2026-09-21T07:00:00",
-            "new_start_time": "2026-09-20T08:00:00"
-          },
-          {
-            "plan_id": "P05",
-            "change": "rescheduled",
-            "old_candidate_id": "P05_F3_spray_20260918_0900",
-            "new_candidate_id": "P05_F3_spray_20260916_0700",
-            "old_start_time": "2026-09-19T08:00:00",
-            "new_start_time": "2026-09-19T08:00:00"
-          },
           {
             "plan_id": "P06",
             "change": "rescheduled",
-            "old_candidate_id": "P06_F3_fertilise_20260922_0900",
-            "new_candidate_id": "P06_F3_fertilise_20260919_0800",
+            "old_candidate_id": "P06_F3_fertilise_20260922_0700",
+            "new_candidate_id": "P06_F3_fertilise_20260921_0800",
             "old_start_time": "2026-09-23T07:00:00",
             "new_start_time": "2026-09-23T07:00:00"
           },
           {
-            "plan_id": "P07",
+            "plan_id": "P11",
             "change": "rescheduled",
-            "old_candidate_id": "P07_F4_fertilise_20260919_1000",
-            "new_candidate_id": "P07_F4_fertilise_20260919_0900",
-            "old_start_time": "2026-09-21T07:00:00",
-            "new_start_time": "2026-09-21T07:00:00"
-          },
-          {
-            "plan_id": "P08",
-            "change": "rescheduled",
-            "old_candidate_id": "P08_F4_spray_20260923_0900",
-            "new_candidate_id": "P08_F4_spray_20260923_0700",
-            "old_start_time": "2026-09-24T07:00:00",
-            "new_start_time": "2026-09-24T07:12:27"
-          },
-          {
-            "plan_id": "P09",
-            "change": "rescheduled",
-            "old_candidate_id": "P09_F5_plant_20260917_0800",
-            "new_candidate_id": "P09_F5_plant_20260917_0700",
-            "old_start_time": "2026-09-20T08:00:00",
+            "old_candidate_id": "P11_F6_spray_20260921_0800",
+            "new_candidate_id": "P11_F6_spray_20260921_0900",
+            "old_start_time": "2026-09-22T07:00:00",
             "new_start_time": "2026-09-22T07:00:00"
-          },
-          {
-            "plan_id": "P13",
-            "change": "rescheduled",
-            "old_candidate_id": "P13_F7_spray_20260918_0700",
-            "new_candidate_id": "P13_F7_spray_20260918_0900",
-            "old_start_time": "2026-09-18T07:00:00",
-            "new_start_time": "2026-09-18T09:00:00"
           },
           {
             "plan_id": "P15",
             "change": "added",
-            "new_candidate_id": "P15_F3_spray_20260923_0700",
+            "new_candidate_id": "P15_F3_spray_20260924_0700",
             "new_start_time": "2026-09-25T07:00:00"
           }
         ]
       },
-      "importance": 0.1077
+      "importance": 0.1101
     }
   ],
   "field_decisions": [
@@ -1712,14 +1528,14 @@
       "decision_id": "F1:field_option",
       "type": "FIELD_OPTION_SELECTED",
       "field_id": "F1",
-      "selected_option_id": "F1_O003",
-      "selected_objective_value_aud": 177095.34,
-      "selected_direct_cash_effect_aud": 177095.34,
+      "selected_option_id": "F1_O001",
+      "selected_objective_value_aud": 146395.7,
+      "selected_direct_cash_effect_aud": 146395.7,
       "selected_terminal_value_aud": 0,
       "best_local_alternative": {
-        "option_id": "F1_O001",
-        "objective_value_aud": 177095.34,
-        "local_value_difference_aud": 0
+        "option_id": "F1_O002",
+        "objective_value_aud": 146265.7,
+        "local_value_difference_aud": 130
       }
     },
     {
@@ -1727,115 +1543,95 @@
       "type": "FIELD_OPTION_SELECTED",
       "field_id": "F2",
       "selected_option_id": "F2_O001",
-      "selected_objective_value_aud": 194320.67,
-      "selected_direct_cash_effect_aud": -3685,
-      "selected_terminal_value_aud": 198005.67,
+      "selected_objective_value_aud": 195003.69,
+      "selected_direct_cash_effect_aud": -4370.3,
+      "selected_terminal_value_aud": 199373.99,
       "best_local_alternative": {
         "option_id": "F2_O003",
-        "objective_value_aud": 194320.67,
-        "local_value_difference_aud": 0
+        "objective_value_aud": 194984.06,
+        "local_value_difference_aud": 19.63
       }
     },
     {
       "decision_id": "F3:field_option",
       "type": "FIELD_OPTION_SELECTED",
       "field_id": "F3",
-      "selected_option_id": "F3_O010",
-      "selected_objective_value_aud": 81490.17,
-      "selected_direct_cash_effect_aud": -7691.63,
-      "selected_terminal_value_aud": 89181.8,
+      "selected_option_id": "F3_O001",
+      "selected_objective_value_aud": 133985.7,
+      "selected_direct_cash_effect_aud": -12906.4,
+      "selected_terminal_value_aud": 146892.1,
       "best_local_alternative": {
-        "option_id": "F3_O001",
-        "objective_value_aud": 81490.17,
-        "local_value_difference_aud": 0
+        "option_id": "F3_O003",
+        "objective_value_aud": 133982.62,
+        "local_value_difference_aud": 3.08
       }
     },
     {
       "decision_id": "F4:field_option",
       "type": "FIELD_OPTION_SELECTED",
       "field_id": "F4",
-      "selected_option_id": "F4_O023",
-      "selected_objective_value_aud": 75974.78,
-      "selected_direct_cash_effect_aud": -7880.55,
-      "selected_terminal_value_aud": 83855.33,
+      "selected_option_id": "F4_O001",
+      "selected_objective_value_aud": 119916.44,
+      "selected_direct_cash_effect_aud": -13320.19,
+      "selected_terminal_value_aud": 133236.63,
       "best_local_alternative": {
-        "option_id": "F4_O001",
-        "objective_value_aud": 75974.78,
-        "local_value_difference_aud": 0
+        "option_id": "F4_O003",
+        "objective_value_aud": 119888.47,
+        "local_value_difference_aud": 27.97
       }
     },
     {
       "decision_id": "F5:field_option",
       "type": "FIELD_OPTION_SELECTED",
       "field_id": "F5",
-      "selected_option_id": "F5_O002",
-      "selected_objective_value_aud": 45280.25,
-      "selected_direct_cash_effect_aud": -12616,
-      "selected_terminal_value_aud": 57896.25,
+      "selected_option_id": "F5_O001",
+      "selected_objective_value_aud": 27533.6,
+      "selected_direct_cash_effect_aud": -17760.04,
+      "selected_terminal_value_aud": 45293.64,
       "best_local_alternative": {
-        "option_id": "F5_O001",
-        "objective_value_aud": 45280.25,
-        "local_value_difference_aud": 0
+        "option_id": "F5_O002",
+        "objective_value_aud": 21180.52,
+        "local_value_difference_aud": 6353.08
       }
     },
     {
       "decision_id": "F6:field_option",
       "type": "FIELD_OPTION_SELECTED",
       "field_id": "F6",
-      "selected_option_id": "F6_O004",
-      "selected_objective_value_aud": 188175.85,
-      "selected_direct_cash_effect_aud": -3377.92,
-      "selected_terminal_value_aud": 191553.77,
+      "selected_option_id": "F6_O003",
+      "selected_objective_value_aud": 189522.97,
+      "selected_direct_cash_effect_aud": -3510.08,
+      "selected_terminal_value_aud": 193033.05,
       "best_local_alternative": {
         "option_id": "F6_O001",
-        "objective_value_aud": 188175.85,
-        "local_value_difference_aud": 0
+        "objective_value_aud": 189525.51,
+        "local_value_difference_aud": -2.54
       }
     },
     {
       "decision_id": "F7:field_option",
       "type": "FIELD_OPTION_SELECTED",
       "field_id": "F7",
-      "selected_option_id": "F7_O003",
-      "selected_objective_value_aud": 57473.87,
-      "selected_direct_cash_effect_aud": 57473.87,
+      "selected_option_id": "F7_O001",
+      "selected_objective_value_aud": 111305.98,
+      "selected_direct_cash_effect_aud": 111305.98,
       "selected_terminal_value_aud": 0,
       "best_local_alternative": {
-        "option_id": "F7_O001",
-        "objective_value_aud": 57473.87,
-        "local_value_difference_aud": 0
+        "option_id": "F7_O003",
+        "objective_value_aud": 111291.16,
+        "local_value_difference_aud": 14.82
       }
     }
   ],
   "resources": [
     {
-      "decision_id": "machine:M3",
-      "type": "RESOURCE_UTILISATION",
-      "resource_type": "machine",
-      "resource_id": "M3",
-      "used_hours": 37.08,
-      "available_hours": 143,
-      "utilisation": 0.2593,
-      "binding": false,
-      "affected_plans": [
-        "P03",
-        "P03",
-        "P11",
-        "P03",
-        "P11",
-        "P11",
-        "P08",
-        "P08"
-      ]
-    },
-    {
       "decision_id": "machine:M5",
       "type": "RESOURCE_UTILISATION",
       "resource_type": "machine",
       "resource_id": "M5",
-      "used_hours": 15.2,
+      "used_hours": 22.29,
       "available_hours": 143,
-      "utilisation": 0.1063,
+      "utilisation": 0.1559,
       "binding": false,
       "affected_plans": [
         "P09",
@@ -1844,48 +1640,39 @@
       ]
     },
     {
+      "decision_id": "machine:M3",
+      "type": "RESOURCE_UTILISATION",
+      "resource_type": "machine",
+      "resource_id": "M3",
+      "used_hours": 43.62,
+      "available_hours": 143,
+      "utilisation": 0.305,
+      "binding": false,
+      "affected_plans": [
+        "P13",
+        "P13",
+        "P11",
+        "P11",
+        "P08",
+        "P08"
+      ]
+    },
+    {
       "decision_id": "machine:M9",
       "type": "RESOURCE_UTILISATION",
       "resource_type": "machine",
       "resource_id": "M9",
-      "used_hours": 6.67,
+      "used_hours": 39.34,
       "available_hours": 154,
-      "utilisation": 0.0433,
-      "binding": false,
-      "affected_plans": [
-        "P13"
-      ]
-    },
-    {
-      "decision_id": "machine:M10",
-      "type": "RESOURCE_UTILISATION",
-      "resource_type": "machine",
-      "resource_id": "M10",
-      "used_hours": 10.13,
-      "available_hours": 154,
-      "utilisation": 0.0657,
+      "utilisation": 0.2555,
       "binding": false,
       "affected_plans": [
         "P05",
-        "P05"
-      ]
-    },
-    {
-      "decision_id": "machine:M1",
-      "type": "RESOURCE_UTILISATION",
-      "resource_type": "machine",
-      "resource_id": "M1",
-      "used_hours": 32,
-      "available_hours": 143,
-      "utilisation": 0.2238,
-      "binding": false,
-      "affected_plans": [
-        "P01",
-        "P01",
-        "P01",
-        "P01",
-        "P14",
-        "P14"
+        "P05",
+        "P05",
+        "P03",
+        "P03",
+        "P03"
       ]
     },
     {
@@ -1893,14 +1680,35 @@
       "type": "RESOURCE_UTILISATION",
       "resource_type": "machine",
       "resource_id": "M4",
-      "used_hours": 18.46,
+      "used_hours": 35.27,
       "available_hours": 143,
-      "utilisation": 0.1291,
+      "utilisation": 0.2466,
       "binding": false,
       "affected_plans": [
         "P07",
+        "P07",
+        "P07",
         "P06",
         "P06"
+      ]
+    },
+    {
+      "decision_id": "machine:M1",
+      "type": "RESOURCE_UTILISATION",
+      "resource_type": "machine",
+      "resource_id": "M1",
+      "used_hours": 41.7,
+      "available_hours": 143,
+      "utilisation": 0.2916,
+      "binding": false,
+      "affected_plans": [
+        "P01",
+        "P01",
+        "P01",
+        "P01",
+        "P14",
+        "P14",
+        "P14"
       ]
     },
     {
@@ -2044,16 +1852,295 @@
       "binding": false
     },
     {
+      "decision_id": "labour:2026-09-16T07:00:00",
+      "type": "RESOURCE_UTILISATION",
+      "resource_type": "labour",
+      "time": "2026-09-16T07:00:00",
+      "used_workers": 3,
+      "available_workers": 5,
+      "utilisation": 0.6,
+      "binding": false,
+      "affected_plans": [
+        "P09",
+        "P13"
+      ]
+    },
+    {
+      "decision_id": "labour:2026-09-16T08:00:00",
+      "type": "RESOURCE_UTILISATION",
+      "resource_type": "labour",
+      "time": "2026-09-16T08:00:00",
+      "used_workers": 3,
+      "available_workers": 5,
+      "utilisation": 0.6,
+      "binding": false,
+      "affected_plans": [
+        "P09",
+        "P13"
+      ]
+    },
+    {
+      "decision_id": "labour:2026-09-16T09:00:00",
+      "type": "RESOURCE_UTILISATION",
+      "resource_type": "labour",
+      "time": "2026-09-16T09:00:00",
+      "used_workers": 3,
+      "available_workers": 5,
+      "utilisation": 0.6,
+      "binding": false,
+      "affected_plans": [
+        "P09",
+        "P13"
+      ]
+    },
+    {
+      "decision_id": "labour:2026-09-16T10:00:00",
+      "type": "RESOURCE_UTILISATION",
+      "resource_type": "labour",
+      "time": "2026-09-16T10:00:00",
+      "used_workers": 3,
+      "available_workers": 5,
+      "utilisation": 0.6,
+      "binding": false,
+      "affected_plans": [
+        "P09",
+        "P13"
+      ]
+    },
+    {
+      "decision_id": "labour:2026-09-16T11:00:00",
+      "type": "RESOURCE_UTILISATION",
+      "resource_type": "labour",
+      "time": "2026-09-16T11:00:00",
+      "used_workers": 3,
+      "available_workers": 5,
+      "utilisation": 0.6,
+      "binding": false,
+      "affected_plans": [
+        "P09",
+        "P13"
+      ]
+    },
+    {
+      "decision_id": "labour:2026-09-16T12:00:00",
+      "type": "RESOURCE_UTILISATION",
+      "resource_type": "labour",
+      "time": "2026-09-16T12:00:00",
+      "used_workers": 3,
+      "available_workers": 5,
+      "utilisation": 0.6,
+      "binding": false,
+      "affected_plans": [
+        "P09",
+        "P13"
+      ]
+    },
+    {
+      "decision_id": "labour:2026-09-16T13:00:00",
+      "type": "RESOURCE_UTILISATION",
+      "resource_type": "labour",
+      "time": "2026-09-16T13:00:00",
+      "used_workers": 3,
+      "available_workers": 5,
+      "utilisation": 0.6,
+      "binding": false,
+      "affected_plans": [
+        "P09",
+        "P13"
+      ]
+    },
+    {
+      "decision_id": "labour:2026-09-16T14:00:00",
+      "type": "RESOURCE_UTILISATION",
+      "resource_type": "labour",
+      "time": "2026-09-16T14:00:00",
+      "used_workers": 3,
+      "available_workers": 5,
+      "utilisation": 0.6,
+      "binding": false,
+      "affected_plans": [
+        "P09",
+        "P13"
+      ]
+    },
+    {
+      "decision_id": "labour:2026-09-16T15:00:00",
+      "type": "RESOURCE_UTILISATION",
+      "resource_type": "labour",
+      "time": "2026-09-16T15:00:00",
+      "used_workers": 3,
+      "available_workers": 5,
+      "utilisation": 0.6,
+      "binding": false,
+      "affected_plans": [
+        "P09",
+        "P13"
+      ]
+    },
+    {
+      "decision_id": "labour:2026-09-16T16:00:00",
+      "type": "RESOURCE_UTILISATION",
+      "resource_type": "labour",
+      "time": "2026-09-16T16:00:00",
+      "used_workers": 3,
+      "available_workers": 5,
+      "utilisation": 0.6,
+      "binding": false,
+      "affected_plans": [
+        "P09",
+        "P13"
+      ]
+    },
+    {
+      "decision_id": "labour:2026-09-17T07:00:00",
+      "type": "RESOURCE_UTILISATION",
+      "resource_type": "labour",
+      "time": "2026-09-17T07:00:00",
+      "used_workers": 3,
+      "available_workers": 5,
+      "utilisation": 0.6,
+      "binding": false,
+      "affected_plans": [
+        "P05",
+        "P09"
+      ]
+    },
+    {
+      "decision_id": "labour:2026-09-17T08:00:00",
+      "type": "RESOURCE_UTILISATION",
+      "resource_type": "labour",
+      "time": "2026-09-17T08:00:00",
+      "used_workers": 3,
+      "available_workers": 5,
+      "utilisation": 0.6,
+      "binding": false,
+      "affected_plans": [
+        "P05",
+        "P09"
+      ]
+    },
+    {
+      "decision_id": "labour:2026-09-17T09:00:00",
+      "type": "RESOURCE_UTILISATION",
+      "resource_type": "labour",
+      "time": "2026-09-17T09:00:00",
+      "used_workers": 3,
+      "available_workers": 5,
+      "utilisation": 0.6,
+      "binding": false,
+      "affected_plans": [
+        "P05",
+        "P09"
+      ]
+    },
+    {
+      "decision_id": "labour:2026-09-17T10:00:00",
+      "type": "RESOURCE_UTILISATION",
+      "resource_type": "labour",
+      "time": "2026-09-17T10:00:00",
+      "used_workers": 3,
+      "available_workers": 5,
+      "utilisation": 0.6,
+      "binding": false,
+      "affected_plans": [
+        "P05",
+        "P09"
+      ]
+    },
+    {
+      "decision_id": "labour:2026-09-17T11:00:00",
+      "type": "RESOURCE_UTILISATION",
+      "resource_type": "labour",
+      "time": "2026-09-17T11:00:00",
+      "used_workers": 3,
+      "available_workers": 5,
+      "utilisation": 0.6,
+      "binding": false,
+      "affected_plans": [
+        "P05",
+        "P09"
+      ]
+    },
+    {
+      "decision_id": "labour:2026-09-17T12:00:00",
+      "type": "RESOURCE_UTILISATION",
+      "resource_type": "labour",
+      "time": "2026-09-17T12:00:00",
+      "used_workers": 3,
+      "available_workers": 5,
+      "utilisation": 0.6,
+      "binding": false,
+      "affected_plans": [
+        "P05",
+        "P09"
+      ]
+    },
+    {
+      "decision_id": "labour:2026-09-17T13:00:00",
+      "type": "RESOURCE_UTILISATION",
+      "resource_type": "labour",
+      "time": "2026-09-17T13:00:00",
+      "used_workers": 3,
+      "available_workers": 5,
+      "utilisation": 0.6,
+      "binding": false,
+      "affected_plans": [
+        "P05",
+        "P09"
+      ]
+    },
+    {
+      "decision_id": "labour:2026-09-17T14:00:00",
+      "type": "RESOURCE_UTILISATION",
+      "resource_type": "labour",
+      "time": "2026-09-17T14:00:00",
+      "used_workers": 3,
+      "available_workers": 5,
+      "utilisation": 0.6,
+      "binding": false,
+      "affected_plans": [
+        "P05",
+        "P09"
+      ]
+    },
+    {
+      "decision_id": "labour:2026-09-17T15:00:00",
+      "type": "RESOURCE_UTILISATION",
+      "resource_type": "labour",
+      "time": "2026-09-17T15:00:00",
+      "used_workers": 2,
+      "available_workers": 5,
+      "utilisation": 0.4,
+      "binding": false,
+      "affected_plans": [
+        "P09"
+      ]
+    },
+    {
+      "decision_id": "labour:2026-09-17T16:00:00",
+      "type": "RESOURCE_UTILISATION",
+      "resource_type": "labour",
+      "time": "2026-09-17T16:00:00",
+      "used_workers": 2,
+      "available_workers": 5,
+      "utilisation": 0.4,
+      "binding": false,
+      "affected_plans": [
+        "P09"
+      ]
+    },
+    {
       "decision_id": "labour:2026-09-18T07:00:00",
       "type": "RESOURCE_UTILISATION",
       "resource_type": "labour",
       "time": "2026-09-18T07:00:00",
-      "used_workers": 4,
+      "used_workers": 5,
       "available_workers": 4,
-      "utilisation": 1,
+      "utilisation": 1.25,
       "binding": true,
       "affected_plans": [
-        "P03",
+        "P05",
+        "P07",
         "P09",
         "P13"
       ]
@@ -2068,7 +2155,7 @@
       "utilisation": 1,
       "binding": true,
       "affected_plans": [
-        "P03",
+        "P05",
         "P09",
         "P13"
       ]
@@ -2078,15 +2165,14 @@
       "type": "RESOURCE_UTILISATION",
       "resource_type": "labour",
       "time": "2026-09-18T09:00:00",
-      "used_workers": 5,
+      "used_workers": 4,
       "available_workers": 4,
-      "utilisation": 1.25,
+      "utilisation": 1,
       "binding": true,
       "affected_plans": [
-        "P03",
+        "P05",
         "P09",
-        "P13",
-        "P05"
+        "P13"
       ]
     },
     {
@@ -2094,15 +2180,13 @@
       "type": "RESOURCE_UTILISATION",
       "resource_type": "labour",
       "time": "2026-09-18T10:00:00",
-      "used_workers": 5,
+      "used_workers": 2,
       "available_workers": 4,
-      "utilisation": 1.25,
-      "binding": true,
+      "utilisation": 0.5,
+      "binding": false,
       "affected_plans": [
-        "P03",
-        "P09",
-        "P13",
-        "P05"
+        "P05",
+        "P13"
       ]
     },
     {
@@ -2110,14 +2194,11 @@
       "type": "RESOURCE_UTILISATION",
       "resource_type": "labour",
       "time": "2026-09-18T11:00:00",
-      "used_workers": 5,
+      "used_workers": 1,
       "available_workers": 4,
-      "utilisation": 1.25,
-      "binding": true,
+      "utilisation": 0.25,
+      "binding": false,
       "affected_plans": [
-        "P03",
-        "P09",
-        "P13",
         "P05"
       ]
     },
@@ -2126,14 +2207,11 @@
       "type": "RESOURCE_UTILISATION",
       "resource_type": "labour",
       "time": "2026-09-18T12:00:00",
-      "used_workers": 5,
+      "used_workers": 1,
       "available_workers": 4,
-      "utilisation": 1.25,
-      "binding": true,
+      "utilisation": 0.25,
+      "binding": false,
       "affected_plans": [
-        "P03",
-        "P09",
-        "P13",
         "P05"
       ]
     },
@@ -2142,14 +2220,11 @@
       "type": "RESOURCE_UTILISATION",
       "resource_type": "labour",
       "time": "2026-09-18T13:00:00",
-      "used_workers": 5,
+      "used_workers": 1,
       "available_workers": 4,
-      "utilisation": 1.25,
-      "binding": true,
+      "utilisation": 0.25,
+      "binding": false,
       "affected_plans": [
-        "P03",
-        "P09",
-        "P13",
         "P05"
       ]
     },
@@ -2158,13 +2233,11 @@
       "type": "RESOURCE_UTILISATION",
       "resource_type": "labour",
       "time": "2026-09-18T14:00:00",
-      "used_workers": 4,
+      "used_workers": 1,
       "available_workers": 4,
-      "utilisation": 1,
-      "binding": true,
+      "utilisation": 0.25,
+      "binding": false,
       "affected_plans": [
-        "P03",
-        "P09",
         "P05"
       ]
     },
@@ -2173,12 +2246,11 @@
       "type": "RESOURCE_UTILISATION",
       "resource_type": "labour",
       "time": "2026-09-18T15:00:00",
-      "used_workers": 2,
+      "used_workers": 1,
       "available_workers": 4,
-      "utilisation": 0.5,
+      "utilisation": 0.25,
       "binding": false,
       "affected_plans": [
-        "P03",
         "P05"
       ]
     },
@@ -2187,12 +2259,11 @@
       "type": "RESOURCE_UTILISATION",
       "resource_type": "labour",
       "time": "2026-09-18T16:00:00",
-      "used_workers": 2,
+      "used_workers": 1,
       "available_workers": 4,
-      "utilisation": 0.5,
+      "utilisation": 0.25,
       "binding": false,
       "affected_plans": [
-        "P03",
         "P05"
       ]
     },
@@ -2201,14 +2272,13 @@
       "type": "RESOURCE_UTILISATION",
       "resource_type": "labour",
       "time": "2026-09-19T08:00:00",
-      "used_workers": 4,
+      "used_workers": 2,
       "available_workers": 4,
-      "utilisation": 1,
-      "binding": true,
+      "utilisation": 0.5,
+      "binding": false,
       "affected_plans": [
-        "P03",
         "P05",
-        "P09"
+        "P07"
       ]
     },
     {
@@ -2216,14 +2286,13 @@
       "type": "RESOURCE_UTILISATION",
       "resource_type": "labour",
       "time": "2026-09-19T09:00:00",
-      "used_workers": 4,
+      "used_workers": 2,
       "available_workers": 4,
-      "utilisation": 1,
-      "binding": true,
+      "utilisation": 0.5,
+      "binding": false,
       "affected_plans": [
-        "P03",
-        "P05",
-        "P09"
+        "P07",
+        "P03"
       ]
     },
     {
@@ -2231,12 +2300,69 @@
       "type": "RESOURCE_UTILISATION",
       "resource_type": "labour",
       "time": "2026-09-19T10:00:00",
-      "used_workers": 3,
+      "used_workers": 2,
       "available_workers": 4,
-      "utilisation": 0.75,
+      "utilisation": 0.5,
       "binding": false,
       "affected_plans": [
-        "P05",
+        "P07",
+        "P03"
+      ]
+    },
+    {
+      "decision_id": "labour:2026-09-19T11:00:00",
+      "type": "RESOURCE_UTILISATION",
+      "resource_type": "labour",
+      "time": "2026-09-19T11:00:00",
+      "used_workers": 2,
+      "available_workers": 4,
+      "utilisation": 0.5,
+      "binding": false,
+      "affected_plans": [
+        "P07",
+        "P03"
+      ]
+    },
+    {
+      "decision_id": "labour:2026-09-19T12:00:00",
+      "type": "RESOURCE_UTILISATION",
+      "resource_type": "labour",
+      "time": "2026-09-19T12:00:00",
+      "used_workers": 2,
+      "available_workers": 4,
+      "utilisation": 0.5,
+      "binding": false,
+      "affected_plans": [
+        "P07",
+        "P03"
+      ]
+    },
+    {
+      "decision_id": "labour:2026-09-19T13:00:00",
+      "type": "RESOURCE_UTILISATION",
+      "resource_type": "labour",
+      "time": "2026-09-19T13:00:00",
+      "used_workers": 2,
+      "available_workers": 4,
+      "utilisation": 0.5,
+      "binding": false,
+      "affected_plans": [
+        "P07",
+        "P03"
+      ]
+    },
+    {
+      "decision_id": "labour:2026-09-19T14:00:00",
+      "type": "RESOURCE_UTILISATION",
+      "resource_type": "labour",
+      "time": "2026-09-19T14:00:00",
+      "used_workers": 4,
+      "available_workers": 4,
+      "utilisation": 1,
+      "binding": true,
+      "affected_plans": [
+        "P07",
+        "P03",
         "P01"
       ]
     },
@@ -2245,13 +2371,13 @@
       "type": "RESOURCE_UTILISATION",
       "resource_type": "labour",
       "time": "2026-09-20T08:00:00",
-      "used_workers": 4,
+      "used_workers": 3,
       "available_workers": 3,
-      "utilisation": 1.3333,
+      "utilisation": 1,
       "binding": true,
       "affected_plans": [
         "P01",
-        "P09"
+        "P03"
       ]
     },
     {
@@ -2259,13 +2385,13 @@
       "type": "RESOURCE_UTILISATION",
       "resource_type": "labour",
       "time": "2026-09-20T09:00:00",
-      "used_workers": 4,
+      "used_workers": 3,
       "available_workers": 3,
-      "utilisation": 1.3333,
+      "utilisation": 1,
       "binding": true,
       "affected_plans": [
         "P01",
-        "P09"
+        "P03"
       ]
     },
     {
@@ -2273,14 +2399,13 @@
       "type": "RESOURCE_UTILISATION",
       "resource_type": "labour",
       "time": "2026-09-20T10:00:00",
-      "used_workers": 5,
+      "used_workers": 3,
       "available_workers": 3,
-      "utilisation": 1.6667,
+      "utilisation": 1,
       "binding": true,
       "affected_plans": [
         "P01",
-        "P09",
-        "P11"
+        "P03"
       ]
     },
     {
@@ -2288,12 +2413,13 @@
       "type": "RESOURCE_UTILISATION",
       "resource_type": "labour",
       "time": "2026-09-20T11:00:00",
-      "used_workers": 2,
+      "used_workers": 3,
       "available_workers": 3,
-      "utilisation": 0.6667,
-      "binding": false,
+      "utilisation": 1,
+      "binding": true,
       "affected_plans": [
-        "P09"
+        "P01",
+        "P03"
       ]
     },
     {
@@ -2301,12 +2427,13 @@
       "type": "RESOURCE_UTILISATION",
       "resource_type": "labour",
       "time": "2026-09-20T12:00:00",
-      "used_workers": 2,
+      "used_workers": 3,
       "available_workers": 3,
-      "utilisation": 0.6667,
-      "binding": false,
+      "utilisation": 1,
+      "binding": true,
       "affected_plans": [
-        "P09"
+        "P01",
+        "P03"
       ]
     },
     {
@@ -2314,12 +2441,13 @@
       "type": "RESOURCE_UTILISATION",
       "resource_type": "labour",
       "time": "2026-09-20T13:00:00",
-      "used_workers": 2,
+      "used_workers": 3,
       "available_workers": 3,
-      "utilisation": 0.6667,
-      "binding": false,
+      "utilisation": 1,
+      "binding": true,
       "affected_plans": [
-        "P09"
+        "P01",
+        "P03"
       ]
     },
     {
@@ -2342,14 +2470,15 @@
       "type": "RESOURCE_UTILISATION",
       "resource_type": "labour",
       "time": "2026-09-21T08:00:00",
-      "used_workers": 4,
+      "used_workers": 5,
       "available_workers": 5,
-      "utilisation": 0.8,
-      "binding": false,
+      "utilisation": 1,
+      "binding": true,
       "affected_plans": [
         "P01",
         "P03",
-        "P07"
+        "P07",
+        "P11"
       ]
     },
     {
@@ -2357,14 +2486,15 @@
       "type": "RESOURCE_UTILISATION",
       "resource_type": "labour",
       "time": "2026-09-21T09:00:00",
-      "used_workers": 4,
+      "used_workers": 5,
       "available_workers": 5,
-      "utilisation": 0.8,
-      "binding": false,
+      "utilisation": 1,
+      "binding": true,
       "affected_plans": [
         "P01",
         "P03",
-        "P07"
+        "P07",
+        "P11"
       ]
     },
     {
@@ -2372,13 +2502,15 @@
       "type": "RESOURCE_UTILISATION",
       "resource_type": "labour",
       "time": "2026-09-21T10:00:00",
-      "used_workers": 3,
+      "used_workers": 5,
       "available_workers": 5,
-      "utilisation": 0.6,
-      "binding": false,
+      "utilisation": 1,
+      "binding": true,
       "affected_plans": [
         "P01",
-        "P07"
+        "P03",
+        "P07",
+        "P11"
       ]
     },
     {
@@ -2386,12 +2518,13 @@
       "type": "RESOURCE_UTILISATION",
       "resource_type": "labour",
       "time": "2026-09-21T11:00:00",
-      "used_workers": 4,
+      "used_workers": 5,
       "available_workers": 5,
-      "utilisation": 0.8,
-      "binding": false,
+      "utilisation": 1,
+      "binding": true,
       "affected_plans": [
         "P01",
+        "P03",
         "P07",
         "P11"
       ]
@@ -2401,12 +2534,13 @@
       "type": "RESOURCE_UTILISATION",
       "resource_type": "labour",
       "time": "2026-09-21T12:00:00",
-      "used_workers": 4,
+      "used_workers": 5,
       "available_workers": 5,
-      "utilisation": 0.8,
-      "binding": false,
+      "utilisation": 1,
+      "binding": true,
       "affected_plans": [
         "P01",
+        "P03",
         "P07",
         "P11"
       ]
@@ -2416,12 +2550,13 @@
       "type": "RESOURCE_UTILISATION",
       "resource_type": "labour",
       "time": "2026-09-21T13:00:00",
-      "used_workers": 4,
+      "used_workers": 5,
       "available_workers": 5,
-      "utilisation": 0.8,
-      "binding": false,
+      "utilisation": 1,
+      "binding": true,
       "affected_plans": [
         "P01",
+        "P03",
         "P07",
         "P11"
       ]
@@ -2431,13 +2566,15 @@
       "type": "RESOURCE_UTILISATION",
       "resource_type": "labour",
       "time": "2026-09-21T14:00:00",
-      "used_workers": 3,
+      "used_workers": 5,
       "available_workers": 5,
-      "utilisation": 0.6,
-      "binding": false,
+      "utilisation": 1,
+      "binding": true,
       "affected_plans": [
         "P01",
-        "P07"
+        "P03",
+        "P07",
+        "P11"
       ]
     },
     {
@@ -2445,13 +2582,15 @@
       "type": "RESOURCE_UTILISATION",
       "resource_type": "labour",
       "time": "2026-09-21T15:00:00",
-      "used_workers": 3,
+      "used_workers": 5,
       "available_workers": 5,
-      "utilisation": 0.6,
-      "binding": false,
+      "utilisation": 1,
+      "binding": true,
       "affected_plans": [
         "P01",
-        "P07"
+        "P03",
+        "P07",
+        "P11"
       ]
     },
     {
@@ -2459,12 +2598,15 @@
       "type": "RESOURCE_UTILISATION",
       "resource_type": "labour",
       "time": "2026-09-21T16:00:00",
-      "used_workers": 2,
+      "used_workers": 5,
       "available_workers": 5,
-      "utilisation": 0.4,
-      "binding": false,
+      "utilisation": 1,
+      "binding": true,
       "affected_plans": [
-        "P01"
+        "P01",
+        "P03",
+        "P07",
+        "P11"
       ]
     },
     {
@@ -2472,12 +2614,13 @@
       "type": "RESOURCE_UTILISATION",
       "resource_type": "labour",
       "time": "2026-09-22T07:00:00",
-      "used_workers": 3,
+      "used_workers": 4,
       "available_workers": 3,
-      "utilisation": 1,
+      "utilisation": 1.3333,
       "binding": true,
       "affected_plans": [
         "P01",
+        "P06",
         "P11"
       ]
     },
@@ -2486,12 +2629,13 @@
       "type": "RESOURCE_UTILISATION",
       "resource_type": "labour",
       "time": "2026-09-22T08:00:00",
-      "used_workers": 3,
+      "used_workers": 4,
       "available_workers": 3,
-      "utilisation": 1,
+      "utilisation": 1.3333,
       "binding": true,
       "affected_plans": [
         "P01",
+        "P06",
         "P11"
       ]
     },
@@ -2506,8 +2650,8 @@
       "binding": true,
       "affected_plans": [
         "P01",
-        "P11",
-        "P06"
+        "P06",
+        "P11"
       ]
     },
     {
@@ -2515,12 +2659,13 @@
       "type": "RESOURCE_UTILISATION",
       "resource_type": "labour",
       "time": "2026-09-22T10:00:00",
-      "used_workers": 3,
+      "used_workers": 4,
       "available_workers": 3,
-      "utilisation": 1,
+      "utilisation": 1.3333,
       "binding": true,
       "affected_plans": [
         "P01",
+        "P06",
         "P11"
       ]
     },
@@ -2529,12 +2674,13 @@
       "type": "RESOURCE_UTILISATION",
       "resource_type": "labour",
       "time": "2026-09-22T11:00:00",
-      "used_workers": 3,
+      "used_workers": 4,
       "available_workers": 3,
-      "utilisation": 1,
+      "utilisation": 1.3333,
       "binding": true,
       "affected_plans": [
         "P01",
+        "P06",
         "P11"
       ]
     },
@@ -2543,12 +2689,13 @@
       "type": "RESOURCE_UTILISATION",
       "resource_type": "labour",
       "time": "2026-09-22T12:00:00",
-      "used_workers": 3,
+      "used_workers": 4,
       "available_workers": 3,
-      "utilisation": 1,
+      "utilisation": 1.3333,
       "binding": true,
       "affected_plans": [
         "P01",
+        "P06",
         "P11"
       ]
     },
@@ -2557,12 +2704,13 @@
       "type": "RESOURCE_UTILISATION",
       "resource_type": "labour",
       "time": "2026-09-22T13:00:00",
-      "used_workers": 3,
+      "used_workers": 4,
       "available_workers": 3,
-      "utilisation": 1,
+      "utilisation": 1.3333,
       "binding": true,
       "affected_plans": [
         "P01",
+        "P06",
         "P11"
       ]
     },
@@ -2577,7 +2725,7 @@
       "binding": true,
       "affected_plans": [
         "P01",
-        "P11"
+        "P06"
       ]
     },
     {
@@ -2585,27 +2733,12 @@
       "type": "RESOURCE_UTILISATION",
       "resource_type": "labour",
       "time": "2026-09-22T15:00:00",
-      "used_workers": 3,
+      "used_workers": 2,
       "available_workers": 3,
-      "utilisation": 1,
-      "binding": true,
+      "utilisation": 0.6667,
+      "binding": false,
       "affected_plans": [
-        "P01",
-        "P11"
-      ]
-    },
-    {
-      "decision_id": "labour:2026-09-22T16:00:00",
-      "type": "RESOURCE_UTILISATION",
-      "resource_type": "labour",
-      "time": "2026-09-22T16:00:00",
-      "used_workers": 3,
-      "available_workers": 3,
-      "utilisation": 1,
-      "binding": true,
-      "affected_plans": [
-        "P01",
-        "P11"
+        "P01"
       ]
     },
     {
@@ -2613,12 +2746,13 @@
       "type": "RESOURCE_UTILISATION",
       "resource_type": "labour",
       "time": "2026-09-23T07:00:00",
-      "used_workers": 1,
+      "used_workers": 2,
       "available_workers": 5,
-      "utilisation": 0.2,
+      "utilisation": 0.4,
       "binding": false,
       "affected_plans": [
-        "P06"
+        "P06",
+        "P08"
       ]
     },
     {
@@ -2626,12 +2760,13 @@
       "type": "RESOURCE_UTILISATION",
       "resource_type": "labour",
       "time": "2026-09-23T08:00:00",
-      "used_workers": 1,
+      "used_workers": 2,
       "available_workers": 5,
-      "utilisation": 0.2,
+      "utilisation": 0.4,
       "binding": false,
       "affected_plans": [
-        "P06"
+        "P06",
+        "P08"
       ]
     },
     {
@@ -2760,10 +2895,192 @@
       ]
     },
     {
+      "decision_id": "labour:2026-09-24T08:00:00",
+      "type": "RESOURCE_UTILISATION",
+      "resource_type": "labour",
+      "time": "2026-09-24T08:00:00",
+      "used_workers": 1,
+      "available_workers": 5,
+      "utilisation": 0.2,
+      "binding": false,
+      "affected_plans": [
+        "P08"
+      ]
+    },
+    {
+      "decision_id": "labour:2026-09-24T09:00:00",
+      "type": "RESOURCE_UTILISATION",
+      "resource_type": "labour",
+      "time": "2026-09-24T09:00:00",
+      "used_workers": 1,
+      "available_workers": 5,
+      "utilisation": 0.2,
+      "binding": false,
+      "affected_plans": [
+        "P08"
+      ]
+    },
+    {
+      "decision_id": "labour:2026-09-24T10:00:00",
+      "type": "RESOURCE_UTILISATION",
+      "resource_type": "labour",
+      "time": "2026-09-24T10:00:00",
+      "used_workers": 1,
+      "available_workers": 5,
+      "utilisation": 0.2,
+      "binding": false,
+      "affected_plans": [
+        "P08"
+      ]
+    },
+    {
+      "decision_id": "labour:2026-09-24T11:00:00",
+      "type": "RESOURCE_UTILISATION",
+      "resource_type": "labour",
+      "time": "2026-09-24T11:00:00",
+      "used_workers": 1,
+      "available_workers": 5,
+      "utilisation": 0.2,
+      "binding": false,
+      "affected_plans": [
+        "P08"
+      ]
+    },
+    {
+      "decision_id": "labour:2026-09-24T16:00:00",
+      "type": "RESOURCE_UTILISATION",
+      "resource_type": "labour",
+      "time": "2026-09-24T16:00:00",
+      "used_workers": 2,
+      "available_workers": 5,
+      "utilisation": 0.4,
+      "binding": false,
+      "affected_plans": [
+        "P14"
+      ]
+    },
+    {
       "decision_id": "labour:2026-09-25T07:00:00",
       "type": "RESOURCE_UTILISATION",
       "resource_type": "labour",
       "time": "2026-09-25T07:00:00",
+      "used_workers": 2,
+      "available_workers": 5,
+      "utilisation": 0.4,
+      "binding": false,
+      "affected_plans": [
+        "P14"
+      ]
+    },
+    {
+      "decision_id": "labour:2026-09-25T08:00:00",
+      "type": "RESOURCE_UTILISATION",
+      "resource_type": "labour",
+      "time": "2026-09-25T08:00:00",
+      "used_workers": 2,
+      "available_workers": 5,
+      "utilisation": 0.4,
+      "binding": false,
+      "affected_plans": [
+        "P14"
+      ]
+    },
+    {
+      "decision_id": "labour:2026-09-25T09:00:00",
+      "type": "RESOURCE_UTILISATION",
+      "resource_type": "labour",
+      "time": "2026-09-25T09:00:00",
+      "used_workers": 2,
+      "available_workers": 5,
+      "utilisation": 0.4,
+      "binding": false,
+      "affected_plans": [
+        "P14"
+      ]
+    },
+    {
+      "decision_id": "labour:2026-09-25T10:00:00",
+      "type": "RESOURCE_UTILISATION",
+      "resource_type": "labour",
+      "time": "2026-09-25T10:00:00",
+      "used_workers": 2,
+      "available_workers": 5,
+      "utilisation": 0.4,
+      "binding": false,
+      "affected_plans": [
+        "P14"
+      ]
+    },
+    {
+      "decision_id": "labour:2026-09-25T11:00:00",
+      "type": "RESOURCE_UTILISATION",
+      "resource_type": "labour",
+      "time": "2026-09-25T11:00:00",
+      "used_workers": 2,
+      "available_workers": 5,
+      "utilisation": 0.4,
+      "binding": false,
+      "affected_plans": [
+        "P14"
+      ]
+    },
+    {
+      "decision_id": "labour:2026-09-25T12:00:00",
+      "type": "RESOURCE_UTILISATION",
+      "resource_type": "labour",
+      "time": "2026-09-25T12:00:00",
+      "used_workers": 2,
+      "available_workers": 5,
+      "utilisation": 0.4,
+      "binding": false,
+      "affected_plans": [
+        "P14"
+      ]
+    },
+    {
+      "decision_id": "labour:2026-09-25T13:00:00",
+      "type": "RESOURCE_UTILISATION",
+      "resource_type": "labour",
+      "time": "2026-09-25T13:00:00",
+      "used_workers": 2,
+      "available_workers": 5,
+      "utilisation": 0.4,
+      "binding": false,
+      "affected_plans": [
+        "P14"
+      ]
+    },
+    {
+      "decision_id": "labour:2026-09-25T14:00:00",
+      "type": "RESOURCE_UTILISATION",
+      "resource_type": "labour",
+      "time": "2026-09-25T14:00:00",
+      "used_workers": 2,
+      "available_workers": 5,
+      "utilisation": 0.4,
+      "binding": false,
+      "affected_plans": [
+        "P14"
+      ]
+    },
+    {
+      "decision_id": "labour:2026-09-25T15:00:00",
+      "type": "RESOURCE_UTILISATION",
+      "resource_type": "labour",
+      "time": "2026-09-25T15:00:00",
+      "used_workers": 2,
+      "available_workers": 5,
+      "utilisation": 0.4,
+      "binding": false,
+      "affected_plans": [
+        "P14"
+      ]
+    },
+    {
+      "decision_id": "labour:2026-09-25T16:00:00",
+      "type": "RESOURCE_UTILISATION",
+      "resource_type": "labour",
+      "time": "2026-09-25T16:00:00",
       "used_workers": 2,
       "available_workers": 5,
       "utilisation": 0.4,
@@ -2874,8 +3191,8 @@
       "baseline_selected": false,
       "scenario": "FORCE_SKIPPED_ACTION",
       "feasible": true,
-      "baseline_objective_aud": 819810.93,
-      "counterfactual_objective_aud": 819810.93,
+      "baseline_objective_aud": 923664.08,
+      "counterfactual_objective_aud": 923664.08,
       "objective_change_aud": 0,
       "affected_decisions": []
     },
@@ -2888,63 +3205,15 @@
       "baseline_selected": true,
       "scenario": "FORBID_SELECTED_ACTION",
       "feasible": true,
-      "baseline_objective_aud": 819810.93,
-      "counterfactual_objective_aud": 810712.44,
-      "objective_change_aud": -9098.49,
+      "baseline_objective_aud": 923664.08,
+      "counterfactual_objective_aud": 913882.57,
+      "objective_change_aud": -9781.51,
       "affected_decisions": [
         {
           "plan_id": "P03",
           "change": "removed",
-          "old_candidate_id": "P03_F2_spray_20260918_0700",
+          "old_candidate_id": "P03_F2_spray_20260919_0900",
           "old_start_time": "2026-09-21T07:00:00"
-        },
-        {
-          "plan_id": "P05",
-          "change": "rescheduled",
-          "old_candidate_id": "P05_F3_spray_20260918_0900",
-          "new_candidate_id": "P05_F3_spray_20260918_0700",
-          "old_start_time": "2026-09-19T08:00:00",
-          "new_start_time": "2026-09-19T08:00:00"
-        },
-        {
-          "plan_id": "P07",
-          "change": "rescheduled",
-          "old_candidate_id": "P07_F4_fertilise_20260919_1000",
-          "new_candidate_id": "P07_F4_fertilise_20260918_0700",
-          "old_start_time": "2026-09-21T07:00:00",
-          "new_start_time": "2026-09-18T07:00:00"
-        },
-        {
-          "plan_id": "P08",
-          "change": "rescheduled",
-          "old_candidate_id": "P08_F4_spray_20260923_0900",
-          "new_candidate_id": "P08_F4_spray_20260924_0700",
-          "old_start_time": "2026-09-24T07:00:00",
-          "new_start_time": "2026-09-24T07:00:00"
-        },
-        {
-          "plan_id": "P11",
-          "change": "rescheduled",
-          "old_candidate_id": "P11_F6_spray_20260920_1000",
-          "new_candidate_id": "P11_F6_spray_20260920_0800",
-          "old_start_time": "2026-09-22T07:00:00",
-          "new_start_time": "2026-09-22T07:00:00"
-        },
-        {
-          "plan_id": "P13",
-          "change": "rescheduled",
-          "old_candidate_id": "P13_F7_spray_20260918_0700",
-          "new_candidate_id": "P13_F7_spray_20260918_0900",
-          "old_start_time": "2026-09-18T07:00:00",
-          "new_start_time": "2026-09-18T09:00:00"
-        },
-        {
-          "plan_id": "P14",
-          "change": "rescheduled",
-          "old_candidate_id": "P14_F7_harvest_20260924_0800",
-          "new_candidate_id": "P14_F7_harvest_20260924_0700",
-          "old_start_time": "2026-09-26T08:00:00",
-          "new_start_time": "2026-09-24T07:00:00"
         }
       ]
     },
@@ -2957,8 +3226,8 @@
       "baseline_selected": false,
       "scenario": "FORCE_SKIPPED_ACTION",
       "feasible": true,
-      "baseline_objective_aud": 819810.93,
-      "counterfactual_objective_aud": 819810.93,
+      "baseline_objective_aud": 923664.08,
+      "counterfactual_objective_aud": 923664.08,
       "objective_change_aud": 0,
       "affected_decisions": []
     },
@@ -2971,55 +3240,15 @@
       "baseline_selected": true,
       "scenario": "FORBID_SELECTED_ACTION",
       "feasible": true,
-      "baseline_objective_aud": 819810.93,
-      "counterfactual_objective_aud": 817166.46,
-      "objective_change_aud": -2644.47,
+      "baseline_objective_aud": 923664.08,
+      "counterfactual_objective_aud": 919910.78,
+      "objective_change_aud": -3753.3,
       "affected_decisions": [
-        {
-          "plan_id": "P01",
-          "change": "rescheduled",
-          "old_candidate_id": "P01_F1_harvest_20260919_1000",
-          "new_candidate_id": "P01_F1_harvest_20260919_0800",
-          "old_start_time": "2026-09-22T07:00:00",
-          "new_start_time": "2026-09-22T07:00:00"
-        },
-        {
-          "plan_id": "P05",
-          "change": "rescheduled",
-          "old_candidate_id": "P05_F3_spray_20260918_0900",
-          "new_candidate_id": "P05_F3_spray_20260918_0700",
-          "old_start_time": "2026-09-19T08:00:00",
-          "new_start_time": "2026-09-19T08:00:00"
-        },
-        {
-          "plan_id": "P07",
-          "change": "rescheduled",
-          "old_candidate_id": "P07_F4_fertilise_20260919_1000",
-          "new_candidate_id": "P07_F4_fertilise_20260921_0700",
-          "old_start_time": "2026-09-21T07:00:00",
-          "new_start_time": "2026-09-21T07:00:00"
-        },
         {
           "plan_id": "P08",
           "change": "removed",
-          "old_candidate_id": "P08_F4_spray_20260923_0900",
+          "old_candidate_id": "P08_F4_spray_20260920_0800",
           "old_start_time": "2026-09-24T07:00:00"
-        },
-        {
-          "plan_id": "P11",
-          "change": "rescheduled",
-          "old_candidate_id": "P11_F6_spray_20260920_1000",
-          "new_candidate_id": "P11_F6_spray_20260920_0800",
-          "old_start_time": "2026-09-22T07:00:00",
-          "new_start_time": "2026-09-22T07:00:00"
-        },
-        {
-          "plan_id": "P14",
-          "change": "rescheduled",
-          "old_candidate_id": "P14_F7_harvest_20260924_0800",
-          "new_candidate_id": "P14_F7_harvest_20260924_0900",
-          "old_start_time": "2026-09-26T08:00:00",
-          "new_start_time": "2026-09-24T09:00:00"
         }
       ]
     },
@@ -3032,8 +3261,8 @@
       "baseline_selected": false,
       "scenario": "FORCE_SKIPPED_ACTION",
       "feasible": true,
-      "baseline_objective_aud": 819810.93,
-      "counterfactual_objective_aud": 819810.93,
+      "baseline_objective_aud": 923664.08,
+      "counterfactual_objective_aud": 923664.08,
       "objective_change_aud": 0,
       "affected_decisions": []
     },
@@ -3046,55 +3275,15 @@
       "baseline_selected": true,
       "scenario": "FORBID_SELECTED_ACTION",
       "feasible": true,
-      "baseline_objective_aud": 819810.93,
-      "counterfactual_objective_aud": 804690.5,
-      "objective_change_aud": -15120.43,
+      "baseline_objective_aud": 923664.08,
+      "counterfactual_objective_aud": 907196.53,
+      "objective_change_aud": -16467.55,
       "affected_decisions": [
-        {
-          "plan_id": "P05",
-          "change": "rescheduled",
-          "old_candidate_id": "P05_F3_spray_20260918_0900",
-          "new_candidate_id": "P05_F3_spray_20260918_0800",
-          "old_start_time": "2026-09-19T08:00:00",
-          "new_start_time": "2026-09-19T08:00:00"
-        },
-        {
-          "plan_id": "P07",
-          "change": "rescheduled",
-          "old_candidate_id": "P07_F4_fertilise_20260919_1000",
-          "new_candidate_id": "P07_F4_fertilise_20260919_0800",
-          "old_start_time": "2026-09-21T07:00:00",
-          "new_start_time": "2026-09-21T07:00:00"
-        },
-        {
-          "plan_id": "P08",
-          "change": "rescheduled",
-          "old_candidate_id": "P08_F4_spray_20260923_0900",
-          "new_candidate_id": "P08_F4_spray_20260924_0800",
-          "old_start_time": "2026-09-24T07:00:00",
-          "new_start_time": "2026-09-24T08:00:00"
-        },
-        {
-          "plan_id": "P09",
-          "change": "rescheduled",
-          "old_candidate_id": "P09_F5_plant_20260917_0800",
-          "new_candidate_id": "P09_F5_plant_20260917_0700",
-          "old_start_time": "2026-09-20T08:00:00",
-          "new_start_time": "2026-09-20T08:00:00"
-        },
         {
           "plan_id": "P11",
           "change": "removed",
-          "old_candidate_id": "P11_F6_spray_20260920_1000",
+          "old_candidate_id": "P11_F6_spray_20260921_0800",
           "old_start_time": "2026-09-22T07:00:00"
-        },
-        {
-          "plan_id": "P14",
-          "change": "rescheduled",
-          "old_candidate_id": "P14_F7_harvest_20260924_0800",
-          "new_candidate_id": "P14_F7_harvest_20260924_0700",
-          "old_start_time": "2026-09-26T08:00:00",
-          "new_start_time": "2026-09-24T07:00:00"
         }
       ]
     },
@@ -3107,8 +3296,8 @@
       "baseline_selected": false,
       "scenario": "FORCE_SKIPPED_ACTION",
       "feasible": true,
-      "baseline_objective_aud": 819810.93,
-      "counterfactual_objective_aud": 819810.93,
+      "baseline_objective_aud": 923664.08,
+      "counterfactual_objective_aud": 923664.08,
       "objective_change_aud": 0,
       "affected_decisions": []
     },
@@ -3121,63 +3310,15 @@
       "baseline_selected": true,
       "scenario": "FORBID_SELECTED_ACTION",
       "feasible": true,
-      "baseline_objective_aud": 819810.93,
-      "counterfactual_objective_aud": 817715.18,
-      "objective_change_aud": -2095.75,
+      "baseline_objective_aud": 923664.08,
+      "counterfactual_objective_aud": 922726.32,
+      "objective_change_aud": -937.76,
       "affected_decisions": [
-        {
-          "plan_id": "P01",
-          "change": "rescheduled",
-          "old_candidate_id": "P01_F1_harvest_20260919_1000",
-          "new_candidate_id": "P01_F1_harvest_20260919_0900",
-          "old_start_time": "2026-09-22T07:00:00",
-          "new_start_time": "2026-09-22T07:00:00"
-        },
-        {
-          "plan_id": "P06",
-          "change": "rescheduled",
-          "old_candidate_id": "P06_F3_fertilise_20260922_0900",
-          "new_candidate_id": "P06_F3_fertilise_20260922_0700",
-          "old_start_time": "2026-09-23T07:00:00",
-          "new_start_time": "2026-09-23T07:00:00"
-        },
-        {
-          "plan_id": "P07",
-          "change": "rescheduled",
-          "old_candidate_id": "P07_F4_fertilise_20260919_1000",
-          "new_candidate_id": "P07_F4_fertilise_20260918_0700",
-          "old_start_time": "2026-09-21T07:00:00",
-          "new_start_time": "2026-09-18T07:00:00"
-        },
-        {
-          "plan_id": "P08",
-          "change": "rescheduled",
-          "old_candidate_id": "P08_F4_spray_20260923_0900",
-          "new_candidate_id": "P08_F4_spray_20260924_0800",
-          "old_start_time": "2026-09-24T07:00:00",
-          "new_start_time": "2026-09-24T08:00:00"
-        },
-        {
-          "plan_id": "P09",
-          "change": "rescheduled",
-          "old_candidate_id": "P09_F5_plant_20260917_0800",
-          "new_candidate_id": "P09_F5_plant_20260917_0900",
-          "old_start_time": "2026-09-20T08:00:00",
-          "new_start_time": "2026-09-19T08:00:00"
-        },
         {
           "plan_id": "P13",
           "change": "removed",
-          "old_candidate_id": "P13_F7_spray_20260918_0700",
+          "old_candidate_id": "P13_F7_spray_20260915_0900",
           "old_start_time": "2026-09-18T07:00:00"
-        },
-        {
-          "plan_id": "P14",
-          "change": "rescheduled",
-          "old_candidate_id": "P14_F7_harvest_20260924_0800",
-          "new_candidate_id": "P14_F7_harvest_20260923_0700",
-          "old_start_time": "2026-09-26T08:00:00",
-          "new_start_time": "2026-09-23T07:00:00"
         }
       ]
     },
@@ -3190,78 +3331,30 @@
       "baseline_selected": false,
       "scenario": "FORCE_SKIPPED_ACTION",
       "feasible": true,
-      "baseline_objective_aud": 819810.93,
-      "counterfactual_objective_aud": 819494.04,
-      "objective_change_aud": -316.89,
+      "baseline_objective_aud": 923664.08,
+      "counterfactual_objective_aud": 923197.71,
+      "objective_change_aud": -466.37,
       "affected_decisions": [
-        {
-          "plan_id": "P01",
-          "change": "rescheduled",
-          "old_candidate_id": "P01_F1_harvest_20260919_1000",
-          "new_candidate_id": "P01_F1_harvest_20260919_0800",
-          "old_start_time": "2026-09-22T07:00:00",
-          "new_start_time": "2026-09-22T07:00:00"
-        },
-        {
-          "plan_id": "P03",
-          "change": "rescheduled",
-          "old_candidate_id": "P03_F2_spray_20260918_0700",
-          "new_candidate_id": "P03_F2_spray_20260918_0900",
-          "old_start_time": "2026-09-21T07:00:00",
-          "new_start_time": "2026-09-20T08:00:00"
-        },
-        {
-          "plan_id": "P05",
-          "change": "rescheduled",
-          "old_candidate_id": "P05_F3_spray_20260918_0900",
-          "new_candidate_id": "P05_F3_spray_20260916_0700",
-          "old_start_time": "2026-09-19T08:00:00",
-          "new_start_time": "2026-09-19T08:00:00"
-        },
         {
           "plan_id": "P06",
           "change": "rescheduled",
-          "old_candidate_id": "P06_F3_fertilise_20260922_0900",
-          "new_candidate_id": "P06_F3_fertilise_20260919_0800",
+          "old_candidate_id": "P06_F3_fertilise_20260922_0700",
+          "new_candidate_id": "P06_F3_fertilise_20260921_0800",
           "old_start_time": "2026-09-23T07:00:00",
           "new_start_time": "2026-09-23T07:00:00"
         },
         {
-          "plan_id": "P07",
+          "plan_id": "P11",
           "change": "rescheduled",
-          "old_candidate_id": "P07_F4_fertilise_20260919_1000",
-          "new_candidate_id": "P07_F4_fertilise_20260919_0900",
-          "old_start_time": "2026-09-21T07:00:00",
-          "new_start_time": "2026-09-21T07:00:00"
-        },
-        {
-          "plan_id": "P08",
-          "change": "rescheduled",
-          "old_candidate_id": "P08_F4_spray_20260923_0900",
-          "new_candidate_id": "P08_F4_spray_20260923_0700",
-          "old_start_time": "2026-09-24T07:00:00",
-          "new_start_time": "2026-09-24T07:12:27"
-        },
-        {
-          "plan_id": "P09",
-          "change": "rescheduled",
-          "old_candidate_id": "P09_F5_plant_20260917_0800",
-          "new_candidate_id": "P09_F5_plant_20260917_0700",
-          "old_start_time": "2026-09-20T08:00:00",
+          "old_candidate_id": "P11_F6_spray_20260921_0800",
+          "new_candidate_id": "P11_F6_spray_20260921_0900",
+          "old_start_time": "2026-09-22T07:00:00",
           "new_start_time": "2026-09-22T07:00:00"
-        },
-        {
-          "plan_id": "P13",
-          "change": "rescheduled",
-          "old_candidate_id": "P13_F7_spray_20260918_0700",
-          "new_candidate_id": "P13_F7_spray_20260918_0900",
-          "old_start_time": "2026-09-18T07:00:00",
-          "new_start_time": "2026-09-18T09:00:00"
         },
         {
           "plan_id": "P15",
           "change": "added",
-          "new_candidate_id": "P15_F3_spray_20260923_0700",
+          "new_candidate_id": "P15_F3_spray_20260924_0700",
           "new_start_time": "2026-09-25T07:00:00"
         }
       ]
