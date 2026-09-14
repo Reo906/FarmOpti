@@ -535,36 +535,6 @@ function DecisionAssistant() {
   </div>;
 }
 
-function OptimizerInputPanel() {
-  const [selectedId, setSelectedId] = useState(managementPlanInputs[0]?.plan_id ?? '');
-  const [drafts, setDrafts] = useState<Record<string, ManagementPlanInput>>(() => Object.fromEntries(managementPlanInputs.map((input) => [input.plan_id, { ...input }])));
-  const [saved, setSaved] = useState(false);
-  const draft = drafts[selectedId] ?? managementPlanInputs[0];
-
-  const selectPlan = (planId: string) => {
-    setSelectedId(planId);
-    setSaved(false);
-  };
-
-  const update = (key: keyof ManagementPlanInput, value: string | boolean) => {
-    setDrafts((current) => ({ ...current, [selectedId]: { ...current[selectedId], [key]: value } }));
-    setSaved(false);
-  };
-
-  const exportPlan = () => {
-    const rows = managementPlanInputs.map((input) => drafts[input.plan_id] ?? input);
-    const header = 'plan_id,field_id,operation,target,amount,unit,allowed_from,allowed_to,required,depends_on,min_gap_hours';
-    const csv = [header, ...rows.map((input) => [input.plan_id, input.field_id, input.operation, input.target, input.amount, input.unit, input.allowed_from, input.allowed_to, input.required ? '1' : '0', input.depends_on, input.min_gap_hours].join(','))].join('\n');
-    const link = document.createElement('a');
-    link.href = URL.createObjectURL(new Blob([csv], { type: 'text/csv' }));
-    link.download = 'management_plan.csv';
-    link.click();
-    URL.revokeObjectURL(link.href);
-  };
-
-  return <section className="yc-card yc-input-panel"><header><div><h3>Management plan editor</h3><span>Modify the fields used by the next optimizer pipeline run</span></div><Badge tone="info">UI draft</Badge></header><div className="yc-card-body"><div className="yc-input-grid"><label>Action<select value={selectedId} onChange={(event) => selectPlan(event.target.value)}>{managementPlanInputs.map((input) => <option key={input.plan_id} value={input.plan_id}>{input.plan_id} · {input.field_id} · {input.operation}</option>)}</select></label><label>Allowed from<input type="date" value={draft.allowed_from} onChange={(event) => update('allowed_from', event.target.value)} /></label><label>Allowed to<input type="date" value={draft.allowed_to} onChange={(event) => update('allowed_to', event.target.value)} /></label><label>Amount {draft.unit && `(${draft.unit})`}<input value={draft.amount} placeholder="Optional" onChange={(event) => update('amount', event.target.value)} /></label></div><div className="yc-input-meta"><span><b>{draft.field_id}</b> · {draft.operation} · {draft.target || 'no target'}</span><label className="yc-check"><input type="checkbox" checked={draft.required} onChange={(event) => update('required', event.target.checked)} /> Required action</label></div><div className="yc-input-actions"><span>{saved ? 'All edits are retained in this editor. Export the CSV to use them in the pipeline.' : 'Edit multiple actions, then export one complete management_plan.csv.'}</span><button className="yc-btn" onClick={() => setSaved(true)}>Save edits</button><button className="yc-btn yc-btn-dark" onClick={exportPlan}>Download management_plan.csv</button></div></div></section>;
-}
-
 function HistoryUploadDialog({ open, onClose, onApplied }: { open: boolean; onClose: () => void; onApplied: (output: OptimizerOutput, calibration: CalibrationSummary) => void }) {
   const inputRef = useRef<HTMLInputElement>(null);
   const [busy, setBusy] = useState(false);
@@ -923,7 +893,7 @@ function DetailView({ view, disrupted, onNavigate, onOutputChange }: { view: Vie
   const selectedResourcePlan = resourcePlans.find((item) => item.id === selectedPlanId) ?? resourcePlans[0];
   const harvestSchedule = selectedResourcePlan?.schedule ?? schedule;
   const harvestSummary = selectedResourcePlan?.summary ?? summary;
-  if (view === 'rules') return <><div className="yc-page-head"><div><h2>Farm rules</h2><p>Add or remove hard scheduling rules the optimizer enforces live. The management plan editor below is a draft tool for preparing a replacement CSV -- it doesn't feed the running optimizer directly.</p></div><div className="yc-actions"><button className="yc-btn yc-btn-dark" onClick={() => onNavigate('command')}><Home size={15} /> Back to command</button></div></div><FarmRulesPanel onOutputChange={onOutputChange} /><OptimizerInputPanel /><Table title="Current management plan"><thead><tr><th>Plan</th><th>Field</th><th>Operation</th><th>Target</th><th>Window</th><th>Required</th></tr></thead><tbody>{managementPlanInputs.map((input) => <tr key={input.plan_id}><td><b>{input.plan_id}</b></td><td>{input.field_id}</td><td>{input.operation}</td><td>{input.target || '—'}</td><td>{input.allowed_from} to {input.allowed_to}</td><td><Badge tone={input.required ? 'ok' : 'mute'}>{input.required ? 'Required' : 'Optional'}</Badge></td></tr>)}</tbody></Table></>;
+  if (view === 'rules') return <><div className="yc-page-head"><div><h2>Farm rules</h2><p>Add or remove hard scheduling rules the optimizer enforces live.</p></div><div className="yc-actions"><button className="yc-btn yc-btn-dark" onClick={() => onNavigate('command')}><Home size={15} /> Back to command</button></div></div><FarmRulesPanel onOutputChange={onOutputChange} /><Table title="Current management plan"><thead><tr><th>Plan</th><th>Field</th><th>Operation</th><th>Target</th><th>Window</th><th>Required</th></tr></thead><tbody>{managementPlanInputs.map((input) => <tr key={input.plan_id}><td><b>{input.plan_id}</b></td><td>{input.field_id}</td><td>{input.operation}</td><td>{input.target || '—'}</td><td>{input.allowed_from} to {input.allowed_to}</td><td><Badge tone={input.required ? 'ok' : 'mute'}>{input.required ? 'Required' : 'Optional'}</Badge></td></tr>)}</tbody></Table></>;
   if (view === 'harvest') return <><div className="yc-page-head"><div><h2>Harvest operations</h2><p>This view mirrors the {live ? 'latest trained' : 'persisted'} schedule generated by the optimizer pipeline.</p><span className="yc-detail">{harvestSummary.num_scheduled_actions} actions / {harvestSchedule.length} work segments · source: optimal_schedule.csv</span></div><div className="yc-actions"><button className="yc-btn yc-btn-primary" onClick={() => onNavigate('command')}>Back to command</button></div></div><Table title={live ? 'Updated schedule assignments' : 'Persisted schedule assignments'}><thead><tr><th>Field</th><th>Operation</th><th>Target</th><th>Machine</th><th>Work hours</th><th>Remaining</th><th>Start</th><th>End</th><th>Complete</th><th className="yc-right">Cash effect</th></tr></thead><tbody>{harvestSchedule.map((row) => <tr key={`${row.option_id}-${row.plan_id}-${row.start_time}`}><td><b>{row.field_id}</b><small>{row.plan_id} · {row.option_id}</small></td><td>{row.operation}</td><td>{row.target}</td><td>{row.machine_id}</td><td>{row.work_hours ?? '—'}</td><td>{row.remaining_workload_hours ?? '—'}</td><td>{row.start_time}</td><td>{row.end_time}</td><td>{row.completion_time ?? row.end_time}</td><td className="yc-right">{signedMoney(row.direct_cash_effect_aud)}</td></tr>)}</tbody></Table></>;
   const rows = view === 'fleet' ? yallambeeOpsDashboard.machines.map((machine) => [machine.id, machine.make, machine.oper ?? '—', machine.rate ? `${(machine.rate * (disrupted && machine.id === 'H2' ? 0.7 : 1)).toFixed(1)} ha/h` : '—', machine.health]) : view === 'people' ? yallambeeOpsDashboard.people.map((person) => [person.name, person.role, person.on, `${person.hours14} h`, person.fatigue]) : view === 'markets' ? yallambeeOpsDashboard.contracts.map((contract) => [contract.id, contract.buyer, contract.grade, `${contract.filled}/${contract.tonnes} t`, contract.due]) : yallambeeOpsDashboard.fields.map((field) => [field.name, field.prop, yallambeeOpsDashboard.crops[field.crop].label, `${field.moist}%`, field.ready]);
   const headings = view === 'fleet' ? ['Asset', 'Make', 'Operator', 'Rate', 'Health'] : view === 'people' ? ['Name', 'Role', 'On', '14-day hours', 'Fatigue'] : view === 'markets' ? ['Contract', 'Buyer', 'Grade', 'Filled', 'Due'] : ['Paddock', 'Property', 'Crop', 'Moisture', 'Ready'];
