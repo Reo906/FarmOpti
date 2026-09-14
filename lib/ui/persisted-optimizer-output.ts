@@ -3,6 +3,7 @@ import scheduleCsv from '@/data/outputs/optimal_schedule.csv?raw';
 import alternativePlansJson from '@/data/outputs/alternative_plans.json';
 import managementPlanCsv from '@/data/external_variables/management_plan.csv?raw';
 import fieldsCsv from '@/data/external_variables/fields.csv?raw';
+import machinesCsv from '@/data/external_variables/machines.csv?raw';
 import weatherCsv from '@/data/external_variables/weather_hourly.csv?raw';
 import decisionIndexJsonl from '@/data/outputs/decision_index.jsonl?raw';
 import planChangeSummary from '@/data/outputs/plan_change_summary.json';
@@ -206,6 +207,28 @@ export const fieldCrops: Record<string, string> = Object.fromEntries(
       return [fieldId, crop || 'unknown'];
     }),
 );
+
+// machine_id -> a friendly "<Type> N" label (e.g. M3 -> "Sprayer 2"), numbered
+// sequentially per type across the WHOLE fleet in machines.csv rather than
+// just whichever machines happen to appear in the currently-displayed
+// schedule -- so the same physical machine always shows the same label
+// regardless of which resource plan is selected.
+export const machineLabels: Record<string, string> = (() => {
+  const rowsByType = new Map<string, string[]>();
+  for (const line of machinesCsv.trim().split(/\r?\n/).slice(1).filter(Boolean)) {
+    const [machineId, machineType] = parseCsvRow(line);
+    if (!rowsByType.has(machineType)) rowsByType.set(machineType, []);
+    rowsByType.get(machineType)!.push(machineId);
+  }
+  const labels: Record<string, string> = {};
+  for (const [type, ids] of rowsByType) {
+    const typeLabel = type.replace(/_/g, ' ').replace(/^./, (c) => c.toUpperCase());
+    [...ids].sort().forEach((id, index) => {
+      labels[id] = `${typeLabel} ${index + 1}`;
+    });
+  }
+  return labels;
+})();
 
 export const managementPlanInputs: ManagementPlanInput[] = managementPlanCsv
   .trim()

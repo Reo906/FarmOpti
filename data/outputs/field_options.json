@@ -2902,214 +2902,6 @@
     {
       "option_id": "F3_O002",
       "field_id": "F3",
-      "total_direct_cash_effect_aud": -17715.53,
-      "terminal_value_aud": 151232.32,
-      "objective_value_aud": 133516.79,
-      "actions": [
-        {
-          "candidate_id": "P05_F3_spray_20260917_0700",
-          "plan_id": "P05",
-          "field_id": "F3",
-          "operation": "spray",
-          "target": "weed_control",
-          "required": true,
-          "depends_on": "",
-          "min_gap_hours": 0,
-          "start_time": "2026-09-17T07:00:00",
-          "end_time": "2026-09-18T14:54:11",
-          "duration_hours": 17.9,
-          "workload_hours": 16.7917,
-          "machine_type": "sprayer",
-          "eligible_machine_ids": [
-            "M9",
-            "M10",
-            "M3"
-          ],
-          "workers_required": 1,
-          "work_segments": [
-            {
-              "date": "2026-09-17",
-              "start_time": "2026-09-17T07:00:00",
-              "end_time": "2026-09-17T17:00:00",
-              "work_hours": 10,
-              "effective_work_hours": 9.125
-            },
-            {
-              "date": "2026-09-18",
-              "start_time": "2026-09-18T07:00:00",
-              "end_time": "2026-09-18T14:54:11",
-              "work_hours": 7.9031,
-              "effective_work_hours": 7.666666666666668
-            }
-          ],
-          "direct_revenue_aud": 0,
-          "direct_cost_aud": 3906.06,
-          "direct_cash_effect_aud": -3906.06,
-          "state_yield_effect_t_ha": 0.4547,
-          "water_ml": 0,
-          "candidate_score": 0.454671,
-          "state_after": {
-            "crop": "barley",
-            "planted": true,
-            "newly_planted": false,
-            "harvested": false,
-            "growth_stage": "stem_elongation",
-            "readiness": 0.526,
-            "soil_moisture": 0.1771,
-            "soil_temperature_c": 14.38,
-            "expected_yield_t_ha": 4.8321,
-            "nitrogen_index": 0.512,
-            "weed_pressure": 0.064,
-            "pest_pressure": 0.08,
-            "disease_pressure": 0.0156,
-            "seedbed_readiness": 0.12,
-            "trafficability": 1,
-            "weather_damage_index": 0
-          }
-        },
-        {
-          "candidate_id": "P06_F3_fertilise_20260921_0800",
-          "plan_id": "P06",
-          "field_id": "F3",
-          "operation": "fertilise",
-          "target": "nitrogen",
-          "required": true,
-          "depends_on": "P05",
-          "min_gap_hours": 24,
-          "start_time": "2026-09-21T08:00:00",
-          "end_time": "2026-09-22T16:05:30",
-          "duration_hours": 18.09,
-          "workload_hours": 16.7917,
-          "machine_type": "fertiliser_spreader",
-          "eligible_machine_ids": [
-            "M4"
-          ],
-          "workers_required": 1,
-          "work_segments": [
-            {
-              "date": "2026-09-21",
-              "start_time": "2026-09-21T08:00:00",
-              "end_time": "2026-09-21T17:00:00",
-              "work_hours": 9,
-              "effective_work_hours": 7.699999999999998
-            },
-            {
-              "date": "2026-09-22",
-              "start_time": "2026-09-22T07:00:00",
-              "end_time": "2026-09-22T16:05:30",
-              "work_hours": 9.0917,
-              "effective_work_hours": 9.091666666666669
-            }
-          ],
-          "direct_revenue_aud": 0,
-          "direct_cost_aud": 9063.17,
-          "direct_cash_effect_aud": -9063.17,
-          "state_yield_effect_t_ha": 0.2273,
-          "water_ml": 0,
-          "candidate_score": 0.204851,
-          "state_after": {
-            "crop": "barley",
-            "planted": true,
-            "newly_planted": false,
-            "harvested": false,
-            "growth_stage": "stem_elongation",
-            "readiness": 0.562,
-            "soil_moisture": 0.2631,
-            "soil_temperature_c": 15.06,
-            "expected_yield_t_ha": 5.0647,
-            "nitrogen_index": 0.6693,
-            "weed_pressure": 0.4076,
-            "pest_pressure": 0.08,
-            "disease_pressure": 0.151,
-            "seedbed_readiness": 0.12,
-            "trafficability": 1,
-            "weather_damage_index": 0
-          }
-        },
-        {
-          "candidate_id": "P15_F3_spray_20260924_0700",
-          "plan_id": "P15",
-          "field_id": "F3",
-          "operation": "spray",
-          "target": "disease_control",
-          "required": false,
-          "depends_on": "P06",
-          "min_gap_hours": 24,
-          "start_time": "2026-09-24T07:00:00",
-          "end_time": "2026-09-25T15:56:14",
-          "duration_hours": 18.94,
-          "workload_hours": 16.7917,
-          "machine_type": "sprayer",
-          "eligible_machine_ids": [
-            "M3",
-            "M9",
-            "M10"
-          ],
-          "workers_required": 1,
-          "work_segments": [
-            {
-              "date": "2026-09-24",
-              "start_time": "2026-09-24T07:00:00",
-              "end_time": "2026-09-24T17:00:00",
-              "work_hours": 10,
-              "effective_work_hours": 8.499999999999998
-            },
-            {
-              "date": "2026-09-25",
-              "start_time": "2026-09-25T07:00:00",
-              "end_time": "2026-09-25T15:56:14",
-              "work_hours": 8.9374,
-              "effective_work_hours": 8.29166666666667
-            }
-          ],
-          "direct_revenue_aud": 0,
-          "direct_cost_aud": 4746.3,
-          "direct_cash_effect_aud": -4746.3,
-          "state_yield_effect_t_ha": 0.1654,
-          "water_ml": 0,
-          "candidate_score": 0.142029,
-          "state_after": {
-            "crop": "barley",
-            "planted": true,
-            "newly_planted": false,
-            "harvested": false,
-            "growth_stage": "stem_elongation",
-            "readiness": 0.589,
-            "soil_moisture": 0.2414,
-            "soil_temperature_c": 15.57,
-            "expected_yield_t_ha": 5.2302,
-            "nitrogen_index": 0.5889,
-            "weed_pressure": 0.5984,
-            "pest_pressure": 0.08,
-            "disease_pressure": 0.0195,
-            "seedbed_readiness": 0.12,
-            "trafficability": 0.96,
-            "weather_damage_index": 0
-          }
-        }
-      ],
-      "final_state": {
-        "crop": "barley",
-        "planted": true,
-        "newly_planted": false,
-        "harvested": false,
-        "growth_stage": "stem_elongation",
-        "readiness": 0.607,
-        "soil_moisture": 0.1104,
-        "soil_temperature_c": 15.91,
-        "expected_yield_t_ha": 5.2302,
-        "nitrogen_index": 0.5357,
-        "weed_pressure": 0.7063,
-        "pest_pressure": 0.08,
-        "disease_pressure": 0.0008,
-        "seedbed_readiness": 0.12,
-        "trafficability": 1,
-        "weather_damage_index": 0
-      }
-    },
-    {
-      "option_id": "F3_O003",
-      "field_id": "F3",
       "total_direct_cash_effect_aud": -12909.48,
       "terminal_value_aud": 146892.1,
       "objective_value_aud": 133982.62,
@@ -3255,7 +3047,7 @@
       }
     },
     {
-      "option_id": "F3_O004",
+      "option_id": "F3_O003",
       "field_id": "F3",
       "total_direct_cash_effect_aud": -12912.57,
       "terminal_value_aud": 146892.1,
@@ -3402,7 +3194,7 @@
       }
     },
     {
-      "option_id": "F3_O005",
+      "option_id": "F3_O004",
       "field_id": "F3",
       "total_direct_cash_effect_aud": -12916.29,
       "terminal_value_aud": 146892.1,
@@ -3549,7 +3341,7 @@
       }
     },
     {
-      "option_id": "F3_O006",
+      "option_id": "F3_O005",
       "field_id": "F3",
       "total_direct_cash_effect_aud": -12919.37,
       "terminal_value_aud": 146892.1,
@@ -3696,7 +3488,7 @@
       }
     },
     {
-      "option_id": "F3_O007",
+      "option_id": "F3_O006",
       "field_id": "F3",
       "total_direct_cash_effect_aud": -12922.46,
       "terminal_value_aud": 146892.1,
@@ -3843,7 +3635,7 @@
       }
     },
     {
-      "option_id": "F3_O008",
+      "option_id": "F3_O007",
       "field_id": "F3",
       "total_direct_cash_effect_aud": -12926.18,
       "terminal_value_aud": 146892.1,
@@ -3990,7 +3782,7 @@
       }
     },
     {
-      "option_id": "F3_O009",
+      "option_id": "F3_O008",
       "field_id": "F3",
       "total_direct_cash_effect_aud": -12929.26,
       "terminal_value_aud": 146892.1,
@@ -4137,7 +3929,7 @@
       }
     },
     {
-      "option_id": "F3_O010",
+      "option_id": "F3_O009",
       "field_id": "F3",
       "total_direct_cash_effect_aud": -12932.35,
       "terminal_value_aud": 146892.1,
@@ -4284,1047 +4076,7 @@
       }
     },
     {
-      "option_id": "F3_O011",
-      "field_id": "F3",
-      "total_direct_cash_effect_aud": -17718.03,
-      "terminal_value_aud": 151232.32,
-      "objective_value_aud": 133514.29,
-      "actions": [
-        {
-          "candidate_id": "P05_F3_spray_20260917_0700",
-          "plan_id": "P05",
-          "field_id": "F3",
-          "operation": "spray",
-          "target": "weed_control",
-          "required": true,
-          "depends_on": "",
-          "min_gap_hours": 0,
-          "start_time": "2026-09-17T07:00:00",
-          "end_time": "2026-09-18T14:54:11",
-          "duration_hours": 17.9,
-          "workload_hours": 16.7917,
-          "machine_type": "sprayer",
-          "eligible_machine_ids": [
-            "M9",
-            "M10",
-            "M3"
-          ],
-          "workers_required": 1,
-          "work_segments": [
-            {
-              "date": "2026-09-17",
-              "start_time": "2026-09-17T07:00:00",
-              "end_time": "2026-09-17T17:00:00",
-              "work_hours": 10,
-              "effective_work_hours": 9.125
-            },
-            {
-              "date": "2026-09-18",
-              "start_time": "2026-09-18T07:00:00",
-              "end_time": "2026-09-18T14:54:11",
-              "work_hours": 7.9031,
-              "effective_work_hours": 7.666666666666668
-            }
-          ],
-          "direct_revenue_aud": 0,
-          "direct_cost_aud": 3906.06,
-          "direct_cash_effect_aud": -3906.06,
-          "state_yield_effect_t_ha": 0.4547,
-          "water_ml": 0,
-          "candidate_score": 0.454671,
-          "state_after": {
-            "crop": "barley",
-            "planted": true,
-            "newly_planted": false,
-            "harvested": false,
-            "growth_stage": "stem_elongation",
-            "readiness": 0.526,
-            "soil_moisture": 0.1771,
-            "soil_temperature_c": 14.38,
-            "expected_yield_t_ha": 4.8321,
-            "nitrogen_index": 0.512,
-            "weed_pressure": 0.064,
-            "pest_pressure": 0.08,
-            "disease_pressure": 0.0156,
-            "seedbed_readiness": 0.12,
-            "trafficability": 1,
-            "weather_damage_index": 0
-          }
-        },
-        {
-          "candidate_id": "P06_F3_fertilise_20260921_0700",
-          "plan_id": "P06",
-          "field_id": "F3",
-          "operation": "fertilise",
-          "target": "nitrogen",
-          "required": true,
-          "depends_on": "P05",
-          "min_gap_hours": 24,
-          "start_time": "2026-09-21T07:00:00",
-          "end_time": "2026-09-22T15:07:00",
-          "duration_hours": 18.12,
-          "workload_hours": 16.7917,
-          "machine_type": "fertiliser_spreader",
-          "eligible_machine_ids": [
-            "M4"
-          ],
-          "workers_required": 1,
-          "work_segments": [
-            {
-              "date": "2026-09-21",
-              "start_time": "2026-09-21T07:00:00",
-              "end_time": "2026-09-21T17:00:00",
-              "work_hours": 10,
-              "effective_work_hours": 8.674999999999999
-            },
-            {
-              "date": "2026-09-22",
-              "start_time": "2026-09-22T07:00:00",
-              "end_time": "2026-09-22T15:07:00",
-              "work_hours": 8.1167,
-              "effective_work_hours": 8.116666666666669
-            }
-          ],
-          "direct_revenue_aud": 0,
-          "direct_cost_aud": 9065.67,
-          "direct_cash_effect_aud": -9065.67,
-          "state_yield_effect_t_ha": 0.2273,
-          "water_ml": 0,
-          "candidate_score": 0.204851,
-          "state_after": {
-            "crop": "barley",
-            "planted": true,
-            "newly_planted": false,
-            "harvested": false,
-            "growth_stage": "stem_elongation",
-            "readiness": 0.562,
-            "soil_moisture": 0.2661,
-            "soil_temperature_c": 15.06,
-            "expected_yield_t_ha": 5.0647,
-            "nitrogen_index": 0.6693,
-            "weed_pressure": 0.4076,
-            "pest_pressure": 0.08,
-            "disease_pressure": 0.154,
-            "seedbed_readiness": 0.12,
-            "trafficability": 1,
-            "weather_damage_index": 0
-          }
-        },
-        {
-          "candidate_id": "P15_F3_spray_20260924_0700",
-          "plan_id": "P15",
-          "field_id": "F3",
-          "operation": "spray",
-          "target": "disease_control",
-          "required": false,
-          "depends_on": "P06",
-          "min_gap_hours": 24,
-          "start_time": "2026-09-24T07:00:00",
-          "end_time": "2026-09-25T15:56:14",
-          "duration_hours": 18.94,
-          "workload_hours": 16.7917,
-          "machine_type": "sprayer",
-          "eligible_machine_ids": [
-            "M3",
-            "M9",
-            "M10"
-          ],
-          "workers_required": 1,
-          "work_segments": [
-            {
-              "date": "2026-09-24",
-              "start_time": "2026-09-24T07:00:00",
-              "end_time": "2026-09-24T17:00:00",
-              "work_hours": 10,
-              "effective_work_hours": 8.499999999999998
-            },
-            {
-              "date": "2026-09-25",
-              "start_time": "2026-09-25T07:00:00",
-              "end_time": "2026-09-25T15:56:14",
-              "work_hours": 8.9374,
-              "effective_work_hours": 8.29166666666667
-            }
-          ],
-          "direct_revenue_aud": 0,
-          "direct_cost_aud": 4746.3,
-          "direct_cash_effect_aud": -4746.3,
-          "state_yield_effect_t_ha": 0.1654,
-          "water_ml": 0,
-          "candidate_score": 0.142029,
-          "state_after": {
-            "crop": "barley",
-            "planted": true,
-            "newly_planted": false,
-            "harvested": false,
-            "growth_stage": "stem_elongation",
-            "readiness": 0.589,
-            "soil_moisture": 0.2414,
-            "soil_temperature_c": 15.57,
-            "expected_yield_t_ha": 5.2302,
-            "nitrogen_index": 0.5889,
-            "weed_pressure": 0.5984,
-            "pest_pressure": 0.08,
-            "disease_pressure": 0.0195,
-            "seedbed_readiness": 0.12,
-            "trafficability": 0.96,
-            "weather_damage_index": 0
-          }
-        }
-      ],
-      "final_state": {
-        "crop": "barley",
-        "planted": true,
-        "newly_planted": false,
-        "harvested": false,
-        "growth_stage": "stem_elongation",
-        "readiness": 0.607,
-        "soil_moisture": 0.1104,
-        "soil_temperature_c": 15.91,
-        "expected_yield_t_ha": 5.2302,
-        "nitrogen_index": 0.5357,
-        "weed_pressure": 0.7063,
-        "pest_pressure": 0.08,
-        "disease_pressure": 0.0008,
-        "seedbed_readiness": 0.12,
-        "trafficability": 1,
-        "weather_damage_index": 0
-      }
-    },
-    {
-      "option_id": "F3_O012",
-      "field_id": "F3",
-      "total_direct_cash_effect_aud": -17718.61,
-      "terminal_value_aud": 151232.32,
-      "objective_value_aud": 133513.71,
-      "actions": [
-        {
-          "candidate_id": "P05_F3_spray_20260917_0800",
-          "plan_id": "P05",
-          "field_id": "F3",
-          "operation": "spray",
-          "target": "weed_control",
-          "required": true,
-          "depends_on": "",
-          "min_gap_hours": 0,
-          "start_time": "2026-09-17T08:00:00",
-          "end_time": "2026-09-18T15:56:02",
-          "duration_hours": 17.93,
-          "workload_hours": 16.7917,
-          "machine_type": "sprayer",
-          "eligible_machine_ids": [
-            "M9",
-            "M10",
-            "M3"
-          ],
-          "workers_required": 1,
-          "work_segments": [
-            {
-              "date": "2026-09-17",
-              "start_time": "2026-09-17T08:00:00",
-              "end_time": "2026-09-17T17:00:00",
-              "work_hours": 9,
-              "effective_work_hours": 8.125
-            },
-            {
-              "date": "2026-09-18",
-              "start_time": "2026-09-18T07:00:00",
-              "end_time": "2026-09-18T15:56:02",
-              "work_hours": 8.9339,
-              "effective_work_hours": 8.666666666666668
-            }
-          ],
-          "direct_revenue_aud": 0,
-          "direct_cost_aud": 3909.14,
-          "direct_cash_effect_aud": -3909.14,
-          "state_yield_effect_t_ha": 0.4547,
-          "water_ml": 0,
-          "candidate_score": 0.454671,
-          "state_after": {
-            "crop": "barley",
-            "planted": true,
-            "newly_planted": false,
-            "harvested": false,
-            "growth_stage": "stem_elongation",
-            "readiness": 0.526,
-            "soil_moisture": 0.1741,
-            "soil_temperature_c": 14.38,
-            "expected_yield_t_ha": 4.8321,
-            "nitrogen_index": 0.512,
-            "weed_pressure": 0.064,
-            "pest_pressure": 0.08,
-            "disease_pressure": 0.0126,
-            "seedbed_readiness": 0.12,
-            "trafficability": 1,
-            "weather_damage_index": 0
-          }
-        },
-        {
-          "candidate_id": "P06_F3_fertilise_20260921_0800",
-          "plan_id": "P06",
-          "field_id": "F3",
-          "operation": "fertilise",
-          "target": "nitrogen",
-          "required": true,
-          "depends_on": "P05",
-          "min_gap_hours": 24,
-          "start_time": "2026-09-21T08:00:00",
-          "end_time": "2026-09-22T16:05:30",
-          "duration_hours": 18.09,
-          "workload_hours": 16.7917,
-          "machine_type": "fertiliser_spreader",
-          "eligible_machine_ids": [
-            "M4"
-          ],
-          "workers_required": 1,
-          "work_segments": [
-            {
-              "date": "2026-09-21",
-              "start_time": "2026-09-21T08:00:00",
-              "end_time": "2026-09-21T17:00:00",
-              "work_hours": 9,
-              "effective_work_hours": 7.699999999999998
-            },
-            {
-              "date": "2026-09-22",
-              "start_time": "2026-09-22T07:00:00",
-              "end_time": "2026-09-22T16:05:30",
-              "work_hours": 9.0917,
-              "effective_work_hours": 9.091666666666669
-            }
-          ],
-          "direct_revenue_aud": 0,
-          "direct_cost_aud": 9063.17,
-          "direct_cash_effect_aud": -9063.17,
-          "state_yield_effect_t_ha": 0.2273,
-          "water_ml": 0,
-          "candidate_score": 0.204851,
-          "state_after": {
-            "crop": "barley",
-            "planted": true,
-            "newly_planted": false,
-            "harvested": false,
-            "growth_stage": "stem_elongation",
-            "readiness": 0.562,
-            "soil_moisture": 0.2631,
-            "soil_temperature_c": 15.06,
-            "expected_yield_t_ha": 5.0647,
-            "nitrogen_index": 0.6693,
-            "weed_pressure": 0.4076,
-            "pest_pressure": 0.08,
-            "disease_pressure": 0.151,
-            "seedbed_readiness": 0.12,
-            "trafficability": 1,
-            "weather_damage_index": 0
-          }
-        },
-        {
-          "candidate_id": "P15_F3_spray_20260924_0700",
-          "plan_id": "P15",
-          "field_id": "F3",
-          "operation": "spray",
-          "target": "disease_control",
-          "required": false,
-          "depends_on": "P06",
-          "min_gap_hours": 24,
-          "start_time": "2026-09-24T07:00:00",
-          "end_time": "2026-09-25T15:56:14",
-          "duration_hours": 18.94,
-          "workload_hours": 16.7917,
-          "machine_type": "sprayer",
-          "eligible_machine_ids": [
-            "M3",
-            "M9",
-            "M10"
-          ],
-          "workers_required": 1,
-          "work_segments": [
-            {
-              "date": "2026-09-24",
-              "start_time": "2026-09-24T07:00:00",
-              "end_time": "2026-09-24T17:00:00",
-              "work_hours": 10,
-              "effective_work_hours": 8.499999999999998
-            },
-            {
-              "date": "2026-09-25",
-              "start_time": "2026-09-25T07:00:00",
-              "end_time": "2026-09-25T15:56:14",
-              "work_hours": 8.9374,
-              "effective_work_hours": 8.29166666666667
-            }
-          ],
-          "direct_revenue_aud": 0,
-          "direct_cost_aud": 4746.3,
-          "direct_cash_effect_aud": -4746.3,
-          "state_yield_effect_t_ha": 0.1654,
-          "water_ml": 0,
-          "candidate_score": 0.142029,
-          "state_after": {
-            "crop": "barley",
-            "planted": true,
-            "newly_planted": false,
-            "harvested": false,
-            "growth_stage": "stem_elongation",
-            "readiness": 0.589,
-            "soil_moisture": 0.2414,
-            "soil_temperature_c": 15.57,
-            "expected_yield_t_ha": 5.2302,
-            "nitrogen_index": 0.5889,
-            "weed_pressure": 0.5984,
-            "pest_pressure": 0.08,
-            "disease_pressure": 0.0195,
-            "seedbed_readiness": 0.12,
-            "trafficability": 0.96,
-            "weather_damage_index": 0
-          }
-        }
-      ],
-      "final_state": {
-        "crop": "barley",
-        "planted": true,
-        "newly_planted": false,
-        "harvested": false,
-        "growth_stage": "stem_elongation",
-        "readiness": 0.607,
-        "soil_moisture": 0.1104,
-        "soil_temperature_c": 15.91,
-        "expected_yield_t_ha": 5.2302,
-        "nitrogen_index": 0.5357,
-        "weed_pressure": 0.7063,
-        "pest_pressure": 0.08,
-        "disease_pressure": 0.0008,
-        "seedbed_readiness": 0.12,
-        "trafficability": 1,
-        "weather_damage_index": 0
-      }
-    },
-    {
-      "option_id": "F3_O013",
-      "field_id": "F3",
-      "total_direct_cash_effect_aud": -17721.11,
-      "terminal_value_aud": 151232.32,
-      "objective_value_aud": 133511.21,
-      "actions": [
-        {
-          "candidate_id": "P05_F3_spray_20260917_0800",
-          "plan_id": "P05",
-          "field_id": "F3",
-          "operation": "spray",
-          "target": "weed_control",
-          "required": true,
-          "depends_on": "",
-          "min_gap_hours": 0,
-          "start_time": "2026-09-17T08:00:00",
-          "end_time": "2026-09-18T15:56:02",
-          "duration_hours": 17.93,
-          "workload_hours": 16.7917,
-          "machine_type": "sprayer",
-          "eligible_machine_ids": [
-            "M9",
-            "M10",
-            "M3"
-          ],
-          "workers_required": 1,
-          "work_segments": [
-            {
-              "date": "2026-09-17",
-              "start_time": "2026-09-17T08:00:00",
-              "end_time": "2026-09-17T17:00:00",
-              "work_hours": 9,
-              "effective_work_hours": 8.125
-            },
-            {
-              "date": "2026-09-18",
-              "start_time": "2026-09-18T07:00:00",
-              "end_time": "2026-09-18T15:56:02",
-              "work_hours": 8.9339,
-              "effective_work_hours": 8.666666666666668
-            }
-          ],
-          "direct_revenue_aud": 0,
-          "direct_cost_aud": 3909.14,
-          "direct_cash_effect_aud": -3909.14,
-          "state_yield_effect_t_ha": 0.4547,
-          "water_ml": 0,
-          "candidate_score": 0.454671,
-          "state_after": {
-            "crop": "barley",
-            "planted": true,
-            "newly_planted": false,
-            "harvested": false,
-            "growth_stage": "stem_elongation",
-            "readiness": 0.526,
-            "soil_moisture": 0.1741,
-            "soil_temperature_c": 14.38,
-            "expected_yield_t_ha": 4.8321,
-            "nitrogen_index": 0.512,
-            "weed_pressure": 0.064,
-            "pest_pressure": 0.08,
-            "disease_pressure": 0.0126,
-            "seedbed_readiness": 0.12,
-            "trafficability": 1,
-            "weather_damage_index": 0
-          }
-        },
-        {
-          "candidate_id": "P06_F3_fertilise_20260921_0700",
-          "plan_id": "P06",
-          "field_id": "F3",
-          "operation": "fertilise",
-          "target": "nitrogen",
-          "required": true,
-          "depends_on": "P05",
-          "min_gap_hours": 24,
-          "start_time": "2026-09-21T07:00:00",
-          "end_time": "2026-09-22T15:07:00",
-          "duration_hours": 18.12,
-          "workload_hours": 16.7917,
-          "machine_type": "fertiliser_spreader",
-          "eligible_machine_ids": [
-            "M4"
-          ],
-          "workers_required": 1,
-          "work_segments": [
-            {
-              "date": "2026-09-21",
-              "start_time": "2026-09-21T07:00:00",
-              "end_time": "2026-09-21T17:00:00",
-              "work_hours": 10,
-              "effective_work_hours": 8.674999999999999
-            },
-            {
-              "date": "2026-09-22",
-              "start_time": "2026-09-22T07:00:00",
-              "end_time": "2026-09-22T15:07:00",
-              "work_hours": 8.1167,
-              "effective_work_hours": 8.116666666666669
-            }
-          ],
-          "direct_revenue_aud": 0,
-          "direct_cost_aud": 9065.67,
-          "direct_cash_effect_aud": -9065.67,
-          "state_yield_effect_t_ha": 0.2273,
-          "water_ml": 0,
-          "candidate_score": 0.204851,
-          "state_after": {
-            "crop": "barley",
-            "planted": true,
-            "newly_planted": false,
-            "harvested": false,
-            "growth_stage": "stem_elongation",
-            "readiness": 0.562,
-            "soil_moisture": 0.2661,
-            "soil_temperature_c": 15.06,
-            "expected_yield_t_ha": 5.0647,
-            "nitrogen_index": 0.6693,
-            "weed_pressure": 0.4076,
-            "pest_pressure": 0.08,
-            "disease_pressure": 0.154,
-            "seedbed_readiness": 0.12,
-            "trafficability": 1,
-            "weather_damage_index": 0
-          }
-        },
-        {
-          "candidate_id": "P15_F3_spray_20260924_0700",
-          "plan_id": "P15",
-          "field_id": "F3",
-          "operation": "spray",
-          "target": "disease_control",
-          "required": false,
-          "depends_on": "P06",
-          "min_gap_hours": 24,
-          "start_time": "2026-09-24T07:00:00",
-          "end_time": "2026-09-25T15:56:14",
-          "duration_hours": 18.94,
-          "workload_hours": 16.7917,
-          "machine_type": "sprayer",
-          "eligible_machine_ids": [
-            "M3",
-            "M9",
-            "M10"
-          ],
-          "workers_required": 1,
-          "work_segments": [
-            {
-              "date": "2026-09-24",
-              "start_time": "2026-09-24T07:00:00",
-              "end_time": "2026-09-24T17:00:00",
-              "work_hours": 10,
-              "effective_work_hours": 8.499999999999998
-            },
-            {
-              "date": "2026-09-25",
-              "start_time": "2026-09-25T07:00:00",
-              "end_time": "2026-09-25T15:56:14",
-              "work_hours": 8.9374,
-              "effective_work_hours": 8.29166666666667
-            }
-          ],
-          "direct_revenue_aud": 0,
-          "direct_cost_aud": 4746.3,
-          "direct_cash_effect_aud": -4746.3,
-          "state_yield_effect_t_ha": 0.1654,
-          "water_ml": 0,
-          "candidate_score": 0.142029,
-          "state_after": {
-            "crop": "barley",
-            "planted": true,
-            "newly_planted": false,
-            "harvested": false,
-            "growth_stage": "stem_elongation",
-            "readiness": 0.589,
-            "soil_moisture": 0.2414,
-            "soil_temperature_c": 15.57,
-            "expected_yield_t_ha": 5.2302,
-            "nitrogen_index": 0.5889,
-            "weed_pressure": 0.5984,
-            "pest_pressure": 0.08,
-            "disease_pressure": 0.0195,
-            "seedbed_readiness": 0.12,
-            "trafficability": 0.96,
-            "weather_damage_index": 0
-          }
-        }
-      ],
-      "final_state": {
-        "crop": "barley",
-        "planted": true,
-        "newly_planted": false,
-        "harvested": false,
-        "growth_stage": "stem_elongation",
-        "readiness": 0.607,
-        "soil_moisture": 0.1104,
-        "soil_temperature_c": 15.91,
-        "expected_yield_t_ha": 5.2302,
-        "nitrogen_index": 0.5357,
-        "weed_pressure": 0.7063,
-        "pest_pressure": 0.08,
-        "disease_pressure": 0.0008,
-        "seedbed_readiness": 0.12,
-        "trafficability": 1,
-        "weather_damage_index": 0
-      }
-    },
-    {
-      "option_id": "F3_O014",
-      "field_id": "F3",
-      "total_direct_cash_effect_aud": -17721.7,
-      "terminal_value_aud": 151232.32,
-      "objective_value_aud": 133510.62,
-      "actions": [
-        {
-          "candidate_id": "P05_F3_spray_20260917_0900",
-          "plan_id": "P05",
-          "field_id": "F3",
-          "operation": "spray",
-          "target": "weed_control",
-          "required": true,
-          "depends_on": "",
-          "min_gap_hours": 0,
-          "start_time": "2026-09-17T09:00:00",
-          "end_time": "2026-09-18T16:57:53",
-          "duration_hours": 17.96,
-          "workload_hours": 16.7917,
-          "machine_type": "sprayer",
-          "eligible_machine_ids": [
-            "M9",
-            "M10",
-            "M3"
-          ],
-          "workers_required": 1,
-          "work_segments": [
-            {
-              "date": "2026-09-17",
-              "start_time": "2026-09-17T09:00:00",
-              "end_time": "2026-09-17T17:00:00",
-              "work_hours": 8,
-              "effective_work_hours": 7.124999999999999
-            },
-            {
-              "date": "2026-09-18",
-              "start_time": "2026-09-18T07:00:00",
-              "end_time": "2026-09-18T16:57:53",
-              "work_hours": 9.9648,
-              "effective_work_hours": 9.666666666666668
-            }
-          ],
-          "direct_revenue_aud": 0,
-          "direct_cost_aud": 3912.23,
-          "direct_cash_effect_aud": -3912.23,
-          "state_yield_effect_t_ha": 0.4547,
-          "water_ml": 0,
-          "candidate_score": 0.454671,
-          "state_after": {
-            "crop": "barley",
-            "planted": true,
-            "newly_planted": false,
-            "harvested": false,
-            "growth_stage": "stem_elongation",
-            "readiness": 0.526,
-            "soil_moisture": 0.1711,
-            "soil_temperature_c": 14.38,
-            "expected_yield_t_ha": 4.8321,
-            "nitrogen_index": 0.512,
-            "weed_pressure": 0.064,
-            "pest_pressure": 0.08,
-            "disease_pressure": 0.0096,
-            "seedbed_readiness": 0.12,
-            "trafficability": 1,
-            "weather_damage_index": 0
-          }
-        },
-        {
-          "candidate_id": "P06_F3_fertilise_20260921_0800",
-          "plan_id": "P06",
-          "field_id": "F3",
-          "operation": "fertilise",
-          "target": "nitrogen",
-          "required": true,
-          "depends_on": "P05",
-          "min_gap_hours": 24,
-          "start_time": "2026-09-21T08:00:00",
-          "end_time": "2026-09-22T16:05:30",
-          "duration_hours": 18.09,
-          "workload_hours": 16.7917,
-          "machine_type": "fertiliser_spreader",
-          "eligible_machine_ids": [
-            "M4"
-          ],
-          "workers_required": 1,
-          "work_segments": [
-            {
-              "date": "2026-09-21",
-              "start_time": "2026-09-21T08:00:00",
-              "end_time": "2026-09-21T17:00:00",
-              "work_hours": 9,
-              "effective_work_hours": 7.699999999999998
-            },
-            {
-              "date": "2026-09-22",
-              "start_time": "2026-09-22T07:00:00",
-              "end_time": "2026-09-22T16:05:30",
-              "work_hours": 9.0917,
-              "effective_work_hours": 9.091666666666669
-            }
-          ],
-          "direct_revenue_aud": 0,
-          "direct_cost_aud": 9063.17,
-          "direct_cash_effect_aud": -9063.17,
-          "state_yield_effect_t_ha": 0.2273,
-          "water_ml": 0,
-          "candidate_score": 0.204851,
-          "state_after": {
-            "crop": "barley",
-            "planted": true,
-            "newly_planted": false,
-            "harvested": false,
-            "growth_stage": "stem_elongation",
-            "readiness": 0.562,
-            "soil_moisture": 0.2631,
-            "soil_temperature_c": 15.06,
-            "expected_yield_t_ha": 5.0647,
-            "nitrogen_index": 0.6693,
-            "weed_pressure": 0.4076,
-            "pest_pressure": 0.08,
-            "disease_pressure": 0.151,
-            "seedbed_readiness": 0.12,
-            "trafficability": 1,
-            "weather_damage_index": 0
-          }
-        },
-        {
-          "candidate_id": "P15_F3_spray_20260924_0700",
-          "plan_id": "P15",
-          "field_id": "F3",
-          "operation": "spray",
-          "target": "disease_control",
-          "required": false,
-          "depends_on": "P06",
-          "min_gap_hours": 24,
-          "start_time": "2026-09-24T07:00:00",
-          "end_time": "2026-09-25T15:56:14",
-          "duration_hours": 18.94,
-          "workload_hours": 16.7917,
-          "machine_type": "sprayer",
-          "eligible_machine_ids": [
-            "M3",
-            "M9",
-            "M10"
-          ],
-          "workers_required": 1,
-          "work_segments": [
-            {
-              "date": "2026-09-24",
-              "start_time": "2026-09-24T07:00:00",
-              "end_time": "2026-09-24T17:00:00",
-              "work_hours": 10,
-              "effective_work_hours": 8.499999999999998
-            },
-            {
-              "date": "2026-09-25",
-              "start_time": "2026-09-25T07:00:00",
-              "end_time": "2026-09-25T15:56:14",
-              "work_hours": 8.9374,
-              "effective_work_hours": 8.29166666666667
-            }
-          ],
-          "direct_revenue_aud": 0,
-          "direct_cost_aud": 4746.3,
-          "direct_cash_effect_aud": -4746.3,
-          "state_yield_effect_t_ha": 0.1654,
-          "water_ml": 0,
-          "candidate_score": 0.142029,
-          "state_after": {
-            "crop": "barley",
-            "planted": true,
-            "newly_planted": false,
-            "harvested": false,
-            "growth_stage": "stem_elongation",
-            "readiness": 0.589,
-            "soil_moisture": 0.2414,
-            "soil_temperature_c": 15.57,
-            "expected_yield_t_ha": 5.2302,
-            "nitrogen_index": 0.5889,
-            "weed_pressure": 0.5984,
-            "pest_pressure": 0.08,
-            "disease_pressure": 0.0195,
-            "seedbed_readiness": 0.12,
-            "trafficability": 0.96,
-            "weather_damage_index": 0
-          }
-        }
-      ],
-      "final_state": {
-        "crop": "barley",
-        "planted": true,
-        "newly_planted": false,
-        "harvested": false,
-        "growth_stage": "stem_elongation",
-        "readiness": 0.607,
-        "soil_moisture": 0.1104,
-        "soil_temperature_c": 15.91,
-        "expected_yield_t_ha": 5.2302,
-        "nitrogen_index": 0.5357,
-        "weed_pressure": 0.7063,
-        "pest_pressure": 0.08,
-        "disease_pressure": 0.0008,
-        "seedbed_readiness": 0.12,
-        "trafficability": 1,
-        "weather_damage_index": 0
-      }
-    },
-    {
-      "option_id": "F3_O015",
-      "field_id": "F3",
-      "total_direct_cash_effect_aud": -17724.2,
-      "terminal_value_aud": 151232.32,
-      "objective_value_aud": 133508.12,
-      "actions": [
-        {
-          "candidate_id": "P05_F3_spray_20260917_0900",
-          "plan_id": "P05",
-          "field_id": "F3",
-          "operation": "spray",
-          "target": "weed_control",
-          "required": true,
-          "depends_on": "",
-          "min_gap_hours": 0,
-          "start_time": "2026-09-17T09:00:00",
-          "end_time": "2026-09-18T16:57:53",
-          "duration_hours": 17.96,
-          "workload_hours": 16.7917,
-          "machine_type": "sprayer",
-          "eligible_machine_ids": [
-            "M9",
-            "M10",
-            "M3"
-          ],
-          "workers_required": 1,
-          "work_segments": [
-            {
-              "date": "2026-09-17",
-              "start_time": "2026-09-17T09:00:00",
-              "end_time": "2026-09-17T17:00:00",
-              "work_hours": 8,
-              "effective_work_hours": 7.124999999999999
-            },
-            {
-              "date": "2026-09-18",
-              "start_time": "2026-09-18T07:00:00",
-              "end_time": "2026-09-18T16:57:53",
-              "work_hours": 9.9648,
-              "effective_work_hours": 9.666666666666668
-            }
-          ],
-          "direct_revenue_aud": 0,
-          "direct_cost_aud": 3912.23,
-          "direct_cash_effect_aud": -3912.23,
-          "state_yield_effect_t_ha": 0.4547,
-          "water_ml": 0,
-          "candidate_score": 0.454671,
-          "state_after": {
-            "crop": "barley",
-            "planted": true,
-            "newly_planted": false,
-            "harvested": false,
-            "growth_stage": "stem_elongation",
-            "readiness": 0.526,
-            "soil_moisture": 0.1711,
-            "soil_temperature_c": 14.38,
-            "expected_yield_t_ha": 4.8321,
-            "nitrogen_index": 0.512,
-            "weed_pressure": 0.064,
-            "pest_pressure": 0.08,
-            "disease_pressure": 0.0096,
-            "seedbed_readiness": 0.12,
-            "trafficability": 1,
-            "weather_damage_index": 0
-          }
-        },
-        {
-          "candidate_id": "P06_F3_fertilise_20260921_0700",
-          "plan_id": "P06",
-          "field_id": "F3",
-          "operation": "fertilise",
-          "target": "nitrogen",
-          "required": true,
-          "depends_on": "P05",
-          "min_gap_hours": 24,
-          "start_time": "2026-09-21T07:00:00",
-          "end_time": "2026-09-22T15:07:00",
-          "duration_hours": 18.12,
-          "workload_hours": 16.7917,
-          "machine_type": "fertiliser_spreader",
-          "eligible_machine_ids": [
-            "M4"
-          ],
-          "workers_required": 1,
-          "work_segments": [
-            {
-              "date": "2026-09-21",
-              "start_time": "2026-09-21T07:00:00",
-              "end_time": "2026-09-21T17:00:00",
-              "work_hours": 10,
-              "effective_work_hours": 8.674999999999999
-            },
-            {
-              "date": "2026-09-22",
-              "start_time": "2026-09-22T07:00:00",
-              "end_time": "2026-09-22T15:07:00",
-              "work_hours": 8.1167,
-              "effective_work_hours": 8.116666666666669
-            }
-          ],
-          "direct_revenue_aud": 0,
-          "direct_cost_aud": 9065.67,
-          "direct_cash_effect_aud": -9065.67,
-          "state_yield_effect_t_ha": 0.2273,
-          "water_ml": 0,
-          "candidate_score": 0.204851,
-          "state_after": {
-            "crop": "barley",
-            "planted": true,
-            "newly_planted": false,
-            "harvested": false,
-            "growth_stage": "stem_elongation",
-            "readiness": 0.562,
-            "soil_moisture": 0.2661,
-            "soil_temperature_c": 15.06,
-            "expected_yield_t_ha": 5.0647,
-            "nitrogen_index": 0.6693,
-            "weed_pressure": 0.4076,
-            "pest_pressure": 0.08,
-            "disease_pressure": 0.154,
-            "seedbed_readiness": 0.12,
-            "trafficability": 1,
-            "weather_damage_index": 0
-          }
-        },
-        {
-          "candidate_id": "P15_F3_spray_20260924_0700",
-          "plan_id": "P15",
-          "field_id": "F3",
-          "operation": "spray",
-          "target": "disease_control",
-          "required": false,
-          "depends_on": "P06",
-          "min_gap_hours": 24,
-          "start_time": "2026-09-24T07:00:00",
-          "end_time": "2026-09-25T15:56:14",
-          "duration_hours": 18.94,
-          "workload_hours": 16.7917,
-          "machine_type": "sprayer",
-          "eligible_machine_ids": [
-            "M3",
-            "M9",
-            "M10"
-          ],
-          "workers_required": 1,
-          "work_segments": [
-            {
-              "date": "2026-09-24",
-              "start_time": "2026-09-24T07:00:00",
-              "end_time": "2026-09-24T17:00:00",
-              "work_hours": 10,
-              "effective_work_hours": 8.499999999999998
-            },
-            {
-              "date": "2026-09-25",
-              "start_time": "2026-09-25T07:00:00",
-              "end_time": "2026-09-25T15:56:14",
-              "work_hours": 8.9374,
-              "effective_work_hours": 8.29166666666667
-            }
-          ],
-          "direct_revenue_aud": 0,
-          "direct_cost_aud": 4746.3,
-          "direct_cash_effect_aud": -4746.3,
-          "state_yield_effect_t_ha": 0.1654,
-          "water_ml": 0,
-          "candidate_score": 0.142029,
-          "state_after": {
-            "crop": "barley",
-            "planted": true,
-            "newly_planted": false,
-            "harvested": false,
-            "growth_stage": "stem_elongation",
-            "readiness": 0.589,
-            "soil_moisture": 0.2414,
-            "soil_temperature_c": 15.57,
-            "expected_yield_t_ha": 5.2302,
-            "nitrogen_index": 0.5889,
-            "weed_pressure": 0.5984,
-            "pest_pressure": 0.08,
-            "disease_pressure": 0.0195,
-            "seedbed_readiness": 0.12,
-            "trafficability": 0.96,
-            "weather_damage_index": 0
-          }
-        }
-      ],
-      "final_state": {
-        "crop": "barley",
-        "planted": true,
-        "newly_planted": false,
-        "harvested": false,
-        "growth_stage": "stem_elongation",
-        "readiness": 0.607,
-        "soil_moisture": 0.1104,
-        "soil_temperature_c": 15.91,
-        "expected_yield_t_ha": 5.2302,
-        "nitrogen_index": 0.5357,
-        "weed_pressure": 0.7063,
-        "pest_pressure": 0.08,
-        "disease_pressure": 0.0008,
-        "seedbed_readiness": 0.12,
-        "trafficability": 1,
-        "weather_damage_index": 0
-      }
-    },
-    {
-      "option_id": "F3_O016",
+      "option_id": "F3_O010",
       "field_id": "F3",
       "total_direct_cash_effect_aud": -12967.39,
       "terminal_value_aud": 146448.49,
@@ -5478,7 +4230,7 @@
       }
     },
     {
-      "option_id": "F3_O017",
+      "option_id": "F3_O011",
       "field_id": "F3",
       "total_direct_cash_effect_aud": -12969.23,
       "terminal_value_aud": 146448.49,
@@ -5625,7 +4377,7 @@
       }
     },
     {
-      "option_id": "F3_O018",
+      "option_id": "F3_O012",
       "field_id": "F3",
       "total_direct_cash_effect_aud": -12970.47,
       "terminal_value_aud": 146448.49,
@@ -5779,7 +4531,7 @@
       }
     },
     {
-      "option_id": "F3_O019",
+      "option_id": "F3_O013",
       "field_id": "F3",
       "total_direct_cash_effect_aud": -12971.73,
       "terminal_value_aud": 146448.49,
@@ -5926,7 +4678,7 @@
       }
     },
     {
-      "option_id": "F3_O020",
+      "option_id": "F3_O014",
       "field_id": "F3",
       "total_direct_cash_effect_aud": -12972.31,
       "terminal_value_aud": 146448.49,
@@ -6073,7 +4825,7 @@
       }
     },
     {
-      "option_id": "F3_O021",
+      "option_id": "F3_O015",
       "field_id": "F3",
       "total_direct_cash_effect_aud": -12973.56,
       "terminal_value_aud": 146448.49,
@@ -6227,7 +4979,7 @@
       }
     },
     {
-      "option_id": "F3_O022",
+      "option_id": "F3_O016",
       "field_id": "F3",
       "total_direct_cash_effect_aud": -12974.81,
       "terminal_value_aud": 146448.49,
@@ -6374,7 +5126,7 @@
       }
     },
     {
-      "option_id": "F3_O023",
+      "option_id": "F3_O017",
       "field_id": "F3",
       "total_direct_cash_effect_aud": -12975.4,
       "terminal_value_aud": 146448.49,
@@ -6521,7 +5273,7 @@
       }
     },
     {
-      "option_id": "F3_O024",
+      "option_id": "F3_O018",
       "field_id": "F3",
       "total_direct_cash_effect_aud": -12977.9,
       "terminal_value_aud": 146448.49,
@@ -6668,14 +5420,14 @@
       }
     },
     {
-      "option_id": "F3_O025",
+      "option_id": "F3_O019",
       "field_id": "F3",
-      "total_direct_cash_effect_aud": -17705.17,
-      "terminal_value_aud": 151138.16,
-      "objective_value_aud": 133432.99,
+      "total_direct_cash_effect_aud": -12908.95,
+      "terminal_value_aud": 145884.76,
+      "objective_value_aud": 132975.81,
       "actions": [
         {
-          "candidate_id": "P05_F3_spray_20260917_0700",
+          "candidate_id": "P05_F3_spray_20260916_0900",
           "plan_id": "P05",
           "field_id": "F3",
           "operation": "spray",
@@ -6683,18 +5435,172 @@
           "required": true,
           "depends_on": "",
           "min_gap_hours": 0,
-          "start_time": "2026-09-17T07:00:00",
-          "end_time": "2026-09-18T14:54:11",
-          "duration_hours": 17.9,
+          "start_time": "2026-09-16T09:00:00",
+          "end_time": "2026-09-17T16:38:04",
+          "duration_hours": 17.63,
           "workload_hours": 16.7917,
           "machine_type": "sprayer",
           "eligible_machine_ids": [
+            "M3",
             "M9",
-            "M10",
-            "M3"
+            "M10"
           ],
           "workers_required": 1,
           "work_segments": [
+            {
+              "date": "2026-09-16",
+              "start_time": "2026-09-16T09:00:00",
+              "end_time": "2026-09-16T17:00:00",
+              "work_hours": 8,
+              "effective_work_hours": 8
+            },
+            {
+              "date": "2026-09-17",
+              "start_time": "2026-09-17T07:00:00",
+              "end_time": "2026-09-17T16:38:04",
+              "work_hours": 9.6347,
+              "effective_work_hours": 8.791666666666668
+            }
+          ],
+          "direct_revenue_aud": 0,
+          "direct_cost_aud": 3908.61,
+          "direct_cash_effect_aud": -3908.61,
+          "state_yield_effect_t_ha": 0.4216,
+          "water_ml": 0,
+          "candidate_score": 0.42158,
+          "state_after": {
+            "crop": "barley",
+            "planted": true,
+            "newly_planted": false,
+            "harvested": false,
+            "growth_stage": "stem_elongation",
+            "readiness": 0.517,
+            "soil_moisture": 0.2352,
+            "soil_temperature_c": 14.21,
+            "expected_yield_t_ha": 4.7803,
+            "nitrogen_index": 0.534,
+            "weed_pressure": 0.0605,
+            "pest_pressure": 0.08,
+            "disease_pressure": 0.0479,
+            "seedbed_readiness": 0.12,
+            "trafficability": 1,
+            "weather_damage_index": 0
+          }
+        },
+        {
+          "candidate_id": "P06_F3_fertilise_20260922_0700",
+          "plan_id": "P06",
+          "field_id": "F3",
+          "operation": "fertilise",
+          "target": "nitrogen",
+          "required": true,
+          "depends_on": "P05",
+          "min_gap_hours": 24,
+          "start_time": "2026-09-22T07:00:00",
+          "end_time": "2026-09-23T14:27:48",
+          "duration_hours": 17.46,
+          "workload_hours": 16.7917,
+          "machine_type": "fertiliser_spreader",
+          "eligible_machine_ids": [
+            "M4"
+          ],
+          "workers_required": 1,
+          "work_segments": [
+            {
+              "date": "2026-09-22",
+              "start_time": "2026-09-22T07:00:00",
+              "end_time": "2026-09-22T17:00:00",
+              "work_hours": 10,
+              "effective_work_hours": 10
+            },
+            {
+              "date": "2026-09-23",
+              "start_time": "2026-09-23T07:00:00",
+              "end_time": "2026-09-23T14:27:48",
+              "work_hours": 7.4634,
+              "effective_work_hours": 6.791666666666668
+            }
+          ],
+          "direct_revenue_aud": 0,
+          "direct_cost_aud": 9000.34,
+          "direct_cash_effect_aud": -9000.34,
+          "state_yield_effect_t_ha": 0.2409,
+          "water_ml": 0,
+          "candidate_score": 0.218676,
+          "state_after": {
+            "crop": "barley",
+            "planted": true,
+            "newly_planted": false,
+            "harvested": false,
+            "growth_stage": "stem_elongation",
+            "readiness": 0.571,
+            "soil_moisture": 0.1729,
+            "soil_temperature_c": 15.23,
+            "expected_yield_t_ha": 5.0453,
+            "nitrogen_index": 0.6612,
+            "weed_pressure": 0.5162,
+            "pest_pressure": 0.08,
+            "disease_pressure": 0.1157,
+            "seedbed_readiness": 0.12,
+            "trafficability": 1,
+            "weather_damage_index": 0
+          }
+        }
+      ],
+      "final_state": {
+        "crop": "barley",
+        "planted": true,
+        "newly_planted": false,
+        "harvested": false,
+        "growth_stage": "stem_elongation",
+        "readiness": 0.607,
+        "soil_moisture": 0.1104,
+        "soil_temperature_c": 15.91,
+        "expected_yield_t_ha": 5.0453,
+        "nitrogen_index": 0.5531,
+        "weed_pressure": 0.7273,
+        "pest_pressure": 0.08,
+        "disease_pressure": 0.0829,
+        "seedbed_readiness": 0.12,
+        "trafficability": 1,
+        "weather_damage_index": 0
+      }
+    },
+    {
+      "option_id": "F3_O020",
+      "field_id": "F3",
+      "total_direct_cash_effect_aud": -12914.29,
+      "terminal_value_aud": 145884.76,
+      "objective_value_aud": 132970.47,
+      "actions": [
+        {
+          "candidate_id": "P05_F3_spray_20260916_1000",
+          "plan_id": "P05",
+          "field_id": "F3",
+          "operation": "spray",
+          "target": "weed_control",
+          "required": true,
+          "depends_on": "",
+          "min_gap_hours": 0,
+          "start_time": "2026-09-16T10:00:00",
+          "end_time": "2026-09-18T07:41:14",
+          "duration_hours": 17.69,
+          "workload_hours": 16.7917,
+          "machine_type": "sprayer",
+          "eligible_machine_ids": [
+            "M3",
+            "M9",
+            "M10"
+          ],
+          "workers_required": 1,
+          "work_segments": [
+            {
+              "date": "2026-09-16",
+              "start_time": "2026-09-16T10:00:00",
+              "end_time": "2026-09-16T17:00:00",
+              "work_hours": 7,
+              "effective_work_hours": 7
+            },
             {
               "date": "2026-09-17",
               "start_time": "2026-09-17T07:00:00",
@@ -6705,31 +5611,1242 @@
             {
               "date": "2026-09-18",
               "start_time": "2026-09-18T07:00:00",
-              "end_time": "2026-09-18T14:54:11",
-              "work_hours": 7.9031,
-              "effective_work_hours": 7.666666666666668
+              "end_time": "2026-09-18T07:41:14",
+              "work_hours": 0.6872,
+              "effective_work_hours": 0.6666666666666679
             }
           ],
           "direct_revenue_aud": 0,
-          "direct_cost_aud": 3906.06,
-          "direct_cash_effect_aud": -3906.06,
-          "state_yield_effect_t_ha": 0.4547,
+          "direct_cost_aud": 3913.95,
+          "direct_cash_effect_aud": -3913.95,
+          "state_yield_effect_t_ha": 0.4216,
           "water_ml": 0,
-          "candidate_score": 0.454671,
+          "candidate_score": 0.42158,
           "state_after": {
             "crop": "barley",
             "planted": true,
             "newly_planted": false,
             "harvested": false,
             "growth_stage": "stem_elongation",
-            "readiness": 0.526,
-            "soil_moisture": 0.1771,
-            "soil_temperature_c": 14.38,
-            "expected_yield_t_ha": 4.8321,
-            "nitrogen_index": 0.512,
-            "weed_pressure": 0.064,
+            "readiness": 0.517,
+            "soil_moisture": 0.2322,
+            "soil_temperature_c": 14.21,
+            "expected_yield_t_ha": 4.7803,
+            "nitrogen_index": 0.534,
+            "weed_pressure": 0.0605,
             "pest_pressure": 0.08,
-            "disease_pressure": 0.0156,
+            "disease_pressure": 0.0449,
+            "seedbed_readiness": 0.12,
+            "trafficability": 1,
+            "weather_damage_index": 0
+          }
+        },
+        {
+          "candidate_id": "P06_F3_fertilise_20260922_0700",
+          "plan_id": "P06",
+          "field_id": "F3",
+          "operation": "fertilise",
+          "target": "nitrogen",
+          "required": true,
+          "depends_on": "P05",
+          "min_gap_hours": 24,
+          "start_time": "2026-09-22T07:00:00",
+          "end_time": "2026-09-23T14:27:48",
+          "duration_hours": 17.46,
+          "workload_hours": 16.7917,
+          "machine_type": "fertiliser_spreader",
+          "eligible_machine_ids": [
+            "M4"
+          ],
+          "workers_required": 1,
+          "work_segments": [
+            {
+              "date": "2026-09-22",
+              "start_time": "2026-09-22T07:00:00",
+              "end_time": "2026-09-22T17:00:00",
+              "work_hours": 10,
+              "effective_work_hours": 10
+            },
+            {
+              "date": "2026-09-23",
+              "start_time": "2026-09-23T07:00:00",
+              "end_time": "2026-09-23T14:27:48",
+              "work_hours": 7.4634,
+              "effective_work_hours": 6.791666666666668
+            }
+          ],
+          "direct_revenue_aud": 0,
+          "direct_cost_aud": 9000.34,
+          "direct_cash_effect_aud": -9000.34,
+          "state_yield_effect_t_ha": 0.2409,
+          "water_ml": 0,
+          "candidate_score": 0.218676,
+          "state_after": {
+            "crop": "barley",
+            "planted": true,
+            "newly_planted": false,
+            "harvested": false,
+            "growth_stage": "stem_elongation",
+            "readiness": 0.571,
+            "soil_moisture": 0.1729,
+            "soil_temperature_c": 15.23,
+            "expected_yield_t_ha": 5.0453,
+            "nitrogen_index": 0.6612,
+            "weed_pressure": 0.5162,
+            "pest_pressure": 0.08,
+            "disease_pressure": 0.1157,
+            "seedbed_readiness": 0.12,
+            "trafficability": 1,
+            "weather_damage_index": 0
+          }
+        }
+      ],
+      "final_state": {
+        "crop": "barley",
+        "planted": true,
+        "newly_planted": false,
+        "harvested": false,
+        "growth_stage": "stem_elongation",
+        "readiness": 0.607,
+        "soil_moisture": 0.1104,
+        "soil_temperature_c": 15.91,
+        "expected_yield_t_ha": 5.0453,
+        "nitrogen_index": 0.5531,
+        "weed_pressure": 0.7273,
+        "pest_pressure": 0.08,
+        "disease_pressure": 0.0829,
+        "seedbed_readiness": 0.12,
+        "trafficability": 1,
+        "weather_damage_index": 0
+      }
+    },
+    {
+      "option_id": "F3_O021",
+      "field_id": "F3",
+      "total_direct_cash_effect_aud": -12917.43,
+      "terminal_value_aud": 145884.76,
+      "objective_value_aud": 132967.33,
+      "actions": [
+        {
+          "candidate_id": "P05_F3_spray_20260916_1100",
+          "plan_id": "P05",
+          "field_id": "F3",
+          "operation": "spray",
+          "target": "weed_control",
+          "required": true,
+          "depends_on": "",
+          "min_gap_hours": 0,
+          "start_time": "2026-09-16T11:00:00",
+          "end_time": "2026-09-18T08:43:05",
+          "duration_hours": 17.72,
+          "workload_hours": 16.7917,
+          "machine_type": "sprayer",
+          "eligible_machine_ids": [
+            "M3",
+            "M9",
+            "M10"
+          ],
+          "workers_required": 1,
+          "work_segments": [
+            {
+              "date": "2026-09-16",
+              "start_time": "2026-09-16T11:00:00",
+              "end_time": "2026-09-16T17:00:00",
+              "work_hours": 6,
+              "effective_work_hours": 6
+            },
+            {
+              "date": "2026-09-17",
+              "start_time": "2026-09-17T07:00:00",
+              "end_time": "2026-09-17T17:00:00",
+              "work_hours": 10,
+              "effective_work_hours": 9.125
+            },
+            {
+              "date": "2026-09-18",
+              "start_time": "2026-09-18T07:00:00",
+              "end_time": "2026-09-18T08:43:05",
+              "work_hours": 1.7181,
+              "effective_work_hours": 1.6666666666666679
+            }
+          ],
+          "direct_revenue_aud": 0,
+          "direct_cost_aud": 3917.09,
+          "direct_cash_effect_aud": -3917.09,
+          "state_yield_effect_t_ha": 0.4216,
+          "water_ml": 0,
+          "candidate_score": 0.42158,
+          "state_after": {
+            "crop": "barley",
+            "planted": true,
+            "newly_planted": false,
+            "harvested": false,
+            "growth_stage": "stem_elongation",
+            "readiness": 0.517,
+            "soil_moisture": 0.2292,
+            "soil_temperature_c": 14.21,
+            "expected_yield_t_ha": 4.7803,
+            "nitrogen_index": 0.534,
+            "weed_pressure": 0.0605,
+            "pest_pressure": 0.08,
+            "disease_pressure": 0.0419,
+            "seedbed_readiness": 0.12,
+            "trafficability": 1,
+            "weather_damage_index": 0
+          }
+        },
+        {
+          "candidate_id": "P06_F3_fertilise_20260922_0700",
+          "plan_id": "P06",
+          "field_id": "F3",
+          "operation": "fertilise",
+          "target": "nitrogen",
+          "required": true,
+          "depends_on": "P05",
+          "min_gap_hours": 24,
+          "start_time": "2026-09-22T07:00:00",
+          "end_time": "2026-09-23T14:27:48",
+          "duration_hours": 17.46,
+          "workload_hours": 16.7917,
+          "machine_type": "fertiliser_spreader",
+          "eligible_machine_ids": [
+            "M4"
+          ],
+          "workers_required": 1,
+          "work_segments": [
+            {
+              "date": "2026-09-22",
+              "start_time": "2026-09-22T07:00:00",
+              "end_time": "2026-09-22T17:00:00",
+              "work_hours": 10,
+              "effective_work_hours": 10
+            },
+            {
+              "date": "2026-09-23",
+              "start_time": "2026-09-23T07:00:00",
+              "end_time": "2026-09-23T14:27:48",
+              "work_hours": 7.4634,
+              "effective_work_hours": 6.791666666666668
+            }
+          ],
+          "direct_revenue_aud": 0,
+          "direct_cost_aud": 9000.34,
+          "direct_cash_effect_aud": -9000.34,
+          "state_yield_effect_t_ha": 0.2409,
+          "water_ml": 0,
+          "candidate_score": 0.218676,
+          "state_after": {
+            "crop": "barley",
+            "planted": true,
+            "newly_planted": false,
+            "harvested": false,
+            "growth_stage": "stem_elongation",
+            "readiness": 0.571,
+            "soil_moisture": 0.1729,
+            "soil_temperature_c": 15.23,
+            "expected_yield_t_ha": 5.0453,
+            "nitrogen_index": 0.6612,
+            "weed_pressure": 0.5162,
+            "pest_pressure": 0.08,
+            "disease_pressure": 0.1157,
+            "seedbed_readiness": 0.12,
+            "trafficability": 1,
+            "weather_damage_index": 0
+          }
+        }
+      ],
+      "final_state": {
+        "crop": "barley",
+        "planted": true,
+        "newly_planted": false,
+        "harvested": false,
+        "growth_stage": "stem_elongation",
+        "readiness": 0.607,
+        "soil_moisture": 0.1104,
+        "soil_temperature_c": 15.91,
+        "expected_yield_t_ha": 5.0453,
+        "nitrogen_index": 0.5531,
+        "weed_pressure": 0.7273,
+        "pest_pressure": 0.08,
+        "disease_pressure": 0.0829,
+        "seedbed_readiness": 0.12,
+        "trafficability": 1,
+        "weather_damage_index": 0
+      }
+    },
+    {
+      "option_id": "F3_O022",
+      "field_id": "F3",
+      "total_direct_cash_effect_aud": -12918.84,
+      "terminal_value_aud": 145884.76,
+      "objective_value_aud": 132965.92,
+      "actions": [
+        {
+          "candidate_id": "P05_F3_spray_20260916_0900",
+          "plan_id": "P05",
+          "field_id": "F3",
+          "operation": "spray",
+          "target": "weed_control",
+          "required": true,
+          "depends_on": "",
+          "min_gap_hours": 0,
+          "start_time": "2026-09-16T09:00:00",
+          "end_time": "2026-09-17T16:38:04",
+          "duration_hours": 17.63,
+          "workload_hours": 16.7917,
+          "machine_type": "sprayer",
+          "eligible_machine_ids": [
+            "M3",
+            "M9",
+            "M10"
+          ],
+          "workers_required": 1,
+          "work_segments": [
+            {
+              "date": "2026-09-16",
+              "start_time": "2026-09-16T09:00:00",
+              "end_time": "2026-09-16T17:00:00",
+              "work_hours": 8,
+              "effective_work_hours": 8
+            },
+            {
+              "date": "2026-09-17",
+              "start_time": "2026-09-17T07:00:00",
+              "end_time": "2026-09-17T16:38:04",
+              "work_hours": 9.6347,
+              "effective_work_hours": 8.791666666666668
+            }
+          ],
+          "direct_revenue_aud": 0,
+          "direct_cost_aud": 3908.61,
+          "direct_cash_effect_aud": -3908.61,
+          "state_yield_effect_t_ha": 0.4216,
+          "water_ml": 0,
+          "candidate_score": 0.42158,
+          "state_after": {
+            "crop": "barley",
+            "planted": true,
+            "newly_planted": false,
+            "harvested": false,
+            "growth_stage": "stem_elongation",
+            "readiness": 0.517,
+            "soil_moisture": 0.2352,
+            "soil_temperature_c": 14.21,
+            "expected_yield_t_ha": 4.7803,
+            "nitrogen_index": 0.534,
+            "weed_pressure": 0.0605,
+            "pest_pressure": 0.08,
+            "disease_pressure": 0.0479,
+            "seedbed_readiness": 0.12,
+            "trafficability": 1,
+            "weather_damage_index": 0
+          }
+        },
+        {
+          "candidate_id": "P06_F3_fertilise_20260922_0800",
+          "plan_id": "P06",
+          "field_id": "F3",
+          "operation": "fertilise",
+          "target": "nitrogen",
+          "required": true,
+          "depends_on": "P05",
+          "min_gap_hours": 24,
+          "start_time": "2026-09-22T08:00:00",
+          "end_time": "2026-09-23T15:33:44",
+          "duration_hours": 17.56,
+          "workload_hours": 16.7917,
+          "machine_type": "fertiliser_spreader",
+          "eligible_machine_ids": [
+            "M4"
+          ],
+          "workers_required": 1,
+          "work_segments": [
+            {
+              "date": "2026-09-22",
+              "start_time": "2026-09-22T08:00:00",
+              "end_time": "2026-09-22T17:00:00",
+              "work_hours": 9,
+              "effective_work_hours": 9
+            },
+            {
+              "date": "2026-09-23",
+              "start_time": "2026-09-23T07:00:00",
+              "end_time": "2026-09-23T15:33:44",
+              "work_hours": 8.5623,
+              "effective_work_hours": 7.791666666666668
+            }
+          ],
+          "direct_revenue_aud": 0,
+          "direct_cost_aud": 9010.23,
+          "direct_cash_effect_aud": -9010.23,
+          "state_yield_effect_t_ha": 0.2409,
+          "water_ml": 0,
+          "candidate_score": 0.218676,
+          "state_after": {
+            "crop": "barley",
+            "planted": true,
+            "newly_planted": false,
+            "harvested": false,
+            "growth_stage": "stem_elongation",
+            "readiness": 0.571,
+            "soil_moisture": 0.1699,
+            "soil_temperature_c": 15.23,
+            "expected_yield_t_ha": 5.0453,
+            "nitrogen_index": 0.6612,
+            "weed_pressure": 0.5162,
+            "pest_pressure": 0.08,
+            "disease_pressure": 0.1127,
+            "seedbed_readiness": 0.12,
+            "trafficability": 1,
+            "weather_damage_index": 0
+          }
+        }
+      ],
+      "final_state": {
+        "crop": "barley",
+        "planted": true,
+        "newly_planted": false,
+        "harvested": false,
+        "growth_stage": "stem_elongation",
+        "readiness": 0.607,
+        "soil_moisture": 0.1104,
+        "soil_temperature_c": 15.91,
+        "expected_yield_t_ha": 5.0453,
+        "nitrogen_index": 0.5531,
+        "weed_pressure": 0.7273,
+        "pest_pressure": 0.08,
+        "disease_pressure": 0.0829,
+        "seedbed_readiness": 0.12,
+        "trafficability": 1,
+        "weather_damage_index": 0
+      }
+    },
+    {
+      "option_id": "F3_O023",
+      "field_id": "F3",
+      "total_direct_cash_effect_aud": -12924.18,
+      "terminal_value_aud": 145884.76,
+      "objective_value_aud": 132960.58,
+      "actions": [
+        {
+          "candidate_id": "P05_F3_spray_20260916_1000",
+          "plan_id": "P05",
+          "field_id": "F3",
+          "operation": "spray",
+          "target": "weed_control",
+          "required": true,
+          "depends_on": "",
+          "min_gap_hours": 0,
+          "start_time": "2026-09-16T10:00:00",
+          "end_time": "2026-09-18T07:41:14",
+          "duration_hours": 17.69,
+          "workload_hours": 16.7917,
+          "machine_type": "sprayer",
+          "eligible_machine_ids": [
+            "M3",
+            "M9",
+            "M10"
+          ],
+          "workers_required": 1,
+          "work_segments": [
+            {
+              "date": "2026-09-16",
+              "start_time": "2026-09-16T10:00:00",
+              "end_time": "2026-09-16T17:00:00",
+              "work_hours": 7,
+              "effective_work_hours": 7
+            },
+            {
+              "date": "2026-09-17",
+              "start_time": "2026-09-17T07:00:00",
+              "end_time": "2026-09-17T17:00:00",
+              "work_hours": 10,
+              "effective_work_hours": 9.125
+            },
+            {
+              "date": "2026-09-18",
+              "start_time": "2026-09-18T07:00:00",
+              "end_time": "2026-09-18T07:41:14",
+              "work_hours": 0.6872,
+              "effective_work_hours": 0.6666666666666679
+            }
+          ],
+          "direct_revenue_aud": 0,
+          "direct_cost_aud": 3913.95,
+          "direct_cash_effect_aud": -3913.95,
+          "state_yield_effect_t_ha": 0.4216,
+          "water_ml": 0,
+          "candidate_score": 0.42158,
+          "state_after": {
+            "crop": "barley",
+            "planted": true,
+            "newly_planted": false,
+            "harvested": false,
+            "growth_stage": "stem_elongation",
+            "readiness": 0.517,
+            "soil_moisture": 0.2322,
+            "soil_temperature_c": 14.21,
+            "expected_yield_t_ha": 4.7803,
+            "nitrogen_index": 0.534,
+            "weed_pressure": 0.0605,
+            "pest_pressure": 0.08,
+            "disease_pressure": 0.0449,
+            "seedbed_readiness": 0.12,
+            "trafficability": 1,
+            "weather_damage_index": 0
+          }
+        },
+        {
+          "candidate_id": "P06_F3_fertilise_20260922_0800",
+          "plan_id": "P06",
+          "field_id": "F3",
+          "operation": "fertilise",
+          "target": "nitrogen",
+          "required": true,
+          "depends_on": "P05",
+          "min_gap_hours": 24,
+          "start_time": "2026-09-22T08:00:00",
+          "end_time": "2026-09-23T15:33:44",
+          "duration_hours": 17.56,
+          "workload_hours": 16.7917,
+          "machine_type": "fertiliser_spreader",
+          "eligible_machine_ids": [
+            "M4"
+          ],
+          "workers_required": 1,
+          "work_segments": [
+            {
+              "date": "2026-09-22",
+              "start_time": "2026-09-22T08:00:00",
+              "end_time": "2026-09-22T17:00:00",
+              "work_hours": 9,
+              "effective_work_hours": 9
+            },
+            {
+              "date": "2026-09-23",
+              "start_time": "2026-09-23T07:00:00",
+              "end_time": "2026-09-23T15:33:44",
+              "work_hours": 8.5623,
+              "effective_work_hours": 7.791666666666668
+            }
+          ],
+          "direct_revenue_aud": 0,
+          "direct_cost_aud": 9010.23,
+          "direct_cash_effect_aud": -9010.23,
+          "state_yield_effect_t_ha": 0.2409,
+          "water_ml": 0,
+          "candidate_score": 0.218676,
+          "state_after": {
+            "crop": "barley",
+            "planted": true,
+            "newly_planted": false,
+            "harvested": false,
+            "growth_stage": "stem_elongation",
+            "readiness": 0.571,
+            "soil_moisture": 0.1699,
+            "soil_temperature_c": 15.23,
+            "expected_yield_t_ha": 5.0453,
+            "nitrogen_index": 0.6612,
+            "weed_pressure": 0.5162,
+            "pest_pressure": 0.08,
+            "disease_pressure": 0.1127,
+            "seedbed_readiness": 0.12,
+            "trafficability": 1,
+            "weather_damage_index": 0
+          }
+        }
+      ],
+      "final_state": {
+        "crop": "barley",
+        "planted": true,
+        "newly_planted": false,
+        "harvested": false,
+        "growth_stage": "stem_elongation",
+        "readiness": 0.607,
+        "soil_moisture": 0.1104,
+        "soil_temperature_c": 15.91,
+        "expected_yield_t_ha": 5.0453,
+        "nitrogen_index": 0.5531,
+        "weed_pressure": 0.7273,
+        "pest_pressure": 0.08,
+        "disease_pressure": 0.0829,
+        "seedbed_readiness": 0.12,
+        "trafficability": 1,
+        "weather_damage_index": 0
+      }
+    },
+    {
+      "option_id": "F3_O024",
+      "field_id": "F3",
+      "total_direct_cash_effect_aud": -12927.32,
+      "terminal_value_aud": 145884.76,
+      "objective_value_aud": 132957.44,
+      "actions": [
+        {
+          "candidate_id": "P05_F3_spray_20260916_1100",
+          "plan_id": "P05",
+          "field_id": "F3",
+          "operation": "spray",
+          "target": "weed_control",
+          "required": true,
+          "depends_on": "",
+          "min_gap_hours": 0,
+          "start_time": "2026-09-16T11:00:00",
+          "end_time": "2026-09-18T08:43:05",
+          "duration_hours": 17.72,
+          "workload_hours": 16.7917,
+          "machine_type": "sprayer",
+          "eligible_machine_ids": [
+            "M3",
+            "M9",
+            "M10"
+          ],
+          "workers_required": 1,
+          "work_segments": [
+            {
+              "date": "2026-09-16",
+              "start_time": "2026-09-16T11:00:00",
+              "end_time": "2026-09-16T17:00:00",
+              "work_hours": 6,
+              "effective_work_hours": 6
+            },
+            {
+              "date": "2026-09-17",
+              "start_time": "2026-09-17T07:00:00",
+              "end_time": "2026-09-17T17:00:00",
+              "work_hours": 10,
+              "effective_work_hours": 9.125
+            },
+            {
+              "date": "2026-09-18",
+              "start_time": "2026-09-18T07:00:00",
+              "end_time": "2026-09-18T08:43:05",
+              "work_hours": 1.7181,
+              "effective_work_hours": 1.6666666666666679
+            }
+          ],
+          "direct_revenue_aud": 0,
+          "direct_cost_aud": 3917.09,
+          "direct_cash_effect_aud": -3917.09,
+          "state_yield_effect_t_ha": 0.4216,
+          "water_ml": 0,
+          "candidate_score": 0.42158,
+          "state_after": {
+            "crop": "barley",
+            "planted": true,
+            "newly_planted": false,
+            "harvested": false,
+            "growth_stage": "stem_elongation",
+            "readiness": 0.517,
+            "soil_moisture": 0.2292,
+            "soil_temperature_c": 14.21,
+            "expected_yield_t_ha": 4.7803,
+            "nitrogen_index": 0.534,
+            "weed_pressure": 0.0605,
+            "pest_pressure": 0.08,
+            "disease_pressure": 0.0419,
+            "seedbed_readiness": 0.12,
+            "trafficability": 1,
+            "weather_damage_index": 0
+          }
+        },
+        {
+          "candidate_id": "P06_F3_fertilise_20260922_0800",
+          "plan_id": "P06",
+          "field_id": "F3",
+          "operation": "fertilise",
+          "target": "nitrogen",
+          "required": true,
+          "depends_on": "P05",
+          "min_gap_hours": 24,
+          "start_time": "2026-09-22T08:00:00",
+          "end_time": "2026-09-23T15:33:44",
+          "duration_hours": 17.56,
+          "workload_hours": 16.7917,
+          "machine_type": "fertiliser_spreader",
+          "eligible_machine_ids": [
+            "M4"
+          ],
+          "workers_required": 1,
+          "work_segments": [
+            {
+              "date": "2026-09-22",
+              "start_time": "2026-09-22T08:00:00",
+              "end_time": "2026-09-22T17:00:00",
+              "work_hours": 9,
+              "effective_work_hours": 9
+            },
+            {
+              "date": "2026-09-23",
+              "start_time": "2026-09-23T07:00:00",
+              "end_time": "2026-09-23T15:33:44",
+              "work_hours": 8.5623,
+              "effective_work_hours": 7.791666666666668
+            }
+          ],
+          "direct_revenue_aud": 0,
+          "direct_cost_aud": 9010.23,
+          "direct_cash_effect_aud": -9010.23,
+          "state_yield_effect_t_ha": 0.2409,
+          "water_ml": 0,
+          "candidate_score": 0.218676,
+          "state_after": {
+            "crop": "barley",
+            "planted": true,
+            "newly_planted": false,
+            "harvested": false,
+            "growth_stage": "stem_elongation",
+            "readiness": 0.571,
+            "soil_moisture": 0.1699,
+            "soil_temperature_c": 15.23,
+            "expected_yield_t_ha": 5.0453,
+            "nitrogen_index": 0.6612,
+            "weed_pressure": 0.5162,
+            "pest_pressure": 0.08,
+            "disease_pressure": 0.1127,
+            "seedbed_readiness": 0.12,
+            "trafficability": 1,
+            "weather_damage_index": 0
+          }
+        }
+      ],
+      "final_state": {
+        "crop": "barley",
+        "planted": true,
+        "newly_planted": false,
+        "harvested": false,
+        "growth_stage": "stem_elongation",
+        "readiness": 0.607,
+        "soil_moisture": 0.1104,
+        "soil_temperature_c": 15.91,
+        "expected_yield_t_ha": 5.0453,
+        "nitrogen_index": 0.5531,
+        "weed_pressure": 0.7273,
+        "pest_pressure": 0.08,
+        "disease_pressure": 0.0829,
+        "seedbed_readiness": 0.12,
+        "trafficability": 1,
+        "weather_damage_index": 0
+      }
+    },
+    {
+      "option_id": "F3_O025",
+      "field_id": "F3",
+      "total_direct_cash_effect_aud": -12928.73,
+      "terminal_value_aud": 145884.76,
+      "objective_value_aud": 132956.03,
+      "actions": [
+        {
+          "candidate_id": "P05_F3_spray_20260916_0900",
+          "plan_id": "P05",
+          "field_id": "F3",
+          "operation": "spray",
+          "target": "weed_control",
+          "required": true,
+          "depends_on": "",
+          "min_gap_hours": 0,
+          "start_time": "2026-09-16T09:00:00",
+          "end_time": "2026-09-17T16:38:04",
+          "duration_hours": 17.63,
+          "workload_hours": 16.7917,
+          "machine_type": "sprayer",
+          "eligible_machine_ids": [
+            "M3",
+            "M9",
+            "M10"
+          ],
+          "workers_required": 1,
+          "work_segments": [
+            {
+              "date": "2026-09-16",
+              "start_time": "2026-09-16T09:00:00",
+              "end_time": "2026-09-16T17:00:00",
+              "work_hours": 8,
+              "effective_work_hours": 8
+            },
+            {
+              "date": "2026-09-17",
+              "start_time": "2026-09-17T07:00:00",
+              "end_time": "2026-09-17T16:38:04",
+              "work_hours": 9.6347,
+              "effective_work_hours": 8.791666666666668
+            }
+          ],
+          "direct_revenue_aud": 0,
+          "direct_cost_aud": 3908.61,
+          "direct_cash_effect_aud": -3908.61,
+          "state_yield_effect_t_ha": 0.4216,
+          "water_ml": 0,
+          "candidate_score": 0.42158,
+          "state_after": {
+            "crop": "barley",
+            "planted": true,
+            "newly_planted": false,
+            "harvested": false,
+            "growth_stage": "stem_elongation",
+            "readiness": 0.517,
+            "soil_moisture": 0.2352,
+            "soil_temperature_c": 14.21,
+            "expected_yield_t_ha": 4.7803,
+            "nitrogen_index": 0.534,
+            "weed_pressure": 0.0605,
+            "pest_pressure": 0.08,
+            "disease_pressure": 0.0479,
+            "seedbed_readiness": 0.12,
+            "trafficability": 1,
+            "weather_damage_index": 0
+          }
+        },
+        {
+          "candidate_id": "P06_F3_fertilise_20260922_0900",
+          "plan_id": "P06",
+          "field_id": "F3",
+          "operation": "fertilise",
+          "target": "nitrogen",
+          "required": true,
+          "depends_on": "P05",
+          "min_gap_hours": 24,
+          "start_time": "2026-09-22T09:00:00",
+          "end_time": "2026-09-23T16:39:40",
+          "duration_hours": 17.66,
+          "workload_hours": 16.7917,
+          "machine_type": "fertiliser_spreader",
+          "eligible_machine_ids": [
+            "M4"
+          ],
+          "workers_required": 1,
+          "work_segments": [
+            {
+              "date": "2026-09-22",
+              "start_time": "2026-09-22T09:00:00",
+              "end_time": "2026-09-22T17:00:00",
+              "work_hours": 8,
+              "effective_work_hours": 8
+            },
+            {
+              "date": "2026-09-23",
+              "start_time": "2026-09-23T07:00:00",
+              "end_time": "2026-09-23T16:39:40",
+              "work_hours": 9.6612,
+              "effective_work_hours": 8.791666666666668
+            }
+          ],
+          "direct_revenue_aud": 0,
+          "direct_cost_aud": 9020.12,
+          "direct_cash_effect_aud": -9020.12,
+          "state_yield_effect_t_ha": 0.2409,
+          "water_ml": 0,
+          "candidate_score": 0.218676,
+          "state_after": {
+            "crop": "barley",
+            "planted": true,
+            "newly_planted": false,
+            "harvested": false,
+            "growth_stage": "stem_elongation",
+            "readiness": 0.571,
+            "soil_moisture": 0.1669,
+            "soil_temperature_c": 15.23,
+            "expected_yield_t_ha": 5.0453,
+            "nitrogen_index": 0.6612,
+            "weed_pressure": 0.5162,
+            "pest_pressure": 0.08,
+            "disease_pressure": 0.1097,
+            "seedbed_readiness": 0.12,
+            "trafficability": 1,
+            "weather_damage_index": 0
+          }
+        }
+      ],
+      "final_state": {
+        "crop": "barley",
+        "planted": true,
+        "newly_planted": false,
+        "harvested": false,
+        "growth_stage": "stem_elongation",
+        "readiness": 0.607,
+        "soil_moisture": 0.1104,
+        "soil_temperature_c": 15.91,
+        "expected_yield_t_ha": 5.0453,
+        "nitrogen_index": 0.5531,
+        "weed_pressure": 0.7273,
+        "pest_pressure": 0.08,
+        "disease_pressure": 0.0829,
+        "seedbed_readiness": 0.12,
+        "trafficability": 1,
+        "weather_damage_index": 0
+      }
+    },
+    {
+      "option_id": "F3_O026",
+      "field_id": "F3",
+      "total_direct_cash_effect_aud": -12934.07,
+      "terminal_value_aud": 145884.76,
+      "objective_value_aud": 132950.69,
+      "actions": [
+        {
+          "candidate_id": "P05_F3_spray_20260916_1000",
+          "plan_id": "P05",
+          "field_id": "F3",
+          "operation": "spray",
+          "target": "weed_control",
+          "required": true,
+          "depends_on": "",
+          "min_gap_hours": 0,
+          "start_time": "2026-09-16T10:00:00",
+          "end_time": "2026-09-18T07:41:14",
+          "duration_hours": 17.69,
+          "workload_hours": 16.7917,
+          "machine_type": "sprayer",
+          "eligible_machine_ids": [
+            "M3",
+            "M9",
+            "M10"
+          ],
+          "workers_required": 1,
+          "work_segments": [
+            {
+              "date": "2026-09-16",
+              "start_time": "2026-09-16T10:00:00",
+              "end_time": "2026-09-16T17:00:00",
+              "work_hours": 7,
+              "effective_work_hours": 7
+            },
+            {
+              "date": "2026-09-17",
+              "start_time": "2026-09-17T07:00:00",
+              "end_time": "2026-09-17T17:00:00",
+              "work_hours": 10,
+              "effective_work_hours": 9.125
+            },
+            {
+              "date": "2026-09-18",
+              "start_time": "2026-09-18T07:00:00",
+              "end_time": "2026-09-18T07:41:14",
+              "work_hours": 0.6872,
+              "effective_work_hours": 0.6666666666666679
+            }
+          ],
+          "direct_revenue_aud": 0,
+          "direct_cost_aud": 3913.95,
+          "direct_cash_effect_aud": -3913.95,
+          "state_yield_effect_t_ha": 0.4216,
+          "water_ml": 0,
+          "candidate_score": 0.42158,
+          "state_after": {
+            "crop": "barley",
+            "planted": true,
+            "newly_planted": false,
+            "harvested": false,
+            "growth_stage": "stem_elongation",
+            "readiness": 0.517,
+            "soil_moisture": 0.2322,
+            "soil_temperature_c": 14.21,
+            "expected_yield_t_ha": 4.7803,
+            "nitrogen_index": 0.534,
+            "weed_pressure": 0.0605,
+            "pest_pressure": 0.08,
+            "disease_pressure": 0.0449,
+            "seedbed_readiness": 0.12,
+            "trafficability": 1,
+            "weather_damage_index": 0
+          }
+        },
+        {
+          "candidate_id": "P06_F3_fertilise_20260922_0900",
+          "plan_id": "P06",
+          "field_id": "F3",
+          "operation": "fertilise",
+          "target": "nitrogen",
+          "required": true,
+          "depends_on": "P05",
+          "min_gap_hours": 24,
+          "start_time": "2026-09-22T09:00:00",
+          "end_time": "2026-09-23T16:39:40",
+          "duration_hours": 17.66,
+          "workload_hours": 16.7917,
+          "machine_type": "fertiliser_spreader",
+          "eligible_machine_ids": [
+            "M4"
+          ],
+          "workers_required": 1,
+          "work_segments": [
+            {
+              "date": "2026-09-22",
+              "start_time": "2026-09-22T09:00:00",
+              "end_time": "2026-09-22T17:00:00",
+              "work_hours": 8,
+              "effective_work_hours": 8
+            },
+            {
+              "date": "2026-09-23",
+              "start_time": "2026-09-23T07:00:00",
+              "end_time": "2026-09-23T16:39:40",
+              "work_hours": 9.6612,
+              "effective_work_hours": 8.791666666666668
+            }
+          ],
+          "direct_revenue_aud": 0,
+          "direct_cost_aud": 9020.12,
+          "direct_cash_effect_aud": -9020.12,
+          "state_yield_effect_t_ha": 0.2409,
+          "water_ml": 0,
+          "candidate_score": 0.218676,
+          "state_after": {
+            "crop": "barley",
+            "planted": true,
+            "newly_planted": false,
+            "harvested": false,
+            "growth_stage": "stem_elongation",
+            "readiness": 0.571,
+            "soil_moisture": 0.1669,
+            "soil_temperature_c": 15.23,
+            "expected_yield_t_ha": 5.0453,
+            "nitrogen_index": 0.6612,
+            "weed_pressure": 0.5162,
+            "pest_pressure": 0.08,
+            "disease_pressure": 0.1097,
+            "seedbed_readiness": 0.12,
+            "trafficability": 1,
+            "weather_damage_index": 0
+          }
+        }
+      ],
+      "final_state": {
+        "crop": "barley",
+        "planted": true,
+        "newly_planted": false,
+        "harvested": false,
+        "growth_stage": "stem_elongation",
+        "readiness": 0.607,
+        "soil_moisture": 0.1104,
+        "soil_temperature_c": 15.91,
+        "expected_yield_t_ha": 5.0453,
+        "nitrogen_index": 0.5531,
+        "weed_pressure": 0.7273,
+        "pest_pressure": 0.08,
+        "disease_pressure": 0.0829,
+        "seedbed_readiness": 0.12,
+        "trafficability": 1,
+        "weather_damage_index": 0
+      }
+    },
+    {
+      "option_id": "F3_O027",
+      "field_id": "F3",
+      "total_direct_cash_effect_aud": -12937.21,
+      "terminal_value_aud": 145884.76,
+      "objective_value_aud": 132947.55,
+      "actions": [
+        {
+          "candidate_id": "P05_F3_spray_20260916_1100",
+          "plan_id": "P05",
+          "field_id": "F3",
+          "operation": "spray",
+          "target": "weed_control",
+          "required": true,
+          "depends_on": "",
+          "min_gap_hours": 0,
+          "start_time": "2026-09-16T11:00:00",
+          "end_time": "2026-09-18T08:43:05",
+          "duration_hours": 17.72,
+          "workload_hours": 16.7917,
+          "machine_type": "sprayer",
+          "eligible_machine_ids": [
+            "M3",
+            "M9",
+            "M10"
+          ],
+          "workers_required": 1,
+          "work_segments": [
+            {
+              "date": "2026-09-16",
+              "start_time": "2026-09-16T11:00:00",
+              "end_time": "2026-09-16T17:00:00",
+              "work_hours": 6,
+              "effective_work_hours": 6
+            },
+            {
+              "date": "2026-09-17",
+              "start_time": "2026-09-17T07:00:00",
+              "end_time": "2026-09-17T17:00:00",
+              "work_hours": 10,
+              "effective_work_hours": 9.125
+            },
+            {
+              "date": "2026-09-18",
+              "start_time": "2026-09-18T07:00:00",
+              "end_time": "2026-09-18T08:43:05",
+              "work_hours": 1.7181,
+              "effective_work_hours": 1.6666666666666679
+            }
+          ],
+          "direct_revenue_aud": 0,
+          "direct_cost_aud": 3917.09,
+          "direct_cash_effect_aud": -3917.09,
+          "state_yield_effect_t_ha": 0.4216,
+          "water_ml": 0,
+          "candidate_score": 0.42158,
+          "state_after": {
+            "crop": "barley",
+            "planted": true,
+            "newly_planted": false,
+            "harvested": false,
+            "growth_stage": "stem_elongation",
+            "readiness": 0.517,
+            "soil_moisture": 0.2292,
+            "soil_temperature_c": 14.21,
+            "expected_yield_t_ha": 4.7803,
+            "nitrogen_index": 0.534,
+            "weed_pressure": 0.0605,
+            "pest_pressure": 0.08,
+            "disease_pressure": 0.0419,
+            "seedbed_readiness": 0.12,
+            "trafficability": 1,
+            "weather_damage_index": 0
+          }
+        },
+        {
+          "candidate_id": "P06_F3_fertilise_20260922_0900",
+          "plan_id": "P06",
+          "field_id": "F3",
+          "operation": "fertilise",
+          "target": "nitrogen",
+          "required": true,
+          "depends_on": "P05",
+          "min_gap_hours": 24,
+          "start_time": "2026-09-22T09:00:00",
+          "end_time": "2026-09-23T16:39:40",
+          "duration_hours": 17.66,
+          "workload_hours": 16.7917,
+          "machine_type": "fertiliser_spreader",
+          "eligible_machine_ids": [
+            "M4"
+          ],
+          "workers_required": 1,
+          "work_segments": [
+            {
+              "date": "2026-09-22",
+              "start_time": "2026-09-22T09:00:00",
+              "end_time": "2026-09-22T17:00:00",
+              "work_hours": 8,
+              "effective_work_hours": 8
+            },
+            {
+              "date": "2026-09-23",
+              "start_time": "2026-09-23T07:00:00",
+              "end_time": "2026-09-23T16:39:40",
+              "work_hours": 9.6612,
+              "effective_work_hours": 8.791666666666668
+            }
+          ],
+          "direct_revenue_aud": 0,
+          "direct_cost_aud": 9020.12,
+          "direct_cash_effect_aud": -9020.12,
+          "state_yield_effect_t_ha": 0.2409,
+          "water_ml": 0,
+          "candidate_score": 0.218676,
+          "state_after": {
+            "crop": "barley",
+            "planted": true,
+            "newly_planted": false,
+            "harvested": false,
+            "growth_stage": "stem_elongation",
+            "readiness": 0.571,
+            "soil_moisture": 0.1669,
+            "soil_temperature_c": 15.23,
+            "expected_yield_t_ha": 5.0453,
+            "nitrogen_index": 0.6612,
+            "weed_pressure": 0.5162,
+            "pest_pressure": 0.08,
+            "disease_pressure": 0.1097,
+            "seedbed_readiness": 0.12,
+            "trafficability": 1,
+            "weather_damage_index": 0
+          }
+        }
+      ],
+      "final_state": {
+        "crop": "barley",
+        "planted": true,
+        "newly_planted": false,
+        "harvested": false,
+        "growth_stage": "stem_elongation",
+        "readiness": 0.607,
+        "soil_moisture": 0.1104,
+        "soil_temperature_c": 15.91,
+        "expected_yield_t_ha": 5.0453,
+        "nitrogen_index": 0.5531,
+        "weed_pressure": 0.7273,
+        "pest_pressure": 0.08,
+        "disease_pressure": 0.0829,
+        "seedbed_readiness": 0.12,
+        "trafficability": 1,
+        "weather_damage_index": 0
+      }
+    },
+    {
+      "option_id": "F3_O028",
+      "field_id": "F3",
+      "total_direct_cash_effect_aud": -12969.94,
+      "terminal_value_aud": 145444.34,
+      "objective_value_aud": 132474.4,
+      "actions": [
+        {
+          "candidate_id": "P05_F3_spray_20260916_0900",
+          "plan_id": "P05",
+          "field_id": "F3",
+          "operation": "spray",
+          "target": "weed_control",
+          "required": true,
+          "depends_on": "",
+          "min_gap_hours": 0,
+          "start_time": "2026-09-16T09:00:00",
+          "end_time": "2026-09-17T16:38:04",
+          "duration_hours": 17.63,
+          "workload_hours": 16.7917,
+          "machine_type": "sprayer",
+          "eligible_machine_ids": [
+            "M3",
+            "M9",
+            "M10"
+          ],
+          "workers_required": 1,
+          "work_segments": [
+            {
+              "date": "2026-09-16",
+              "start_time": "2026-09-16T09:00:00",
+              "end_time": "2026-09-16T17:00:00",
+              "work_hours": 8,
+              "effective_work_hours": 8
+            },
+            {
+              "date": "2026-09-17",
+              "start_time": "2026-09-17T07:00:00",
+              "end_time": "2026-09-17T16:38:04",
+              "work_hours": 9.6347,
+              "effective_work_hours": 8.791666666666668
+            }
+          ],
+          "direct_revenue_aud": 0,
+          "direct_cost_aud": 3908.61,
+          "direct_cash_effect_aud": -3908.61,
+          "state_yield_effect_t_ha": 0.4216,
+          "water_ml": 0,
+          "candidate_score": 0.42158,
+          "state_after": {
+            "crop": "barley",
+            "planted": true,
+            "newly_planted": false,
+            "harvested": false,
+            "growth_stage": "stem_elongation",
+            "readiness": 0.517,
+            "soil_moisture": 0.2352,
+            "soil_temperature_c": 14.21,
+            "expected_yield_t_ha": 4.7803,
+            "nitrogen_index": 0.534,
+            "weed_pressure": 0.0605,
+            "pest_pressure": 0.08,
+            "disease_pressure": 0.0479,
             "seedbed_readiness": 0.12,
             "trafficability": 1,
             "weather_damage_index": 0
@@ -6779,7 +6896,7 @@
           "direct_revenue_aud": 0,
           "direct_cost_aud": 9061.33,
           "direct_cash_effect_aud": -9061.33,
-          "state_yield_effect_t_ha": 0.2273,
+          "state_yield_effect_t_ha": 0.2257,
           "water_ml": 0,
           "candidate_score": 0.204851,
           "state_after": {
@@ -6791,74 +6908,13 @@
             "readiness": 0.562,
             "soil_moisture": 0.2601,
             "soil_temperature_c": 15.06,
-            "expected_yield_t_ha": 5.0647,
+            "expected_yield_t_ha": 5.03,
             "nitrogen_index": 0.6693,
-            "weed_pressure": 0.4076,
+            "weed_pressure": 0.455,
             "pest_pressure": 0.08,
             "disease_pressure": 0.148,
             "seedbed_readiness": 0.12,
             "trafficability": 1,
-            "weather_damage_index": 0
-          }
-        },
-        {
-          "candidate_id": "P15_F3_spray_20260924_0800",
-          "plan_id": "P15",
-          "field_id": "F3",
-          "operation": "spray",
-          "target": "disease_control",
-          "required": false,
-          "depends_on": "P06",
-          "min_gap_hours": 24,
-          "start_time": "2026-09-24T08:00:00",
-          "end_time": "2026-09-25T16:51:12",
-          "duration_hours": 18.85,
-          "workload_hours": 16.7917,
-          "machine_type": "sprayer",
-          "eligible_machine_ids": [
-            "M3",
-            "M9",
-            "M10"
-          ],
-          "workers_required": 1,
-          "work_segments": [
-            {
-              "date": "2026-09-24",
-              "start_time": "2026-09-24T08:00:00",
-              "end_time": "2026-09-24T17:00:00",
-              "work_hours": 9,
-              "effective_work_hours": 7.649999999999999
-            },
-            {
-              "date": "2026-09-25",
-              "start_time": "2026-09-25T07:00:00",
-              "end_time": "2026-09-25T16:51:12",
-              "work_hours": 9.8536,
-              "effective_work_hours": 9.14166666666667
-            }
-          ],
-          "direct_revenue_aud": 0,
-          "direct_cost_aud": 4737.78,
-          "direct_cash_effect_aud": -4737.78,
-          "state_yield_effect_t_ha": 0.1622,
-          "water_ml": 0,
-          "candidate_score": 0.139233,
-          "state_after": {
-            "crop": "barley",
-            "planted": true,
-            "newly_planted": false,
-            "harvested": false,
-            "growth_stage": "stem_elongation",
-            "readiness": 0.589,
-            "soil_moisture": 0.2384,
-            "soil_temperature_c": 15.57,
-            "expected_yield_t_ha": 5.2269,
-            "nitrogen_index": 0.5889,
-            "weed_pressure": 0.5984,
-            "pest_pressure": 0.08,
-            "disease_pressure": 0.0192,
-            "seedbed_readiness": 0.12,
-            "trafficability": 0.995,
             "weather_damage_index": 0
           }
         }
@@ -6872,25 +6928,25 @@
         "readiness": 0.607,
         "soil_moisture": 0.1104,
         "soil_temperature_c": 15.91,
-        "expected_yield_t_ha": 5.2269,
+        "expected_yield_t_ha": 5.03,
         "nitrogen_index": 0.5357,
-        "weed_pressure": 0.7063,
+        "weed_pressure": 0.7273,
         "pest_pressure": 0.08,
-        "disease_pressure": 0.0008,
+        "disease_pressure": 0.0829,
         "seedbed_readiness": 0.12,
         "trafficability": 1,
         "weather_damage_index": 0
       }
     },
     {
-      "option_id": "F3_O026",
+      "option_id": "F3_O029",
       "field_id": "F3",
-      "total_direct_cash_effect_aud": -17707.01,
-      "terminal_value_aud": 151138.16,
-      "objective_value_aud": 133431.15,
+      "total_direct_cash_effect_aud": -12971.78,
+      "terminal_value_aud": 145444.34,
+      "objective_value_aud": 132472.56,
       "actions": [
         {
-          "candidate_id": "P05_F3_spray_20260917_0700",
+          "candidate_id": "P05_F3_spray_20260916_0900",
           "plan_id": "P05",
           "field_id": "F3",
           "operation": "spray",
@@ -6898,53 +6954,53 @@
           "required": true,
           "depends_on": "",
           "min_gap_hours": 0,
-          "start_time": "2026-09-17T07:00:00",
-          "end_time": "2026-09-18T14:54:11",
-          "duration_hours": 17.9,
+          "start_time": "2026-09-16T09:00:00",
+          "end_time": "2026-09-17T16:38:04",
+          "duration_hours": 17.63,
           "workload_hours": 16.7917,
           "machine_type": "sprayer",
           "eligible_machine_ids": [
+            "M3",
             "M9",
-            "M10",
-            "M3"
+            "M10"
           ],
           "workers_required": 1,
           "work_segments": [
             {
-              "date": "2026-09-17",
-              "start_time": "2026-09-17T07:00:00",
-              "end_time": "2026-09-17T17:00:00",
-              "work_hours": 10,
-              "effective_work_hours": 9.125
+              "date": "2026-09-16",
+              "start_time": "2026-09-16T09:00:00",
+              "end_time": "2026-09-16T17:00:00",
+              "work_hours": 8,
+              "effective_work_hours": 8
             },
             {
-              "date": "2026-09-18",
-              "start_time": "2026-09-18T07:00:00",
-              "end_time": "2026-09-18T14:54:11",
-              "work_hours": 7.9031,
-              "effective_work_hours": 7.666666666666668
+              "date": "2026-09-17",
+              "start_time": "2026-09-17T07:00:00",
+              "end_time": "2026-09-17T16:38:04",
+              "work_hours": 9.6347,
+              "effective_work_hours": 8.791666666666668
             }
           ],
           "direct_revenue_aud": 0,
-          "direct_cost_aud": 3906.06,
-          "direct_cash_effect_aud": -3906.06,
-          "state_yield_effect_t_ha": 0.4547,
+          "direct_cost_aud": 3908.61,
+          "direct_cash_effect_aud": -3908.61,
+          "state_yield_effect_t_ha": 0.4216,
           "water_ml": 0,
-          "candidate_score": 0.454671,
+          "candidate_score": 0.42158,
           "state_after": {
             "crop": "barley",
             "planted": true,
             "newly_planted": false,
             "harvested": false,
             "growth_stage": "stem_elongation",
-            "readiness": 0.526,
-            "soil_moisture": 0.1771,
-            "soil_temperature_c": 14.38,
-            "expected_yield_t_ha": 4.8321,
-            "nitrogen_index": 0.512,
-            "weed_pressure": 0.064,
+            "readiness": 0.517,
+            "soil_moisture": 0.2352,
+            "soil_temperature_c": 14.21,
+            "expected_yield_t_ha": 4.7803,
+            "nitrogen_index": 0.534,
+            "weed_pressure": 0.0605,
             "pest_pressure": 0.08,
-            "disease_pressure": 0.0156,
+            "disease_pressure": 0.0479,
             "seedbed_readiness": 0.12,
             "trafficability": 1,
             "weather_damage_index": 0
@@ -6987,7 +7043,7 @@
           "direct_revenue_aud": 0,
           "direct_cost_aud": 9063.17,
           "direct_cash_effect_aud": -9063.17,
-          "state_yield_effect_t_ha": 0.2273,
+          "state_yield_effect_t_ha": 0.2257,
           "water_ml": 0,
           "candidate_score": 0.204851,
           "state_after": {
@@ -6999,76 +7055,15 @@
             "readiness": 0.562,
             "soil_moisture": 0.2631,
             "soil_temperature_c": 15.06,
-            "expected_yield_t_ha": 5.0647,
+            "expected_yield_t_ha": 5.03,
             "nitrogen_index": 0.6693,
-            "weed_pressure": 0.4076,
+            "weed_pressure": 0.455,
             "pest_pressure": 0.08,
             "disease_pressure": 0.151,
             "seedbed_readiness": 0.12,
             "trafficability": 1,
             "weather_damage_index": 0
           }
-        },
-        {
-          "candidate_id": "P15_F3_spray_20260924_0800",
-          "plan_id": "P15",
-          "field_id": "F3",
-          "operation": "spray",
-          "target": "disease_control",
-          "required": false,
-          "depends_on": "P06",
-          "min_gap_hours": 24,
-          "start_time": "2026-09-24T08:00:00",
-          "end_time": "2026-09-25T16:51:12",
-          "duration_hours": 18.85,
-          "workload_hours": 16.7917,
-          "machine_type": "sprayer",
-          "eligible_machine_ids": [
-            "M3",
-            "M9",
-            "M10"
-          ],
-          "workers_required": 1,
-          "work_segments": [
-            {
-              "date": "2026-09-24",
-              "start_time": "2026-09-24T08:00:00",
-              "end_time": "2026-09-24T17:00:00",
-              "work_hours": 9,
-              "effective_work_hours": 7.649999999999999
-            },
-            {
-              "date": "2026-09-25",
-              "start_time": "2026-09-25T07:00:00",
-              "end_time": "2026-09-25T16:51:12",
-              "work_hours": 9.8536,
-              "effective_work_hours": 9.14166666666667
-            }
-          ],
-          "direct_revenue_aud": 0,
-          "direct_cost_aud": 4737.78,
-          "direct_cash_effect_aud": -4737.78,
-          "state_yield_effect_t_ha": 0.1622,
-          "water_ml": 0,
-          "candidate_score": 0.139233,
-          "state_after": {
-            "crop": "barley",
-            "planted": true,
-            "newly_planted": false,
-            "harvested": false,
-            "growth_stage": "stem_elongation",
-            "readiness": 0.589,
-            "soil_moisture": 0.2384,
-            "soil_temperature_c": 15.57,
-            "expected_yield_t_ha": 5.2269,
-            "nitrogen_index": 0.5889,
-            "weed_pressure": 0.5984,
-            "pest_pressure": 0.08,
-            "disease_pressure": 0.0192,
-            "seedbed_readiness": 0.12,
-            "trafficability": 0.995,
-            "weather_damage_index": 0
-          }
         }
       ],
       "final_state": {
@@ -7080,25 +7075,25 @@
         "readiness": 0.607,
         "soil_moisture": 0.1104,
         "soil_temperature_c": 15.91,
-        "expected_yield_t_ha": 5.2269,
+        "expected_yield_t_ha": 5.03,
         "nitrogen_index": 0.5357,
-        "weed_pressure": 0.7063,
+        "weed_pressure": 0.7273,
         "pest_pressure": 0.08,
-        "disease_pressure": 0.0008,
+        "disease_pressure": 0.0829,
         "seedbed_readiness": 0.12,
         "trafficability": 1,
         "weather_damage_index": 0
       }
     },
     {
-      "option_id": "F3_O027",
+      "option_id": "F3_O030",
       "field_id": "F3",
-      "total_direct_cash_effect_aud": -17708.25,
-      "terminal_value_aud": 151138.16,
-      "objective_value_aud": 133429.91,
+      "total_direct_cash_effect_aud": -12974.28,
+      "terminal_value_aud": 145444.34,
+      "objective_value_aud": 132470.06,
       "actions": [
         {
-          "candidate_id": "P05_F3_spray_20260917_0800",
+          "candidate_id": "P05_F3_spray_20260916_0900",
           "plan_id": "P05",
           "field_id": "F3",
           "operation": "spray",
@@ -7106,268 +7101,53 @@
           "required": true,
           "depends_on": "",
           "min_gap_hours": 0,
-          "start_time": "2026-09-17T08:00:00",
-          "end_time": "2026-09-18T15:56:02",
-          "duration_hours": 17.93,
+          "start_time": "2026-09-16T09:00:00",
+          "end_time": "2026-09-17T16:38:04",
+          "duration_hours": 17.63,
           "workload_hours": 16.7917,
           "machine_type": "sprayer",
           "eligible_machine_ids": [
+            "M3",
             "M9",
-            "M10",
-            "M3"
+            "M10"
           ],
           "workers_required": 1,
           "work_segments": [
             {
-              "date": "2026-09-17",
-              "start_time": "2026-09-17T08:00:00",
-              "end_time": "2026-09-17T17:00:00",
-              "work_hours": 9,
-              "effective_work_hours": 8.125
-            },
-            {
-              "date": "2026-09-18",
-              "start_time": "2026-09-18T07:00:00",
-              "end_time": "2026-09-18T15:56:02",
-              "work_hours": 8.9339,
-              "effective_work_hours": 8.666666666666668
-            }
-          ],
-          "direct_revenue_aud": 0,
-          "direct_cost_aud": 3909.14,
-          "direct_cash_effect_aud": -3909.14,
-          "state_yield_effect_t_ha": 0.4547,
-          "water_ml": 0,
-          "candidate_score": 0.454671,
-          "state_after": {
-            "crop": "barley",
-            "planted": true,
-            "newly_planted": false,
-            "harvested": false,
-            "growth_stage": "stem_elongation",
-            "readiness": 0.526,
-            "soil_moisture": 0.1741,
-            "soil_temperature_c": 14.38,
-            "expected_yield_t_ha": 4.8321,
-            "nitrogen_index": 0.512,
-            "weed_pressure": 0.064,
-            "pest_pressure": 0.08,
-            "disease_pressure": 0.0126,
-            "seedbed_readiness": 0.12,
-            "trafficability": 1,
-            "weather_damage_index": 0
-          }
-        },
-        {
-          "candidate_id": "P06_F3_fertilise_20260921_0900",
-          "plan_id": "P06",
-          "field_id": "F3",
-          "operation": "fertilise",
-          "target": "nitrogen",
-          "required": true,
-          "depends_on": "P05",
-          "min_gap_hours": 24,
-          "start_time": "2026-09-21T09:00:00",
-          "end_time": "2026-09-23T07:04:23",
-          "duration_hours": 18.07,
-          "workload_hours": 16.7917,
-          "machine_type": "fertiliser_spreader",
-          "eligible_machine_ids": [
-            "M4"
-          ],
-          "workers_required": 1,
-          "work_segments": [
-            {
-              "date": "2026-09-21",
-              "start_time": "2026-09-21T09:00:00",
-              "end_time": "2026-09-21T17:00:00",
+              "date": "2026-09-16",
+              "start_time": "2026-09-16T09:00:00",
+              "end_time": "2026-09-16T17:00:00",
               "work_hours": 8,
-              "effective_work_hours": 6.724999999999999
+              "effective_work_hours": 8
             },
-            {
-              "date": "2026-09-22",
-              "start_time": "2026-09-22T07:00:00",
-              "end_time": "2026-09-22T17:00:00",
-              "work_hours": 10,
-              "effective_work_hours": 10
-            },
-            {
-              "date": "2026-09-23",
-              "start_time": "2026-09-23T07:00:00",
-              "end_time": "2026-09-23T07:04:23",
-              "work_hours": 0.0733,
-              "effective_work_hours": 0.06666666666666998
-            }
-          ],
-          "direct_revenue_aud": 0,
-          "direct_cost_aud": 9061.33,
-          "direct_cash_effect_aud": -9061.33,
-          "state_yield_effect_t_ha": 0.2273,
-          "water_ml": 0,
-          "candidate_score": 0.204851,
-          "state_after": {
-            "crop": "barley",
-            "planted": true,
-            "newly_planted": false,
-            "harvested": false,
-            "growth_stage": "stem_elongation",
-            "readiness": 0.562,
-            "soil_moisture": 0.2601,
-            "soil_temperature_c": 15.06,
-            "expected_yield_t_ha": 5.0647,
-            "nitrogen_index": 0.6693,
-            "weed_pressure": 0.4076,
-            "pest_pressure": 0.08,
-            "disease_pressure": 0.148,
-            "seedbed_readiness": 0.12,
-            "trafficability": 1,
-            "weather_damage_index": 0
-          }
-        },
-        {
-          "candidate_id": "P15_F3_spray_20260924_0800",
-          "plan_id": "P15",
-          "field_id": "F3",
-          "operation": "spray",
-          "target": "disease_control",
-          "required": false,
-          "depends_on": "P06",
-          "min_gap_hours": 24,
-          "start_time": "2026-09-24T08:00:00",
-          "end_time": "2026-09-25T16:51:12",
-          "duration_hours": 18.85,
-          "workload_hours": 16.7917,
-          "machine_type": "sprayer",
-          "eligible_machine_ids": [
-            "M3",
-            "M9",
-            "M10"
-          ],
-          "workers_required": 1,
-          "work_segments": [
-            {
-              "date": "2026-09-24",
-              "start_time": "2026-09-24T08:00:00",
-              "end_time": "2026-09-24T17:00:00",
-              "work_hours": 9,
-              "effective_work_hours": 7.649999999999999
-            },
-            {
-              "date": "2026-09-25",
-              "start_time": "2026-09-25T07:00:00",
-              "end_time": "2026-09-25T16:51:12",
-              "work_hours": 9.8536,
-              "effective_work_hours": 9.14166666666667
-            }
-          ],
-          "direct_revenue_aud": 0,
-          "direct_cost_aud": 4737.78,
-          "direct_cash_effect_aud": -4737.78,
-          "state_yield_effect_t_ha": 0.1622,
-          "water_ml": 0,
-          "candidate_score": 0.139233,
-          "state_after": {
-            "crop": "barley",
-            "planted": true,
-            "newly_planted": false,
-            "harvested": false,
-            "growth_stage": "stem_elongation",
-            "readiness": 0.589,
-            "soil_moisture": 0.2384,
-            "soil_temperature_c": 15.57,
-            "expected_yield_t_ha": 5.2269,
-            "nitrogen_index": 0.5889,
-            "weed_pressure": 0.5984,
-            "pest_pressure": 0.08,
-            "disease_pressure": 0.0192,
-            "seedbed_readiness": 0.12,
-            "trafficability": 0.995,
-            "weather_damage_index": 0
-          }
-        }
-      ],
-      "final_state": {
-        "crop": "barley",
-        "planted": true,
-        "newly_planted": false,
-        "harvested": false,
-        "growth_stage": "stem_elongation",
-        "readiness": 0.607,
-        "soil_moisture": 0.1104,
-        "soil_temperature_c": 15.91,
-        "expected_yield_t_ha": 5.2269,
-        "nitrogen_index": 0.5357,
-        "weed_pressure": 0.7063,
-        "pest_pressure": 0.08,
-        "disease_pressure": 0.0008,
-        "seedbed_readiness": 0.12,
-        "trafficability": 1,
-        "weather_damage_index": 0
-      }
-    },
-    {
-      "option_id": "F3_O028",
-      "field_id": "F3",
-      "total_direct_cash_effect_aud": -17709.51,
-      "terminal_value_aud": 151138.16,
-      "objective_value_aud": 133428.65,
-      "actions": [
-        {
-          "candidate_id": "P05_F3_spray_20260917_0700",
-          "plan_id": "P05",
-          "field_id": "F3",
-          "operation": "spray",
-          "target": "weed_control",
-          "required": true,
-          "depends_on": "",
-          "min_gap_hours": 0,
-          "start_time": "2026-09-17T07:00:00",
-          "end_time": "2026-09-18T14:54:11",
-          "duration_hours": 17.9,
-          "workload_hours": 16.7917,
-          "machine_type": "sprayer",
-          "eligible_machine_ids": [
-            "M9",
-            "M10",
-            "M3"
-          ],
-          "workers_required": 1,
-          "work_segments": [
             {
               "date": "2026-09-17",
               "start_time": "2026-09-17T07:00:00",
-              "end_time": "2026-09-17T17:00:00",
-              "work_hours": 10,
-              "effective_work_hours": 9.125
-            },
-            {
-              "date": "2026-09-18",
-              "start_time": "2026-09-18T07:00:00",
-              "end_time": "2026-09-18T14:54:11",
-              "work_hours": 7.9031,
-              "effective_work_hours": 7.666666666666668
+              "end_time": "2026-09-17T16:38:04",
+              "work_hours": 9.6347,
+              "effective_work_hours": 8.791666666666668
             }
           ],
           "direct_revenue_aud": 0,
-          "direct_cost_aud": 3906.06,
-          "direct_cash_effect_aud": -3906.06,
-          "state_yield_effect_t_ha": 0.4547,
+          "direct_cost_aud": 3908.61,
+          "direct_cash_effect_aud": -3908.61,
+          "state_yield_effect_t_ha": 0.4216,
           "water_ml": 0,
-          "candidate_score": 0.454671,
+          "candidate_score": 0.42158,
           "state_after": {
             "crop": "barley",
             "planted": true,
             "newly_planted": false,
             "harvested": false,
             "growth_stage": "stem_elongation",
-            "readiness": 0.526,
-            "soil_moisture": 0.1771,
-            "soil_temperature_c": 14.38,
-            "expected_yield_t_ha": 4.8321,
-            "nitrogen_index": 0.512,
-            "weed_pressure": 0.064,
+            "readiness": 0.517,
+            "soil_moisture": 0.2352,
+            "soil_temperature_c": 14.21,
+            "expected_yield_t_ha": 4.7803,
+            "nitrogen_index": 0.534,
+            "weed_pressure": 0.0605,
             "pest_pressure": 0.08,
-            "disease_pressure": 0.0156,
+            "disease_pressure": 0.0479,
             "seedbed_readiness": 0.12,
             "trafficability": 1,
             "weather_damage_index": 0
@@ -7410,7 +7190,7 @@
           "direct_revenue_aud": 0,
           "direct_cost_aud": 9065.67,
           "direct_cash_effect_aud": -9065.67,
-          "state_yield_effect_t_ha": 0.2273,
+          "state_yield_effect_t_ha": 0.2257,
           "water_ml": 0,
           "candidate_score": 0.204851,
           "state_after": {
@@ -7422,76 +7202,15 @@
             "readiness": 0.562,
             "soil_moisture": 0.2661,
             "soil_temperature_c": 15.06,
-            "expected_yield_t_ha": 5.0647,
+            "expected_yield_t_ha": 5.03,
             "nitrogen_index": 0.6693,
-            "weed_pressure": 0.4076,
+            "weed_pressure": 0.455,
             "pest_pressure": 0.08,
             "disease_pressure": 0.154,
             "seedbed_readiness": 0.12,
             "trafficability": 1,
             "weather_damage_index": 0
           }
-        },
-        {
-          "candidate_id": "P15_F3_spray_20260924_0800",
-          "plan_id": "P15",
-          "field_id": "F3",
-          "operation": "spray",
-          "target": "disease_control",
-          "required": false,
-          "depends_on": "P06",
-          "min_gap_hours": 24,
-          "start_time": "2026-09-24T08:00:00",
-          "end_time": "2026-09-25T16:51:12",
-          "duration_hours": 18.85,
-          "workload_hours": 16.7917,
-          "machine_type": "sprayer",
-          "eligible_machine_ids": [
-            "M3",
-            "M9",
-            "M10"
-          ],
-          "workers_required": 1,
-          "work_segments": [
-            {
-              "date": "2026-09-24",
-              "start_time": "2026-09-24T08:00:00",
-              "end_time": "2026-09-24T17:00:00",
-              "work_hours": 9,
-              "effective_work_hours": 7.649999999999999
-            },
-            {
-              "date": "2026-09-25",
-              "start_time": "2026-09-25T07:00:00",
-              "end_time": "2026-09-25T16:51:12",
-              "work_hours": 9.8536,
-              "effective_work_hours": 9.14166666666667
-            }
-          ],
-          "direct_revenue_aud": 0,
-          "direct_cost_aud": 4737.78,
-          "direct_cash_effect_aud": -4737.78,
-          "state_yield_effect_t_ha": 0.1622,
-          "water_ml": 0,
-          "candidate_score": 0.139233,
-          "state_after": {
-            "crop": "barley",
-            "planted": true,
-            "newly_planted": false,
-            "harvested": false,
-            "growth_stage": "stem_elongation",
-            "readiness": 0.589,
-            "soil_moisture": 0.2384,
-            "soil_temperature_c": 15.57,
-            "expected_yield_t_ha": 5.2269,
-            "nitrogen_index": 0.5889,
-            "weed_pressure": 0.5984,
-            "pest_pressure": 0.08,
-            "disease_pressure": 0.0192,
-            "seedbed_readiness": 0.12,
-            "trafficability": 0.995,
-            "weather_damage_index": 0
-          }
         }
       ],
       "final_state": {
@@ -7503,434 +7222,11 @@
         "readiness": 0.607,
         "soil_moisture": 0.1104,
         "soil_temperature_c": 15.91,
-        "expected_yield_t_ha": 5.2269,
+        "expected_yield_t_ha": 5.03,
         "nitrogen_index": 0.5357,
-        "weed_pressure": 0.7063,
+        "weed_pressure": 0.7273,
         "pest_pressure": 0.08,
-        "disease_pressure": 0.0008,
-        "seedbed_readiness": 0.12,
-        "trafficability": 1,
-        "weather_damage_index": 0
-      }
-    },
-    {
-      "option_id": "F3_O029",
-      "field_id": "F3",
-      "total_direct_cash_effect_aud": -17710.09,
-      "terminal_value_aud": 151138.16,
-      "objective_value_aud": 133428.07,
-      "actions": [
-        {
-          "candidate_id": "P05_F3_spray_20260917_0800",
-          "plan_id": "P05",
-          "field_id": "F3",
-          "operation": "spray",
-          "target": "weed_control",
-          "required": true,
-          "depends_on": "",
-          "min_gap_hours": 0,
-          "start_time": "2026-09-17T08:00:00",
-          "end_time": "2026-09-18T15:56:02",
-          "duration_hours": 17.93,
-          "workload_hours": 16.7917,
-          "machine_type": "sprayer",
-          "eligible_machine_ids": [
-            "M9",
-            "M10",
-            "M3"
-          ],
-          "workers_required": 1,
-          "work_segments": [
-            {
-              "date": "2026-09-17",
-              "start_time": "2026-09-17T08:00:00",
-              "end_time": "2026-09-17T17:00:00",
-              "work_hours": 9,
-              "effective_work_hours": 8.125
-            },
-            {
-              "date": "2026-09-18",
-              "start_time": "2026-09-18T07:00:00",
-              "end_time": "2026-09-18T15:56:02",
-              "work_hours": 8.9339,
-              "effective_work_hours": 8.666666666666668
-            }
-          ],
-          "direct_revenue_aud": 0,
-          "direct_cost_aud": 3909.14,
-          "direct_cash_effect_aud": -3909.14,
-          "state_yield_effect_t_ha": 0.4547,
-          "water_ml": 0,
-          "candidate_score": 0.454671,
-          "state_after": {
-            "crop": "barley",
-            "planted": true,
-            "newly_planted": false,
-            "harvested": false,
-            "growth_stage": "stem_elongation",
-            "readiness": 0.526,
-            "soil_moisture": 0.1741,
-            "soil_temperature_c": 14.38,
-            "expected_yield_t_ha": 4.8321,
-            "nitrogen_index": 0.512,
-            "weed_pressure": 0.064,
-            "pest_pressure": 0.08,
-            "disease_pressure": 0.0126,
-            "seedbed_readiness": 0.12,
-            "trafficability": 1,
-            "weather_damage_index": 0
-          }
-        },
-        {
-          "candidate_id": "P06_F3_fertilise_20260921_0800",
-          "plan_id": "P06",
-          "field_id": "F3",
-          "operation": "fertilise",
-          "target": "nitrogen",
-          "required": true,
-          "depends_on": "P05",
-          "min_gap_hours": 24,
-          "start_time": "2026-09-21T08:00:00",
-          "end_time": "2026-09-22T16:05:30",
-          "duration_hours": 18.09,
-          "workload_hours": 16.7917,
-          "machine_type": "fertiliser_spreader",
-          "eligible_machine_ids": [
-            "M4"
-          ],
-          "workers_required": 1,
-          "work_segments": [
-            {
-              "date": "2026-09-21",
-              "start_time": "2026-09-21T08:00:00",
-              "end_time": "2026-09-21T17:00:00",
-              "work_hours": 9,
-              "effective_work_hours": 7.699999999999998
-            },
-            {
-              "date": "2026-09-22",
-              "start_time": "2026-09-22T07:00:00",
-              "end_time": "2026-09-22T16:05:30",
-              "work_hours": 9.0917,
-              "effective_work_hours": 9.091666666666669
-            }
-          ],
-          "direct_revenue_aud": 0,
-          "direct_cost_aud": 9063.17,
-          "direct_cash_effect_aud": -9063.17,
-          "state_yield_effect_t_ha": 0.2273,
-          "water_ml": 0,
-          "candidate_score": 0.204851,
-          "state_after": {
-            "crop": "barley",
-            "planted": true,
-            "newly_planted": false,
-            "harvested": false,
-            "growth_stage": "stem_elongation",
-            "readiness": 0.562,
-            "soil_moisture": 0.2631,
-            "soil_temperature_c": 15.06,
-            "expected_yield_t_ha": 5.0647,
-            "nitrogen_index": 0.6693,
-            "weed_pressure": 0.4076,
-            "pest_pressure": 0.08,
-            "disease_pressure": 0.151,
-            "seedbed_readiness": 0.12,
-            "trafficability": 1,
-            "weather_damage_index": 0
-          }
-        },
-        {
-          "candidate_id": "P15_F3_spray_20260924_0800",
-          "plan_id": "P15",
-          "field_id": "F3",
-          "operation": "spray",
-          "target": "disease_control",
-          "required": false,
-          "depends_on": "P06",
-          "min_gap_hours": 24,
-          "start_time": "2026-09-24T08:00:00",
-          "end_time": "2026-09-25T16:51:12",
-          "duration_hours": 18.85,
-          "workload_hours": 16.7917,
-          "machine_type": "sprayer",
-          "eligible_machine_ids": [
-            "M3",
-            "M9",
-            "M10"
-          ],
-          "workers_required": 1,
-          "work_segments": [
-            {
-              "date": "2026-09-24",
-              "start_time": "2026-09-24T08:00:00",
-              "end_time": "2026-09-24T17:00:00",
-              "work_hours": 9,
-              "effective_work_hours": 7.649999999999999
-            },
-            {
-              "date": "2026-09-25",
-              "start_time": "2026-09-25T07:00:00",
-              "end_time": "2026-09-25T16:51:12",
-              "work_hours": 9.8536,
-              "effective_work_hours": 9.14166666666667
-            }
-          ],
-          "direct_revenue_aud": 0,
-          "direct_cost_aud": 4737.78,
-          "direct_cash_effect_aud": -4737.78,
-          "state_yield_effect_t_ha": 0.1622,
-          "water_ml": 0,
-          "candidate_score": 0.139233,
-          "state_after": {
-            "crop": "barley",
-            "planted": true,
-            "newly_planted": false,
-            "harvested": false,
-            "growth_stage": "stem_elongation",
-            "readiness": 0.589,
-            "soil_moisture": 0.2384,
-            "soil_temperature_c": 15.57,
-            "expected_yield_t_ha": 5.2269,
-            "nitrogen_index": 0.5889,
-            "weed_pressure": 0.5984,
-            "pest_pressure": 0.08,
-            "disease_pressure": 0.0192,
-            "seedbed_readiness": 0.12,
-            "trafficability": 0.995,
-            "weather_damage_index": 0
-          }
-        }
-      ],
-      "final_state": {
-        "crop": "barley",
-        "planted": true,
-        "newly_planted": false,
-        "harvested": false,
-        "growth_stage": "stem_elongation",
-        "readiness": 0.607,
-        "soil_moisture": 0.1104,
-        "soil_temperature_c": 15.91,
-        "expected_yield_t_ha": 5.2269,
-        "nitrogen_index": 0.5357,
-        "weed_pressure": 0.7063,
-        "pest_pressure": 0.08,
-        "disease_pressure": 0.0008,
-        "seedbed_readiness": 0.12,
-        "trafficability": 1,
-        "weather_damage_index": 0
-      }
-    },
-    {
-      "option_id": "F3_O030",
-      "field_id": "F3",
-      "total_direct_cash_effect_aud": -17711.34,
-      "terminal_value_aud": 151138.16,
-      "objective_value_aud": 133426.82,
-      "actions": [
-        {
-          "candidate_id": "P05_F3_spray_20260917_0900",
-          "plan_id": "P05",
-          "field_id": "F3",
-          "operation": "spray",
-          "target": "weed_control",
-          "required": true,
-          "depends_on": "",
-          "min_gap_hours": 0,
-          "start_time": "2026-09-17T09:00:00",
-          "end_time": "2026-09-18T16:57:53",
-          "duration_hours": 17.96,
-          "workload_hours": 16.7917,
-          "machine_type": "sprayer",
-          "eligible_machine_ids": [
-            "M9",
-            "M10",
-            "M3"
-          ],
-          "workers_required": 1,
-          "work_segments": [
-            {
-              "date": "2026-09-17",
-              "start_time": "2026-09-17T09:00:00",
-              "end_time": "2026-09-17T17:00:00",
-              "work_hours": 8,
-              "effective_work_hours": 7.124999999999999
-            },
-            {
-              "date": "2026-09-18",
-              "start_time": "2026-09-18T07:00:00",
-              "end_time": "2026-09-18T16:57:53",
-              "work_hours": 9.9648,
-              "effective_work_hours": 9.666666666666668
-            }
-          ],
-          "direct_revenue_aud": 0,
-          "direct_cost_aud": 3912.23,
-          "direct_cash_effect_aud": -3912.23,
-          "state_yield_effect_t_ha": 0.4547,
-          "water_ml": 0,
-          "candidate_score": 0.454671,
-          "state_after": {
-            "crop": "barley",
-            "planted": true,
-            "newly_planted": false,
-            "harvested": false,
-            "growth_stage": "stem_elongation",
-            "readiness": 0.526,
-            "soil_moisture": 0.1711,
-            "soil_temperature_c": 14.38,
-            "expected_yield_t_ha": 4.8321,
-            "nitrogen_index": 0.512,
-            "weed_pressure": 0.064,
-            "pest_pressure": 0.08,
-            "disease_pressure": 0.0096,
-            "seedbed_readiness": 0.12,
-            "trafficability": 1,
-            "weather_damage_index": 0
-          }
-        },
-        {
-          "candidate_id": "P06_F3_fertilise_20260921_0900",
-          "plan_id": "P06",
-          "field_id": "F3",
-          "operation": "fertilise",
-          "target": "nitrogen",
-          "required": true,
-          "depends_on": "P05",
-          "min_gap_hours": 24,
-          "start_time": "2026-09-21T09:00:00",
-          "end_time": "2026-09-23T07:04:23",
-          "duration_hours": 18.07,
-          "workload_hours": 16.7917,
-          "machine_type": "fertiliser_spreader",
-          "eligible_machine_ids": [
-            "M4"
-          ],
-          "workers_required": 1,
-          "work_segments": [
-            {
-              "date": "2026-09-21",
-              "start_time": "2026-09-21T09:00:00",
-              "end_time": "2026-09-21T17:00:00",
-              "work_hours": 8,
-              "effective_work_hours": 6.724999999999999
-            },
-            {
-              "date": "2026-09-22",
-              "start_time": "2026-09-22T07:00:00",
-              "end_time": "2026-09-22T17:00:00",
-              "work_hours": 10,
-              "effective_work_hours": 10
-            },
-            {
-              "date": "2026-09-23",
-              "start_time": "2026-09-23T07:00:00",
-              "end_time": "2026-09-23T07:04:23",
-              "work_hours": 0.0733,
-              "effective_work_hours": 0.06666666666666998
-            }
-          ],
-          "direct_revenue_aud": 0,
-          "direct_cost_aud": 9061.33,
-          "direct_cash_effect_aud": -9061.33,
-          "state_yield_effect_t_ha": 0.2273,
-          "water_ml": 0,
-          "candidate_score": 0.204851,
-          "state_after": {
-            "crop": "barley",
-            "planted": true,
-            "newly_planted": false,
-            "harvested": false,
-            "growth_stage": "stem_elongation",
-            "readiness": 0.562,
-            "soil_moisture": 0.2601,
-            "soil_temperature_c": 15.06,
-            "expected_yield_t_ha": 5.0647,
-            "nitrogen_index": 0.6693,
-            "weed_pressure": 0.4076,
-            "pest_pressure": 0.08,
-            "disease_pressure": 0.148,
-            "seedbed_readiness": 0.12,
-            "trafficability": 1,
-            "weather_damage_index": 0
-          }
-        },
-        {
-          "candidate_id": "P15_F3_spray_20260924_0800",
-          "plan_id": "P15",
-          "field_id": "F3",
-          "operation": "spray",
-          "target": "disease_control",
-          "required": false,
-          "depends_on": "P06",
-          "min_gap_hours": 24,
-          "start_time": "2026-09-24T08:00:00",
-          "end_time": "2026-09-25T16:51:12",
-          "duration_hours": 18.85,
-          "workload_hours": 16.7917,
-          "machine_type": "sprayer",
-          "eligible_machine_ids": [
-            "M3",
-            "M9",
-            "M10"
-          ],
-          "workers_required": 1,
-          "work_segments": [
-            {
-              "date": "2026-09-24",
-              "start_time": "2026-09-24T08:00:00",
-              "end_time": "2026-09-24T17:00:00",
-              "work_hours": 9,
-              "effective_work_hours": 7.649999999999999
-            },
-            {
-              "date": "2026-09-25",
-              "start_time": "2026-09-25T07:00:00",
-              "end_time": "2026-09-25T16:51:12",
-              "work_hours": 9.8536,
-              "effective_work_hours": 9.14166666666667
-            }
-          ],
-          "direct_revenue_aud": 0,
-          "direct_cost_aud": 4737.78,
-          "direct_cash_effect_aud": -4737.78,
-          "state_yield_effect_t_ha": 0.1622,
-          "water_ml": 0,
-          "candidate_score": 0.139233,
-          "state_after": {
-            "crop": "barley",
-            "planted": true,
-            "newly_planted": false,
-            "harvested": false,
-            "growth_stage": "stem_elongation",
-            "readiness": 0.589,
-            "soil_moisture": 0.2384,
-            "soil_temperature_c": 15.57,
-            "expected_yield_t_ha": 5.2269,
-            "nitrogen_index": 0.5889,
-            "weed_pressure": 0.5984,
-            "pest_pressure": 0.08,
-            "disease_pressure": 0.0192,
-            "seedbed_readiness": 0.12,
-            "trafficability": 0.995,
-            "weather_damage_index": 0
-          }
-        }
-      ],
-      "final_state": {
-        "crop": "barley",
-        "planted": true,
-        "newly_planted": false,
-        "harvested": false,
-        "growth_stage": "stem_elongation",
-        "readiness": 0.607,
-        "soil_moisture": 0.1104,
-        "soil_temperature_c": 15.91,
-        "expected_yield_t_ha": 5.2269,
-        "nitrogen_index": 0.5357,
-        "weed_pressure": 0.7063,
-        "pest_pressure": 0.08,
-        "disease_pressure": 0.0008,
+        "disease_pressure": 0.0829,
         "seedbed_readiness": 0.12,
         "trafficability": 1,
         "weather_damage_index": 0

@@ -27,7 +27,7 @@ import {
   X,
 } from 'lucide-react';
 import { yallambeeOpsDashboard } from '@/app/yallambee-ops';
-import { dashboardPlanFrom, defaultResourcePlanId, managementPlanInputs, parseSchedule, persistedDashboardPlan, persistedDecisionIndex, persistedHighWindWindows, persistedPlanChangeSummary, persistedRainWindows, persistedResourcePlans, persistedSchedule, persistedSummary, scheduleAnchorFrom, type ManagementPlanInput, type PersistedOptimizerSummary, type PersistedScheduleRow, type PlanChangeSummary, type ResourcePlanOption, type WeatherWindow } from '@/lib/ui/persisted-optimizer-output';
+import { dashboardPlanFrom, defaultResourcePlanId, machineLabels, managementPlanInputs, parseSchedule, persistedDashboardPlan, persistedDecisionIndex, persistedHighWindWindows, persistedPlanChangeSummary, persistedRainWindows, persistedResourcePlans, persistedSchedule, persistedSummary, scheduleAnchorFrom, type ManagementPlanInput, type PersistedOptimizerSummary, type PersistedScheduleRow, type PlanChangeSummary, type ResourcePlanOption, type WeatherWindow } from '@/lib/ui/persisted-optimizer-output';
 import { whyReasonsForPlan } from '@/lib/ui/plan-reasons';
 import type { DashboardView, FarmField, HarvestBlock, OptimiserCandidate } from '@/app/yallambee-ops';
 
@@ -260,7 +260,7 @@ function Timeline({ plan, disrupted, anchorTime: anchorOverride }: { plan: Optim
   };
 
   const rows = [...new Set(plan.blocks.map((block) => block.m))];
-  const labels: Record<string, string> = Object.fromEntries(rows.map((row) => [row, row]));
+  const labels: Record<string, string> = Object.fromEntries(rows.map((row) => [row, machineLabels[row] ?? row]));
   const operations = [...new Set(plan.blocks.map((block) => block.operation))].sort();
 
   // Once a page spans more than ~2 days, hourly ticks get too cramped to
@@ -341,7 +341,7 @@ function Timeline({ plan, disrupted, anchorTime: anchorOverride }: { plan: Optim
       </div>
       {hoverDetail && <div className="yc-block-detail" style={{ left: `${hoverDetail.left}px`, top: `${hoverDetail.top}px` }}>
         <strong>{hoverDetail.block.name} · {capitalize(hoverDetail.block.crop)}</strong>
-        <span>{capitalize(hoverDetail.block.operation)} ({hoverDetail.block.target}) · {hoverDetail.block.m}</span>
+        <span>{capitalize(hoverDetail.block.operation)} ({hoverDetail.block.target}) · {machineLabels[hoverDetail.block.m] ?? hoverDetail.block.m}</span>
         <span>{timelineDateTime(anchorTime, hoverDetail.block.s)} → {timelineDateTime(anchorTime, hoverDetail.block.e)}</span>
         <span>{hoverDetail.block.workers} worker{hoverDetail.block.workers === 1 ? '' : 's'} · {signedMoney(hoverDetail.block.cashEffect)} direct cash effect</span>
         <span>{hoverDetail.block.planId}</span>
@@ -522,7 +522,7 @@ function DecisionAssistant() {
       </div>
       <div className="yc-chat-suggestions">
         <button onClick={() => ask('Explain a current optimised schedule')}>Explain a current optimised schedule</button>
-        <button onClick={() => ask('I want to make a change in the plan')}>I want to make a change in the plan</button>
+        <button onClick={() => ask('Never spray on field F3 within 24h of heavy rain')}>Never spray on field F3 within 24h of heavy rain</button>
       </div>
       <form className="yc-chat-form" onSubmit={(event) => { event.preventDefault(); void ask(); }}>
         <input value={question} onChange={(event) => setQuestion(event.target.value)} placeholder="Ask about a decision or scenario..." aria-label="Ask the decision assistant" />
