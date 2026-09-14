@@ -350,7 +350,7 @@ function Timeline({ plan, disrupted, anchorTime: anchorOverride }: { plan: Optim
   );
 }
 
-function ResourcePlanSection({ disrupted, showLegend = false }: { disrupted: boolean; showLegend?: boolean }) {
+function ResourcePlanSection({ disrupted }: { disrupted: boolean }) {
   const { live, resourcePlans, selectedPlanId, selectResourcePlan, plan, schedule, summary, anchorTime } = useOptimizerOutput();
   const selected = resourcePlans.find((item) => item.id === selectedPlanId) ?? resourcePlans[0];
   const displayPlan = selected?.dashboardPlan ?? plan;
@@ -365,7 +365,6 @@ function ResourcePlanSection({ disrupted, showLegend = false }: { disrupted: boo
           <h3>{live ? 'Resource plan' : 'Resource plan'}</h3>
           <span>{selected ? `${selected.name} · ${displaySummary.num_scheduled_actions} actions / ${displaySchedule.length} work segments` : `${displayPlan.label} · ${displaySchedule.length} actions from the pipeline ${live ? 'run' : 'snapshot'}`}</span>
         </div>
-        {showLegend && <div className="yc-hero-legend"><span><i className="yc-legend-wheat" /> Wheat</span><span><i className="yc-legend-canola" /> Other operations</span><span><i className="yc-legend-rain" /> Rain</span><span><i className="yc-legend-wind" /> High wind</span></div>}
       </div>
       {resourcePlans.length > 0 && (
         <div className="yc-plan-cards" role="radiogroup" aria-label="Resource plan options">
@@ -642,7 +641,7 @@ function CommandView({ evaluated, improvement, onNavigate, onOpenUpload, history
   const { summary, live, changeSummary } = useOptimizerOutput();
   return <>
     <div className="yc-page-head"><div><h2>Home</h2></div><div className="yc-actions"><button className="yc-btn" type="button" onClick={onOpenUpload}><Upload size={15} /> Calibrate farm model</button></div></div>
-    <ResourcePlanSection disrupted={false} showLegend />
+    <ResourcePlanSection disrupted={false} />
     <PlanRationalePanel />
     <div className="yc-grid yc-grid-4"><StatCard label="Upcoming jobs" value={String(summary.num_scheduled_actions)} detail={live ? 'Selected after history retraining' : 'Selected by the persisted optimizer'} /><StatCard label="Total cash effect" value={money(summary.total_direct_cash_effect_aud)} /><StatCard label="Future crop value" value={money(summary.total_terminal_value_aud)} /><StatCard label="Total farm value" value={money(summary.total_objective_value_aud)} detail={`Status: ${summary.status}`} /></div>
     <div className="yc-result-source"><CheckCircle2 size={15} /> {historyStatus || (live ? 'Displaying the schedule produced after the latest history.csv upload.' : 'Displaying the latest persisted pipeline result. Upload history.csv to retrain and refresh this snapshot.')}</div>

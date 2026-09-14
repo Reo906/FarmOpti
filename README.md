@@ -11,6 +11,8 @@ adjust it by talking to it in plain English.
 
 [![Watch the demo](https://img.youtube.com/vi/9CGH3szSdds/maxresdefault.jpg)](https://youtu.be/9CGH3szSdds)
 
+![FarmOpti dashboard showing the resource plan comparison, timeline, and plan rationale](public/dashboard-screenshot.png)
+
 ---
 
 ## What it does
