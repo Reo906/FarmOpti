@@ -1,5 +1,5 @@
-{"timestamp":"2026-09-14T00:57:04.242Z","stage":"candidates","message":"Regenerated 422 candidate actions","metrics":{"count":422}}
-{"timestamp":"2026-09-14T00:57:04.496Z","stage":"field_options","message":"Rebuilt 151 field options","metrics":{"count":151}}
-{"timestamp":"2026-09-14T00:57:06.448Z","stage":"optimise","message":"Re-solved to optimal (10 actions, objective $923,863.27)","metrics":{"status":"optimal","num_scheduled_actions":10,"objective_value_aud":923863.27}}
-{"timestamp":"2026-09-14T00:57:21.196Z","stage":"decision_evidence","message":"Refreshed evidence for 15 scheduling decisions","metrics":{"count":15}}
-{"timestamp":"2026-09-14T00:57:21.197Z","stage":"retrieval_index","message":"Rebuilt the chatbot's retrieval index (66 facts)","metrics":{"count":66}}
+{"timestamp":"2026-09-14T01:19:50.363Z","stage":"candidates","message":"Regenerated 422 candidate actions","metrics":{"count":422}}
+{"timestamp":"2026-09-14T01:19:50.618Z","stage":"field_options","message":"Rebuilt 151 field options","metrics":{"count":151}}
+{"timestamp":"2026-09-14T01:19:52.613Z","stage":"optimise","message":"Re-solved to optimal (10 actions, objective $923,863.27)","metrics":{"status":"optimal","num_scheduled_actions":10,"objective_value_aud":923863.27}}
+{"timestamp":"2026-09-14T01:20:07.359Z","stage":"decision_evidence","message":"Refreshed evidence for 15 scheduling decisions","metrics":{"count":15}}
+{"timestamp":"2026-09-14T01:20:07.361Z","stage":"retrieval_index","message":"Rebuilt the chatbot's retrieval index (66 facts)","metrics":{"count":66}}
