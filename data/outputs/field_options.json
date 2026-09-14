@@ -3,6 +3,396 @@
     {
       "option_id": "F1_O001",
       "field_id": "F1",
+      "total_direct_cash_effect_aud": 146592.35,
+      "terminal_value_aud": 0,
+      "objective_value_aud": 146592.35,
+      "actions": [
+        {
+          "candidate_id": "P01_F1_harvest_20260917_0700",
+          "plan_id": "P01",
+          "field_id": "F1",
+          "operation": "harvest",
+          "target": "wheat",
+          "required": true,
+          "depends_on": "",
+          "min_gap_hours": 0,
+          "start_time": "2026-09-17T07:00:00",
+          "end_time": "2026-09-19T10:00:16",
+          "duration_hours": 22,
+          "workload_hours": 20,
+          "machine_type": "harvester",
+          "eligible_machine_ids": [
+            "M1",
+            "M8"
+          ],
+          "workers_required": 2,
+          "work_segments": [
+            {
+              "date": "2026-09-17",
+              "start_time": "2026-09-17T07:00:00",
+              "end_time": "2026-09-17T17:00:00",
+              "work_hours": 10,
+              "effective_work_hours": 9.125
+            },
+            {
+              "date": "2026-09-18",
+              "start_time": "2026-09-18T07:00:00",
+              "end_time": "2026-09-18T17:00:00",
+              "work_hours": 10,
+              "effective_work_hours": 9.700833333333334
+            },
+            {
+              "date": "2026-09-19",
+              "start_time": "2026-09-19T08:00:00",
+              "end_time": "2026-09-19T10:00:16",
+              "work_hours": 2.0047,
+              "effective_work_hours": 1.1741666666666664
+            }
+          ],
+          "direct_revenue_aud": 152093.52,
+          "direct_cost_aud": 5501.17,
+          "direct_cash_effect_aud": 146592.35,
+          "state_yield_effect_t_ha": 0,
+          "water_ml": 0,
+          "candidate_score": 135035.831436,
+          "state_after": {
+            "crop": "",
+            "planted": false,
+            "newly_planted": false,
+            "harvested": true,
+            "growth_stage": "mature",
+            "readiness": 0.932,
+            "soil_moisture": 0.1231,
+            "soil_temperature_c": 14.1,
+            "expected_yield_t_ha": 0,
+            "nitrogen_index": 0.66,
+            "weed_pressure": 0.08,
+            "pest_pressure": 0.06,
+            "disease_pressure": 0,
+            "seedbed_readiness": 0.1,
+            "trafficability": 1,
+            "weather_damage_index": 0
+          }
+        }
+      ],
+      "final_state": {
+        "crop": "",
+        "planted": false,
+        "newly_planted": false,
+        "harvested": true,
+        "growth_stage": "mature",
+        "readiness": 1,
+        "soil_moisture": 0.0474,
+        "soil_temperature_c": 15.45,
+        "expected_yield_t_ha": 0,
+        "nitrogen_index": 0.66,
+        "weed_pressure": 0.08,
+        "pest_pressure": 0.06,
+        "disease_pressure": 0,
+        "seedbed_readiness": 0.1,
+        "trafficability": 1,
+        "weather_damage_index": 0
+      }
+    },
+    {
+      "option_id": "F1_O002",
+      "field_id": "F1",
+      "total_direct_cash_effect_aud": 146436.65,
+      "terminal_value_aud": 0,
+      "objective_value_aud": 146436.65,
+      "actions": [
+        {
+          "candidate_id": "P01_F1_harvest_20260918_0700",
+          "plan_id": "P01",
+          "field_id": "F1",
+          "operation": "harvest",
+          "target": "wheat",
+          "required": true,
+          "depends_on": "",
+          "min_gap_hours": 0,
+          "start_time": "2026-09-18T07:00:00",
+          "end_time": "2026-09-21T10:30:53",
+          "duration_hours": 26.51,
+          "workload_hours": 20,
+          "machine_type": "harvester",
+          "eligible_machine_ids": [
+            "M8",
+            "M1"
+          ],
+          "workers_required": 2,
+          "work_segments": [
+            {
+              "date": "2026-09-18",
+              "start_time": "2026-09-18T07:00:00",
+              "end_time": "2026-09-18T17:00:00",
+              "work_hours": 10,
+              "effective_work_hours": 9.700833333333334
+            },
+            {
+              "date": "2026-09-19",
+              "start_time": "2026-09-19T08:00:00",
+              "end_time": "2026-09-19T15:00:00",
+              "work_hours": 7,
+              "effective_work_hours": 4.1
+            },
+            {
+              "date": "2026-09-20",
+              "start_time": "2026-09-20T08:00:00",
+              "end_time": "2026-09-20T14:00:00",
+              "work_hours": 6,
+              "effective_work_hours": 3.15
+            },
+            {
+              "date": "2026-09-21",
+              "start_time": "2026-09-21T07:00:00",
+              "end_time": "2026-09-21T10:30:53",
+              "work_hours": 3.5149,
+              "effective_work_hours": 3.049166666666667
+            }
+          ],
+          "direct_revenue_aud": 153065.37,
+          "direct_cost_aud": 6628.72,
+          "direct_cash_effect_aud": 146436.65,
+          "state_yield_effect_t_ha": 0,
+          "water_ml": 0,
+          "candidate_score": 134806.277752,
+          "state_after": {
+            "crop": "",
+            "planted": false,
+            "newly_planted": false,
+            "harvested": true,
+            "growth_stage": "mature",
+            "readiness": 0.95,
+            "soil_moisture": 0.0735,
+            "soil_temperature_c": 14.25,
+            "expected_yield_t_ha": 0,
+            "nitrogen_index": 0.66,
+            "weed_pressure": 0.08,
+            "pest_pressure": 0.06,
+            "disease_pressure": 0,
+            "seedbed_readiness": 0.1,
+            "trafficability": 1,
+            "weather_damage_index": 0
+          }
+        }
+      ],
+      "final_state": {
+        "crop": "",
+        "planted": false,
+        "newly_planted": false,
+        "harvested": true,
+        "growth_stage": "mature",
+        "readiness": 1,
+        "soil_moisture": 0.0474,
+        "soil_temperature_c": 15.45,
+        "expected_yield_t_ha": 0,
+        "nitrogen_index": 0.66,
+        "weed_pressure": 0.08,
+        "pest_pressure": 0.06,
+        "disease_pressure": 0,
+        "seedbed_readiness": 0.1,
+        "trafficability": 1,
+        "weather_damage_index": 0
+      }
+    },
+    {
+      "option_id": "F1_O003",
+      "field_id": "F1",
+      "total_direct_cash_effect_aud": 146415.52,
+      "terminal_value_aud": 0,
+      "objective_value_aud": 146415.52,
+      "actions": [
+        {
+          "candidate_id": "P01_F1_harvest_20260917_0800",
+          "plan_id": "P01",
+          "field_id": "F1",
+          "operation": "harvest",
+          "target": "wheat",
+          "required": true,
+          "depends_on": "",
+          "min_gap_hours": 0,
+          "start_time": "2026-09-17T08:00:00",
+          "end_time": "2026-09-19T11:42:43",
+          "duration_hours": 22.71,
+          "workload_hours": 20,
+          "machine_type": "harvester",
+          "eligible_machine_ids": [
+            "M1",
+            "M8"
+          ],
+          "workers_required": 2,
+          "work_segments": [
+            {
+              "date": "2026-09-17",
+              "start_time": "2026-09-17T08:00:00",
+              "end_time": "2026-09-17T17:00:00",
+              "work_hours": 9,
+              "effective_work_hours": 8.125
+            },
+            {
+              "date": "2026-09-18",
+              "start_time": "2026-09-18T07:00:00",
+              "end_time": "2026-09-18T17:00:00",
+              "work_hours": 10,
+              "effective_work_hours": 9.700833333333334
+            },
+            {
+              "date": "2026-09-19",
+              "start_time": "2026-09-19T08:00:00",
+              "end_time": "2026-09-19T11:42:43",
+              "work_hours": 3.712,
+              "effective_work_hours": 2.1741666666666664
+            }
+          ],
+          "direct_revenue_aud": 152093.52,
+          "direct_cost_aud": 5678,
+          "direct_cash_effect_aud": 146415.52,
+          "state_yield_effect_t_ha": 0,
+          "water_ml": 0,
+          "candidate_score": 134859.002167,
+          "state_after": {
+            "crop": "",
+            "planted": false,
+            "newly_planted": false,
+            "harvested": true,
+            "growth_stage": "mature",
+            "readiness": 0.932,
+            "soil_moisture": 0.1201,
+            "soil_temperature_c": 14.1,
+            "expected_yield_t_ha": 0,
+            "nitrogen_index": 0.66,
+            "weed_pressure": 0.08,
+            "pest_pressure": 0.06,
+            "disease_pressure": 0,
+            "seedbed_readiness": 0.1,
+            "trafficability": 1,
+            "weather_damage_index": 0
+          }
+        }
+      ],
+      "final_state": {
+        "crop": "",
+        "planted": false,
+        "newly_planted": false,
+        "harvested": true,
+        "growth_stage": "mature",
+        "readiness": 1,
+        "soil_moisture": 0.0474,
+        "soil_temperature_c": 15.45,
+        "expected_yield_t_ha": 0,
+        "nitrogen_index": 0.66,
+        "weed_pressure": 0.08,
+        "pest_pressure": 0.06,
+        "disease_pressure": 0,
+        "seedbed_readiness": 0.1,
+        "trafficability": 1,
+        "weather_damage_index": 0
+      }
+    },
+    {
+      "option_id": "F1_O004",
+      "field_id": "F1",
+      "total_direct_cash_effect_aud": 146398.46,
+      "terminal_value_aud": 0,
+      "objective_value_aud": 146398.46,
+      "actions": [
+        {
+          "candidate_id": "P01_F1_harvest_20260918_0800",
+          "plan_id": "P01",
+          "field_id": "F1",
+          "operation": "harvest",
+          "target": "wheat",
+          "required": true,
+          "depends_on": "",
+          "min_gap_hours": 0,
+          "start_time": "2026-09-18T08:00:00",
+          "end_time": "2026-09-21T11:40:03",
+          "duration_hours": 26.67,
+          "workload_hours": 20,
+          "machine_type": "harvester",
+          "eligible_machine_ids": [
+            "M8",
+            "M1"
+          ],
+          "workers_required": 2,
+          "work_segments": [
+            {
+              "date": "2026-09-18",
+              "start_time": "2026-09-18T08:00:00",
+              "end_time": "2026-09-18T17:00:00",
+              "work_hours": 9,
+              "effective_work_hours": 8.700833333333334
+            },
+            {
+              "date": "2026-09-19",
+              "start_time": "2026-09-19T08:00:00",
+              "end_time": "2026-09-19T15:00:00",
+              "work_hours": 7,
+              "effective_work_hours": 4.1
+            },
+            {
+              "date": "2026-09-20",
+              "start_time": "2026-09-20T08:00:00",
+              "end_time": "2026-09-20T14:00:00",
+              "work_hours": 6,
+              "effective_work_hours": 3.15
+            },
+            {
+              "date": "2026-09-21",
+              "start_time": "2026-09-21T07:00:00",
+              "end_time": "2026-09-21T11:40:03",
+              "work_hours": 4.6676,
+              "effective_work_hours": 4.049166666666666
+            }
+          ],
+          "direct_revenue_aud": 153065.37,
+          "direct_cost_aud": 6666.91,
+          "direct_cash_effect_aud": 146398.46,
+          "state_yield_effect_t_ha": 0,
+          "water_ml": 0,
+          "candidate_score": 134768.093314,
+          "state_after": {
+            "crop": "",
+            "planted": false,
+            "newly_planted": false,
+            "harvested": true,
+            "growth_stage": "mature",
+            "readiness": 0.95,
+            "soil_moisture": 0.0705,
+            "soil_temperature_c": 14.25,
+            "expected_yield_t_ha": 0,
+            "nitrogen_index": 0.66,
+            "weed_pressure": 0.08,
+            "pest_pressure": 0.06,
+            "disease_pressure": 0,
+            "seedbed_readiness": 0.1,
+            "trafficability": 1,
+            "weather_damage_index": 0
+          }
+        }
+      ],
+      "final_state": {
+        "crop": "",
+        "planted": false,
+        "newly_planted": false,
+        "harvested": true,
+        "growth_stage": "mature",
+        "readiness": 1,
+        "soil_moisture": 0.0474,
+        "soil_temperature_c": 15.45,
+        "expected_yield_t_ha": 0,
+        "nitrogen_index": 0.66,
+        "weed_pressure": 0.08,
+        "pest_pressure": 0.06,
+        "disease_pressure": 0,
+        "seedbed_readiness": 0.1,
+        "trafficability": 1,
+        "weather_damage_index": 0
+      }
+    },
+    {
+      "option_id": "F1_O005",
+      "field_id": "F1",
       "total_direct_cash_effect_aud": 146395.7,
       "terminal_value_aud": 0,
       "objective_value_aud": 146395.7,
@@ -22,7 +412,8 @@
           "workload_hours": 20,
           "machine_type": "harvester",
           "eligible_machine_ids": [
-            "M1"
+            "M1",
+            "M8"
           ],
           "workers_required": 2,
           "work_segments": [
@@ -101,7 +492,108 @@
       }
     },
     {
-      "option_id": "F1_O002",
+      "option_id": "F1_O006",
+      "field_id": "F1",
+      "total_direct_cash_effect_aud": 146360.28,
+      "terminal_value_aud": 0,
+      "objective_value_aud": 146360.28,
+      "actions": [
+        {
+          "candidate_id": "P01_F1_harvest_20260918_0900",
+          "plan_id": "P01",
+          "field_id": "F1",
+          "operation": "harvest",
+          "target": "wheat",
+          "required": true,
+          "depends_on": "",
+          "min_gap_hours": 0,
+          "start_time": "2026-09-18T09:00:00",
+          "end_time": "2026-09-21T12:49:13",
+          "duration_hours": 26.82,
+          "workload_hours": 20,
+          "machine_type": "harvester",
+          "eligible_machine_ids": [
+            "M8",
+            "M1"
+          ],
+          "workers_required": 2,
+          "work_segments": [
+            {
+              "date": "2026-09-18",
+              "start_time": "2026-09-18T09:00:00",
+              "end_time": "2026-09-18T17:00:00",
+              "work_hours": 8,
+              "effective_work_hours": 7.700833333333334
+            },
+            {
+              "date": "2026-09-19",
+              "start_time": "2026-09-19T08:00:00",
+              "end_time": "2026-09-19T15:00:00",
+              "work_hours": 7,
+              "effective_work_hours": 4.1
+            },
+            {
+              "date": "2026-09-20",
+              "start_time": "2026-09-20T08:00:00",
+              "end_time": "2026-09-20T14:00:00",
+              "work_hours": 6,
+              "effective_work_hours": 3.15
+            },
+            {
+              "date": "2026-09-21",
+              "start_time": "2026-09-21T07:00:00",
+              "end_time": "2026-09-21T12:49:13",
+              "work_hours": 5.8204,
+              "effective_work_hours": 5.049166666666666
+            }
+          ],
+          "direct_revenue_aud": 153065.37,
+          "direct_cost_aud": 6705.09,
+          "direct_cash_effect_aud": 146360.28,
+          "state_yield_effect_t_ha": 0,
+          "water_ml": 0,
+          "candidate_score": 134729.908876,
+          "state_after": {
+            "crop": "",
+            "planted": false,
+            "newly_planted": false,
+            "harvested": true,
+            "growth_stage": "mature",
+            "readiness": 0.95,
+            "soil_moisture": 0.0675,
+            "soil_temperature_c": 14.25,
+            "expected_yield_t_ha": 0,
+            "nitrogen_index": 0.66,
+            "weed_pressure": 0.08,
+            "pest_pressure": 0.06,
+            "disease_pressure": 0,
+            "seedbed_readiness": 0.1,
+            "trafficability": 1,
+            "weather_damage_index": 0
+          }
+        }
+      ],
+      "final_state": {
+        "crop": "",
+        "planted": false,
+        "newly_planted": false,
+        "harvested": true,
+        "growth_stage": "mature",
+        "readiness": 1,
+        "soil_moisture": 0.0474,
+        "soil_temperature_c": 15.45,
+        "expected_yield_t_ha": 0,
+        "nitrogen_index": 0.66,
+        "weed_pressure": 0.08,
+        "pest_pressure": 0.06,
+        "disease_pressure": 0,
+        "seedbed_readiness": 0.1,
+        "trafficability": 1,
+        "weather_damage_index": 0
+      }
+    },
+    {
+      "option_id": "F1_O007",
       "field_id": "F1",
       "total_direct_cash_effect_aud": 146265.7,
       "terminal_value_aud": 0,
@@ -122,7 +614,8 @@
           "workload_hours": 20,
           "machine_type": "harvester",
           "eligible_machine_ids": [
-            "M1"
+            "M1",
+            "M8"
           ],
           "workers_required": 2,
           "work_segments": [
@@ -201,7 +694,101 @@
       }
     },
     {
-      "option_id": "F1_O003",
+      "option_id": "F1_O008",
+      "field_id": "F1",
+      "total_direct_cash_effect_aud": 146238.69,
+      "terminal_value_aud": 0,
+      "objective_value_aud": 146238.69,
+      "actions": [
+        {
+          "candidate_id": "P01_F1_harvest_20260917_0900",
+          "plan_id": "P01",
+          "field_id": "F1",
+          "operation": "harvest",
+          "target": "wheat",
+          "required": true,
+          "depends_on": "",
+          "min_gap_hours": 0,
+          "start_time": "2026-09-17T09:00:00",
+          "end_time": "2026-09-19T13:25:09",
+          "duration_hours": 23.42,
+          "workload_hours": 20,
+          "machine_type": "harvester",
+          "eligible_machine_ids": [
+            "M1",
+            "M8"
+          ],
+          "workers_required": 2,
+          "work_segments": [
+            {
+              "date": "2026-09-17",
+              "start_time": "2026-09-17T09:00:00",
+              "end_time": "2026-09-17T17:00:00",
+              "work_hours": 8,
+              "effective_work_hours": 7.124999999999999
+            },
+            {
+              "date": "2026-09-18",
+              "start_time": "2026-09-18T07:00:00",
+              "end_time": "2026-09-18T17:00:00",
+              "work_hours": 10,
+              "effective_work_hours": 9.700833333333334
+            },
+            {
+              "date": "2026-09-19",
+              "start_time": "2026-09-19T08:00:00",
+              "end_time": "2026-09-19T13:25:09",
+              "work_hours": 5.4193,
+              "effective_work_hours": 3.1741666666666664
+            }
+          ],
+          "direct_revenue_aud": 152093.52,
+          "direct_cost_aud": 5854.83,
+          "direct_cash_effect_aud": 146238.69,
+          "state_yield_effect_t_ha": 0,
+          "water_ml": 0,
+          "candidate_score": 134682.172899,
+          "state_after": {
+            "crop": "",
+            "planted": false,
+            "newly_planted": false,
+            "harvested": true,
+            "growth_stage": "mature",
+            "readiness": 0.932,
+            "soil_moisture": 0.1171,
+            "soil_temperature_c": 14.1,
+            "expected_yield_t_ha": 0,
+            "nitrogen_index": 0.66,
+            "weed_pressure": 0.08,
+            "pest_pressure": 0.06,
+            "disease_pressure": 0,
+            "seedbed_readiness": 0.1,
+            "trafficability": 1,
+            "weather_damage_index": 0
+          }
+        }
+      ],
+      "final_state": {
+        "crop": "",
+        "planted": false,
+        "newly_planted": false,
+        "harvested": true,
+        "growth_stage": "mature",
+        "readiness": 1,
+        "soil_moisture": 0.0474,
+        "soil_temperature_c": 15.45,
+        "expected_yield_t_ha": 0,
+        "nitrogen_index": 0.66,
+        "weed_pressure": 0.08,
+        "pest_pressure": 0.06,
+        "disease_pressure": 0,
+        "seedbed_readiness": 0.1,
+        "trafficability": 1,
+        "weather_damage_index": 0
+      }
+    },
+    {
+      "option_id": "F1_O009",
       "field_id": "F1",
       "total_direct_cash_effect_aud": 146145.7,
       "terminal_value_aud": 0,
@@ -222,7 +809,8 @@
           "workload_hours": 20,
           "machine_type": "harvester",
           "eligible_machine_ids": [
-            "M1"
+            "M1",
+            "M8"
           ],
           "workers_required": 2,
           "work_segments": [
@@ -301,7 +889,7 @@
       }
     },
     {
-      "option_id": "F1_O004",
+      "option_id": "F1_O010",
       "field_id": "F1",
       "total_direct_cash_effect_aud": 145938.85,
       "terminal_value_aud": 0,
@@ -322,7 +910,8 @@
           "workload_hours": 20,
           "machine_type": "harvester",
           "eligible_machine_ids": [
-            "M1"
+            "M1",
+            "M8"
           ],
           "workers_required": 2,
           "work_segments": [
@@ -394,7 +983,7 @@
       }
     },
     {
-      "option_id": "F1_O005",
+      "option_id": "F1_O011",
       "field_id": "F1",
       "total_direct_cash_effect_aud": 145813.85,
       "terminal_value_aud": 0,
@@ -415,7 +1004,8 @@
           "workload_hours": 20,
           "machine_type": "harvester",
           "eligible_machine_ids": [
-            "M1"
+            "M1",
+            "M8"
           ],
           "workers_required": 2,
           "work_segments": [
@@ -487,7 +1077,7 @@
       }
     },
     {
-      "option_id": "F1_O006",
+      "option_id": "F1_O012",
       "field_id": "F1",
       "total_direct_cash_effect_aud": 145688.85,
       "terminal_value_aud": 0,
@@ -508,7 +1098,8 @@
           "workload_hours": 20,
           "machine_type": "harvester",
           "eligible_machine_ids": [
-            "M1"
+            "M1",
+            "M8"
           ],
           "workers_required": 2,
           "work_segments": [
@@ -580,14 +1171,14 @@
       }
     },
     {
-      "option_id": "F1_O007",
+      "option_id": "F1_O013",
       "field_id": "F1",
-      "total_direct_cash_effect_aud": 145298.85,
+      "total_direct_cash_effect_aud": 144599.92,
       "terminal_value_aud": 0,
-      "objective_value_aud": 145298.85,
+      "objective_value_aud": 144599.92,
       "actions": [
         {
-          "candidate_id": "P01_F1_harvest_20260917_0700",
+          "candidate_id": "P01_F1_harvest_20260916_0900",
           "plan_id": "P01",
           "field_id": "F1",
           "operation": "harvest",
@@ -595,329 +1186,23 @@
           "required": true,
           "depends_on": "",
           "min_gap_hours": 0,
-          "start_time": "2026-09-17T07:00:00",
-          "end_time": "2026-09-21T11:10:43",
-          "duration_hours": 27.18,
+          "start_time": "2026-09-16T09:00:00",
+          "end_time": "2026-09-18T09:57:49",
+          "duration_hours": 20.96,
           "workload_hours": 20,
           "machine_type": "harvester",
           "eligible_machine_ids": [
-            "M1"
-          ],
-          "workers_required": 2,
-          "work_segments": [
-            {
-              "date": "2026-09-17",
-              "start_time": "2026-09-17T07:00:00",
-              "end_time": "2026-09-17T17:00:00",
-              "work_hours": 10,
-              "effective_work_hours": 9.125
-            },
-            {
-              "date": "2026-09-19",
-              "start_time": "2026-09-19T08:00:00",
-              "end_time": "2026-09-19T15:00:00",
-              "work_hours": 7,
-              "effective_work_hours": 4.1
-            },
-            {
-              "date": "2026-09-20",
-              "start_time": "2026-09-20T08:00:00",
-              "end_time": "2026-09-20T14:00:00",
-              "work_hours": 6,
-              "effective_work_hours": 3.15
-            },
-            {
-              "date": "2026-09-21",
-              "start_time": "2026-09-21T07:00:00",
-              "end_time": "2026-09-21T11:10:43",
-              "work_hours": 4.1787,
-              "effective_work_hours": 3.6250000000000004
-            }
-          ],
-          "direct_revenue_aud": 152093.52,
-          "direct_cost_aud": 6794.67,
-          "direct_cash_effect_aud": 145298.85,
-          "state_yield_effect_t_ha": 0,
-          "water_ml": 0,
-          "candidate_score": 133742.331546,
-          "state_after": {
-            "crop": "",
-            "planted": false,
-            "newly_planted": false,
-            "harvested": true,
-            "growth_stage": "mature",
-            "readiness": 0.932,
-            "soil_moisture": 0.1231,
-            "soil_temperature_c": 14.1,
-            "expected_yield_t_ha": 0,
-            "nitrogen_index": 0.66,
-            "weed_pressure": 0.08,
-            "pest_pressure": 0.06,
-            "disease_pressure": 0,
-            "seedbed_readiness": 0.1,
-            "trafficability": 1,
-            "weather_damage_index": 0
-          }
-        }
-      ],
-      "final_state": {
-        "crop": "",
-        "planted": false,
-        "newly_planted": false,
-        "harvested": true,
-        "growth_stage": "mature",
-        "readiness": 1,
-        "soil_moisture": 0.0474,
-        "soil_temperature_c": 15.45,
-        "expected_yield_t_ha": 0,
-        "nitrogen_index": 0.66,
-        "weed_pressure": 0.08,
-        "pest_pressure": 0.06,
-        "disease_pressure": 0,
-        "seedbed_readiness": 0.1,
-        "trafficability": 1,
-        "weather_damage_index": 0
-      }
-    },
-    {
-      "option_id": "F1_O008",
-      "field_id": "F1",
-      "total_direct_cash_effect_aud": 145292.89,
-      "terminal_value_aud": 0,
-      "objective_value_aud": 145292.89,
-      "actions": [
-        {
-          "candidate_id": "P01_F1_harvest_20260917_1600",
-          "plan_id": "P01",
-          "field_id": "F1",
-          "operation": "harvest",
-          "target": "wheat",
-          "required": true,
-          "depends_on": "",
-          "min_gap_hours": 0,
-          "start_time": "2026-09-17T16:00:00",
-          "end_time": "2026-09-22T10:12:09",
-          "duration_hours": 27.2,
-          "workload_hours": 20,
-          "machine_type": "harvester",
-          "eligible_machine_ids": [
-            "M1"
-          ],
-          "workers_required": 2,
-          "work_segments": [
-            {
-              "date": "2026-09-17",
-              "start_time": "2026-09-17T16:00:00",
-              "end_time": "2026-09-17T17:00:00",
-              "work_hours": 1,
-              "effective_work_hours": 0.8724999999999999
-            },
-            {
-              "date": "2026-09-19",
-              "start_time": "2026-09-19T08:00:00",
-              "end_time": "2026-09-19T15:00:00",
-              "work_hours": 7,
-              "effective_work_hours": 4.1
-            },
-            {
-              "date": "2026-09-20",
-              "start_time": "2026-09-20T08:00:00",
-              "end_time": "2026-09-20T14:00:00",
-              "work_hours": 6,
-              "effective_work_hours": 3.15
-            },
-            {
-              "date": "2026-09-21",
-              "start_time": "2026-09-21T07:00:00",
-              "end_time": "2026-09-21T17:00:00",
-              "work_hours": 10,
-              "effective_work_hours": 8.674999999999999
-            },
-            {
-              "date": "2026-09-22",
-              "start_time": "2026-09-22T07:00:00",
-              "end_time": "2026-09-22T10:12:09",
-              "work_hours": 3.2025,
-              "effective_work_hours": 3.2025000000000023
-            }
-          ],
-          "direct_revenue_aud": 152093.52,
-          "direct_cost_aud": 6800.63,
-          "direct_cash_effect_aud": 145292.89,
-          "state_yield_effect_t_ha": 0,
-          "water_ml": 0,
-          "candidate_score": 133736.375134,
-          "state_after": {
-            "crop": "",
-            "planted": false,
-            "newly_planted": false,
-            "harvested": true,
-            "growth_stage": "mature",
-            "readiness": 0.932,
-            "soil_moisture": 0.0961,
-            "soil_temperature_c": 14.1,
-            "expected_yield_t_ha": 0,
-            "nitrogen_index": 0.66,
-            "weed_pressure": 0.08,
-            "pest_pressure": 0.06,
-            "disease_pressure": 0,
-            "seedbed_readiness": 0.1,
-            "trafficability": 1,
-            "weather_damage_index": 0
-          }
-        }
-      ],
-      "final_state": {
-        "crop": "",
-        "planted": false,
-        "newly_planted": false,
-        "harvested": true,
-        "growth_stage": "mature",
-        "readiness": 1,
-        "soil_moisture": 0.0474,
-        "soil_temperature_c": 15.45,
-        "expected_yield_t_ha": 0,
-        "nitrogen_index": 0.66,
-        "weed_pressure": 0.08,
-        "pest_pressure": 0.06,
-        "disease_pressure": 0,
-        "seedbed_readiness": 0.1,
-        "trafficability": 1,
-        "weather_damage_index": 0
-      }
-    },
-    {
-      "option_id": "F1_O009",
-      "field_id": "F1",
-      "total_direct_cash_effect_aud": 145260.67,
-      "terminal_value_aud": 0,
-      "objective_value_aud": 145260.67,
-      "actions": [
-        {
-          "candidate_id": "P01_F1_harvest_20260917_0800",
-          "plan_id": "P01",
-          "field_id": "F1",
-          "operation": "harvest",
-          "target": "wheat",
-          "required": true,
-          "depends_on": "",
-          "min_gap_hours": 0,
-          "start_time": "2026-09-17T08:00:00",
-          "end_time": "2026-09-21T12:19:53",
-          "duration_hours": 27.33,
-          "workload_hours": 20,
-          "machine_type": "harvester",
-          "eligible_machine_ids": [
-            "M1"
-          ],
-          "workers_required": 2,
-          "work_segments": [
-            {
-              "date": "2026-09-17",
-              "start_time": "2026-09-17T08:00:00",
-              "end_time": "2026-09-17T17:00:00",
-              "work_hours": 9,
-              "effective_work_hours": 8.125
-            },
-            {
-              "date": "2026-09-19",
-              "start_time": "2026-09-19T08:00:00",
-              "end_time": "2026-09-19T15:00:00",
-              "work_hours": 7,
-              "effective_work_hours": 4.1
-            },
-            {
-              "date": "2026-09-20",
-              "start_time": "2026-09-20T08:00:00",
-              "end_time": "2026-09-20T14:00:00",
-              "work_hours": 6,
-              "effective_work_hours": 3.15
-            },
-            {
-              "date": "2026-09-21",
-              "start_time": "2026-09-21T07:00:00",
-              "end_time": "2026-09-21T12:19:53",
-              "work_hours": 5.3314,
-              "effective_work_hours": 4.625
-            }
-          ],
-          "direct_revenue_aud": 152093.52,
-          "direct_cost_aud": 6832.85,
-          "direct_cash_effect_aud": 145260.67,
-          "state_yield_effect_t_ha": 0,
-          "water_ml": 0,
-          "candidate_score": 133704.147108,
-          "state_after": {
-            "crop": "",
-            "planted": false,
-            "newly_planted": false,
-            "harvested": true,
-            "growth_stage": "mature",
-            "readiness": 0.932,
-            "soil_moisture": 0.1201,
-            "soil_temperature_c": 14.1,
-            "expected_yield_t_ha": 0,
-            "nitrogen_index": 0.66,
-            "weed_pressure": 0.08,
-            "pest_pressure": 0.06,
-            "disease_pressure": 0,
-            "seedbed_readiness": 0.1,
-            "trafficability": 1,
-            "weather_damage_index": 0
-          }
-        }
-      ],
-      "final_state": {
-        "crop": "",
-        "planted": false,
-        "newly_planted": false,
-        "harvested": true,
-        "growth_stage": "mature",
-        "readiness": 1,
-        "soil_moisture": 0.0474,
-        "soil_temperature_c": 15.45,
-        "expected_yield_t_ha": 0,
-        "nitrogen_index": 0.66,
-        "weed_pressure": 0.08,
-        "pest_pressure": 0.06,
-        "disease_pressure": 0,
-        "seedbed_readiness": 0.1,
-        "trafficability": 1,
-        "weather_damage_index": 0
-      }
-    },
-    {
-      "option_id": "F1_O010",
-      "field_id": "F1",
-      "total_direct_cash_effect_aud": 144403.34,
-      "terminal_value_aud": 0,
-      "objective_value_aud": 144403.34,
-      "actions": [
-        {
-          "candidate_id": "P01_F1_harvest_20260916_0700",
-          "plan_id": "P01",
-          "field_id": "F1",
-          "operation": "harvest",
-          "target": "wheat",
-          "required": true,
-          "depends_on": "",
-          "min_gap_hours": 0,
-          "start_time": "2026-09-16T07:00:00",
-          "end_time": "2026-09-19T09:45:00",
-          "duration_hours": 21.75,
-          "workload_hours": 20,
-          "machine_type": "harvester",
-          "eligible_machine_ids": [
-            "M1"
+            "M1",
+            "M8"
           ],
           "workers_required": 2,
           "work_segments": [
             {
               "date": "2026-09-16",
-              "start_time": "2026-09-16T07:00:00",
+              "start_time": "2026-09-16T09:00:00",
               "end_time": "2026-09-16T17:00:00",
-              "work_hours": 10,
-              "effective_work_hours": 9.85
+              "work_hours": 8,
+              "effective_work_hours": 8
             },
             {
               "date": "2026-09-17",
@@ -927,19 +1212,19 @@
               "effective_work_hours": 9.125
             },
             {
-              "date": "2026-09-19",
-              "start_time": "2026-09-19T08:00:00",
-              "end_time": "2026-09-19T09:45:00",
-              "work_hours": 1.75,
-              "effective_work_hours": 1.0250000000000004
+              "date": "2026-09-18",
+              "start_time": "2026-09-18T07:00:00",
+              "end_time": "2026-09-18T09:57:49",
+              "work_hours": 2.9637,
+              "effective_work_hours": 2.875
             }
           ],
           "direct_revenue_aud": 149840.84,
-          "direct_cost_aud": 5437.5,
-          "direct_cash_effect_aud": 144403.34,
+          "direct_cost_aud": 5240.92,
+          "direct_cash_effect_aud": 144599.92,
           "state_yield_effect_t_ha": 0,
           "water_ml": 0,
-          "candidate_score": 132994.500133,
+          "candidate_score": 133191.084404,
           "state_after": {
             "crop": "",
             "planted": false,
@@ -947,13 +1232,13 @@
             "harvested": true,
             "growth_stage": "mature",
             "readiness": 0.914,
-            "soil_moisture": 0.1882,
+            "soil_moisture": 0.1822,
             "soil_temperature_c": 13.95,
             "expected_yield_t_ha": 0,
             "nitrogen_index": 0.66,
             "weed_pressure": 0.08,
             "pest_pressure": 0.06,
-            "disease_pressure": 0.012,
+            "disease_pressure": 0.006,
             "seedbed_readiness": 0.1,
             "trafficability": 1,
             "weather_damage_index": 0
@@ -980,11 +1265,11 @@
       }
     },
     {
-      "option_id": "F1_O011",
+      "option_id": "F1_O014",
       "field_id": "F1",
-      "total_direct_cash_effect_aud": 144269.19,
+      "total_direct_cash_effect_aud": 144594.75,
       "terminal_value_aud": 0,
-      "objective_value_aud": 144269.19,
+      "objective_value_aud": 144594.75,
       "actions": [
         {
           "candidate_id": "P01_F1_harvest_20260916_0800",
@@ -996,12 +1281,13 @@
           "depends_on": "",
           "min_gap_hours": 0,
           "start_time": "2026-09-16T08:00:00",
-          "end_time": "2026-09-19T11:17:11",
-          "duration_hours": 22.29,
+          "end_time": "2026-09-18T08:59:03",
+          "duration_hours": 20.98,
           "workload_hours": 20,
           "machine_type": "harvester",
           "eligible_machine_ids": [
-            "M1"
+            "M1",
+            "M8"
           ],
           "workers_required": 2,
           "work_segments": [
@@ -1020,19 +1306,19 @@
               "effective_work_hours": 9.125
             },
             {
-              "date": "2026-09-19",
-              "start_time": "2026-09-19T08:00:00",
-              "end_time": "2026-09-19T11:17:11",
-              "work_hours": 3.2866,
+              "date": "2026-09-18",
+              "start_time": "2026-09-18T07:00:00",
+              "end_time": "2026-09-18T08:59:03",
+              "work_hours": 1.9844,
               "effective_work_hours": 1.9250000000000007
             }
           ],
           "direct_revenue_aud": 149840.84,
-          "direct_cost_aud": 5571.65,
-          "direct_cash_effect_aud": 144269.19,
+          "direct_cost_aud": 5246.09,
+          "direct_cash_effect_aud": 144594.75,
           "state_yield_effect_t_ha": 0,
           "water_ml": 0,
-          "candidate_score": 132860.353791,
+          "candidate_score": 133185.908732,
           "state_after": {
             "crop": "",
             "planted": false,
@@ -1073,14 +1359,14 @@
       }
     },
     {
-      "option_id": "F1_O012",
+      "option_id": "F1_O015",
       "field_id": "F1",
-      "total_direct_cash_effect_aud": 144113.71,
+      "total_direct_cash_effect_aud": 144592.21,
       "terminal_value_aud": 0,
-      "objective_value_aud": 144113.71,
+      "objective_value_aud": 144592.21,
       "actions": [
         {
-          "candidate_id": "P01_F1_harvest_20260916_0900",
+          "candidate_id": "P01_F1_harvest_20260916_1000",
           "plan_id": "P01",
           "field_id": "F1",
           "operation": "harvest",
@@ -1088,22 +1374,23 @@
           "required": true,
           "depends_on": "",
           "min_gap_hours": 0,
-          "start_time": "2026-09-16T09:00:00",
-          "end_time": "2026-09-19T12:54:30",
-          "duration_hours": 22.91,
+          "start_time": "2026-09-16T10:00:00",
+          "end_time": "2026-09-18T10:59:40",
+          "duration_hours": 20.99,
           "workload_hours": 20,
           "machine_type": "harvester",
           "eligible_machine_ids": [
-            "M1"
+            "M1",
+            "M8"
           ],
           "workers_required": 2,
           "work_segments": [
             {
               "date": "2026-09-16",
-              "start_time": "2026-09-16T09:00:00",
+              "start_time": "2026-09-16T10:00:00",
               "end_time": "2026-09-16T17:00:00",
-              "work_hours": 8,
-              "effective_work_hours": 8
+              "work_hours": 7,
+              "effective_work_hours": 7
             },
             {
               "date": "2026-09-17",
@@ -1113,19 +1400,19 @@
               "effective_work_hours": 9.125
             },
             {
-              "date": "2026-09-19",
-              "start_time": "2026-09-19T08:00:00",
-              "end_time": "2026-09-19T12:54:30",
-              "work_hours": 4.9085,
-              "effective_work_hours": 2.875
+              "date": "2026-09-18",
+              "start_time": "2026-09-18T07:00:00",
+              "end_time": "2026-09-18T10:59:40",
+              "work_hours": 3.9945,
+              "effective_work_hours": 3.875
             }
           ],
           "direct_revenue_aud": 149840.84,
-          "direct_cost_aud": 5727.13,
-          "direct_cash_effect_aud": 144113.71,
+          "direct_cost_aud": 5248.63,
+          "direct_cash_effect_aud": 144592.21,
           "state_yield_effect_t_ha": 0,
           "water_ml": 0,
-          "candidate_score": 132704.865986,
+          "candidate_score": 133183.374586,
           "state_after": {
             "crop": "",
             "planted": false,
@@ -1133,13 +1420,13 @@
             "harvested": true,
             "growth_stage": "mature",
             "readiness": 0.914,
-            "soil_moisture": 0.1822,
+            "soil_moisture": 0.1792,
             "soil_temperature_c": 13.95,
             "expected_yield_t_ha": 0,
             "nitrogen_index": 0.66,
             "weed_pressure": 0.08,
             "pest_pressure": 0.06,
-            "disease_pressure": 0.006,
+            "disease_pressure": 0.003,
             "seedbed_readiness": 0.1,
             "trafficability": 1,
             "weather_damage_index": 0
@@ -15065,7 +15352,8 @@
           "workload_hours": 16,
           "machine_type": "harvester",
           "eligible_machine_ids": [
-            "M1"
+            "M1",
+            "M8"
           ],
           "workers_required": 2,
           "work_segments": [
@@ -15158,7 +15446,8 @@
           "workload_hours": 16,
           "machine_type": "harvester",
           "eligible_machine_ids": [
-            "M1"
+            "M1",
+            "M8"
           ],
           "workers_required": 2,
           "work_segments": [
@@ -15312,7 +15601,8 @@
           "workload_hours": 16,
           "machine_type": "harvester",
           "eligible_machine_ids": [
-            "M1"
+            "M1",
+            "M8"
           ],
           "workers_required": 2,
           "work_segments": [
@@ -15466,7 +15756,8 @@
           "workload_hours": 16,
           "machine_type": "harvester",
           "eligible_machine_ids": [
-            "M1"
+            "M1",
+            "M8"
           ],
           "workers_required": 2,
           "work_segments": [
@@ -15620,7 +15911,8 @@
           "workload_hours": 16,
           "machine_type": "harvester",
           "eligible_machine_ids": [
-            "M1"
+            "M1",
+            "M8"
           ],
           "workers_required": 2,
           "work_segments": [
@@ -15774,7 +16066,8 @@
           "workload_hours": 16,
           "machine_type": "harvester",
           "eligible_machine_ids": [
-            "M1"
+            "M1",
+            "M8"
           ],
           "workers_required": 2,
           "work_segments": [
@@ -15928,7 +16221,8 @@
           "workload_hours": 16,
           "machine_type": "harvester",
           "eligible_machine_ids": [
-            "M1"
+            "M1",
+            "M8"
           ],
           "workers_required": 2,
           "work_segments": [
@@ -16082,7 +16376,8 @@
           "workload_hours": 16,
           "machine_type": "harvester",
           "eligible_machine_ids": [
-            "M1"
+            "M1",
+            "M8"
           ],
           "workers_required": 2,
           "work_segments": [
@@ -16236,7 +16531,8 @@
           "workload_hours": 16,
           "machine_type": "harvester",
           "eligible_machine_ids": [
-            "M1"
+            "M1",
+            "M8"
           ],
           "workers_required": 2,
           "work_segments": [
@@ -16390,7 +16686,8 @@
           "workload_hours": 16,
           "machine_type": "harvester",
           "eligible_machine_ids": [
-            "M1"
+            "M1",
+            "M8"
           ],
           "workers_required": 2,
           "work_segments": [
@@ -16544,7 +16841,8 @@
           "workload_hours": 16,
           "machine_type": "harvester",
           "eligible_machine_ids": [
-            "M1"
+            "M1",
+            "M8"
           ],
           "workers_required": 2,
           "work_segments": [
@@ -16698,7 +16996,8 @@
           "workload_hours": 16,
           "machine_type": "harvester",
           "eligible_machine_ids": [
-            "M1"
+            "M1",
+            "M8"
           ],
           "workers_required": 2,
           "work_segments": [
@@ -16845,7 +17144,8 @@
           "workload_hours": 16,
           "machine_type": "harvester",
           "eligible_machine_ids": [
-            "M1"
+            "M1",
+            "M8"
           ],
           "workers_required": 2,
           "work_segments": [
@@ -16999,7 +17299,8 @@
           "workload_hours": 16,
           "machine_type": "harvester",
           "eligible_machine_ids": [
-            "M1"
+            "M1",
+            "M8"
           ],
           "workers_required": 2,
           "work_segments": [
@@ -17153,7 +17454,8 @@
           "workload_hours": 16,
           "machine_type": "harvester",
           "eligible_machine_ids": [
-            "M1"
+            "M1",
+            "M8"
           ],
           "workers_required": 2,
           "work_segments": [
@@ -17300,7 +17602,8 @@
           "workload_hours": 16,
           "machine_type": "harvester",
           "eligible_machine_ids": [
-            "M1"
+            "M1",
+            "M8"
           ],
           "workers_required": 2,
           "work_segments": [
@@ -17454,7 +17757,8 @@
           "workload_hours": 16,
           "machine_type": "harvester",
           "eligible_machine_ids": [
-            "M1"
+            "M1",
+            "M8"
           ],
           "workers_required": 2,
           "work_segments": [
@@ -17608,7 +17912,8 @@
           "workload_hours": 16,
           "machine_type": "harvester",
           "eligible_machine_ids": [
-            "M1"
+            "M1",
+            "M8"
           ],
           "workers_required": 2,
           "work_segments": [
@@ -17755,7 +18060,8 @@
           "workload_hours": 16,
           "machine_type": "harvester",
           "eligible_machine_ids": [
-            "M1"
+            "M1",
+            "M8"
           ],
           "workers_required": 2,
           "work_segments": [
@@ -17909,7 +18215,8 @@
           "workload_hours": 16,
           "machine_type": "harvester",
           "eligible_machine_ids": [
-            "M1"
+            "M1",
+            "M8"
           ],
           "workers_required": 2,
           "work_segments": [
@@ -18063,7 +18370,8 @@
           "workload_hours": 16,
           "machine_type": "harvester",
           "eligible_machine_ids": [
-            "M1"
+            "M1",
+            "M8"
           ],
           "workers_required": 2,
           "work_segments": [
@@ -18217,7 +18525,8 @@
           "workload_hours": 16,
           "machine_type": "harvester",
           "eligible_machine_ids": [
-            "M1"
+            "M1",
+            "M8"
           ],
           "workers_required": 2,
           "work_segments": [
@@ -18371,7 +18680,8 @@
           "workload_hours": 16,
           "machine_type": "harvester",
           "eligible_machine_ids": [
-            "M1"
+            "M1",
+            "M8"
           ],
           "workers_required": 2,
           "work_segments": [
@@ -18525,7 +18835,8 @@
           "workload_hours": 16,
           "machine_type": "harvester",
           "eligible_machine_ids": [
-            "M1"
+            "M1",
+            "M8"
           ],
           "workers_required": 2,
           "work_segments": [
@@ -18679,7 +18990,8 @@
           "workload_hours": 16,
           "machine_type": "harvester",
           "eligible_machine_ids": [
-            "M1"
+            "M1",
+            "M8"
           ],
           "workers_required": 2,
           "work_segments": [
@@ -18833,7 +19145,8 @@
           "workload_hours": 16,
           "machine_type": "harvester",
           "eligible_machine_ids": [
-            "M1"
+            "M1",
+            "M8"
           ],
           "workers_required": 2,
           "work_segments": [
@@ -18987,7 +19300,8 @@
           "workload_hours": 16,
           "machine_type": "harvester",
           "eligible_machine_ids": [
-            "M1"
+            "M1",
+            "M8"
           ],
           "workers_required": 2,
           "work_segments": [
@@ -19141,7 +19455,8 @@
           "workload_hours": 16,
           "machine_type": "harvester",
           "eligible_machine_ids": [
-            "M1"
+            "M1",
+            "M8"
           ],
           "workers_required": 2,
           "work_segments": [
@@ -19295,7 +19610,8 @@
           "workload_hours": 16,
           "machine_type": "harvester",
           "eligible_machine_ids": [
-            "M1"
+            "M1",
+            "M8"
           ],
           "workers_required": 2,
           "work_segments": [
@@ -19442,7 +19758,8 @@
           "workload_hours": 16,
           "machine_type": "harvester",
           "eligible_machine_ids": [
-            "M1"
+            "M1",
+            "M8"
           ],
           "workers_required": 2,
           "work_segments": [

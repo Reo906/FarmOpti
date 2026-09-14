@@ -1,18 +1,20 @@
 {
-  "generated_at": "2026-09-14T00:07:38.176Z",
-  "narrative": "One action was added to improve the whole-farm objective value by $9,781.51.",
+  "generated_at": "2026-09-14T00:55:23.852Z",
+  "narrative": "Two actions were rescheduled to improve the whole-farm objective value by $199.19.",
   "change_bullets": [
-    "Added the spray on F2 that was scheduled for 21 Sep, 07:00."
+    "Rescheduled the spray on F2 from M9 to M3.",
+    "Rescheduled the spray on F6 from M3 to M10."
   ],
   "positive_bullets": [
-    "Whole-farm objective value improved by $9,781.51, reflecting a better overall schedule."
+    "Whole-farm objective value improved by $199.19.",
+    "Direct cash effect improved by $199.19."
   ],
   "steps": [
-    "Regenerated 442 candidate actions",
-    "Rebuilt 148 field options",
-    "Re-solved to optimal (10 actions, objective $923,664.08)",
+    "Regenerated 452 candidate actions",
+    "Rebuilt 151 field options",
+    "Re-solved to optimal (10 actions, objective $923,863.27)",
     "Refreshed evidence for 15 scheduling decisions",
-    "Rebuilt the chatbot's retrieval index (78 facts)"
+    "Rebuilt the chatbot's retrieval index (76 facts)"
   ],
   "source": "llm"
 }

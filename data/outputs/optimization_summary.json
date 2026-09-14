@@ -1,16 +1,16 @@
 {
   "status": "optimal",
-  "total_direct_cash_effect_aud": 205834.67,
+  "total_direct_cash_effect_aud": 206033.86,
   "total_terminal_value_aud": 717829.41,
-  "total_objective_value_aud": 923664.08,
+  "total_objective_value_aud": 923863.27,
   "num_scheduled_actions": 10,
   "selected_options": [
     {
       "option_id": "F1_O001",
       "field_id": "F1",
-      "direct_cash_effect_aud": 146395.7,
+      "direct_cash_effect_aud": 146592.35,
       "terminal_value_aud": 0,
-      "objective_value_aud": 146395.7
+      "objective_value_aud": 146592.35
     },
     {
       "option_id": "F2_O001",
@@ -41,11 +41,11 @@
       "objective_value_aud": 27533.6
     },
     {
-      "option_id": "F6_O003",
+      "option_id": "F6_O001",
       "field_id": "F6",
-      "direct_cash_effect_aud": -3510.08,
+      "direct_cash_effect_aud": -3507.54,
       "terminal_value_aud": 193033.05,
-      "objective_value_aud": 189522.97
+      "objective_value_aud": 189525.51
     },
     {
       "option_id": "F7_O001",
