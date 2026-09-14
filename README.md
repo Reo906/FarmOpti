@@ -7,6 +7,12 @@ adjust it by talking to it in plain English.
 
 ---
 
+## Demo
+
+[![Watch the demo](https://img.youtube.com/vi/9CGH3szSdds/maxresdefault.jpg)](https://youtu.be/9CGH3szSdds)
+
+---
+
 ## What it does
 
 - **Builds a full harvest schedule** across every field, machine, and operation (harvest,
